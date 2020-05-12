@@ -49,11 +49,47 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+
+        $validacao_geral = array(
+            'nome' => ['required', 'string', 'max:255'],
+            'tipo' => ['required', 'string', 'max:2'],
+            'telefone' => ['required', 'string', 'max:14'],
+            'logradouro' => ['required', 'string', 'max:150'],
+            'numero' => ['required', 'string', 'max:10'],
+            'bairro' => ['required', 'string', 'max:100'],
+            'cep' => ['required', 'string', 'max:10'],
+            'estado' => ['required'],
+            'cidade' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'terms' => ['required'],
+        );
+
+        $attributeNames = array(
+            'nome' => 'Nome',
+            'tipo' => 'Tipo',
+            'telefone' => 'Telefone',
+            'cpf' => 'CPF',
+            'cnpj' => 'CNPJ',
+            'logradouro' => 'Logradouro',
+            'numero' => 'Número',
+            'bairro' => 'Bairro',
+            'cep' => 'CEP',
+            'estado' => 'Estado',
+            'cidade' => 'Cidade',
+            'email' => 'E-mail',
+            'password' => 'Senha',
+            'terms' => 'Termos de Uso',
+        );
+
+        if($data['tipo']=="PF"){
+            $validacao_cpf_cnpj = array('cpf' => ['required','cpf','formato_cpf','unique:users']); 
+        } else if($data['tipo']=="PJ"){
+            $validacao_cpf_cnpj = array('cnpj' => ['required','cnpj','formato_cnpj','unique:users']); 
+        }
+
+        $validator = Validator::make($data,array_merge($validacao_geral, $validacao_cpf_cnpj));
+        $validator->setAttributeNames($attributeNames);
     }
 
     /**
@@ -64,10 +100,42 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+            try{
+
+                if($data['tipo']=="PF"){
+                    $cpf_cnpj = $data['cpf']; 
+                } else if($data['tipo']=="PJ"){
+                    $cpf_cnpj = $data['cnpj'];
+                }
+
+                $user =  new User();
+                $user->nome = $data['nome'];
+                $user->sexo = $data['sexo'];
+                $user->nascimento = $data['nascimento'];
+                $user->tipo = $data['tipo'];
+                $user->telefone = $data['telefone'];
+                $user->cpf_cnpj = $cpf_cnpj;
+                $user->logradouro = $data['logradouro'];
+                $user->numero = $data['numero'];
+                $user->bairro = $data['bairro'];
+                $user->cep = $data['cep'];
+                $user->cep = $data['complemento'];
+                $user->fk_estado = $data['estado'];
+                $user->fk_cidade = $data['cidade'];
+
+                $user->email = $data['email'];
+                $user->password = bcrypt($data['password']);
+                    
+                DB::transaction(function() use ($user) {
+                    $user->save();
+                    $user->assignRole('cidadao');
+                });
+
+                app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+                return $user;
+            }catch(\Exception  $erro){
+                return response()->json(array('erros' => $erro));
+            }
+
     }
 }
