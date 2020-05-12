@@ -829,3 +829,132 @@ LINE 1: select * from \"estados\"
 #24 /var/www/html/processus/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #25 {main}
 "} 
+[2020-05-12 19:44:58] local.ERROR: Class 'Spatie\Permission\PermissionServiceProvider' not found {"exception":"[object] (Error(code: 0): Class 'Spatie\\Permission\\PermissionServiceProvider' not found at /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php:208)
+[stacktrace]
+#0 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider('Spatie\\\\Permissi...')
+#1 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(61): Illuminate\\Foundation\\ProviderRepository->compileManifest(Array)
+#2 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(604): Illuminate\\Foundation\\ProviderRepository->load(Array)
+#3 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/RegisterProviders.php(17): Illuminate\\Foundation\\Application->registerConfiguredProviders()
+#4 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(230): Illuminate\\Foundation\\Bootstrap\\RegisterProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#5 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(310): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#6 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#7 /var/www/html/processus/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 {main}
+"} 
+[2020-05-12 19:47:02] local.ERROR: The "--model:Setor" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--model:Setor\" option does not exist. at /var/www/html/processus/vendor/symfony/console/Input/ArgvInput.php:200)
+[stacktrace]
+#0 /var/www/html/processus/vendor/symfony/console/Input/ArgvInput.php(144): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption('model:Setor', NULL)
+#1 /var/www/html/processus/vendor/symfony/console/Input/ArgvInput.php(78): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption('--model:Setor')
+#2 /var/www/html/processus/vendor/symfony/console/Input/Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#3 /var/www/html/processus/vendor/symfony/console/Command/Command.php(214): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#4 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#5 /var/www/html/processus/vendor/symfony/console/Application.php(912): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 /var/www/html/processus/vendor/symfony/console/Application.php(264): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Routing\\Console\\ControllerMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 /var/www/html/processus/vendor/symfony/console/Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 /var/www/html/processus/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 {main}
+"} 
+[2020-05-12 19:52:43] local.ERROR: Command "routes" is not defined.
+
+Did you mean one of these?
+    route:cache
+    route:clear
+    route:list {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"routes\" is not defined.
+
+Did you mean one of these?
+    route:cache
+    route:clear
+    route:list at /var/www/html/processus/vendor/symfony/console/Application.php:644)
+[stacktrace]
+#0 /var/www/html/processus/vendor/symfony/console/Application.php(228): Symfony\\Component\\Console\\Application->find('routes')
+#1 /var/www/html/processus/vendor/symfony/console/Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 /var/www/html/processus/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2020-05-12 19:52:47] local.ERROR: There are no commands defined in the "routes" namespace.
+
+Did you mean this?
+    route {"exception":"[object] (Symfony\\Component\\Console\\Exception\\NamespaceNotFoundException(code: 0): There are no commands defined in the \"routes\" namespace.
+
+Did you mean this?
+    route at /var/www/html/processus/vendor/symfony/console/Application.php:574)
+[stacktrace]
+#0 /var/www/html/processus/vendor/symfony/console/Application.php(625): Symfony\\Component\\Console\\Application->findNamespace('routes')
+#1 /var/www/html/processus/vendor/symfony/console/Application.php(228): Symfony\\Component\\Console\\Application->find('routes:list')
+#2 /var/www/html/processus/vendor/symfony/console/Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 /var/www/html/processus/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#6 {main}
+"} 
+[2020-05-12 19:52:51] local.ERROR: Target class [App\Http\Controllers\Setorcontroller] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [App\\Http\\Controllers\\Setorcontroller] does not exist. at /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Container.php:807)
+[stacktrace]
+#0 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Container.php(687): Illuminate\\Container\\Container->build('App\\\\Http\\\\Contro...')
+#1 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(796): Illuminate\\Container\\Container->resolve('App\\\\Http\\\\Contro...', Array, true)
+#2 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Container.php(633): Illuminate\\Foundation\\Application->resolve('App\\\\Http\\\\Contro...', Array)
+#3 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(781): Illuminate\\Container\\Container->make('App\\\\Http\\\\Contro...', Array)
+#4 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Routing/Route.php(253): Illuminate\\Foundation\\Application->make('App\\\\Http\\\\Contro...')
+#5 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Routing/Route.php(960): Illuminate\\Routing\\Route->getController()
+#6 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Routing/Route.php(921): Illuminate\\Routing\\Route->controllerMiddleware()
+#7 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(173): Illuminate\\Routing\\Route->gatherMiddleware()
+#8 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(117): Illuminate\\Foundation\\Console\\RouteListCommand->getMiddleware(Object(Illuminate\\Routing\\Route))
+#9 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(89): Illuminate\\Foundation\\Console\\RouteListCommand->getRouteInformation(Object(Illuminate\\Routing\\Route))
+#10 [internal function]: Illuminate\\Foundation\\Console\\RouteListCommand->Illuminate\\Foundation\\Console\\{closure}(Object(Illuminate\\Routing\\Route), 1)
+#11 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Support/Collection.php(638): array_map(Object(Closure), Array, Array)
+#12 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(90): Illuminate\\Support\\Collection->map(Object(Closure))
+#13 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(74): Illuminate\\Foundation\\Console\\RouteListCommand->getRoutes()
+#14 [internal function]: Illuminate\\Foundation\\Console\\RouteListCommand->handle()
+#15 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(33): call_user_func_array(Array, Array)
+#16 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Util.php(36): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#17 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(91): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#18 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#19 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Container.php(592): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#20 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Command.php(134): Illuminate\\Container\\Container->call(Array)
+#21 /var/www/html/processus/vendor/symfony/console/Command/Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#22 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#23 /var/www/html/processus/vendor/symfony/console/Application.php(912): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#24 /var/www/html/processus/vendor/symfony/console/Application.php(264): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\RouteListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 /var/www/html/processus/vendor/symfony/console/Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 /var/www/html/processus/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class App\\Http\\Controllers\\Setorcontroller does not exist at /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Container.php:805)
+[stacktrace]
+#0 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Container.php(805): ReflectionClass->__construct('App\\\\Http\\\\Contro...')
+#1 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Container.php(687): Illuminate\\Container\\Container->build('App\\\\Http\\\\Contro...')
+#2 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(796): Illuminate\\Container\\Container->resolve('App\\\\Http\\\\Contro...', Array, true)
+#3 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Container.php(633): Illuminate\\Foundation\\Application->resolve('App\\\\Http\\\\Contro...', Array)
+#4 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(781): Illuminate\\Container\\Container->make('App\\\\Http\\\\Contro...', Array)
+#5 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Routing/Route.php(253): Illuminate\\Foundation\\Application->make('App\\\\Http\\\\Contro...')
+#6 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Routing/Route.php(960): Illuminate\\Routing\\Route->getController()
+#7 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Routing/Route.php(921): Illuminate\\Routing\\Route->controllerMiddleware()
+#8 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(173): Illuminate\\Routing\\Route->gatherMiddleware()
+#9 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(117): Illuminate\\Foundation\\Console\\RouteListCommand->getMiddleware(Object(Illuminate\\Routing\\Route))
+#10 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(89): Illuminate\\Foundation\\Console\\RouteListCommand->getRouteInformation(Object(Illuminate\\Routing\\Route))
+#11 [internal function]: Illuminate\\Foundation\\Console\\RouteListCommand->Illuminate\\Foundation\\Console\\{closure}(Object(Illuminate\\Routing\\Route), 1)
+#12 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Support/Collection.php(638): array_map(Object(Closure), Array, Array)
+#13 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(90): Illuminate\\Support\\Collection->map(Object(Closure))
+#14 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/RouteListCommand.php(74): Illuminate\\Foundation\\Console\\RouteListCommand->getRoutes()
+#15 [internal function]: Illuminate\\Foundation\\Console\\RouteListCommand->handle()
+#16 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(33): call_user_func_array(Array, Array)
+#17 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Util.php(36): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#18 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(91): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#19 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#20 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Container/Container.php(592): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#21 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Command.php(134): Illuminate\\Container\\Container->call(Array)
+#22 /var/www/html/processus/vendor/symfony/console/Command/Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#23 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Command.php(121): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#24 /var/www/html/processus/vendor/symfony/console/Application.php(912): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 /var/www/html/processus/vendor/symfony/console/Application.php(264): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Foundation\\Console\\RouteListCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 /var/www/html/processus/vendor/symfony/console/Application.php(140): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#27 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Console/Application.php(93): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 /var/www/html/processus/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 /var/www/html/processus/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 {main}
+"} 
