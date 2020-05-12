@@ -1,29 +1,43 @@
 @extends('auth.app')
+@section('htmlheader_title', 'Cadastro')
+ @section('contentheader_title', 'Cadastro')
 @section('conteudo')
+<script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{asset('plugins/inputmask/jquery.inputmask.js') }}"></script>
+    <script src="{{ asset('js/base.js') }}"></script>
+    <script src="{{ asset('js/register.js') }}"></script>
 <br><br>
     <div class="login-logo">
         <a href="../../index2.html"><b>Processus</b></a>
     </div>
         <!-- /.login-logo -->
     <div class="card">
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         <div class="card-body register-card-body">
             <form action="{{ url('/register') }}" method="post" id="form">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                
+               @csrf
                 <div class="row">
                     <div class="form-group col-md-8">
                         <strong>Nome</strong>
                             <input type="text" class="form-control"
-                                placeholder="Nome Completo" name="name"
-                                value="{{ old('name') }}" />
+                                placeholder="Nome Completo" name="nome"
+                                value="{{ old('nome') }}" />
                     </div>
                     <div class="form-group col-md-4">
                         <strong>Data de Nascimento</strong>
-                            <input type="date" class="form-control" name="data_nascimento" id="data_nascimento"
+                            <input type="date" class="form-control" name="nascimento" id="nascimento"
                                 maxlength="10" value="{{ old('data_nascimento') }}"
                                 placeholder="Data de Nascimento" />
                     </div>
-                   
                 </div>
                 <div class="row">
                     <div class="form-group col-md-3 sexo hidden">
@@ -35,18 +49,17 @@
                         </select>                               
                     </div>
                     <div class=" form-group col-md-3">
-                        <strong>CPF ou CNPJ</strong>
+                        <strong>Tipo</strong>
                         <select id="tipo" name="tipo"  class="form-control">
-                            <option value='' selected >Selecione ...</option>  
-                            <option value="cpf">CPF</option>
-                            <option value="cnpj">CNPJ</option>                                    
+                            <option value="PF">Pessoa Física</option>
+                            <option value="PJ">Pessoa Jurídica</option>                                    
                         </select>                               
                     </div>
-                    <div class="form-group col-md-6 cpfcnpj hidden">                                    
-                        <div class="form-group">
-                            <strong id="documentacao">CPF/CNPJ</strong>
+                    <div class="form-group col-md-6">                                    
+                        <div class="form-group cpf">
+                            <strong>CPF/CNPJ</strong>
                             <input type="text" class="form-control" name="cpf_cnpj" id="cpf_cnpj"
-                                placeholder="Identificação" value="{{ old('cpf_cnpj') }}" />
+                                placeholder="Identificação" value="{{ old('cpf_cnpj') }}"  />
                         </div>
                     </div>
                 </div>
@@ -54,13 +67,13 @@
                     <div class="form-group col-md-8">
                         <strong>E-Mail</strong>
                             <input type="email" class="form-control"
-                                placeholder="e-mal para acesso" name="email"
+                                placeholder="e-mail para acesso" name="email"
                                 value="{{ old('email') }}" />
                     </div>
                     <div class="form-group col-md-4">
                         <strong>Telefone</strong>
                             <input type="text" class="form-control" placeholder="Telefone p/ contato"
-                                id="telefone" name="telefone" value="{{ old('telefone') }}" />
+                                id="telefone" name="telefone" value="{{ old('telefone') }}" data-inputmask='"mask": "(99)99999-9999"' data-mask/>
                     </div>
                 </div>
                 <div class="row">
@@ -102,7 +115,7 @@
                     <div class="form-group col-md-2">
                         <strong>CEP</strong>
                                <input type="text" class="form-control" name="cep" id="cep" placeholder="CEP"
-                                value="{{old('cep')}}" />
+                                value="{{old('cep')}}" data-inputmask='"mask": "99999-999"' data-mask />
                     </div>
                     <div class="form-group col-md-4">
                         <strong>Complemento</strong>
@@ -146,4 +159,5 @@
     <!-- /.social-auth-links -->
         </div>
     </div>
+    
 @endsection

@@ -1,5 +1,6 @@
 @extends('auth.app')
-
+@section('htmlheader_title', 'Login')
+ @section('contentheader_title', 'Login')
 @section('conteudo')
 <div class="login-box">
         <div class="login-logo">
