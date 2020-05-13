@@ -11,7 +11,6 @@ class SecretariaSeeder extends Seeder
      */
     public function run()
     {
-        //Educacao
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de Educacao',
             'sigla' => 'Sec Educacao',          
@@ -20,7 +19,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        //Administracao
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de Administracao',
             'sigla' => 'Sec Administracao',          
@@ -29,7 +27,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        //Secretaria Municipal de Desenvolvimento  Social
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de Desenvolvimento Social',
             'sigla' => 'Sec Desenvolvimento Social',          
@@ -38,7 +35,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        //Procuradoria Geral do Município
         DB::table('secretarias')->insert([            
             'titulo' => 'Procuradoria Geral do Município',
             'sigla' => 'Procuradoria Geral',          
@@ -47,7 +43,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        //Secretaria Municipal da Fazenda
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal da Fazenda',
             'sigla' => 'Sec Fazenda',          
@@ -56,7 +51,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        //Secretaria Municipal de Governo
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de Governo',
             'sigla' => 'Sec Governo',          
@@ -65,7 +59,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        //Secretaria Municipal de Infraestrutura
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de Infraestrutura',
             'sigla' => 'Sec Infraestrutura',          
@@ -74,7 +67,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]);
 
-        //Secretaria Municipal de Agricultura, Irrigacao e Meio Ambiente
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de de Agricultura, Irrigacao e Meio Ambiente',
             'sigla' => 'Sec Agricultura e Meio ambiente',          
@@ -82,8 +74,7 @@ class SecretariaSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]); 
-        
-        //Secretaria Municipal de Cultura e Turismo
+
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de Cultura e Turismo',
             'sigla' => 'Sec Cultura e Turismo',          
@@ -92,7 +83,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]); 
 
-        //Secretaria Municipal de Esporte e Lazer
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de Esporte e Lazer',
             'sigla' => 'Sec Esporte e Lazer',          
@@ -101,7 +91,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]); 
 
-        //Secretaria Municipal de Desenvolvimento Economico
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de Desenvolvimento Economico',
             'sigla' => 'Sec Desenvolvimento Economico',          
@@ -110,7 +99,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]); 
 
-        //Controladoria Geral do Município
         DB::table('secretarias')->insert([            
             'titulo' => 'Controladoria Geral do Município',
             'sigla' => 'Controladoria',          
@@ -119,7 +107,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]); 
 
-        //Secretaria Municipal de Serviços Publicos
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria Municipal de Servicos Publicos',
             'sigla' => 'Sec Servicos Publicos',          
@@ -128,7 +115,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]); 
 
-        //Secretaria de Relacoes Institucionais e Comunicacao Social
         DB::table('secretarias')->insert([            
             'titulo' => 'Secretaria de Relacoes Institucionais e Comunicacao Social',
             'sigla' => 'Sec Servicos Publicos',          
@@ -137,7 +123,6 @@ class SecretariaSeeder extends Seeder
             'updated_at' => now()
         ]); 
 
-        //Servico de Informacao ao Cidadao
         DB::table('secretarias')->insert([            
             'titulo' => 'Servico de Informacao ao Cidadao',
             'sigla' => 'SIC',          
@@ -145,6 +130,5 @@ class SecretariaSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
     }
 }
