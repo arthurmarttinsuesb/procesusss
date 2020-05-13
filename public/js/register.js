@@ -1,7 +1,18 @@
 $(document).ready(function($) {
+    $('[data-mask]').inputmask();
 
-    $("#cnpj").mask("99.999.999/9999-99");
-    $("#cpf").mask("999.999.999-99");
+    $("#cpf_cnpj").inputmask("999.999.999-99");
+
+    $(document).on('change', '#tipo', function() {
+        //recuperando id do select de estado
+        var tipo = $("#tipo option:selected").val();
+        if (tipo == "PF") {
+            $("#cpf_cnpj").inputmask("999.999.999-99");
+        } else if (tipo == 'PJ') {
+            $("#cpf_cnpj").inputmask("99.999.999/9999-99");
+
+        }
+    });
 
     //Select de Estado e Cidade
     $(document).on('change', '#estado', function() {
