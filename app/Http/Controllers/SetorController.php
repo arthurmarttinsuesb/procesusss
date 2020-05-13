@@ -56,9 +56,13 @@ class SetorController extends Controller
      */
     public function show($id)
     {
-        $setor = Setor::find($id)->where('status', 'ativo')->get();
+        try{
+            $setor = Setor::find($id)->where('status', 'ativo')->get();
 
-        return $setor;
+            return $setor;
+        }catch(Exception  $erro){
+            return response()->json(array('erro' => "ERRO"));
+        }
     }
 
 
@@ -95,12 +99,15 @@ class SetorController extends Controller
      */
     public function destroy($id)
     {
+        try{
+            $setor = Setor::find($id);
+            $setor->status = 'inativo';
+            $setor->save();
 
-        $setor = Setor::find($id);
-        $setor->status = 'inativo';
-        $setor->save();
-
-        return response()->json(array('status' => "OK"));
+            return response()->json(array('status' => "OK"));
+        } catch(\Exception  $erro){
+            return response()->json(array('erro' => "ERRO"));
+        }
     }
 
 

@@ -30,5 +30,11 @@ Route::post('/secretaria', 'SecretariaController@store');
 Route::put('/secretaria/{id}', 'SecretariaController@update');
 Route::delete('/secretaria/{id}', 'SecretariaController@destroy');
 
+Route::get('/user-setors', 'UserSetorsController@index');
+Route::get('/user-setors/{id}', 'UserSetorsController@show');
+Route::post('/user-setors', 'UserSetorsController@store');
+Route::put('/user-setors/{id}', 'UserSetorsController@update');
+Route::delete('/user-setors/{id}', 'UserSetorsController@destroy');
+
 
 
