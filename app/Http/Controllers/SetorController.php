@@ -55,7 +55,7 @@ class SetorController extends Controller
      * @param  \App\Setor  $setor
      * @return \Illuminate\Http\Response
      */
-    public function show(Setor $setor, $id)
+    public function show($id)
     {
         $setor = Setor::find($id);
 
@@ -97,7 +97,7 @@ class SetorController extends Controller
      * @param  \App\Setor  $setor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Setor $setor, $id)
+    public function destroy($id)
     {
 
         $setor = Setor::find($id);
