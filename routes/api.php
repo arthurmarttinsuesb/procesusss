@@ -22,4 +22,13 @@ Route::get('/setor', 'SetorController@index');
 Route::get('/setor/{id}', 'SetorController@show');
 Route::post('/setor', 'SetorController@store');
 Route::put('/setor/{id}', 'SetorController@update');
-Route::delete('/setor/{id}', 'SetorController@delete');
+Route::delete('/setor/{id}', 'SetorController@destroy');
+
+Route::get('/secretaria', 'SecretariaController@index');
+Route::get('/secretaria/{id}', 'SecretariaController@show');
+Route::post('/secretaria', 'SecretariaController@store');
+Route::put('/secretaria/{id}', 'SecretariaController@update');
+Route::delete('/secretaria/{id}', 'SecretariaController@destroy');
+
+
+

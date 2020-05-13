@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Setor;
+use App\Secretaria;
 use Illuminate\Http\Request;
 
-
-
-
-class SetorController extends Controller
+class SecretariaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +14,8 @@ class SetorController extends Controller
      */
     public function index()
     {
-        $setor = Setor::where('status', 'ativo')->get();
-        return $setor;
+        $secretaria = Secretaria::where('status', 'ativo')->get();
+        return $secretaria;
     }
 
     /**
@@ -32,15 +29,13 @@ class SetorController extends Controller
 
 
         try{
-            $setor = new Setor();
+            $secretaria = new Secretaria();
 
-            $setor->titulo = $request->titulo;
-            $setor->sigla = $request->sigla;
-            $setor->status = $request->status;
-            $setor->fk_secretaria = $request->fk_secretaria;
+            $secretaria->titulo = $request->titulo;
+            $secretaria->sigla = $request->sigla;
+            $secretaria->status = $request->status;
 
-            $setor->save();
-
+            $secretaria->save();
 
             return response()->json(array('status' => "OK"));
         } catch(\Exception  $erro){
@@ -56,9 +51,9 @@ class SetorController extends Controller
      */
     public function show($id)
     {
-        $setor = Setor::find($id)->where('status', 'ativo')->get();
+        $secretaria = Secretaria::find($id)->where('status', 'ativo')->get();
 
-        return $setor;
+        return $secretaria;
     }
 
 
@@ -68,18 +63,17 @@ class SetorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Setor $setor, $id)
+    public function update(Request $request, $id)
     {
 
         try{
-            $setor = Setor::find($id);
+            $secretaria = Secretaria::find($id);
 
-            $setor->titulo = isset($request->titulo) ? $request->titulo : $setor->titulo;
-            $setor->sigla = isset($request->sigla) ? $request->sigla : $setor->sigla;
-            $setor->status = isset($request->status) ? $request->status : $setor->status;
-            $setor->fk_secretaria = isset($request->fk_secretaria) ? $request->fk_secretaria : $setor->fk_secretaria;
+            $secretaria->titulo = isset($request->titulo) ? $request->titulo : $secretaria->titulo;
+            $secretaria->sigla = isset($request->sigla) ? $request->sigla : $secretaria->sigla;
+            $secretaria->status = isset($request->status) ? $request->status : $secretaria->status;
 
-            $setor->save();
+            $secretaria->save();
 
             return response()->json(array('status' => "OK"));
         } catch(\Exception  $erro){
@@ -96,12 +90,10 @@ class SetorController extends Controller
     public function destroy($id)
     {
 
-        $setor = Setor::find($id);
-        $setor->status = 'inativo';
-        $setor->save();
+        $secretaria = Secretaria::find($id);
+        $secretaria->status = 'inativo';
+        $secretaria->save();
 
         return response()->json(array('status' => "OK"));
     }
-
-
 }
