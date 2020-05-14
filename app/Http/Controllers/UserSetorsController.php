@@ -26,8 +26,6 @@ class UserSetorsController extends Controller
      */
     public function store(Request $request)
     {
-
-
         try{
             $userSetor = new UserSetor();
 

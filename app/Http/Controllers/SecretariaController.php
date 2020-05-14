@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Session;
+use Redirect;
+
 use App\Secretaria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+
 
 class SecretariaController extends Controller
 {
@@ -15,7 +20,9 @@ class SecretariaController extends Controller
     public function index()
     {
         $secretaria = Secretaria::where('status', 'ativo')->get();
-        return $secretaria;
+
+        return View::make('secretaria.index')
+        ->with('secretaria', $secretaria);
     }
 
     /**
@@ -37,11 +44,17 @@ class SecretariaController extends Controller
 
             $secretaria->save();
 
-            return response()->json(array('status' => "OK"));
+            Session::flash('message', 'Secretaria criada!');
+            return Redirect::to('secretaria');
         } catch(\Exception  $erro){
             return response()->json(array('erro' => "ERRO"));
         }
 
+    }
+
+    public function create()
+    {
+        return View::make('secretaria.create');
     }
 
     /**
@@ -51,9 +64,10 @@ class SecretariaController extends Controller
      */
     public function show($id)
     {
-        $secretaria = Secretaria::find($id)->where('status', 'ativo')->get();
+        $secretaria = Secretaria::find($id);
 
-        return $secretaria;
+        return View::make('secretaria.show')
+        ->with('secretaria', $secretaria);
     }
 
 

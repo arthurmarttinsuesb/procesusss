@@ -33,8 +33,10 @@ Route::group(['prefix' => 'modelo-documento', 'where' => ['prefix' => 'modelo-do
     Route::post('/update', ['uses' => 'ModeloDocumentoController@update']);
 });
 
+Route::resource('secretaria', 'SecretariaController');
+
 
 });
 
 
-    
+

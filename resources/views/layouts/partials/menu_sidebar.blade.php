@@ -19,12 +19,18 @@
                with font-awesome or any other icon font library -->
           <li class="nav-header">MENU</li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="/modelo-documento" class="nav-link">
               <i class="nav-icon fas fa-file"></i>
-              <p></p>
+              <p>Modelo Documento</p>
             </a>
           </li>
-            
+          <li class="nav-item">
+            <a href="/secretaria" class="nav-link">
+              <i class="nav-icon fas fa-file"></i>
+              <p>Secretaria</p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
