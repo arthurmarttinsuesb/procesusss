@@ -7,8 +7,8 @@ $(document).on("click", "#btn-excluir", function () {
     });
 });
 
-var tabela = $("#table").DataTable({
-    ajax: base_url + "/pacote/list-admin",
+var tabela = $("#table_secretarias").DataTable({
+    ajax: base_url + "/secretaria/list",
     scrollCollapse: true,
     responsive: true,
     paging: true,
@@ -19,8 +19,7 @@ var tabela = $("#table").DataTable({
     pageLength: 10,
     columns: [
         { data: "titulo", name: "titulo" },
-        { data: "link", name: "link" },
-        { data: "valor", name: "valor" },
+        { data: "sigla", name: "sigla" },
         { data: "status", name: "status" },
         { data: "acao", name: "acao" },
     ],

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Session;
 use Redirect;
+use DataTables;
 
 use App\Secretaria;
 use Illuminate\Http\Request;
@@ -19,10 +20,37 @@ class SecretariaController extends Controller
      */
     public function index()
     {
+        return View::make('secretaria.index');
+    }
+
+
+    public function list(Request $request)
+    {
         $secretaria = Secretaria::where('status', 'ativo')->get();
 
-        return View::make('secretaria.index')
-            ->with('secretaria', $secretaria);
+        return DataTables::of($secretaria)
+            ->editColumn('acao', function ($secretaria) {
+                return $this->setEstrutura($secretaria);
+            })->escapeColumns([0])
+            ->make(true);
+    }
+
+    private function setEstrutura(Secretaria $modelo)
+    {
+
+        $btnEditar = ' <a  class="btn btn-default btn-xs btnEditar"
+                          href="modelodocumento/editar/' . $modelo->id . '"
+                          title="Alterar Modelo" data-toggle="tooltip">&nbsp
+                          <i class="fa fa-fw fa-pencil-square-o fa-lg"></i>&nbsp
+                       </a>';
+
+        $btnExcluir =  ' <a title="Excluir Modelo" data-toggle="tooltip"
+                           class="btn btn-default btn-xs btnExcluir"
+                            data-id="' . $modelo->id . '" >&nbsp
+                            <i  class="fa fa-fw fa-trash-o fa-lg"></i>&nbsp
+                       </a>';
+
+        return $btnEditar . $btnExcluir;
     }
 
     /**
@@ -39,7 +67,7 @@ class SecretariaController extends Controller
 
             $secretaria->titulo = $request->titulo;
             $secretaria->sigla = $request->sigla;
-            $secretaria->status = $request->status;
+            $secretaria->status = 'Ativo';
 
             $secretaria->save();
 
@@ -92,7 +120,6 @@ class SecretariaController extends Controller
 
             $secretaria->titulo = isset($request->titulo) ? $request->titulo : $secretaria->titulo;
             $secretaria->sigla = isset($request->sigla) ? $request->sigla : $secretaria->sigla;
-            $secretaria->status = isset($request->status) ? $request->status : $secretaria->status;
 
             $secretaria->save();
 
@@ -113,7 +140,7 @@ class SecretariaController extends Controller
     {
 
         $secretaria = Secretaria::find($id);
-        $secretaria->status = 'inativo';
+        $secretaria->status = 'Inativo';
         $secretaria->save();
 
         return response()->json(array('status' => "OK"));

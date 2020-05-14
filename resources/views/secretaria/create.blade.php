@@ -54,10 +54,6 @@
                                     <strong>Sigla</strong>
                                     <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control" value="">
                                 </div>
-                                <div class="form-group">
-                                    <strong>Status</strong>
-                                    <input type="text" autocomplete="off" id="status" name="status" class="form-control" value="">
-                                </div>
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>

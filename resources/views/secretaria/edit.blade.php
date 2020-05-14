@@ -55,10 +55,6 @@
                                     <strong>Sigla</strong>
                                     <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control" value="{{ $secretaria->sigla }}">
                                 </div>
-                                <div class="form-group">
-                                    <strong>Status</strong>
-                                    <input type="text" autocomplete="off" id="status" name="status" class="form-control" value="{{ $secretaria->status }}">
-                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-action btn-success btnNovo" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
