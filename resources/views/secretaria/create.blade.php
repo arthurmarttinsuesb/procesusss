@@ -43,7 +43,7 @@
                         </div>
                         (<span style="color: red;">*</span>) Campos Obrigatórios
                         <br><br>
-                        <form method="POST" action="/secretaria" id="form">
+                        <form method="POST" action="/secretaria">
                             @csrf
                             <div class="box-body">
                                 <div class="form-group">
