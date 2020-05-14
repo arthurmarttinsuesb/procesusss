@@ -54,13 +54,14 @@
                                 </div>
                             </div>
                             <!-- /.card-body -->
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
-                    &nbsp Aguarde...">Salvar</button>
-                            </div>
-                            <!-- /.card-footer -->
                         </form>
                     </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                    &nbsp Aguarde...">Salvar</button>
+                    </div>
+                    <!-- /.card-footer -->
+
                     <!-- /.card -->
 
                 </div>
