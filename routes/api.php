@@ -17,9 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/setor', 'SetorController@index');
-Route::get('/setor/{id}', 'SetorController@show');
-Route::post('/setor', 'SetorController@store');
-Route::put('/setor/{id}', 'SetorController@update');
-Route::delete('/setor/{id}', 'SetorController@delete');

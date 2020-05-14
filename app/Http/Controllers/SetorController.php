@@ -17,8 +17,8 @@ class SetorController extends Controller
      */
     public function index()
     {
-
-        return Setor::all();
+        $setor = Setor::where('status', 'ativo')->get();
+        return $setor;
     }
 
     /**
@@ -52,14 +52,17 @@ class SetorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Setor  $setor
      * @return \Illuminate\Http\Response
      */
-    public function show(Setor $setor, $id)
+    public function show($id)
     {
-        $setor = Setor::find($id);
+        try{
+            $setor = Setor::find($id)->where('status', 'ativo')->get();
 
-        return $setor;
+            return $setor;
+        }catch(Exception  $erro){
+            return response()->json(array('erro' => "ERRO"));
+        }
     }
 
 
@@ -67,7 +70,6 @@ class SetorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Setor  $setor
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Setor $setor, $id)
@@ -80,7 +82,6 @@ class SetorController extends Controller
             $setor->sigla = isset($request->sigla) ? $request->sigla : $setor->sigla;
             $setor->status = isset($request->status) ? $request->status : $setor->status;
             $setor->fk_secretaria = isset($request->fk_secretaria) ? $request->fk_secretaria : $setor->fk_secretaria;
-            $setor->arquivo = isset($request->arquivo) ? $nameFile : $setor->arquivo;
 
             $setor->save();
 
@@ -94,15 +95,19 @@ class SetorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Setor  $setor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Setor $setor, $id)
+    public function destroy($id)
     {
+        try{
+            $setor = Setor::find($id);
+            $setor->status = 'inativo';
+            $setor->save();
 
-        $setor = Setor::find($id);
-        $setor->delete();
-        return response()->json(array('status' => "OK"));
+            return response()->json(array('status' => "OK"));
+        } catch(\Exception  $erro){
+            return response()->json(array('erro' => "ERRO"));
+        }
     }
 
 

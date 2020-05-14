@@ -7,7 +7,6 @@
  <!-- DataTables -->
  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-
    
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -60,7 +59,7 @@
  <!-- jQuery -->
    <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
    <script src="{{ asset('js/base.js') }}"></script>
-   <script src="{{ asset('js/rifa_listar.js') }}"></script>
+   <script src="{{ asset('js/listar_modelo_documento.js') }}"></script>
    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
