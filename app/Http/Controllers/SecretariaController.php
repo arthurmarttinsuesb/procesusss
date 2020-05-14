@@ -69,6 +69,15 @@ class SecretariaController extends Controller
     }
 
 
+    public function edit($id)
+    {
+        $secretaria = Secretaria::find($id);
+
+        return View::make('secretaria.edit')
+            ->with('secretaria', $secretaria);
+    }
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -87,7 +96,9 @@ class SecretariaController extends Controller
 
             $secretaria->save();
 
-            return response()->json(array('status' => "OK"));
+            // redirect
+            Session::flash('message', 'Secretaria atualizada!');
+            return Redirect::to('secretaria');
         } catch (\Exception  $erro) {
             return response()->json(array('erro' => "ERRO"));
         }
