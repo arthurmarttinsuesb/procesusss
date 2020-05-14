@@ -22,7 +22,7 @@ class SecretariaController extends Controller
         $secretaria = Secretaria::where('status', 'ativo')->get();
 
         return View::make('secretaria.index')
-        ->with('secretaria', $secretaria);
+            ->with('secretaria', $secretaria);
     }
 
     /**
@@ -34,8 +34,7 @@ class SecretariaController extends Controller
     public function store(Request $request)
     {
 
-
-        try{
+        try {
             $secretaria = new Secretaria();
 
             $secretaria->titulo = $request->titulo;
@@ -46,10 +45,9 @@ class SecretariaController extends Controller
 
             Session::flash('message', 'Secretaria criada!');
             return Redirect::to('secretaria');
-        } catch(\Exception  $erro){
+        } catch (\Exception  $erro) {
             return response()->json(array('erro' => "ERRO"));
         }
-
     }
 
     public function create()
@@ -67,7 +65,7 @@ class SecretariaController extends Controller
         $secretaria = Secretaria::find($id);
 
         return View::make('secretaria.show')
-        ->with('secretaria', $secretaria);
+            ->with('secretaria', $secretaria);
     }
 
 
@@ -80,7 +78,7 @@ class SecretariaController extends Controller
     public function update(Request $request, $id)
     {
 
-        try{
+        try {
             $secretaria = Secretaria::find($id);
 
             $secretaria->titulo = isset($request->titulo) ? $request->titulo : $secretaria->titulo;
@@ -90,10 +88,9 @@ class SecretariaController extends Controller
             $secretaria->save();
 
             return response()->json(array('status' => "OK"));
-        } catch(\Exception  $erro){
+        } catch (\Exception  $erro) {
             return response()->json(array('erro' => "ERRO"));
         }
-
     }
 
     /**
