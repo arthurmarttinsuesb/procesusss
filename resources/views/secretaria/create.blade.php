@@ -38,9 +38,9 @@
                     <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
                     <ul></ul>
                 </div>
-                <br><br>
               <form  method="POST" action="/secretaria" id="form">
-              (<span style="color: red;">*</span>) Campos Obrigatórios
+                    (<span style="color: red;">*</span>) Campos Obrigatórios
+                    <br><br>
                 <div class="card-body">
                        <div class="row">
                             <div class="form-group col-6">
