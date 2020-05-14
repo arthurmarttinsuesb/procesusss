@@ -15,43 +15,48 @@ $(document).ready(function($) {
         language: { url: "/plugins/datatables/traducao.json" }
     });
 
+
     $(document).on('click', '.btnExcluir', function() {
-        var id_modelo = $(this).data('id');
-        swal({
-                title: "Deseja excluir esse Modelo?",
-                text: "deseja Excluir?",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Sim, quero excluir!",
-                cancelButtonText: "Não, cancelar!",
-                closeOnConfirm: true,
-                closeOnCancel: true
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    $.ajax({
-                        type: 'post',
-                        url: base_url + '/modelo-documento/delete',
-                        data: {
-                            'id': id_modelo
-                        },
-                        success: function(data) {
-                            if (data.status == "error") {
-                                swal("Cancelado", "Exclusão Cancelada  :)", "error");
-                            } else {
-                                swal("Excluído!", "Operação realizada com sucesso", "success");
-                                $('#table').DataTable().draw(false);
-                            }
-                        },
-                        error: function() {
-                            swal("Cancelado", "Exclusão Cancelada  :)", "error");
-                        },
-                    });
-                } else {
-                    swal("Cancelado", "Exclusão Cancelada :)", "error");
-                }
-            });
+        id = $(this).data('id');
+        swalWithBootstrapButtons.fire({
+            title: 'Deseja excluir esse modelo?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, quero excluir!',
+            cancelButtonText: 'Não, cancelar!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'post',
+                    url: base_url + '/modelo-documento/delete',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        'id': id
+                    },
+                    success: function(data) {
+                        if ((data.error_banco)) {
+                            Swal.fire("Atenção", "Exclusão cancelada, tente novamente mais tarde.", "error")
+                        } else {
+                            swalWithBootstrapButtons.fire("Sucesso", "Exclusão Realizada", "success").then(function(result) {
+                                if (result.value) {
+                                    $('#table').DataTable().draw(false);
+                                }
+                            });
+                        }
+                    },
+                    error: function() {
+                        swalWithBootstrapButtons.fire("Atenção", "Exclusão cancelada, tente novamente mais tarde.", "error")
+                    },
+                });
+
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire("Atenção", "Exclusão cancelada.", "error")
+            }
+        })
     });
 
 });

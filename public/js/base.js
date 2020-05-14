@@ -35,8 +35,15 @@ function mensagemErro() {
 // <button type="button" data-id="1" /> "id" é o nome.
 // o valor padrão já é id, então não é necessario preencher caso use o
 // mesmo nome
-function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", btnId }) {
-    id = $(btnId).data(dataId);
+// btnClass é o nome da classe do botao de excluir, por padrao ja fica btnExcluir
+function deleteDialog({
+    nomeModulo,
+    rota,
+    idTable,
+    dataId = "id",
+    btnClass = "btnExcluir",
+}) {
+    id = $(`.${btnClass}`).data(dataId);
     swalWithBootstrapButtons
         .fire({
             title: `Deseja excluir essa ${nomeModulo}?`,

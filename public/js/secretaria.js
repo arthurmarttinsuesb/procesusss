@@ -1,9 +1,8 @@
-$(document).on("click", "#btn-excluir", function () {
+$(document).on("click", ".btnExcluir", function () {
     deleteDialog({
         nomeModulo: "Secretaria",
         rota: "secretaria",
         idTable: "table_secretarias",
-        btnId: "#btn-excluir",
     });
 });
 

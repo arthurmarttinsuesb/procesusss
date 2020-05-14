@@ -39,7 +39,7 @@ class SecretariaController extends Controller
     {
 
         $btnEditar = ' <a  class="btn btn-default btn-xs btnEditar"
-                          href="modelodocumento/editar/' . $modelo->id . '"
+                          href="secretaria/' . $modelo->id . '"
                           title="Alterar Modelo" data-toggle="tooltip">&nbsp
                           <i class="fa fa-fw fa-pencil-square-o fa-lg"></i>&nbsp
                        </a>';
