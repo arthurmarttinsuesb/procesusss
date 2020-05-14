@@ -5,8 +5,6 @@
  
  @section('conteudo') 
  <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/iziToast/iziToast.min.css') }}">
-
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -75,7 +73,6 @@
     <!-- /.content -->
    <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
    <script src="{{ asset('/plugins/summernote/summernote.min.js') }}"></script>
-   <script src="{{ asset('/plugins/iziToast/iziToast.min.js') }}"></script>
    <script src="{{ asset('js/base.js') }}"></script>
    <script src="{{ asset('js/modelo_documento.js') }}"></script>
 @endsection

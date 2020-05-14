@@ -39,9 +39,10 @@
                     <ul></ul>
                 </div>
               <form  method="POST" action="/secretaria" id="form">
-                    (<span style="color: red;">*</span>) Campos Obrigatórios
-                    <br><br>
+                    
                 <div class="card-body">
+                (<span style="color: red;">*</span>) Campos Obrigatórios
+                    <br><br>
                        <div class="row">
                             <div class="form-group col-6">
                                 <strong>Titulo</strong>
