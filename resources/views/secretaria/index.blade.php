@@ -43,7 +43,7 @@
                     <!-- /.card-header -->
 
                     <div class="card-body">
-                        <table id="table" class="table table-bordered table-hover">
+                        <table id="table_secretarias" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Titulo</th>
@@ -61,6 +61,7 @@
                                     <td>
                                         <a class="btn btn-small btn-success" href="{{ URL::to('secretaria/' . $value->id) }}">Ver</a>
                                         <a class="btn btn-small btn-info" href="{{ URL::to('secretaria/' . $value->id . '/edit') }}">Editar</a>
+                                        <button type="button" id="btn-excluir" data-id="{{$value->id}}" class="btn btn-small btn-danger">Deletar</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -77,7 +78,7 @@
 <!-- jQuery -->
 <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/rifa_listar.js') }}"></script>
+<script src="{{ asset('js/secretaria.js') }}"></script>
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
