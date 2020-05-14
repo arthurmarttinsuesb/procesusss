@@ -41,9 +41,10 @@
                       <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
                       <ul></ul>
                   </div>
-                  (<span style="color: red;">*</span>) Campos Obrigatórios
+                  
                   <br><br>
                    <form method="POST" action="{{ route('listar_modelo') }}">
+                   (<span style="color: red;">*</span>) Campos Obrigatórios
                    @csrf
                       <div class="row">
                         <div class="form-group col-12">

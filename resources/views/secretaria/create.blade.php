@@ -23,29 +23,26 @@
         </div><!-- /.container-fluid -->
     </section>
 
-
-
-
     <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-12">
-          <div class="card">
-             <div class="card-header">
-                <div class="col-2 float-right">
-                    <a href="{{ URL::to('secretaria') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Modelos</a>
-                </div>
+
+           <div class="card">
+              <div class="card-header">
+                    <div class="col-2 float-right">
+                        <a href="{{ URL::to('secretaria.index') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Secretarias</a>
+                    </div>
               </div>
-                  <div class="alert alert-danger erros" style="display: none;">
-                      <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
-                      <ul></ul>
-                  </div>
-                  (<span style="color: red;">*</span>) Campos Obrigatórios
-                  <br><br>
-                  <form method="POST" action="/secretaria" id="form">
-                    @csrf
-                    <div class="card-body">
-                        <div class="row">
+                 <div class="alert alert-danger erros" style="display: none;">
+                    <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
+                    <ul></ul>
+                </div>
+                <br><br>
+              <form  method="POST" action="/secretaria" id="form">
+              (<span style="color: red;">*</span>) Campos Obrigatórios
+                <div class="card-body">
+                       <div class="row">
                             <div class="form-group col-6">
                                 <strong>Titulo</strong>
                                 <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" value="">
@@ -55,22 +52,25 @@
                                 <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control" value="">
                             </div>
                         </div>
-                    </div>           
-                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
-                        &nbsp Aguarde...">Salvar</button>
-                    </div>
-                </form>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                    &nbsp Aguarde...">Salvar</button>
+                </div>
+                <!-- /.card-footer -->
+              </form>
+            </div>
+            <!-- /.card -->
 
-           </div>
           </div>
         </div>
     </section>
-
-   
 </div>
 
 @endsection
+
+
 
 
 

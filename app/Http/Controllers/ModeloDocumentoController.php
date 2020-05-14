@@ -32,7 +32,6 @@ class ModeloDocumentoController extends Controller
         $modelo = ModeloDocumento::where('id', $request->id)
 
         ->where('status','Ativo')->get();
-
         return view('ModeloDocumento.edit',compact('modelo'));
     }
    
