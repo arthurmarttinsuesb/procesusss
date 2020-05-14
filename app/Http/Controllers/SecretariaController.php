@@ -113,7 +113,7 @@ class SecretariaController extends Controller
     {
 
         $secretaria = Secretaria::find($id);
-        $secretaria->status = 'inativo';
+        $secretaria->status = 'Inativo';
         $secretaria->save();
 
         return response()->json(array('status' => "OK"));

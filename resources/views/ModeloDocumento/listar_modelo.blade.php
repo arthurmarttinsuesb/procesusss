@@ -60,7 +60,7 @@
  <!-- jQuery -->
    <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
    <script src="{{ asset('js/base.js') }}"></script>
-   <script src="{{ asset('js/rifa_listar.js') }}"></script>
+   <script src="{{ asset('js/listar_modelo_documento.js') }}"></script>
    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
