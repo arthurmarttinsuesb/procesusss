@@ -36,6 +36,7 @@ function mensagemErro() {
 // o valor padrão já é id, então não é necessario preencher caso use o
 // mesmo nome
 // btnClass é o nome da classe do botao de excluir, por padrao ja fica btnExcluir
+
 function deleteDialog({
     nomeModulo,
     rota,
@@ -74,12 +75,7 @@ function deleteDialog({
                             );
                         } else {
                             swalWithBootstrapButtons
-                                .fire(
-                                    "Sucesso",
-                                    "Exclusão Realizada",
-                                    "success"
-                                )
-                                .then(function(result) {
+                                .fire("Sucesso", "Exclusão Realizada", "success").then(function(result) {
                                     if (result.value) {
                                         $("#" + idTable).DataTable().draw(false);
                                     }

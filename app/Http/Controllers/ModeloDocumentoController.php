@@ -63,7 +63,7 @@ class ModeloDocumentoController extends Controller
                         </a>
                         <a 
                             class="btn bg-danger color-palette btnExcluir"
-                            data-id="'.$modelo->id.'"
+                             data-id="'.$modelo->id.'"
                             title="Excluir" data-toggle="tooltip">
                             <i class="fas fa-trash"></i>
                         </a>
@@ -106,7 +106,7 @@ class ModeloDocumentoController extends Controller
     }
 
     public function destroy($id){
-        $modelo = ModeloDocumento::find($request->id);
+        $modelo = ModeloDocumento::find($id);
         $modelo->status = "Inativo";
         $modelo->save();
         return response()->json(array('status' => "OK"));

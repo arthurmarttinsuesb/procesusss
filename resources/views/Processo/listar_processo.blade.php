@@ -1,7 +1,7 @@
 @extends('layouts.app')
  
- @section('htmlheader_title', 'Modelo de Documento')
- @section('contentheader_title', 'Modelo de Documento')
+ @section('htmlheader_title', 'Processo')
+ @section('contentheader_title', 'Processo')
  
  @section('conteudo') 
  <!-- DataTables -->
@@ -14,12 +14,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gerenciar Modelos de Documentos</h1>
+            <h1>Gerenciar Meus Processos</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Modelo Documento</li>
+              <li class="breadcrumb-item active">Processos</li>
             </ol>
           </div>
         </div>
@@ -32,8 +32,8 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-                <div class="col-2 float-right">
-                    <a href="{{ URL::to('modelo-documento/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Modelo</a>
+                <div class="col-3 float-right">
+                    <a href="{{ URL::to('processo/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Processo</a>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -44,7 +44,7 @@
               <table id="table" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>Tipo de Documento</th>
+                    <th>Número Processo</th>
                     <th>Ação</th>
                   </tr>
                 </thead>
@@ -66,6 +66,6 @@
    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
    <script src="{{ asset('js/base.js') }}"></script>
-   <script src="{{ asset('js/listar_modelo_documento.js') }}"></script>
+   <script src="{{ asset('js/listar_processo.js') }}"></script>
 @endsection
 
