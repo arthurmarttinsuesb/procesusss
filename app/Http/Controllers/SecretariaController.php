@@ -10,6 +10,8 @@ use App\Secretaria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
+use App\Http\Utility\BotoesDatatable;
+
 
 class SecretariaController extends Controller
 {
@@ -30,29 +32,10 @@ class SecretariaController extends Controller
 
         return DataTables::of($secretaria)
             ->editColumn('acao', function ($secretaria) {
-                return $this->setEstrutura($secretaria);
+                return BotoesDatatable::criarBotoes($secretaria->id, 'secretaria');
             })->escapeColumns([0])
             ->make(true);
     }
-
-    private function setEstrutura(Secretaria $modelo)
-    {
-
-        $btnEditar = ' <a  class="btn btn-default btn-xs btnEditar"
-                          href="secretaria/' . $modelo->id . '"
-                          title="Alterar Modelo" data-toggle="tooltip">&nbsp
-                          <i class="fa fa-fw fa-pencil-square-o fa-lg"></i>&nbsp
-                       </a>';
-
-        $btnExcluir =  ' <a title="Excluir Modelo" data-toggle="tooltip"
-                           class="btn btn-default btn-xs btnExcluir"
-                            data-id="' . $modelo->id . '" >&nbsp
-                            <i  class="fa fa-fw fa-trash-o fa-lg"></i>&nbsp
-                       </a>';
-
-        return $btnEditar . $btnExcluir;
-    }
-
     /**
      * Store a newly created resource in storage.
      *
