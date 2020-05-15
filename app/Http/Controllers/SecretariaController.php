@@ -26,7 +26,7 @@ class SecretariaController extends Controller
 
     public function list(Request $request)
     {
-        $secretaria = Secretaria::where('status', 'ativo')->get();
+        $secretaria = Secretaria::where('status', 'Ativo')->get();
 
         return DataTables::of($secretaria)
             ->editColumn('acao', function ($secretaria) {
