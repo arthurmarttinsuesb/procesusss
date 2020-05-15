@@ -9,6 +9,8 @@ use DataTables;
 use App\Secretaria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Validator;
+
 
 use App\Http\Utility\BotoesDatatable;
 
@@ -46,6 +48,17 @@ class SecretariaController extends Controller
     {
 
         try {
+            $validator = Validator::make($request->all(), [
+                'titulo' => 'required',
+                'sigla' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect('secretaria/create')
+                    ->withErrors($validator, 'secretaria')
+                    ->withInput();
+            }
+
             $secretaria = new Secretaria();
 
             $secretaria->titulo = $request->titulo;

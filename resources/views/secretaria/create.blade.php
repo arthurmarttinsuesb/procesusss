@@ -40,24 +40,32 @@
                         <ul></ul>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="/secretaria" id="form">
+                        <form method="POST" action="/secretaria" id="secretaria">
+                            @csrf
                             (<span style="color: red;">*</span>) Campos Obrigatórios
                             <br><br>
+
                             <div class="row">
                                 <div class="form-group col-6">
                                     <strong>Titulo <span style="color: red;">*</span></strong>
-                                    <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" value="">
+                                    <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo', 'secretaria') is-invalid @enderror"" value=" {{ old('titulo') }}">
+                                    @error('titulo', 'secretaria')
+                                    <div class=" alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-6">
                                     <strong>Sigla <span style="color: red;">*</span></strong>
-                                    <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control" value="">
+                                    <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control" value="{{ old('sigla') }}">
+                                    @error('sigla', 'secretaria')
+                                    <div class=" alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <!-- /.card-body -->
                         </form>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                        <button type="submit" form="secretaria" class="btn btn-info float-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                     &nbsp Aguarde...">Salvar</button>
                     </div>
                     <!-- /.card-footer -->

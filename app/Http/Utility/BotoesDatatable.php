@@ -2,6 +2,9 @@
 
 namespace App\Http\Utility;
 
+// basta importar essa classe no controller; use App\Http\Utility\BotoesDatatable;
+// e depois no return do Datatable chamar o metodo criarBotoes passando o id e a rota, exemplo
+// return BotoesDatatable::criarBotoes($usuarios->id, 'usuarios');
 class BotoesDatatable
 {
 
