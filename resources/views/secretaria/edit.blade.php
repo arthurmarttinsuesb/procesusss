@@ -37,24 +37,30 @@
                             <a href="{{ URL::to('secretaria.index') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Secretarias</a>
                         </div>
                     </div>
-              </div>
-                 <div class="alert alert-danger erros" style="display: none;">
+                </div>
+                <div class="alert alert-danger erros" style="display: none;">
                     <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
                     <ul></ul>
                 </div>
-              <form  method="POST" action="/secretaria/{{$secretaria->id}}" id="form">
-                  
-                <div class="card-body">
-                (<span style="color: red;">*</span>) Campos Obrigatórios
-                    <br><br>
-                       <div class="row">
+                <form method="POST" action="/secretaria/{{$secretaria->id}}" id="form">
+
+                    <div class="card-body">
+                        (<span style="color: red;">*</span>) Campos Obrigatórios
+                        <br><br>
+                        <div class="row">
                             <div class="form-group col-6">
                                 <strong>Titulo <span style="color: red;">*</span></strong>
-                                <input value='{{$secretaria->titulo}}' type="text" autocomplete="off" id="titulo" name="titulo" class="form-control">
+                                <input value="{{ old('titulo', $secretaria->titulo) }}" type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo', 'secretaria') is-invalid @enderror">
+                                @error('titulo', 'secretaria')
+                                <div class=" alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <strong>Sigla <span style="color: red;">*</span></strong>
-                                <input value='{{$secretaria->sigla}}' type="text" autocomplete="off" id="sigla" name="sigla" class="form-control">
+                                <input value="{{ old('sigla', $secretaria->sigla) }}" type="text" autocomplete="off" id="sigla" name="sigla" class="form-control @error('sigla', 'secretaria') is-invalid @enderror">
+                                @error('titulo', 'secretaria')
+                                <div class=" alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
@@ -62,12 +68,12 @@
                     &nbsp Aguarde...">Salvar</button>
                             </div>
                             <!-- /.card-footer -->
-                    </form>
-                </div>
-                <!-- /.card -->
-
+                </form>
             </div>
+            <!-- /.card -->
+
         </div>
-    </section>
+</div>
+</section>
 </div>
 @endsection

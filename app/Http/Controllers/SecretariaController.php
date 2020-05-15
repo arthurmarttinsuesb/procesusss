@@ -112,6 +112,17 @@ class SecretariaController extends Controller
     {
 
         try {
+            $validator = Validator::make($request->all(), [
+                'titulo' => 'required',
+                'sigla' => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect('secretaria/' . $id . '/edit')
+                    ->withErrors($validator, 'secretaria')
+                    ->withInput();
+            }
+
             $secretaria = Secretaria::find($id);
 
             $secretaria->titulo = isset($request->titulo) ? $request->titulo : $secretaria->titulo;
