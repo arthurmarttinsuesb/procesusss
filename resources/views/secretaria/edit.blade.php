@@ -37,26 +37,6 @@
                             <a href="{{ URL::to('secretaria.index') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Secretarias</a>
                         </div>
                     </div>
-<<<<<<< HEAD
-
-                    <div class="alert alert-danger erros" style="display: none;">
-                        <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
-                        <ul></ul>
-                    </div>
-                    <form method="POST" action="/secretaria/{{$secretaria->id}}" id="form">
-                        (<span style="color: red;">*</span>) Campos Obrigatórios
-                        <br><br>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="form-group col-6">
-                                    <strong>Titulo</strong>
-                                    <input value='{{$secretaria->titulo}}' type="text" autocomplete="off" id="titulo" name="titulo" class="form-control">
-                                </div>
-                                <div class="form-group col-6">
-                                    <strong>Sigla</strong>
-                                    <input value='{{$secretaria->sigla}}' type="text" autocomplete="off" id="sigla" name="sigla" class="form-control">
-                                </div>
-=======
               </div>
                  <div class="alert alert-danger erros" style="display: none;">
                     <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
@@ -69,13 +49,12 @@
                     <br><br>
                        <div class="row">
                             <div class="form-group col-6">
-                                <strong>Titulo</strong>
+                                <strong>Titulo <span style="color: red;">*</span></strong>
                                 <input value='{{$secretaria->titulo}}' type="text" autocomplete="off" id="titulo" name="titulo" class="form-control">
                             </div>
                             <div class="form-group col-6">
-                                <strong>Sigla</strong>
+                                <strong>Sigla <span style="color: red;">*</span></strong>
                                 <input value='{{$secretaria->sigla}}' type="text" autocomplete="off" id="sigla" name="sigla" class="form-control">
->>>>>>> b8f18f00c53c67b3dfcd8efff3408a87faca3087
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">

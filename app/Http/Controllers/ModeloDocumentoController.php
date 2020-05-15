@@ -14,6 +14,9 @@ use Auth;
 use Validator;
 use Image;
 use Storage;
+
+use Session;
+use Redirect;
 #class
 
 use App\ModeloDocumento;
@@ -24,16 +27,15 @@ class ModeloDocumentoController extends Controller
         return view('ModeloDocumento.listar_modelo');
     }
 
-    public function novo(){
+    public function create()
+    {
         return view('ModeloDocumento.create');
     }
-
-    public function editar(Request $request){
-        $modelo = ModeloDocumento::where('id', $request->id)
-
-        ->where('status','Ativo')->get();
+    public function edit($id){
+        $modelo = ModeloDocumento::where('id', $id)->where('status','Ativo')->first();
         return view('ModeloDocumento.edit',compact('modelo'));
     }
+
    
     public function list(Request $request){
         $modelo = ModeloDocumento::where('status', "Ativo")->get();
@@ -54,12 +56,12 @@ class ModeloDocumentoController extends Controller
                             title="Visualizar" data-toggle="tooltip">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a href=route"("editar_modelo",["id"=>'.$modelo->id.'])"
+                        <a href="modelo-documento/'.$modelo->id.'/edit"
                             class="btn btn-info" 
                             title="Alterar" data-toggle="tooltip">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-                        <a href="#"
+                        <a 
                             class="btn bg-danger color-palette btnExcluir"
                             data-id="'.$modelo->id.'"
                             title="Excluir" data-toggle="tooltip">
@@ -73,15 +75,16 @@ class ModeloDocumentoController extends Controller
         try{
             $modelo =  new ModeloDocumento();
             $modelo->titulo = $request->titulo;
-            $modelo->conteudo = $request->conteudo;
+            // $modelo->conteudo = $request->conteudo;
             
             DB::transaction(function() use ($modelo) {
                 $modelo->save();
             });
 
-            return response()->json(array('status' => "OK"));
-        }catch(\Exception  $erro){
-            return response()->json(array('exception' => "ERRO ".$erro));
+            Session::flash('message', 'Modelo criado!');
+            return Redirect::to('modelo-documento');
+        }catch(\Exception  $errors){
+            return response()->json(array('errors' => "Não foi possível editar, tente novamente mais tarde."));
         }
     }
 
@@ -95,10 +98,18 @@ class ModeloDocumentoController extends Controller
                     $modelo->save();
                 });
 
-                return response()->json(array('status' => "OK"));
+                Session::flash('message', 'Modelo criado!');
+                return Redirect::to('modelo-documento');
             }catch(\Exception  $erro){
-                return response()->json(array('exception' => "ERRO ".$erro));
+                return response()->json(array('errors' => "Não foi possível editar, tente novamente mais tarde."));
             }
+    }
+
+    public function destroy($id){
+        $modelo = ModeloDocumento::find($request->id);
+        $modelo->status = "Inativo";
+        $modelo->save();
+        return response()->json(array('status' => "OK"));
     }
 
     public function inserir_imagem(Request $request){
@@ -106,7 +117,7 @@ class ModeloDocumentoController extends Controller
         if ($request->file('file')) {
             $arquivoNome = time().'.'.$request->file('file')->getClientOriginalExtension();
 
-            if($request->file('file')->storeAs('public/imagem_summernote/',$arquivoNome)){
+            if($request->file('file')->storeAs('public/imagem_modelo/',$arquivoNome)){
                return response()->json($arquivoNome);
             }else{
                return Response::json(array('errors' => 'true'));
@@ -115,14 +126,6 @@ class ModeloDocumentoController extends Controller
         }
     }
 
-    public function delete(Request $request){
-        if(!isset($request->id)){
-            return response()->json(array('status' => "error"));
-        }
-        $modelo = ModeloDocumento::find($request->id);
-        $modelo->status = "Inativo";
-        $modelo->save();
-        return response()->json(array('status' => "OK"));
-    }
+    
 
 }

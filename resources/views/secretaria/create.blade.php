@@ -45,11 +45,11 @@
                             <br><br>
                             <div class="row">
                                 <div class="form-group col-6">
-                                    <strong>Titulo</strong>
+                                    <strong>Titulo <span style="color: red;">*</span></strong>
                                     <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" value="">
                                 </div>
                                 <div class="form-group col-6">
-                                    <strong>Sigla</strong>
+                                    <strong>Sigla <span style="color: red;">*</span></strong>
                                     <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control" value="">
                                 </div>
                             </div>

@@ -44,7 +44,7 @@ class SecretariaController extends Controller
                           <i class="fa fa-fw fa-pencil-square-o fa-lg"></i>&nbsp
                        </a>';
 
-        $btnExcluir =  ' <a title="Excluir Modelo" data-toggle="tooltip"
+        $btnExcluir =  ' <a title="Excluir " data-toggle="tooltip"
                            class="btn btn-default btn-xs btnExcluir"
                             data-id="' . $modelo->id . '" >&nbsp
                             <i  class="fa fa-fw fa-trash-o fa-lg"></i>&nbsp

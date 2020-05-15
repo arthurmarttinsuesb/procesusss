@@ -1,5 +1,5 @@
 //Proteção da aplicação contra ataques de falsificação de solicitações entre sites (CSRF).
-$(document).ready(function ($) {
+$(document).ready(function($) {
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -65,7 +65,7 @@ function deleteDialog({
                         ),
                     },
                     data: {},
-                    success: function (data) {
+                    success: function(data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -79,16 +79,14 @@ function deleteDialog({
                                     "Exclusão Realizada",
                                     "success"
                                 )
-                                .then(function (result) {
+                                .then(function(result) {
                                     if (result.value) {
-                                        $("#" + idTable)
-                                            .DataTable()
-                                            .draw(false);
+                                        $("#" + idTable).DataTable().draw(false);
                                     }
                                 });
                         }
                     },
-                    error: function () {
+                    error: function() {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Exclusão cancelada, tente novamente mais tarde.",

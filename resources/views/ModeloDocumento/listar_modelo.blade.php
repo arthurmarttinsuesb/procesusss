@@ -33,11 +33,13 @@
           <div class="card">
             <div class="card-header">
                 <div class="col-2 float-right">
-                    <a href="{{ route('adicionar_modelo') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Modelo</a>
+                    <a href="{{ URL::to('modelo-documento/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Modelo</a>
                 </div>
             </div>
             <!-- /.card-header -->
-           
+            @if (Session::has('message'))
+                 <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
+            @endif
             <div class="card-body">
               <table id="table" class="table table-bordered table-hover">
                 <thead>
@@ -58,11 +60,11 @@
     <!-- /.content -->
  <!-- jQuery -->
    <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
-   <script src="{{ asset('js/base.js') }}"></script>
-   <script src="{{ asset('js/listar_modelo_documento.js') }}"></script>
    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+   <script src="{{ asset('js/base.js') }}"></script>
+   <script src="{{ asset('js/listar_modelo_documento.js') }}"></script>
 @endsection
 

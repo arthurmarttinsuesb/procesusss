@@ -26,12 +26,14 @@ class RequestModelo extends FormRequest
     {
         return [
             'titulo' =>'required',
+            'conteudo' =>'required',
         ];
     }
 
     public function attributes(){
         return [
                 'titulo' =>'Título',
+                'conteudo' =>'Conteúdo',
            ];
     }
 }
