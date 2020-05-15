@@ -4,8 +4,9 @@
  @section('contentheader_title', 'Modelo Documento')
  
  @section('conteudo') 
- <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote.min.css') }}">
-
+  <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
+  <link rel="stylesheet" href="{{asset('plugins/jquery-ui/jquery-ui.min.css') }}">
+  
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -32,33 +33,41 @@
            <div class="card">
               <div class="card-header">
                     <div class="col-2 float-right">
-                        <a href="{{ URL::to('listar_modelo') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Modelos</a>
+                        <a href="{{ URL::to('modelo-documento') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Modelos</a>
                     </div>
               </div>
-                 <div class="alert alert-danger erros" style="display: none;">
+              @if (count($errors) > 0)
+                <div class="alert alert-danger">
                     <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
-                    <ul></ul>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-              <form  method="POST" action="/secretaria" id="form">
+            @endif
+              <form  method="POST" id="form" action="/modelo-documento">
+                 @csrf
                 <div class="card-body">
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
                        <div class="row">
                             <div class="form-group col-12">
-                                <strong>Titulo</strong>
-                                <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" value="">
+                                <strong>Titulo <span style="color: red;">*</span></strong>
+                                <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" value="{{ old('titulo') }}">
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-12">
-                                <strong>Conteúdo</strong>
-                                <div id='summernote'></div>
+                                <strong>Conteúdo <span style="color: red;">*</span></strong>
+                                <textarea class="textarea" name='conteudo' id='conteudo' placeholder="Place some text here"
+                                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('conteudo') }}</textarea>
                             </div>
                         </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                    <button type="submit" class="btn btn-info float-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                     &nbsp Aguarde...">Salvar</button>
                 </div>
                 <!-- /.card-footer -->
@@ -70,9 +79,10 @@
         </div>
     </section>
 </div>
-    <!-- /.content -->
-   <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
-   <script src="{{ asset('/plugins/summernote/summernote.min.js') }}"></script>
+
+<script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
    <script src="{{ asset('js/base.js') }}"></script>
    <script src="{{ asset('js/modelo_documento.js') }}"></script>
 @endsection

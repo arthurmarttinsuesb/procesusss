@@ -1,6 +1,6 @@
 $(document).ready(function($) {
     var table = $("#table").DataTable({
-        ajax: base_url + "/modelo-documento/list/",
+        ajax: base_url + "/processo/list/",
         scrollCollapse: true,
         responsive: true,
         paging: false,
@@ -9,7 +9,7 @@ $(document).ready(function($) {
         deferRender: true,
         searching: false,
         columns: [
-            { data: "titulo", name: "titulo" },
+            { data: "numero", name: "numero" },
             { data: "acao", name: "acao" }
         ],
         language: { url: "/plugins/datatables/traducao.json" }
@@ -18,8 +18,8 @@ $(document).ready(function($) {
 
     $(document).on("click", ".btnExcluir", function() {
         deleteDialog({
-            nomeModulo: "Modelo",
-            rota: "modelo-documento",
+            nomeModulo: "Processo",
+            rota: "processo",
             idTable: "table",
         });
     });

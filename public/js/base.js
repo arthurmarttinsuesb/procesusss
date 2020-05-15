@@ -1,5 +1,5 @@
 //Proteção da aplicação contra ataques de falsificação de solicitações entre sites (CSRF).
-$(document).ready(function ($) {
+$(document).ready(function($) {
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -36,6 +36,7 @@ function mensagemErro() {
 // o valor padrão já é id, então não é necessario preencher caso use o
 // mesmo nome
 // btnClass é o nome da classe do botao de excluir, por padrao ja fica btnExcluir
+
 function deleteDialog({
     nomeModulo,
     rota,
@@ -65,7 +66,7 @@ function deleteDialog({
                         ),
                     },
                     data: {},
-                    success: function (data) {
+                    success: function(data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -74,21 +75,14 @@ function deleteDialog({
                             );
                         } else {
                             swalWithBootstrapButtons
-                                .fire(
-                                    "Sucesso",
-                                    "Exclusão Realizada",
-                                    "success"
-                                )
-                                .then(function (result) {
+                                .fire("Sucesso", "Exclusão Realizada", "success").then(function(result) {
                                     if (result.value) {
-                                        $("#" + idTable)
-                                            .DataTable()
-                                            .draw(false);
+                                        $("#" + idTable).DataTable().draw(false);
                                     }
                                 });
                         }
                     },
-                    error: function () {
+                    error: function() {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Exclusão cancelada, tente novamente mais tarde.",

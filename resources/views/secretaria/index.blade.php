@@ -33,7 +33,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-2 float-right">
+                        <div class="col-3 float-right">
                             <a href="{{ URL::to('secretaria/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Secretaria</a>
                         </div>
                     </div>

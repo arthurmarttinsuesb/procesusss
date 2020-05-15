@@ -4,17 +4,16 @@
  @section('contentheader_title', 'Modelo Documento')
  
  @section('conteudo') 
- <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/iziToast/iziToast.min.css') }}">
-
-
+  <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
+  <link rel="stylesheet" href="{{asset('plugins/jquery-ui/jquery-ui.min.css') }}">
+  
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Editar Modelo Documento</h1>
+            <h1>Adicionar Modelo Documento</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -26,54 +25,69 @@
       </div><!-- /.container-fluid -->
     </section>
 
-    <!-- Main content -->
-    <section class="content">
+ <!-- Main content -->
+ <section class="content">
       <div class="row">
         <div class="col-12">
-          <div class="card">
-             <div class="card-header">
-                <div class="col-2 float-right">
-                  <a href="{{ route('listar_modelo') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Rifas</a>
-                </div>
-              </div>
-              <div class="card-body">
-                  <div class="alert alert-danger erros" style="display: none;">
-                      <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
-                      <ul></ul>
-                  </div>
-                  
-                  <br><br>
-                   <form method="POST" action="{{ route('listar_modelo') }}">
-                   (<span style="color: red;">*</span>) Campos Obrigatórios
-                   @csrf
-                      <div class="row">
-                        <div class="form-group col-12">
-                          <label>Título<span style="color: red;">*</span></label>
-                          <input type="text" name='titulo' class="form-control" placeholder="Título da Rifa">
-                        </div>
-                     </div>  
-                      <div class="row">
-                          <div class="form-group col-12">
-                                 <label>Conteúdo</label>                   
-                                <div id="summernote"></div>
-                          </div>
-                      </div>
-                    </div> <!-- /.card-body -->
-                    <div class="card-footer">
-                        <button type="button" class="btn btn-info float-right salvar">Salvar</button>
+
+           <div class="card">
+              <div class="card-header">
+                    <div class="col-2 float-right">
+                        <a href="{{ URL::to('modelo-documento') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Modelos</a>
                     </div>
-                </form>
+              </div>
+              @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+              <form  method="POST" id="form" action="/modelo-documento/{{$modelo->id}}">
+                 @csrf
+                <div class="card-body">
+                      (<span style="color: red;">*</span>) Campos Obrigatórios
+                      <br><br>
+                       <div class="row">
+                            <div class="form-group col-12">
+                                <strong>Titulo <span style="color: red;">*</span></strong>
+                                <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" value="{{$modelo->titulo}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <strong>Conteúdo <span style="color: red;">*</span></strong>
+                                <textarea class="textarea" name='conteudo' id='conteudo' placeholder="Place some text here"
+                                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$modelo->conteudo}}</textarea>
+                            </div>
+                            <input type='hidden' id='id' value='{{$modelo->id}}'>
+                        </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="button" class="btn btn-info float-right btnEditar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                    &nbsp Aguarde...">Salvar</button>
+                </div>
+                <!-- /.card-footer -->
+              </form>
             </div>
-           </div>
+            <!-- /.card -->
+
           </div>
         </div>
     </section>
 </div>
-    <!-- /.content -->
-   <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
-   <script src="{{ asset('/plugins/summernote/summernote.min.js') }}"></script>
-   <script src="{{ asset('/plugins/iziToast/iziToast.min.js') }}"></script>
+
+<script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="{{asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
    <script src="{{ asset('js/base.js') }}"></script>
    <script src="{{ asset('js/modelo_documento.js') }}"></script>
 @endsection
+
+
+
 
