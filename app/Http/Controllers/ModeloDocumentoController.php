@@ -81,7 +81,7 @@ class ModeloDocumentoController extends Controller
         try {
             $modelo =  new ModeloDocumento();
             $modelo->titulo = $request->titulo;
-            // $modelo->conteudo = $request->conteudo;
+            $modelo->conteudo = $request->conteudo;
 
             DB::transaction(function () use ($modelo) {
                 $modelo->save();
