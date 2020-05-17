@@ -50,14 +50,18 @@
                                     <strong>Titulo <span style="color: red;">*</span></strong>
                                     <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo', 'secretaria') is-invalid @enderror" value=" {{ old('titulo') }}">
                                     @error('titulo', 'secretaria')
-                                    <div class=" alert alert-danger">{{ $message }}</div>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                                 <div class="form-group col-6">
                                     <strong>Sigla <span style="color: red;">*</span></strong>
                                     <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control @error('sigla', 'secretaria') is-invalid @enderror" value="{{ old('sigla') }}">
                                     @error('sigla', 'secretaria')
-                                    <div class=" alert alert-danger">{{ $message }}</div>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>

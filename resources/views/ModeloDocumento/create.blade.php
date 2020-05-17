@@ -36,16 +36,14 @@
                         <a href="{{ URL::to('modelo-documento') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Modelos</a>
                     </div>
               </div>
-              @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+              @if (Session::has('message'))
+              <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
+                     {{ Session::get('message') }}
                 </div>
-            @endif
+              @endif
+           
               <form  method="POST" id="form" action="/modelo-documento">
                  @csrf
                 <div class="card-body">
@@ -54,15 +52,26 @@
                        <div class="row">
                             <div class="form-group col-12">
                                 <strong>Titulo <span style="color: red;">*</span></strong>
-                                <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" value="{{ old('titulo') }}">
+                                <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}">
+                                @error('titulo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-12">
                                 <strong>Conteúdo <span style="color: red;">*</span></strong>
-                                <textarea class="textarea" name='conteudo' id='conteudo' placeholder="Place some text here"
+                                <textarea class="textarea form-control @error('conteudo') is-invalid @enderror" name='conteudo' id='conteudo' placeholder="Place some text here"
                                     style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('conteudo') }}</textarea>
-                            </div>
+                                    @error('conteudo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    
+                                </div>
                         </div>
                 </div>
                 <!-- /.card-body -->

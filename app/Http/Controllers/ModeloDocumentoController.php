@@ -78,7 +78,6 @@ class ModeloDocumentoController extends Controller
 
     public function store(RequestModelo $request)
     {
-
         try {
             $modelo =  new ModeloDocumento();
             $modelo->titulo = $request->titulo;
@@ -91,7 +90,8 @@ class ModeloDocumentoController extends Controller
             Session::flash('message', 'Modelo criado!');
             return Redirect::to('modelo-documento');
         } catch (\Exception  $errors) {
-            return response()->json(array('errors' => "Não foi possível editar, tente novamente mais tarde."));
+            Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!');
+            return back()->withInput();
         }
     }
 
@@ -106,10 +106,11 @@ class ModeloDocumentoController extends Controller
                 $modelo->save();
             });
 
-            Session::flash('message', 'Modelo criado!');
+            Session::flash('message', 'Modelo Alterado!');
             return Redirect::to('modelo-documento');
         } catch (\Exception  $erro) {
-            return response()->json(array('errors' => "Não foi possível editar, tente novamente mais tarde."));
+            Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!');
+            return back()->withInput();
         }
     }
 
