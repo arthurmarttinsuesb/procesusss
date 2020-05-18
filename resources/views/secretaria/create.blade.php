@@ -35,10 +35,13 @@
                         </div>
                     </div>
 
-                    <div class="alert alert-danger erros" style="display: none;">
-                        <strong>Atenção!</strong> Houve algum problema com as suas informações.<br><br>
-                        <ul></ul>
-                    </div>
+                    @if (Session::has('message'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
                     <div class="card-body">
                         <form method="POST" action="/secretaria" id="secretaria">
                             @csrf
@@ -49,7 +52,7 @@
                                 <div class="form-group col-6">
                                     <strong>Titulo <span style="color: red;">*</span></strong>
                                     <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo', 'secretaria') is-invalid @enderror" value=" {{ old('titulo') }}">
-                                    @error('titulo', 'secretaria')
+                                    @error('titulo','secretaria')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -58,7 +61,7 @@
                                 <div class="form-group col-6">
                                     <strong>Sigla <span style="color: red;">*</span></strong>
                                     <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control @error('sigla', 'secretaria') is-invalid @enderror" value="{{ old('sigla') }}">
-                                    @error('sigla', 'secretaria')
+                                    @error('sigla','secretaria')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

@@ -70,7 +70,8 @@ class SecretariaController extends Controller
             Session::flash('message', 'Secretaria criada!');
             return Redirect::to('secretaria');
         } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "ERRO"));
+            Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!');
+            return back()->withInput();
         }
     }
 
@@ -134,7 +135,8 @@ class SecretariaController extends Controller
             Session::flash('message', 'Secretaria atualizada!');
             return Redirect::to('secretaria');
         } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "ERRO"));
+            Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!');
+            return back()->withInput();
         }
     }
 
