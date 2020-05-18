@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Secretaria extends Model
 {
-    protected $fillable = 
+    protected $fillable =
     [
-        'titulo', 'sigla','status'
-    ]; 
+        'titulo', 'sigla', 'status'
+    ];
 }

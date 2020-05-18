@@ -1,12 +1,9 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Secretaria')
-@section('contentheader_title', 'Secretaria')
+@section('htmlheader_title', 'Setor')
+@section('contentheader_title', 'Setor')
 
 @section('conteudo')
-<link rel="stylesheet" href="{{ asset('plugins/summernote/summernote.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/iziToast/iziToast.min.css') }}">
-
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -14,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Editar Secretaria: {{ $secretaria->titulo }}</h1>
+                    <h1>Adicionar Setor</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('listar_modelo')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Secretaria</li>
+                        <li class="breadcrumb-item active">Setor</li>
                     </ol>
                 </div>
             </div>
@@ -34,7 +31,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-2 float-right">
-                            <a href="{{ URL::to('secretaria.index') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Secretarias</a>
+                            <a href="{{ URL::to('setor') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Setor</a>
                         </div>
                     </div>
 
@@ -45,16 +42,17 @@
                         {{ Session::get('message') }}
                     </div>
                     @endif
-                    <form method="POST" action="/secretaria/{{$secretaria->id}}" id="form">
-
-                        <div class="card-body">
+                    <div class="card-body">
+                        <form method="POST" action="/setor" id="setor">
+                            @csrf
                             (<span style="color: red;">*</span>) Campos Obrigatórios
                             <br><br>
+
                             <div class="row">
                                 <div class="form-group col-6">
                                     <strong>Titulo <span style="color: red;">*</span></strong>
-                                    <input value="{{ old('titulo', $secretaria->titulo) }}" type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo', 'secretaria') is-invalid @enderror">
-                                    @error('titulo','secretaria')
+                                    <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo', 'setor') is-invalid @enderror" value=" {{ old('titulo') }}">
+                                    @error('titulo','setor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -62,27 +60,28 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <strong>Sigla <span style="color: red;">*</span></strong>
-                                    <input value="{{ old('sigla', $secretaria->sigla) }}" type="text" autocomplete="off" id="sigla" name="sigla" class="form-control @error('sigla', 'secretaria') is-invalid @enderror">
-                                    @error('sigla','secretaria')
+                                    <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control @error('sigla', 'setor') is-invalid @enderror" value="{{ old('sigla') }}">
+                                    @error('sigla','setor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
-
-
-                    </form>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                            </div>
+                            <!-- /.card-body -->
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" form="setor" class="btn btn-info float-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                     &nbsp Aguarde...">Salvar</button>
-                <!-- /.card-footer -->
+                    </div>
+                    <!-- /.card-footer -->
+
+                    <!-- /.card -->
+
+                </div>
             </div>
-            <!-- /.card -->
-        </div>
+    </section>
 </div>
-</section>
-</div>
+
 @endsection

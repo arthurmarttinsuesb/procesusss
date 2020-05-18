@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Setor extends Model
 {
-    protected $fillable = 
+    protected $fillable =
     [
-        'titulo', 'sigla','status','fk_secretaria'
-    ]; 
+        'titulo', 'sigla', 'status', 'fk_secretaria'
+    ];
 
     public function secretaria()
     {
-        return $this->belongsTo(Secretaria::class, 'fk_secretaria');
+        return $this->belongsTo('App\Secretaria', 'fk_secretaria');
     }
 }
