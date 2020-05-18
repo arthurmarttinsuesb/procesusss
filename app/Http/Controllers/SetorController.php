@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Setor;
-use Illuminate\Http\Request;
+use Session;
+use Redirect;
+use DataTables;
 
+use App\Setor;
+use App\Http\Utility\BotoesDatatable;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Validator;
 
 
 
@@ -17,8 +24,18 @@ class SetorController extends Controller
      */
     public function index()
     {
-        $setor = Setor::where('status', 'ativo')->get();
-        return $setor;
+        return View::make('setor.index');
+    }
+
+    public function list()
+    {
+        $setor = Setor::where('status', 'Ativo')->get();
+
+        return DataTables::of($setor)
+            ->editColumn('acao', function ($setor) {
+                return BotoesDatatable::criarBotoes($setor->id, 'setor');
+            })->escapeColumns([0])
+            ->make(true);
     }
 
     /**
@@ -29,24 +46,38 @@ class SetorController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+            $validator = Validator::make($request->all(), [
+                'titulo' => 'required',
+                'sigla' => 'required',
+                'fk_secretaria' => 'required',
+            ]);
 
+            if ($validator->fails()) {
+                return redirect('setor/create')
+                    ->withErrors($validator, 'setor')
+                    ->withInput();
+            }
 
-        try{
             $setor = new Setor();
-
             $setor->titulo = $request->titulo;
             $setor->sigla = $request->sigla;
-            $setor->status = $request->status;
+            $setor->status = 'Ativo';
             $setor->fk_secretaria = $request->fk_secretaria;
 
             $setor->save();
 
-
-            return response()->json(array('status' => "OK"));
-        } catch(\Exception  $erro){
-            return response()->json(array('erro' => "ERRO"));
+            Session::flash('message', 'Setor criado!');
+            return Redirect::to('setor');
+        } catch (\Exception  $erro) {
+            Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!');
+            return back()->withInput();
         }
+    }
 
+    public function create()
+    {
+        return View::make('setor.create');
     }
 
     /**
@@ -56,13 +87,23 @@ class SetorController extends Controller
      */
     public function show($id)
     {
-        try{
-            $setor = Setor::find($id)->where('status', 'ativo')->get();
+        try {
+            $setor = Setor::find($id);
 
-            return $setor;
-        }catch(Exception  $erro){
-            return response()->json(array('erro' => "ERRO"));
+            return View::make('setor.show')
+                ->with('setor', $setor);
+        } catch (Exception  $erro) {
+            Session::flash('message', 'Não foi possível encontrar o registro!');
+            return back();
         }
+    }
+
+    public function edit($id)
+    {
+        $setor = Setor::find($id);
+
+        return View::make('setor.edit')
+            ->with('setor', $setor);
     }
 
 
@@ -74,22 +115,33 @@ class SetorController extends Controller
      */
     public function update(Request $request, Setor $setor, $id)
     {
+        try {
+            $validator = Validator::make($request->all(), [
+                'titulo' => 'required',
+                'sigla' => 'required',
+                'fk_secretaria' => 'required',
+            ]);
 
-        try{
+            if ($validator->fails()) {
+                return redirect('setor/' . $id . '/edit')
+                    ->withErrors($validator, 'setor')
+                    ->withInput();
+            }
+
             $setor = Setor::find($id);
 
             $setor->titulo = isset($request->titulo) ? $request->titulo : $setor->titulo;
             $setor->sigla = isset($request->sigla) ? $request->sigla : $setor->sigla;
-            $setor->status = isset($request->status) ? $request->status : $setor->status;
             $setor->fk_secretaria = isset($request->fk_secretaria) ? $request->fk_secretaria : $setor->fk_secretaria;
 
             $setor->save();
 
-            return response()->json(array('status' => "OK"));
-        } catch(\Exception  $erro){
-            return response()->json(array('erro' => "ERRO"));
+            Session::flash('message', 'Setor atualizado!');
+            return Redirect::to('setor');
+        } catch (\Exception  $erro) {
+            Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!');
+            return back()->withInput();
         }
-
     }
 
     /**
@@ -99,16 +151,14 @@ class SetorController extends Controller
      */
     public function destroy($id)
     {
-        try{
+        try {
             $setor = Setor::find($id);
             $setor->status = 'inativo';
             $setor->save();
 
             return response()->json(array('status' => "OK"));
-        } catch(\Exception  $erro){
+        } catch (\Exception  $erro) {
             return response()->json(array('erro' => "ERRO"));
         }
     }
-
-
 }

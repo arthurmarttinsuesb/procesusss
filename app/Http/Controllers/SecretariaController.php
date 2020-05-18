@@ -7,12 +7,14 @@ use Redirect;
 use DataTables;
 
 use App\Secretaria;
+use App\Http\Utility\BotoesDatatable;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 
 
-use App\Http\Utility\BotoesDatatable;
+
 
 
 class SecretariaController extends Controller
@@ -60,7 +62,6 @@ class SecretariaController extends Controller
             }
 
             $secretaria = new Secretaria();
-
             $secretaria->titulo = $request->titulo;
             $secretaria->sigla = $request->sigla;
             $secretaria->status = 'Ativo';
@@ -87,10 +88,15 @@ class SecretariaController extends Controller
      */
     public function show($id)
     {
-        $secretaria = Secretaria::find($id);
+        try {
+            $secretaria = Secretaria::find($id);
 
-        return View::make('secretaria.show')
-            ->with('secretaria', $secretaria);
+            return View::make('secretaria.show')
+                ->with('secretaria', $secretaria);
+        } catch (Exception  $erro) {
+            Session::flash('message', 'Não foi possível encontrar o registro!');
+            return back();
+        }
     }
 
 
@@ -131,7 +137,7 @@ class SecretariaController extends Controller
 
             $secretaria->save();
 
-            // redirect
+
             Session::flash('message', 'Secretaria atualizada!');
             return Redirect::to('secretaria');
         } catch (\Exception  $erro) {
@@ -147,11 +153,14 @@ class SecretariaController extends Controller
      */
     public function destroy($id)
     {
+        try {
+            $secretaria = Secretaria::find($id);
+            $secretaria->status = 'Inativo';
+            $secretaria->save();
 
-        $secretaria = Secretaria::find($id);
-        $secretaria->status = 'Inativo';
-        $secretaria->save();
-
-        return response()->json(array('status' => "OK"));
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
+        }
     }
 }
