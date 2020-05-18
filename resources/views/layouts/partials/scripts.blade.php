@@ -11,9 +11,9 @@
 <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
 <script>
-    window.Laravel = {!! json_encode([
+    window.Laravel = `{!!json_encode([
         'csrfToken' => csrf_token(),
-    ]) !!};
+    ])!!}`;
 
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -21,5 +21,5 @@
             cancelButton: 'btn btn-danger'
         },
         buttonsStyling: true
-        })
+    })
 </script>

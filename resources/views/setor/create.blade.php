@@ -5,6 +5,9 @@
 
 @section('conteudo')
 
+<link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -68,6 +71,24 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <strong>Secretaria <span style="color: red;">*</span></strong>
+                                    <input type="text" autocomplete="off" id="titulo" name="titulo" class="" value=" {{ old('titulo') }}">
+                                    <select class="form-control select2 form-control @error('titulo', 'setor') is-invalid @enderror" name="fk_secretaria">
+                                        <!-- select2-hidden-accessible -->
+                                        <option value="AL">Alabama</option>
+                                        ...
+                                        <option value="WY">Wyoming</option>
+                                    </select>
+                                    @error('titulo','setor')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <!-- /.card-body -->
                         </form>
                     </div>
@@ -83,5 +104,8 @@
             </div>
     </section>
 </div>
-
+@endsection
+@section('scripts-adicionais')
+<script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('js/setor.js') }}"></script>
 @endsection
