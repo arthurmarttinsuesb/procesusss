@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-2 float-right">
-                            <a href="{{ URL::to('setor.index') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Setor</a>
+                            <a href="{{ URL::to('setor') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Setor</a>
                         </div>
                     </div>
 
@@ -45,7 +45,10 @@
                         {{ Session::get('message') }}
                     </div>
                     @endif
-                    <form method="POST" action="/setor/{{$setor->id}}" id="form">
+                    <form method="POST" action="/setor/{{$setor->id}}" id="setor">
+                        @csrf
+                        @method('PUT')
+
 
                         <div class="card-body">
                             (<span style="color: red;">*</span>) Campos Obrigatórios
@@ -71,20 +74,42 @@
                                 </div>
 
 
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <strong>Secretaria <span style="color: red;">*</span></strong>
+                                    <select class="form-control select2 form-control @error('fk_secretaria', 'setor') is-invalid @enderror" name="fk_secretaria">
+
+
+                                        @foreach ($secretarias as $secretaria)
+                                        @if (old('fk_secretaria', $setor->fk_secretaria) == $secretaria->id)
+                                        <option value="{{$secretaria->id}}" selected>{{$secretaria->titulo}}</option>
+                                        @else
+                                        <option value="{{$secretaria->id}}">{{$secretaria->titulo}}</option>
+                                        @endif
+
+                                        @endforeach
+                                    </select>
+                                    @error('fk_secretaria','setor')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
                     </form>
+
+                    <!-- /.card-body -->
+                </div>
+                <div class="card-footer">
+                    <button type="submit" form="setor" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                    &nbsp Aguarde...">Salvar</button>
+                    <!-- /.card-footer -->
                 </div>
 
-                <!-- /.card-body -->
+                <!-- /.card -->
             </div>
-            <div class="card-footer">
-                <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
-                    &nbsp Aguarde...">Salvar</button>
-                <!-- /.card-footer -->
-            </div>
-
-            <!-- /.card -->
         </div>
-</div>
-</section>
+    </section>
 </div>
 @endsection

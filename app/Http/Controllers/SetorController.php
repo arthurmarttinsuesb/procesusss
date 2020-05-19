@@ -7,6 +7,7 @@ use Redirect;
 use DataTables;
 
 use App\Setor;
+use App\Secretaria;
 use App\Http\Utility\BotoesDatatable;
 
 use Illuminate\Http\Request;
@@ -78,7 +79,8 @@ class SetorController extends Controller
 
     public function create()
     {
-        return View::make('setor.create');
+        $secretarias = Secretaria::where('status', 'Ativo')->get();
+        return View::make('setor.create', ['secretarias' => $secretarias]);
     }
 
     /**
@@ -90,9 +92,9 @@ class SetorController extends Controller
     {
         try {
             $setor = Setor::find($id);
+            $secretarias = Secretaria::where('status', 'Ativo')->get();
 
-            return View::make('setor.show')
-                ->with('setor', $setor);
+            return View::make('setor.show',  ['secretarias' => $secretarias, 'setor' => $setor]);
         } catch (Exception  $erro) {
             Session::flash('message', 'Não foi possível encontrar o registro!');
             return back();
@@ -102,9 +104,9 @@ class SetorController extends Controller
     public function edit($id)
     {
         $setor = Setor::find($id);
+        $secretarias = Secretaria::where('status', 'Ativo')->get();
 
-        return View::make('setor.edit')
-            ->with('setor', $setor);
+        return View::make('setor.edit', ['secretarias' => $secretarias, 'setor' => $setor]);
     }
 
 
@@ -114,7 +116,7 @@ class SetorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Setor $setor, $id)
+    public function update(Request $request, $id)
     {
         try {
             $validator = Validator::make($request->all(), [

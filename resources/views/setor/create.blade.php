@@ -74,14 +74,19 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <strong>Secretaria <span style="color: red;">*</span></strong>
-                                    <input type="text" autocomplete="off" id="titulo" name="titulo" class="" value=" {{ old('titulo') }}">
-                                    <select class="form-control select2 form-control @error('titulo', 'setor') is-invalid @enderror" name="fk_secretaria">
-                                        <!-- select2-hidden-accessible -->
-                                        <option value="AL">Alabama</option>
-                                        ...
-                                        <option value="WY">Wyoming</option>
+                                    <select class="form-control select2 form-control @error('fk_secretaria', 'setor') is-invalid @enderror" name="fk_secretaria">
+
+
+                                        @foreach ($secretarias as $secretaria)
+                                        @if (old('fk_secretaria') == $secretaria->id)
+                                        <option value="{{$secretaria->id}}" selected>{{$secretaria->titulo}}</option>
+                                        @else
+                                        <option value="{{$secretaria->id}}">{{$secretaria->titulo}}</option>
+                                        @endif
+
+                                        @endforeach
                                     </select>
-                                    @error('titulo','setor')
+                                    @error('fk_secretaria','setor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
