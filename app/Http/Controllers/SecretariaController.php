@@ -91,8 +91,7 @@ class SecretariaController extends Controller
         try {
             $secretaria = Secretaria::find($id);
 
-            return View::make('secretaria.show')
-                ->with('secretaria', $secretaria);
+            return View::make('secretaria.show', ['secretaria' => $secretaria]);
         } catch (Exception  $erro) {
             Session::flash('message', 'Não foi possível encontrar o registro!');
             return back();
@@ -104,8 +103,7 @@ class SecretariaController extends Controller
     {
         $secretaria = Secretaria::find($id);
 
-        return View::make('secretaria.edit')
-            ->with('secretaria', $secretaria);
+        return View::make('secretaria.edit', ['secretaria' => $secretaria])
     }
 
 

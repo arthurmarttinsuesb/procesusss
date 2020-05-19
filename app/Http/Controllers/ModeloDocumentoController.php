@@ -47,33 +47,9 @@ class ModeloDocumentoController extends Controller
 
         return Datatables::of($modelo)
             ->editColumn('acao', function ($modelo) {
-                return $this->setEstrutura($modelo);
+                return BotoesDatatable::criarBotoes($modelo->id, 'modelo-documento');
             })->escapeColumns([0])
             ->make(true);
-    }
-
-    private function setEstrutura(ModeloDocumento $modelo)
-    {
-
-        return '<div class="btn-group btn-group-sm">
-                        <a href="javascript:void(0)"
-                            class="btn bg-teal color-palette btnVisualizar"
-                            data-id="' . $modelo->id . '"
-                            title="Visualizar" data-toggle="tooltip">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a href="modelo-documento/' . $modelo->id . '/edit"
-                            class="btn btn-info"
-                            title="Alterar" data-toggle="tooltip">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
-                        <a
-                            class="btn bg-danger color-palette btnExcluir"
-                             data-id="' . $modelo->id . '"
-                            title="Excluir" data-toggle="tooltip">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                </div>';
     }
 
     public function store(RequestModelo $request)
