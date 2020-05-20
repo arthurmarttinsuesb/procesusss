@@ -27,17 +27,17 @@ class ModeloDocumentoController extends Controller
 {
     public function index()
     {
-        return view('ModeloDocumento.listar_modelo');
+        return view('modeloDocumento.index');
     }
 
     public function create()
     {
-        return view('ModeloDocumento.create');
+        return view('modeloDocumento.create');
     }
     public function edit($id)
     {
         $modelo = ModeloDocumento::where('id', $id)->where('status', 'Ativo')->first();
-        return view('ModeloDocumento.edit', compact('modelo'));
+        return view('modeloDocumento.edit', compact('modelo'));
     }
 
 
