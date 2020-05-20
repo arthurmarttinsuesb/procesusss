@@ -27,7 +27,7 @@ class SecretariaController extends Controller
     }
 
 
-    public function list(Request $request)
+    public function list()
     {
         $secretaria = Secretaria::where('status', 'Ativo')->get();
 
@@ -100,7 +100,7 @@ class SecretariaController extends Controller
     {
         $secretaria = Secretaria::find($id);
 
-        return View::make('secretaria.edit', ['secretaria' => $secretaria])
+        return View::make('secretaria.edit', ['secretaria' => $secretaria]);
     }
 
 

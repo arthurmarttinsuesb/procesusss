@@ -36,8 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     // lembrar de por as rotas pro metodo 'list' mais acima,
     // para que o laravel não sobrescreva(comportamento padrão do resources)
-    Route::resource('secretaria', 'SecretariaController');
     Route::resource('modelo-documento', 'ModeloDocumentoController');
+    Route::resource('usuario-setor', 'UserSetorsController');
+    Route::resource('secretaria', 'SecretariaController');
     Route::resource('processo', 'ProcessoController');
     Route::resource('setor', 'SetorController');
 });
