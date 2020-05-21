@@ -39,7 +39,12 @@
                         <p>Setor</p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="/usuario-setor" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Usuario Setor</p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Secretaria')
-@section('contentheader_title', 'Secretaria')
+@section('htmlheader_title', 'Usuario Setor')
+@section('contentheader_title', 'Usuario Setor')
 
 @section('conteudo')
 <!-- DataTables -->
@@ -15,12 +15,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Secretarias</h1>
+                    <h1>Usuario Setor</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Secretaria</li>
+                        <li class="breadcrumb-item active">Usuario Setor</li>
                     </ol>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-3 float-right">
-                            <a href="{{ URL::to('secretaria/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Secretaria</a>
+                            <a href="{{ URL::to('usuario-setor/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Usuario-Setor</a>
                         </div>
                     </div>
                     @if (Session::has('message'))
@@ -43,12 +43,13 @@
                     <!-- /.card-header -->
 
                     <div class="card-body">
-                        <table id="table_secretarias" class="table table-bordered table-hover">
+                        <table id="table_usuario-setor" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Titulo</th>
-                                    <th>Sigla</th>
-                                    <th>Status</th>
+                                    <th>Usuario</th>
+                                    <th>Setor</th>
+                                    <th>Data Entrada</th>
+                                    <th>Data Saida</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
@@ -70,5 +71,5 @@
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/secretaria.js') }}"></script>
+<script src="{{ asset('js/usuario-setor.js') }}"></script>
 @endsection
