@@ -92,8 +92,8 @@
 <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script src="{{asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
-   <script src="{{ asset('js/base.js') }}"></script>
-   <script src="{{ asset('js/modelo_documento.js') }}"></script>
+<script src="{{ asset('js/base.js') }}"></script>
+<script src="{{ asset('js/modelo_documento.js') }}"></script>
 @endsection
 
 

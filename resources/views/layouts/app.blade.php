@@ -12,7 +12,6 @@
 
         @yield('conteudo')
 
-
     </div>
     @include('layouts.partials.footer')
     @section('scripts')

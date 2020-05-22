@@ -45,6 +45,7 @@
               @endif
               <form  method="POST" id="form" action="/modelo-documento/{{$modelo->id}}">
                  @csrf
+                 @method('PUT')
                 <div class="card-body">
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
@@ -75,7 +76,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="button" class="btn btn-info float-right btnEditar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                    <button type="submit" class="btn btn-info float-right btnEditar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                     &nbsp Aguarde...">Salvar</button>
                 </div>
                 <!-- /.card-footer -->

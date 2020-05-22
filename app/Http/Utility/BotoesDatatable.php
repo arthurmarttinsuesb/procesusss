@@ -28,6 +28,6 @@ class BotoesDatatable
                 title="Excluir" data-toggle="tooltip">
                 <i class="fas fa-trash"></i>
             </a>
-    </div>';
+        </div>';
     }
 }

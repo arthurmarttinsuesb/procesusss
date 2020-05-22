@@ -100,10 +100,8 @@ class ModeloDocumentoController extends Controller
 
     public function inserir_imagem(Request $request)
     {
-
         if ($request->file('file')) {
             $arquivoNome = time() . '.' . $request->file('file')->getClientOriginalExtension();
-
             if ($request->file('file')->storeAs('public/imagem_modelo/', $arquivoNome)) {
                 return response()->json($arquivoNome);
             } else {

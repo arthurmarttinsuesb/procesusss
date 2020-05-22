@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
-
-
 @section('htmlheader')
     <head>
         <meta charset="utf-8">
