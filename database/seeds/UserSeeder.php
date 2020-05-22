@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
             'fk_estado' => '5',
             'email' => 'admin@processus.com.br',
             'password' => Hash::make('processus@234'),
+            'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
         ]);

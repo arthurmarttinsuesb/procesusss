@@ -16,6 +16,7 @@ use Redirect;
 #class
 
 use App\Processo;
+use App\Http\Utility\BotoesDatatable;
 
 class ProcessoController extends Controller
 {
@@ -24,45 +25,24 @@ class ProcessoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return view('Processo.listar_processo');
+    public function index()
+    {
+        return view('processo.index');
     }
 
-    public function list(Request $request){
-        if(Auth::user()->hasRole('administrador')){
+    public function list(Request $request)
+    {
+        if (Auth::user()->hasRole('administrador')) {
             $modelo = Processo::where('status', "Ativo")->get();
-        }else{
-            $modelo = Processo::where('fk_user',Auth::user()->id)->where('status', "Ativo")->get();
+        } else {
+            $modelo = Processo::where('fk_user', Auth::user()->id)->where('status', "Ativo")->get();
         }
 
         return Datatables::of($modelo)
-        ->editColumn('acao', function ($modelo) {
-            return $this->setEstrutura($modelo);
-        })->escapeColumns([0])
-        ->make(true);
-    } 
-
-    private function setEstrutura(Processo $modelo){
-
-        return '<div class="btn-group btn-group-sm">
-                        <a href="javascript:void(0)" 
-                            class="btn bg-teal color-palette btnVisualizar"
-                            data-id="'.$modelo->id.'"
-                            title="Visualizar" data-toggle="tooltip">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a href="modelo-documento/'.$modelo->id.'/edit"
-                            class="btn btn-info" 
-                            title="Alterar" data-toggle="tooltip">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
-                        <a 
-                            class="btn bg-danger color-palette btnExcluir"
-                             data-id="'.$modelo->id.'"
-                            title="Excluir" data-toggle="tooltip">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                </div>';
+            ->editColumn('acao', function ($modelo) {
+                return BotoesDatatable::criarBotoes($modelo->id, 'processo');
+            })->escapeColumns([0])
+            ->make(true);
     }
 
     /**
@@ -72,7 +52,21 @@ class ProcessoController extends Controller
      */
     public function create()
     {
-        return view('Processo.create');
+        try {
+            $id = Auth::id();
+
+            $processo = new Processo();
+            $processo->numero = 'pmj.' . time() . '.' . date('Y');
+            $processo->fk_user = $id;
+            $processo->status = 'Ativo';
+
+            $processo->save();
+
+            return Redirect::to('processo/' . $processo->id . '/edit');
+        } catch (\Exception  $erro) {
+            Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!' . $erro);
+            return back()->withInput();
+        }
     }
 
     /**
@@ -81,9 +75,8 @@ class ProcessoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $user)
     {
-        //
     }
 
     /**
@@ -105,7 +98,9 @@ class ProcessoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $processo = Processo::find($id);
+
+        return view('processo.edit', ['processo' => $processo]);
     }
 
     /**
