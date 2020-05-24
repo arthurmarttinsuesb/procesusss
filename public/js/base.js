@@ -10,21 +10,6 @@ $(document).ready(function($) {
 var base_url = "http://" + window.location.host.toString();
 var base_url = location.protocol + "//" + window.location.host.toString();
 
-//mensagens de alerta
-function mensagemSuccess() {
-    iziToast.success({
-        title: "OK",
-        message: "Operação Realizada com Sucesso!",
-    });
-}
-
-function mensagemErro() {
-    iziToast.error({
-        title: "Erro Interno",
-        message: "Operação cancelada, tente novamente mais tarde.",
-    });
-}
-
 // Componentes do Sweet Alert
 
 // nomeModulo é o nome do modulo, que será exibido pro usuario,

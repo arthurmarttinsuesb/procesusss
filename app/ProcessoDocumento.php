@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProcessoDocumento extends Model
 {
+    use HasSlug;
+    
     protected $fillable = 
     [
         'fk_processo','fk_user','fk_modelo_documento','titulo','slug','descricao','conteudo','status'
@@ -24,9 +26,9 @@ class ProcessoDocumento extends Model
         return $this->belongsTo(User::class, 'fk_user');
     }
 
-    public function modelo_documeto()
+    public function modelo_documento()
     {
-        return $this->belongsTo(ModeloDocumento::class, 'fk_user');
+        return $this->belongsTo(ModeloDocumento::class, 'fk_modelo_documento');
     }
 
      //toda vez que eu criar um titulo ele irá gerar um slug automaticamente.

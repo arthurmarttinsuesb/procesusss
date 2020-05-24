@@ -17,7 +17,6 @@
     @section('scripts')
     @include('layouts.partials.scripts')
     @show
-
     @yield('scripts-adicionais')
 </body>
 

@@ -1,15 +1,6 @@
  $(document).ready(function($) {
      $('.textarea').summernote({
-         height: 300,
-         toolbar: [
-             ['style', ['style']],
-             ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-             ['fontname', ['fontname']],
-             ['fontsize', ['fontsize']],
-             ['color', ['color']],
-             ['para', ['ol', 'ul', 'paragraph', 'height']],
-             ['table', ['table']],
-         ],
+         height: 900,
          callbacks: {
              onImageUpload: function(files, editor, $editable) {
                  uploadImage(files[0], editor, $editable);

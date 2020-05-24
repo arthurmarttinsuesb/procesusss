@@ -109,4 +109,13 @@ class ModeloDocumentoController extends Controller
             }
         }
     }
+    public function remover_imagem(Request $request)
+    {
+        try {
+            Storage::delete($request->file);
+        } catch (\Exception  $erro) {
+            return Response::json(array('errors' => 'true'));
+        }
+        
+    }
 }

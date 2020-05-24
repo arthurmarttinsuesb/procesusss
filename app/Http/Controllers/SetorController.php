@@ -156,7 +156,7 @@ class SetorController extends Controller
     {
         try {
             $setor = Setor::find($id);
-            $setor->status = 'inativo';
+            $setor->status = 'Inativo';
             $setor->save();
 
             return response()->json(array('status' => "OK"));

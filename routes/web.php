@@ -25,8 +25,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::group(['prefix' => 'modelo-documento', 'where' => ['prefix' => 'modelo-documento']], function () {
-        Route::post('/inserir-imagem', ['uses' => 'ModeloDocumentoController@inserir_imagem'])->name('inserir_imagem');
+        Route::post('/inserir-imagem', ['uses' => 'ModeloDocumentoController@inserir_imagem']);
+        Route::post('/remover-imagem', ['uses' => 'ModeloDocumentoController@remover_imagem']);
         Route::get('/list', ['uses' => 'ModeloDocumentoController@list'])->name('listar_modelo');
+    });
+    Route::group(['prefix' => 'documento', 'where' => ['prefix' => 'documento']], function () {
+        Route::post('/preencher', ['uses' => 'DocumentoController@preencher']);
+        Route::get('/list/{id}', ['uses' => 'DocumentoController@list']);
     });
 
     // rotas para o metodo 'list'
@@ -42,4 +47,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('secretaria', 'SecretariaController');
     Route::resource('processo', 'ProcessoController');
     Route::resource('setor', 'SetorController');
+    Route::resource('documento', 'DocumentoController');
 });

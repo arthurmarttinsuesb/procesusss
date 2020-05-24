@@ -5,7 +5,6 @@
  
  @section('conteudo') 
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
-  <link rel="stylesheet" href="{{asset('plugins/jquery-ui/jquery-ui.min.css') }}">
   
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -88,14 +87,12 @@
         </div>
     </section>
 </div>
-
-<script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-<script src="{{asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
-   <script src="{{ asset('js/base.js') }}"></script>
-   <script src="{{ asset('js/modelo_documento.js') }}"></script>
 @endsection
-
+@section('scripts-adicionais')
+<script src="{{asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script src="{{ asset('js/base.js') }}"></script>
+<script src="{{ asset('js/modelo_documento.js') }}"></script>
+@endsection
 
 
 
