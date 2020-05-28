@@ -12,11 +12,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Adicionar Modelo Documento</h1>
+            <h1>Alterar Modelo Documento</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{route('listar_modelo')}}">Home</a></li>
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
               <li class="breadcrumb-item active">Modelo Documento</li>
             </ol>
           </div>
@@ -32,7 +32,7 @@
            <div class="card">
               <div class="card-header">
                     <div class="col-2 float-right">
-                        <a href="{{ URL::to('modelo-documento') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Modelos</a>
+                        <a href="/modelo-documento" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Modelos</a>
                     </div>
               </div>
               @if (Session::has('message'))
@@ -75,7 +75,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-info float-right btnEditar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                    <button type="submit" class="btn btn-info float-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                     &nbsp Aguarde...">Salvar</button>
                 </div>
                 <!-- /.card-footer -->

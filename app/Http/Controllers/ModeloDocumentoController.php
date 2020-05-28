@@ -71,10 +71,10 @@ class ModeloDocumentoController extends Controller
         }
     }
 
-    public function update(RequestModelo $request)
+    public function update(Request $request,$id)
     {
         try {
-            $modelo = ModeloDocumento::find($request->id);
+            $modelo = ModeloDocumento::find($id);
             $modelo->titulo = $request->titulo;
             $modelo->conteudo = $request->conteudo;
 
@@ -109,10 +109,11 @@ class ModeloDocumentoController extends Controller
             }
         }
     }
+
     public function remover_imagem(Request $request)
     {
         try {
-            Storage::delete($request->file);
+            unlink(public_path($request->local));
         } catch (\Exception  $erro) {
             return Response::json(array('errors' => 'true'));
         }

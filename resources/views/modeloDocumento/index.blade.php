@@ -32,13 +32,16 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-                <div class="col-2 float-right">
+                <div class="float-right">
                     <a href="{{ URL::to('modelo-documento/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Modelo</a>
                 </div>
             </div>
             <!-- /.card-header -->
             @if (Session::has('message'))
-                 <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
+            <div class="alert alert-info alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                     {{ Session::get('message') }}
+                </div>
             @endif
             <div class="card-body">
               <table id="table" class="table table-bordered table-hover">

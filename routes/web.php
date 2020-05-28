@@ -27,8 +27,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'modelo-documento', 'where' => ['prefix' => 'modelo-documento']], function () {
         Route::post('/inserir-imagem', ['uses' => 'ModeloDocumentoController@inserir_imagem']);
         Route::post('/remover-imagem', ['uses' => 'ModeloDocumentoController@remover_imagem']);
-        Route::get('/list', ['uses' => 'ModeloDocumentoController@list'])->name('listar_modelo');
+        Route::get('/list', ['uses' => 'ModeloDocumentoController@list']);
     });
+
+    Route::group(['prefix' => 'pdf', 'where' => ['prefix' => 'pdf']], function () {
+        Route::get('/modelo-documento/{id}', ['uses' => 'PDFController@modelo_documento']);
+        Route::get('/documento/{id}', ['uses' => 'PDFController@documento']);
+    });
+
     Route::group(['prefix' => 'documento', 'where' => ['prefix' => 'documento']], function () {
         Route::post('/preencher', ['uses' => 'DocumentoController@preencher']);
         Route::get('/list/{id}', ['uses' => 'DocumentoController@list']);

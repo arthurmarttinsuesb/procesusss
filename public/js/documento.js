@@ -22,7 +22,7 @@ $(document).ready(function($) {
             data: data,
             type: "post",
             success: function(data) {
-                $('#conteudo').summernote("insertImage", base_url + "/storage/imagem_modelo/" + data);
+                $('#conteudo').summernote("insertImage", "/editor/" + data);
             },
             error: function(data) {
                 console.log(data);
@@ -31,18 +31,21 @@ $(document).ready(function($) {
     }
 
     function deleteFile(file) {
+        var local = file.replace(base_url, '');
         $.ajax({
             url: base_url + '/modelo-documento/remover-imagem',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: file,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: { local: local },
             type: "post",
+            dataType: 'json',
+            cache: false,
             success: function(data) {
-                // $('#conteudo').summernote("insertImage", base_url + "/storage/imagem_modelo/" + data);
+                // console.log(data);
             },
             error: function(data) {
-                console.log(data);
+                // console.log(data);
             }
         });
     }

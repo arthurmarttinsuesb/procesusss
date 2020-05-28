@@ -24,4 +24,23 @@ $(document).ready(function($) {
         });
     });
 
+
+    // $(document).on('click', '.btnVisualizar', function() {
+    //     var id = $(this).data("id");
+    //     $.ajax({
+    //         type: 'get',
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         url: base_url + '/pdf/modelo-documento/' + id,
+    //         success: function(data) {
+    //             console.log(data);
+    //         },
+    //         error: function(data) {
+    //             console.log(data);
+    //         },
+    //     });
+    // });
+
+
 });

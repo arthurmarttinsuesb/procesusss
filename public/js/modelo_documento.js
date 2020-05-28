@@ -4,6 +4,9 @@
          callbacks: {
              onImageUpload: function(files, editor, $editable) {
                  uploadImage(files[0], editor, $editable);
+             },
+             onMediaDelete: function(target) {
+                 deleteFile(target[0].src);
              }
          }
      });
@@ -19,81 +22,29 @@
              data: data,
              type: "post",
              success: function(data) {
-                 // editor.insertNode(welEditable, "<img src='{{url('storage/imagem_summernote/'" + data + "}}'>");
-                 // var file = $('<img>').attr('src', '{{url("storage / imagem_summernote /"' + data + '}}');
-                 $('#conteudo').summernote("insertImage", base_url + "/storage/imagem_modelo/" + data);
+                 $('#conteudo').summernote("insertImage", "/editor/" + data);
              },
              error: function(data) {
                  console.log(data);
              }
          });
      }
+
+     function deleteFile(file) {
+         var local = file.replace(base_url, '');
+         $.ajax({
+             url: base_url + '/modelo-documento/remover-imagem',
+             headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             },
+             data: { local: local },
+             type: "post",
+             dataType: 'json',
+             cache: false,
+             success: function(data) {},
+             error: function(data) {
+                 // console.log(data);
+             }
+         });
+     }
  })
-
- $(document).on('click', '.btnNovo', function() {
-     var titulo = $("#titulo").val();
-     var conteudo = $('#conteudo').val();
-     $.ajax({
-         type: 'post',
-         headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-         },
-         url: base_url + '/modelo-documento/store',
-         data: {
-             'titulo': titulo,
-             'conteudo': conteudo
-         },
-         success: function(data) {
-             if ((data.errors)) {
-                 $('.callout').removeClass('hidden'); //exibe a div de erro
-                 $('.callout').find('p').text(""); //limpa a div para erros successivos
-
-                 $.each(data.errors, function(nome, mensagem) {
-                     $('.callout').find("p").append(mensagem + "</br>");
-                 });
-             } else if ((data.exception)) {
-                 console.log('deu erro');
-             } else {
-                 console.log('deu certo');
-             }
-         },
-         error: function() {
-             console.log('deu erro');
-         },
-     });
- });
-
- $(document).on('click', '.btnEditar', function() {
-     var id = $("#id").val();
-     var titulo = $("#titulo").val();
-     var conteudo = $('#conteudo').val();
-     $.ajax({
-         type: 'post',
-         headers: {
-             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-         },
-         url: base_url + '/modelo-documento/update',
-         data: {
-             'id': id,
-             'titulo': titulo,
-             'conteudo': conteudo
-         },
-         success: function(data) {
-             if ((data.errors)) {
-                 $('.callout').removeClass('hidden'); //exibe a div de erro
-                 $('.callout').find('p').text(""); //limpa a div para erros successivos
-
-                 $.each(data.errors, function(nome, mensagem) {
-                     $('.callout').find("p").append(mensagem + "</br>");
-                 });
-             } else if ((data.exception)) {
-                 console.log('deu erro');
-             } else {
-                 console.log('deu certo');
-             }
-         },
-         error: function() {
-             console.log('deu erro');
-         },
-     });
- });
