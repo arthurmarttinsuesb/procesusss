@@ -17,8 +17,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/sair', 'Auth/LoginController@logout');
-
 Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
 
 
