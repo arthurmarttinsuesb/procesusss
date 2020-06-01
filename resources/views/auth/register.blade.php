@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="form-group col-md-2">
+                    <div class="form-group col-md-2">
                         <label>Estado <span style="color: red;">*</span></label>
                         @inject('estados', 'App\Estado')
                         <select id="estado" name='estado' class="form-control">

@@ -45,7 +45,20 @@
                         <p>Usuario Setor</p>
                     </a>
                 </li>
-            </ul>
+                <li class="nav-item">
+                    <a href="{{ url('/logout') }}"  class="nav-link" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                                <i class="nav-icon fa fa-power-off"></i>  
+                                <p>
+                                    Sair da Conta
+                                </p>
+                        </a>
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                            <input type="submit" value="logout" style="display: none;">
+                        </form>
+                    </li>
+             </ul>
         </nav>
         <!-- /.sidebar-menu -->
     </div>
