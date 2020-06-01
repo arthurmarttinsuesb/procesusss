@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Traits\HasRoles;
 use DB;
 use App\User;
+use Auth;
+use Mail;
+use App\Mail\SendMailUser;
+
 
 class RegisterController extends Controller
 {
@@ -129,6 +133,11 @@ class RegisterController extends Controller
                 $user->save();
                 $user->assignRole('cidadao');
             });
+            try {
+
+                Mail::to($user->email)->send(new SendMailUser($user));
+            } catch (\Exception  $erro) {
+            }
 
             app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
             return $user;
