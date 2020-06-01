@@ -37,7 +37,6 @@ class ProcessoController extends Controller
         } else {
             $modelo = Processo::where('fk_user', Auth::user()->id)->where('status', "Ativo")->get();
         }
-
         return Datatables::of($modelo)
             ->editColumn('acao', function ($modelo) {
                 return BotoesDatatable::criarBotoes($modelo->id, 'processo');

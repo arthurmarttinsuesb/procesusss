@@ -40,6 +40,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/list/{id}', ['uses' => 'DocumentoController@list']);
     });
 
+    Route::group(['prefix' => 'anexos', 'where' => ['prefix' => 'anexos']], function () {
+        Route::post('/store/{id}', ['uses' => 'AnexoController@store']);
+        Route::get('/list/{id}', ['uses' => 'AnexoController@list']);
+    });
+
     // rotas para o metodo 'list'
     Route::get('/usuario-setor/list', 'UserSetorsController@list');
     Route::get('/secretaria/list', 'SecretariaController@list');
@@ -54,4 +59,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('processo', 'ProcessoController');
     Route::resource('setor', 'SetorController');
     Route::resource('documento', 'DocumentoController');
+    Route::resource('anexos', 'AnexoController');
 });

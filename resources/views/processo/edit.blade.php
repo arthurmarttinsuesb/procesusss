@@ -49,7 +49,7 @@
                         <div class="tab-content" id="custom-tabs-four-tabContent">
                               <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
                                  <!-- Main content -->
-                    
+
                                 <div class="float-right">
                                     <a href="/documento/{{$processo->id}} " class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Documento</a>
                                 </div>
@@ -75,23 +75,50 @@
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-                                   
-                                    <div class="float-right">
-                                        <a href="{{ URL::to('modelo-documento/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Anexo</a>
-                                    </div>
+                                   <form  method="POST" id="form_anexo" enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="card-body">
+                                            (<span style="color: red;">*</span>) Campos Obrigatórios
+                                            <br><br>
+                                               <div class="row">
+                                                    <div class="form-group col-6">
+                                                        <strong>Tipo <span style="color: red;">*</span></strong>
+                                                        <input type="text" autocomplete="off" id="tipo" name="tipo" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}">
+                                                        @error('tipo')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="form-group col-6">
+                                                        <strong>Arquivo <span style="color: red;">*</span></strong>
+                                                        <input type="file" autocomplete="off" id="arquivo" name="arquivo" class="form-control @error('arquivo') is-invalid @enderror">
+                                                        @error('arquivo')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="float-right">
+                                             <button type='button' class="btn btn-block btn-outline-info add_anexo"><i class="fa fa-plus"></i> Adicionar Anexo</button>
+                                       </div>
+                                    </form>
+                                    
                                                 
                                     @if (Session::has('message'))
                                         <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                                     @endif
                                     <br>
                                     <br>
-                                    <table id="table" class="table table-bordered table-hover">
+                                    <table id="table_anexo" class="table table-bordered table-hover" style="width:100%">
                                         <thead>
-                                        <tr>
-                                            <th>Tipo</th>
-                                            <th>Usuário</th>
-                                            <th>Ação</th>
-                                        </tr>
+                                            <tr>
+                                                <th>Tipo</th>
+                                                <th>Usuário</th>
+                                                <th>Ação</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                     </table>
