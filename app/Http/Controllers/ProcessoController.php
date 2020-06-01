@@ -49,13 +49,25 @@ class ProcessoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
+    {
+       
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         try {
             $id = Auth::id();
 
             $processo = new Processo();
             $processo->numero = 'pmj.' . time() . '.' . date('Y');
+            $processo->tipo = $request->tipo;
             $processo->fk_user = $id;
             $processo->status = 'Ativo';
 
@@ -66,16 +78,6 @@ class ProcessoController extends Controller
             Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!' . $erro);
             return back()->withInput();
         }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, $user)
-    {
     }
 
     /**

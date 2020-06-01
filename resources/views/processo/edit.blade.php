@@ -47,84 +47,15 @@
                     <div class="card-body">
                         <input type='hidden' id='processo' name='processo'  value='{{$processo->id}}'/>
                         <div class="tab-content" id="custom-tabs-four-tabContent">
-                              <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                                 <!-- Main content -->
-
-                                <div class="float-right">
-                                    <a href="/documento/{{$processo->id}} " class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Documento</a>
-                                </div>
-                                               
-                                @if (Session::has('message'))
-                                    <div class="alert alert-info alert-dismissible col-6">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                        {{ Session::get('message') }}
-                                    </div>
-                                @endif
-                                <br>
-                                <br>
-                                <table id="table_documento" class="table table-bordered table-hover" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>Título</th>
-                                        <th>Tipo</th>
-                                        <th>Status</th>
-                                        <th>Ação</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                </table>
+                            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                              @include('processo.tab_documento')
                             </div>
+                            
                             <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-                                   <form  method="POST" id="form_anexo" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="card-body">
-                                            (<span style="color: red;">*</span>) Campos Obrigatórios
-                                            <br><br>
-                                               <div class="row">
-                                                    <div class="form-group col-6">
-                                                        <strong>Tipo <span style="color: red;">*</span></strong>
-                                                        <input type="text" autocomplete="off" id="tipo" name="tipo" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}">
-                                                        @error('tipo')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group col-6">
-                                                        <strong>Arquivo <span style="color: red;">*</span></strong>
-                                                        <input type="file" autocomplete="off" id="arquivo" name="arquivo" class="form-control @error('arquivo') is-invalid @enderror">
-                                                        @error('arquivo')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                        </div>
-                                        <div class="float-right">
-                                             <button type='button' class="btn btn-block btn-outline-info add_anexo"><i class="fa fa-plus"></i> Adicionar Anexo</button>
-                                       </div>
-                                    </form>
-                                    
-                                                
-                                    @if (Session::has('message'))
-                                        <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
-                                    @endif
-                                    <br>
-                                    <br>
-                                    <table id="table_anexo" class="table table-bordered table-hover" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Tipo</th>
-                                                <th>Usuário</th>
-                                                <th>Ação</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                    </table>
+                                @include('processo.tab_anexo')
                             </div>
                             <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
-                                Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+                            @include('processo.tab_tramitacao')
                             </div>
                         </div>
                     </div>
@@ -261,7 +192,6 @@
                     </div>
                 </div>
                 <!-- /.card -->
-
             </div>
 
 

@@ -61,7 +61,12 @@ $(document).ready(function($) {
                 $('#table_anexo').DataTable().draw(false);
             },
             error: function(data) {
-                // mensagemErro();
+                $('.erros').show(); //exibe a div de erro
+                $('.erros').find('ul').text(""); //limpa a div para erros successivos
+
+                $.each(data.responseJSON.errors, function(nome, mensagem) {
+                    $('.erros').find("ul").append(mensagem + "</br>");
+                });
             },
         });
     });

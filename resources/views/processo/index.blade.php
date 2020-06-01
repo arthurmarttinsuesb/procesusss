@@ -33,7 +33,7 @@
           <div class="card">
             <div class="card-header">
                 <div class="col-3 float-right">
-                    <a href="{{ URL::to('processo/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Processo</a>
+                    <button  data-toggle="modal" data-target="#modal-processo" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Processo</button>
                 </div>
             </div>
             <!-- /.card-header -->
@@ -57,6 +57,7 @@
       <!-- /.row -->
     </section>
 </div>
+@include('processo.modal_processo')
     <!-- /.content -->
  <!-- jQuery -->
    <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>

@@ -59,16 +59,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-8">
-                    <strong>E-Mail</strong>
-                    <input type="email" class="form-control" placeholder="e-mail para acesso" name="email" value="{{ old('email') }}" />
-                </div>
-                <div class="form-group col-md-4">
-                    <strong>Telefone</strong>
-                    <input type="text" class="form-control" placeholder="Telefone p/ contato" id="telefone" name="telefone" value="{{ old('telefone') }}" data-inputmask='"mask": "(99)99999-9999"' data-mask />
-                </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-2">
                     <label>Estado <span style="color: red;">*</span></label>
                     @inject('estados', 'App\Estado')
@@ -92,6 +82,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="form-group col-md-2">
                     <strong>Número</strong>
