@@ -15,7 +15,7 @@ class CreateProcessosTable extends Migration
     {
         Schema::create('processos', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo')(); // público/sigiloso
+            $table->string('tipo'); // público/sigiloso
             $table->string('numero')->unique();
             $table->integer('fk_user'); #Usuário
             $table->foreign('fk_user')->references('id')-> on('users');
