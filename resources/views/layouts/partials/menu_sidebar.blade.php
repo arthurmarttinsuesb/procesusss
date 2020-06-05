@@ -17,6 +17,12 @@
                 <li class="nav-header">MENU</li>
                 @if (auth()->user()->status == 'Ativo')
                 <li class="nav-item">
+                    <a href="/ativar-usuarios" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Ativar Usuarios</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/modelo-documento" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>Modelo Documento</p>

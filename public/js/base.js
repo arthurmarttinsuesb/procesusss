@@ -1,5 +1,5 @@
 //Proteção da aplicação contra ataques de falsificação de solicitações entre sites (CSRF).
-$(document).ready(function($) {
+$(document).ready(function ($) {
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -51,7 +51,7 @@ function deleteDialog({
                         ),
                     },
                     data: {},
-                    success: function(data) {
+                    success: function (data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -60,14 +60,21 @@ function deleteDialog({
                             );
                         } else {
                             swalWithBootstrapButtons
-                                .fire("Sucesso", "Exclusão Realizada", "success").then(function(result) {
+                                .fire(
+                                    "Sucesso",
+                                    "Exclusão Realizada",
+                                    "success"
+                                )
+                                .then(function (result) {
                                     if (result.value) {
-                                        $("#" + idTable).DataTable().draw(false);
+                                        $("#" + idTable)
+                                            .DataTable()
+                                            .draw(false);
                                     }
                                 });
                         }
                     },
-                    error: function() {
+                    error: function () {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Exclusão cancelada, tente novamente mais tarde.",
@@ -79,6 +86,82 @@ function deleteDialog({
                 swalWithBootstrapButtons.fire(
                     "Atenção",
                     "Exclusão cancelada.",
+                    "error"
+                );
+            }
+        });
+}
+
+// nomeModulo é o nome do modulo, que será exibido pro usuario,
+// exemplo "Deseja ativar o usuario (Fulano da Silva) ?"
+// rota é a rota para ativar que será feita o post, sem barras
+// idTable é o id do datatable
+// dataId é o nome da prop que ficará o id a ser ativo no botão, exemplo:
+// <button type="button" data-id="1" /> "id" é o nome.
+// o valor padrão já é id, então não é necessario preencher caso use o mesmo nome
+// btnClass é o nome da classe do botao de ativar, por padrao ja fica btnAtivar
+function ativarDialog({
+    nomeModulo,
+    rota,
+    idTable,
+    dataId = "id",
+    btnClass = "btnAtivar",
+}) {
+    id = $(`.${btnClass}`).data(dataId);
+    swalWithBootstrapButtons
+        .fire({
+            title: `Deseja ativar o(a) ${nomeModulo}?`,
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, quero ativar!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true,
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "put",
+                    url: base_url + `/${rota}/${id}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    data: {
+                        ativar: true, // mando esse campo pra confirmar q quero ativar, e nao atualizar outra info
+                    },
+                    success: function (data) {
+                        if (data.error_banco) {
+                            Swal.fire(
+                                "Atenção",
+                                "Exclusão ativação cancelada, tente novamente mais tarde.",
+                                "error"
+                            );
+                        } else {
+                            swalWithBootstrapButtons
+                                .fire("Sucesso", "Usuario ativado!", "success")
+                                .then(function (result) {
+                                    if (result.value) {
+                                        $("#" + idTable)
+                                            .DataTable()
+                                            .draw(false);
+                                    }
+                                });
+                        }
+                    },
+                    error: function () {
+                        swalWithBootstrapButtons.fire(
+                            "Atenção",
+                            "Exclusão ativação cancelada, tente novamente mais tarde.",
+                            "error"
+                        );
+                    },
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    "Atenção",
+                    "Ativação cancelada.",
                     "error"
                 );
             }
