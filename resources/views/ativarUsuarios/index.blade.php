@@ -34,7 +34,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-3 float-right">
-                            <a href="{{ URL::to('setor/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Setor</a>
+                            <a href="{{ URL::to('setor/create') }}" class="btn btn-block btn-outline-info"><i
+                                    class="fa fa-plus"></i> Adicionar Setor</a>
                         </div>
                     </div>
                     @if (Session::has('message'))
@@ -50,16 +51,9 @@
                                     <th>Sexo</th>
                                     <th>Nascimento</th>
                                     <th>Telefone</th>
-                                    <th>Cpf/Cnpj</th>
                                     <th>Cidade</th>
                                     <th>Estado</th>
-                                    <th>Logradouro</th>
-                                    <th>Numero</th>
-                                    <th>Bairro</th>
-                                    <th>Cep</th>
-                                    <th>Complemento</th>
                                     <th>Email</th>
-                                    <th>Status</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>

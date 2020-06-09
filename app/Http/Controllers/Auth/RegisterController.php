@@ -134,7 +134,6 @@ class RegisterController extends Controller
                 $user->assignRole('cidadao');
             });
             try {
-
                 Mail::to($user->email)->send(new SendMailUser($user));
             } catch (\Exception  $erro) {
             }

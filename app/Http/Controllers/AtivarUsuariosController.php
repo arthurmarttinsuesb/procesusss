@@ -1,18 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use Session;
-use Redirect;
+use Mail;
 use DataTables;
 
-
 use App\User;
+use App\Mail\UsuarioAtivado;
 use App\Http\Utility\BotoesDatatable;
 
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Validator;
 
 class AtivarUsuariosController extends Controller
 {
@@ -47,9 +45,16 @@ class AtivarUsuariosController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $usuario = User::find($id);
-            $usuario->status = 'Ativo';
-            $usuario->save();
+            $user = User::find($id);
+            $user->status = 'Ativo';
+            $user->save();
+
+
+            try{
+                Mail::to($user->email)->send(new UsuarioAtivado($user));
+            }catch(\Exception $erro){
+                return response()->json(array('erro' => "ERRO_EMAIL"));
+            }
 
             return response()->json(array('status' => "OK"));
         } catch (\Exception  $erro) {
@@ -65,9 +70,10 @@ class AtivarUsuariosController extends Controller
     public function destroy($id)
     {
         try {
-            $setor = Setor::find($id);
-            $setor->status = 'Inativo';
-            $setor->save();
+            $user = User::find($id);
+            $user->status = 'Inativo';
+            $user->save();
+
 
             return response()->json(array('status' => "OK"));
         } catch (\Exception  $erro) {

@@ -17,10 +17,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-
-
 Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
-
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
