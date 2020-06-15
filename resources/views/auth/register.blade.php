@@ -8,7 +8,8 @@
 <script src="{{ asset('js/register.js') }}"></script>
 <br><br>
 <div class="login-logo">
-    <a href="../../index2.html"><b>Processus</b></a>
+        <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}" 
+        alt="Processus" style="width: 20%; height: auto;"></a>
 </div>
 <!-- /.login-logo -->
 <div class="card">

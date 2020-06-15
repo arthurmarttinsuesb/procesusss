@@ -4,7 +4,8 @@
 @section('conteudo')
 <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Processus</b></a>
+                <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}" 
+                   alt="Processus" style="width: 60%; height: auto;"></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -59,7 +60,7 @@
             <!-- /.social-auth-links -->
 
             <p class="mb-1">
-                <a href="forgot-password.html">Esqueceu a senha?</a>
+                <a href="/password/reset">Esqueceu a senha?</a>
             </p>
             <p class="mb-0">
                 <a href="{{route('register')}}" class="text-center">Ainda não possui uma conta, cadastre-se.</a>

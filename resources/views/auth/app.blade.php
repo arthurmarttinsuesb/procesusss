@@ -21,7 +21,8 @@
     </head>
 @show
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('{{'img/background-processus.png'}}'); 
+    background-repeat: no-repeat; background-size: cover; background-position:center center;">
     @yield('conteudo')
     @section('scripts')
         <!-- jQuery -->

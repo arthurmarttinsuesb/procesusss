@@ -1,15 +1,22 @@
-@extends('layouts.app')
+@extends('auth.app')
+@section('htmlheader_title', 'Alterar Senha')
+ @section('contentheader_title', 'Alterar Senha')
+@section('conteudo')
+<div class="login-box">
+        <div class="login-logo">
+                <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}" 
+                   alt="Processus" style="width: 60%; height: auto;"></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                  @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
-
-                <div class="card-body">
-                    {{ __('Please confirm your password before continuing.') }}
-
+                    Confirme sua senha antes de continuar.
                     <form method="POST" action="{{ route('password.confirm') }}">
                         @csrf
 
@@ -41,9 +48,9 @@
                             </div>
                         </div>
                     </form>
-                </div>
             </div>
+            <!-- /.login-card-body -->
         </div>
-    </div>
 </div>
 @endsection
+
