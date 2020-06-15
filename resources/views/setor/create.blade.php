@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('listar_modelo')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                         <li class="breadcrumb-item active">Setor</li>
                     </ol>
                 </div>
@@ -75,8 +75,6 @@
                                 <div class="form-group col-6">
                                     <strong>Secretaria <span style="color: red;">*</span></strong>
                                     <select class="form-control select2 form-control @error('fk_secretaria', 'setor') is-invalid @enderror" name="fk_secretaria">
-
-
                                         @foreach ($secretarias as $secretaria)
                                         @if (old('fk_secretaria') == $secretaria->id)
                                         <option value="{{$secretaria->id}}" selected>{{$secretaria->titulo}}</option>

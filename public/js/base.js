@@ -1,5 +1,5 @@
 //Proteção da aplicação contra ataques de falsificação de solicitações entre sites (CSRF).
-$(document).ready(function ($) {
+$(document).ready(function($) {
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -51,7 +51,7 @@ function deleteDialog({
                         ),
                     },
                     data: {},
-                    success: function (data) {
+                    success: function(data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -65,7 +65,7 @@ function deleteDialog({
                                     "Exclusão Realizada",
                                     "success"
                                 )
-                                .then(function (result) {
+                                .then(function(result) {
                                     if (result.value) {
                                         $("#" + idTable)
                                             .DataTable()
@@ -74,7 +74,7 @@ function deleteDialog({
                                 });
                         }
                     },
-                    error: function () {
+                    error: function() {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Exclusão cancelada, tente novamente mais tarde.",
@@ -131,7 +131,7 @@ function ativarDialog({
                     data: {
                         ativar: true, // mando esse campo pra confirmar q quero ativar, e nao atualizar outra info
                     },
-                    success: function (data) {
+                    success: function(data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -141,7 +141,7 @@ function ativarDialog({
                         } else {
                             swalWithBootstrapButtons
                                 .fire("Sucesso", "Usuario ativado!", "success")
-                                .then(function (result) {
+                                .then(function(result) {
                                     if (result.value) {
                                         $("#" + idTable)
                                             .DataTable()
@@ -150,7 +150,7 @@ function ativarDialog({
                                 });
                         }
                     },
-                    error: function () {
+                    error: function() {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Exclusão ativação cancelada, tente novamente mais tarde.",

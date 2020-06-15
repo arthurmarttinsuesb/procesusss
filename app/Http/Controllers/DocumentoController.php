@@ -58,7 +58,12 @@ class DocumentoController extends Controller
                 if($documento_tramite->count()==0){
                     return  '<span class="right badge badge-success">criado</span>';
                 }else{
-                    return  '<span class="right badge badge-info">encaminhado</span>';
+                    $documento_tramite_pendente = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Pendente')->get();
+                    if($documento_tramite_pendente->count()==0){
+                        return  '<span class="right badge badge-secondary">finalizado</span>';
+                    }else{
+                        return  '<span class="right badge badge-info">encaminhado</span>';
+                    }
                 }
             })
             ->editColumn('acao', function ($modelo) {

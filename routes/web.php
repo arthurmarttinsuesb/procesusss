@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/preencher', ['uses' => 'DocumentoController@preencher']);
         Route::get('/list/{id}', ['uses' => 'DocumentoController@list']);
         Route::get('/create/{id}', ['uses' => 'DocumentoTramiteController@create']);
+        Route::post('/store/{id}', ['uses' => 'DocumentoTramiteController@store']);
         Route::post('/encaminhar', ['uses' => 'DocumentoController@encaminhar']);
     });
 
