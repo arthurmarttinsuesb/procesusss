@@ -82,7 +82,7 @@ class UserSetorsController extends Controller
 
             $userSetor->fk_user = $request->fk_user;
             $userSetor->fk_setor = $request->fk_setor;
-            $userSetor->data_entrada = date('Y-m-d', strtotime($request->data_entrada));
+            $userSetor->data_entrada = date('Y-m-d', strtotime(str_replace("/", "-", $request->data_entrada)));
             $userSetor->status = 'Ativo';
 
             $userSetor->save();
@@ -182,7 +182,7 @@ class UserSetorsController extends Controller
 
 
             return response()->json(array('status' => "OK"));
-        } catch (Exception $error) {
+        } catch (\Exception $error) {
             return response()->json(array('erro' => "ERRO"));
         }
     }
