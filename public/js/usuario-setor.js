@@ -18,12 +18,26 @@ if (Object.keys(table).length !== 0) {
         deferRender: true,
         searching: true,
         pageLength: 10,
+
         columns: [
             { data: "user.nome", name: "usuario" },
             { data: "setor.titulo", name: "setor" },
             { data: "data_entrada", name: "data_entrada" },
             { data: "data_saida", name: "data_saida" },
             { data: "acao", name: "acao" },
+        ],
+        columnDefs: [
+            {
+                targets: 2, //index of column starting from 0
+                data: "acao", //this name should exist in your JSON response
+                render: function (data, type, full, meta) {
+                    return (
+                        '<span class="label label-danger">' +
+                        new Date(data.split("-")).toLocaleDateString() +
+                        "</span>"
+                    );
+                },
+            },
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
