@@ -29,4 +29,27 @@ class BotoesDatatable
             </a>
         </div>';
     }
+
+    public static function criarBotoesAtivar($id, $route)
+    {
+        return '<div class="btn-group btn-group-sm">
+            <a href="#"
+                class="btn btn-info btnAtivar"
+                data-id="' . $id . '"
+                title="Ativar" data-toggle="tooltip">
+                <i class="fas fa-signal"></i>
+            </a>    
+            <a href="/pdf/' . $route . '/' . $id . '"
+                class="btn bg-teal color-palette"
+                title="Visualizar" data-toggle="tooltip" target="_blank">
+                <i class="fas fa-eye"></i>
+            </a>
+            <a href="#"
+                class="btn bg-danger color-palette btnExcluir"
+                data-id="' . $id . '"
+                title="Excluir" data-toggle="tooltip">
+                <i class="fas fa-trash"></i>
+            </a>
+        </div>';
+    }
 }

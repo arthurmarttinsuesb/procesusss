@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
 
+Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/secretaria/list', 'SecretariaController@list');
     Route::get('/processo/list', 'ProcessoController@list');
     Route::get('/setor/list', 'SetorController@list');
+    Route::get('/ativar-usuarios/list', 'AtivarUsuariosController@list');
 
     // lembrar de por as rotas pro metodo 'list' mais acima,
     // para que o laravel não sobrescreva(comportamento padrão do resources)
@@ -60,4 +61,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('setor', 'SetorController');
     Route::resource('documento', 'DocumentoController');
     Route::resource('anexos', 'AnexoController');
+    Route::resource('ativar-usuarios', 'AtivarUsuariosController');
 });

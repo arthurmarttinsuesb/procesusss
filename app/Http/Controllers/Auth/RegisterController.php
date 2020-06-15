@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Traits\HasRoles;
 use DB;
 use App\User;
+use Auth;
+use Mail;
+use App\Mail\SendMailUser;
+
 
 class RegisterController extends Controller
 {
@@ -84,16 +88,16 @@ class RegisterController extends Controller
             'terms' => 'Termos de Uso',
         );
 
-        if($data['tipo']=="PF"){
-            $validacao_cpf_cnpj = array('cpf_cnpj' => ['required','cpf_cnpj','formato_cpf','unique:users']); 
-            $name = array('cpf_cnpj' => 'CPF'); 
-        } else if($data['tipo']=="PJ"){
-            $validacao_cpf_cnpj = array('cpf_cnpj' => ['required','cpf_cnpj','formato_cnpj','unique:users']); 
+        if ($data['tipo'] == "PF") {
+            $validacao_cpf_cnpj = array('cpf_cnpj' => ['required', 'cpf_cnpj', 'formato_cpf', 'unique:users']);
+            $name = array('cpf_cnpj' => 'CPF');
+        } else if ($data['tipo'] == "PJ") {
+            $validacao_cpf_cnpj = array('cpf_cnpj' => ['required', 'cpf_cnpj', 'formato_cnpj', 'unique:users']);
             $name = array('cpf_cnpj' => 'CNPJ');
         }
 
-        $validator = Validator::make($data,array_merge($validacao_geral, $validacao_cpf_cnpj));
-        $validator->setAttributeNames(array_merge($attributeNames,$name));
+        $validator = Validator::make($data, array_merge($validacao_geral, $validacao_cpf_cnpj));
+        $validator->setAttributeNames(array_merge($attributeNames, $name));
 
         return $validator;
     }
@@ -106,35 +110,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-            try{
-                $user =  new User();
-                $user->nome = $data['nome'];
-                $user->sexo = $data['sexo'];
-                $user->nascimento = $data['nascimento'];
-                $user->tipo = $data['tipo'];
-                $user->telefone = $data['telefone'];
-                $user->cpf_cnpj = $data['cpf_cnpj'];
-                $user->logradouro = $data['logradouro'];
-                $user->numero = $data['numero'];
-                $user->bairro = $data['bairro'];
-                $user->cep = $data['cep'];
-                $user->cep = $data['complemento'];
-                $user->fk_estado = $data['estado'];
-                $user->fk_cidade = $data['cidade'];
+        try {
+            $user =  new User();
+            $user->nome = $data['nome'];
+            $user->sexo = $data['sexo'];
+            $user->nascimento = $data['nascimento'];
+            $user->tipo = $data['tipo'];
+            $user->telefone = $data['telefone'];
+            $user->cpf_cnpj = $data['cpf_cnpj'];
+            $user->logradouro = $data['logradouro'];
+            $user->numero = $data['numero'];
+            $user->bairro = $data['bairro'];
+            $user->cep = $data['cep'];
+            $user->complemento = $data['complemento'];
+            $user->fk_estado = $data['estado'];
+            $user->fk_cidade = $data['cidade'];
 
-                $user->email = $data['email'];
-                $user->password = bcrypt($data['password']);
-                    
-                DB::transaction(function() use ($user) {
-                    $user->save();
-                    $user->assignRole('cidadao');
-                });
+            $user->email = $data['email'];
+            $user->password = bcrypt($data['password']);
 
-                app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
-                return $user;
-            }catch(\Exception  $erro){
-                return response()->json(array('erros' => $erro));
+            DB::transaction(function () use ($user) {
+                $user->save();
+                $user->assignRole('cidadao');
+            });
+            try {
+                Mail::to($user->email)->send(new SendMailUser($user));
+            } catch (\Exception  $erro) {
             }
 
+            app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+            return $user;
+        } catch (\Exception  $erro) {
+            return response()->json(array('erros' => $erro));
+        }
     }
 }

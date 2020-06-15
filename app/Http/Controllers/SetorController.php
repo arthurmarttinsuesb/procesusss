@@ -6,9 +6,11 @@ use Session;
 use Redirect;
 use DataTables;
 
+
 use App\Setor;
 use App\Secretaria;
 use App\Http\Utility\BotoesDatatable;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;

@@ -15,6 +15,13 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-header">MENU</li>
+                @if (auth()->user()->status == 'Ativo')
+                <li class="nav-item">
+                    <a href="/ativar-usuarios" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Ativar Usuarios</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="/modelo-documento" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
@@ -46,19 +53,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/logout') }}"  class="nav-link" onclick="event.preventDefault();
+                    <a href="{{ url('/logout') }}" class="nav-link" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
-                                <i class="nav-icon fa fa-power-off"></i>  
-                                <p>
-                                    Sair da Conta
-                                </p>
-                        </a>
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                            <input type="submit" value="logout" style="display: none;">
-                        </form>
-                    </li>
-             </ul>
+                        <i class="nav-icon fa fa-power-off"></i>
+                        <p>
+                            Sair da Conta
+                        </p>
+                    </a>
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                        <input type="submit" value="logout" style="display: none;">
+                    </form>
+                </li>
+                @else
+                <div class="alert alert-warning m-2">Por favor, ative o usuario.</div>
+                @endif
+            </ul>
         </nav>
         <!-- /.sidebar-menu -->
     </div>
