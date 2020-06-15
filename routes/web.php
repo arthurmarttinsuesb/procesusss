@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'documento', 'where' => ['prefix' => 'documento']], function () {
         Route::post('/preencher', ['uses' => 'DocumentoController@preencher']);
         Route::get('/list/{id}', ['uses' => 'DocumentoController@list']);
+        Route::get('/create/{id}', ['uses' => 'DocumentoTramiteController@create']);
+        Route::post('/encaminhar', ['uses' => 'DocumentoController@encaminhar']);
     });
 
     Route::group(['prefix' => 'anexos', 'where' => ['prefix' => 'anexos']], function () {

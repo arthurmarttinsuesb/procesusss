@@ -2,13 +2,12 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/home" class="brand-link elevation-4">
-        <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Processus</span>
+    <span class="logo-mini"><img src="{{url('img/icone-processus.png')}}" 
+         alt="PROCESSUS-ÍCONE" style="width: 40px; height: 40px; padding: 4px;"></span>
+        <span class="brand-text">Processus</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

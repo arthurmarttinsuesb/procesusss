@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RequestDocumento;
 use Illuminate\Support\Facades\Input;
 
+
 use Response;
 use DataTables;
 use DB;
@@ -36,8 +37,12 @@ class DocumentoController extends Controller
     public function edit($id)
     {   
         $tipo = ModeloDocumento::where('status', "Ativo")->get();
-        $modelo = ProcessoDocumento::where('id', $id)->where('status', 'Ativo')->first();
-        return view('documento.edit', compact('modelo','tipo'));
+        $modelo = ProcessoDocumento::where('id', $id)->where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
+        if(empty($modelo)){
+            abort(401);
+        }else{
+            return view('documento.edit', compact('modelo','tipo'));
+        }
     }
 
     public function list($id)
@@ -57,7 +62,30 @@ class DocumentoController extends Controller
                 }
             })
             ->editColumn('acao', function ($modelo) {
-                return BotoesDatatable::criarBotoes($modelo->id, 'documento');
+                return '<div class="btn-group btn-group-sm">
+                        <a href="/pdf/documento/'.$modelo->id.'"
+                            class="btn bg-teal color-palette"
+                            title="Visualizar" data-toggle="tooltip" target="_blank">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="/documento/'.$modelo->id.'/edit"
+                            class="btn btn-info"
+                            title="Alterar" data-toggle="tooltip">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                        <a href="/documento/create/'.$modelo->id.'"
+                            class="btn bg-gray"
+                            title="Encaminhar" data-toggle="tooltip">
+                            <i class="fas fa-share-alt"></i>
+                        </a>
+                        <a href="#"
+                            class="btn bg-danger color-palette btnExcluir"
+                            data-id="'.$modelo->id.'"
+                            title="Excluir" data-toggle="tooltip">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>';
+                
             })->escapeColumns([0])
             ->make(true);
     }
@@ -123,4 +151,6 @@ class DocumentoController extends Controller
             return response()->json(array('erro' => "ERRO"));
         }
     }
+
+  
 }

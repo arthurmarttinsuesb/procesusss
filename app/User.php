@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
 {
@@ -30,6 +31,10 @@ class User extends Authenticatable
         return $this->belongsTo(Estado::class, 'fk_estado');
     }
 
+    public function roles()
+    {
+      return $this->belongsToMany(Role::class, 'model_has_roles','model_id','role_id');
+    }
     /**
      * The attributes that are mass assignable.
      *
