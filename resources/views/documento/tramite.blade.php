@@ -3,7 +3,8 @@
  @section('htmlheader_title', 'Documento')
  @section('contentheader_title', 'Documento')
  @section('conteudo') 
-  
+ <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -41,25 +42,72 @@
                 </div>
               @endif
            
-              <form  method="POST" id="documento" action="/documento">
+              <form  method="POST" id="documento" action="/documento/store/{{$modelo->id}}">
                  @csrf
                 <div class="card-body">
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
-                       <div class="row">
-                            <div class="form-group col-8">
-                                <strong>Titulo <span style="color: red;">*</span></strong>
-                                <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}">
-                                <input type="hidden"  name="modelo" value="{{$modelo->id}}">
-                                @error('titulo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                          
-                        </div>
-                       
+                         <div class="form-row">
+                             <div class="form-group col-md-2">
+                                    <strong>Assinatura <span style="color: red;">*</span></strong>
+                                    <select  name="assinatura" id="assinatura" class="form-control select2 @error('assinatura') is-invalid @enderror" required>
+                                       <option value="" >Selecione</option>
+                                       <option value="true" >Sim</option>
+                                       <option value="false" >Não</option>
+                                    </select>
+                                    <input type="hidden"  name="processo" value="{{$modelo->fk_processo}}">
+                                    @error('assinatura')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                              </div>
+                              <div class="form-group col-md-2">
+                                    <strong>Enviar Para <span style="color: red;">*</span></strong>
+                                    <select  name="envio" id="envio" class="form-control select2 @error('envio') is-invalid @enderror" required>
+                                       <option value="" >Selecione</option>
+                                       <option value="setor" >Setor</option>
+                                       <option value="colaborador" >Colaborador</option>
+                                    </select>
+                                    @error('envio')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                              </div>
+                              <div class="form-group col-md-8 setor" style='display:none'>
+                                    <strong>Setor <span style="color: red;">*</span></strong>
+                                    <select  name="setor[]" class="form-control select2 @error('setor') is-invalid @enderror" multiple="multiple">
+                                        @inject('setor','App\Setor')
+                                        @foreach($secretaria as $secretarias)
+                                            <optgroup label="{{$secretarias->titulo}}" >
+                                                @foreach($setor->where('fk_secretaria',$secretarias->id)->get() as $setores)
+                                                    <option value="{{$setores->id}}" >{{$setores->titulo}}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                    @error('setor')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                              </div>
+                              <div class="form-group col-md-8 colaborador" style='display:none'>
+                                    <strong>Colaborador <span style="color: red;">*</span></strong>
+                                    <select  name="usuario[]" class="form-control select2 @error('usuario') is-invalid @enderror" multiple="multiple">
+                                    <option value="" >Selecione..</option>
+                                    @foreach($usuario as $usuarios)
+                                        <option value="{{$usuarios->id}}">{{$usuarios->nome}}</option>
+                                    @endforeach
+                                    </select>
+                                    @error('usuario')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                              </div>
+                          </div>    
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -79,8 +127,9 @@
 
 @endsection
 @section('scripts-adicionais')
+<script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/documento.js') }}"></script>
+<script src="{{ asset('js/tramite.js') }}"></script>
 @endsection
 
 

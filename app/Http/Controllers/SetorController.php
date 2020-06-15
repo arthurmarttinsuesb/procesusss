@@ -33,8 +33,6 @@ class SetorController extends Controller
     public function list()
     {
         $setor = Setor::where('status', 'Ativo')->with('secretaria')->get();
-
-
         return DataTables::of($setor)
             ->editColumn('acao', function ($setor) {
                 return BotoesDatatable::criarBotoes($setor->id, 'setor');

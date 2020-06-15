@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('setor.index')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                         <li class="breadcrumb-item active">Setor</li>
                     </ol>
                 </div>
@@ -79,25 +79,31 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <strong>Secretaria <span style="color: red;">*</span></strong>
-                                    <select
+                                    <<<<<<< HEAD <select
                                         class="form-control select2 form-control @error('fk_secretaria', 'setor') is-invalid @enderror"
                                         name="fk_secretaria">
 
 
-                                        @foreach ($secretarias as $secretaria)
-                                        @if (old('fk_secretaria') == $secretaria->id)
-                                        <option value="{{$secretaria->id}}" selected>{{$secretaria->titulo}}</option>
-                                        @else
-                                        <option value="{{$secretaria->id}}">{{$secretaria->titulo}}</option>
-                                        @endif
+                                        =======
+                                        <select
+                                            class="form-control select2 form-control @error('fk_secretaria', 'setor') is-invalid @enderror"
+                                            name="fk_secretaria">
+                                            >>>>>>> 01da465a0354562d8a75c5386eaf74faabee934f
+                                            @foreach ($secretarias as $secretaria)
+                                            @if (old('fk_secretaria') == $secretaria->id)
+                                            <option value="{{$secretaria->id}}" selected>{{$secretaria->titulo}}
+                                            </option>
+                                            @else
+                                            <option value="{{$secretaria->id}}">{{$secretaria->titulo}}</option>
+                                            @endif
 
-                                        @endforeach
-                                    </select>
-                                    @error('fk_secretaria','setor')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                            @endforeach
+                                        </select>
+                                        @error('fk_secretaria','setor')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                 </div>
                             </div>
 
