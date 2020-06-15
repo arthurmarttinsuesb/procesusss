@@ -176,7 +176,6 @@ class UserSetorsController extends Controller
         try {
             $userSetor = UserSetor::find($id);
             $user = User::find($userSetor->fk_user);
-            $user->removeRole('writer');
             $userSetor->status = 'Inativo';
             $userSetor->data_saida = date('Y-m-d H:i:s');
             $userSetor->save();
