@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('listar_modelo')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('secretaria.index')}}">Home</a></li>
                         <li class="breadcrumb-item active">Secretaria</li>
                     </ol>
                 </div>
@@ -31,17 +31,18 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-2 float-right">
-                            <a href="{{ URL::to('secretaria') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Secretarias</a>
+                            <a href="{{ URL::to('secretaria') }}" class="btn btn-block btn-outline-info "><i
+                                    class="fa fa-list-alt"></i> Listar Secretarias</a>
                         </div>
                     </div>
 
                     @if (Session::has('message'))
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
-                                {{ Session::get('message') }}
-                            </div>
-                        @endif
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
+                        {{ Session::get('message') }}
+                    </div>
+                    @endif
                     <div class="card-body">
                         <form method="POST" action="/secretaria" id="secretaria">
                             @csrf
@@ -51,20 +52,24 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <strong>Titulo <span style="color: red;">*</span></strong>
-                                    <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo', 'secretaria') is-invalid @enderror" value=" {{ old('titulo') }}">
+                                    <input type="text" autocomplete="off" id="titulo" name="titulo"
+                                        class="form-control @error('titulo', 'secretaria') is-invalid @enderror"
+                                        value=" {{ old('titulo') }}">
                                     @error('titulo','secretaria')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                                 <div class="form-group col-6">
                                     <strong>Sigla <span style="color: red;">*</span></strong>
-                                    <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control @error('sigla', 'secretaria') is-invalid @enderror" value="{{ old('sigla') }}">
+                                    <input type="text" autocomplete="off" id="sigla" name="sigla"
+                                        class="form-control @error('sigla', 'secretaria') is-invalid @enderror"
+                                        value="{{ old('sigla') }}">
                                     @error('sigla','secretaria')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
