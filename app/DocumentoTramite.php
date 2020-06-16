@@ -22,6 +22,6 @@ class DocumentoTramite extends Model
     }
     public function setor()
     {
-        return $this->belongsTo(Setor::class, 'fk_user');
+        return $this->belongsTo(Setor::class, 'fk_setor');
     }
 }

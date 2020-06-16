@@ -3,6 +3,9 @@
  @section('htmlheader_title', 'Documento')
  @section('contentheader_title', 'Documento')
  @section('conteudo') 
+ <!-- DataTables -->
+<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 <div class="content-wrapper">
@@ -41,14 +44,20 @@
                      {{ Session::get('message') }}
                 </div>
               @endif
+              @if (Session::has('message_success'))
+              <div class="alert alert-info alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                     {{ Session::get('message_success') }}
+                </div>
+              @endif
            
-              <form  method="POST" id="documento" action="/documento/store/{{$modelo->id}}">
+              <form  method="POST" id="tramite_documento" action="/documento-tramite/store/{{$modelo->id}}">
                  @csrf
                 <div class="card-body">
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
-                         <div class="form-row">
-                             <div class="form-group col-md-2">
+                        <div class="form-row">
+                                <div class="form-group col-md-2">
                                     <strong>Assinatura <span style="color: red;">*</span></strong>
                                     <select  name="assinatura" id="assinatura" class="form-control select2 @error('assinatura') is-invalid @enderror" required>
                                        <option value="" >Selecione</option>
@@ -56,13 +65,14 @@
                                        <option value="false" >Não</option>
                                     </select>
                                     <input type="hidden"  name="processo" value="{{$modelo->fk_processo}}">
+                                    <input type="hidden"  id="processo_documento" value="{{$modelo->id}}">
                                     @error('assinatura')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                              </div>
-                              <div class="form-group col-md-2">
+                                 </div>
+                                <div class="form-group col-md-2">
                                     <strong>Enviar Para <span style="color: red;">*</span></strong>
                                     <select  name="envio" id="envio" class="form-control select2 @error('envio') is-invalid @enderror" required>
                                        <option value="" >Selecione</option>
@@ -74,8 +84,8 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                              </div>
-                              <div class="form-group col-md-8 setor" style='display:none'>
+                                </div>
+                                <div class="form-group col-md-6 setor" style='display:none'>
                                     <strong>Setor <span style="color: red;">*</span></strong>
                                     <select  name="setor[]" class="form-control select2 @error('setor') is-invalid @enderror" multiple="multiple">
                                         @inject('setor','App\Setor')
@@ -92,11 +102,10 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                              </div>
-                              <div class="form-group col-md-8 colaborador" style='display:none'>
+                                </div>
+                                <div class="form-group col-md-6 colaborador" style='display:none'>
                                     <strong>Colaborador <span style="color: red;">*</span></strong>
                                     <select  name="usuario[]" class="form-control select2 @error('usuario') is-invalid @enderror" multiple="multiple">
-                                    <option value="" >Selecione..</option>
                                     @foreach($usuario as $usuarios)
                                         <option value="{{$usuarios->id}}">{{$usuarios->nome}}</option>
                                     @endforeach
@@ -106,27 +115,53 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                              </div>
-                          </div>    
-                </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <br>
+                                      <button type="submit" form="tramite_documento" class=" form-control btn btn-info" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>&nbsp Aguarde..."> <i class='fa fa-plus'></i> Adicionar</button>
+                                 </div> 
+                            </div>   
+                            <hr>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                        <table id="table_tramite_documento" class="table table-bordered table-hover" width="100%">
+                                            <thead>
+                                            <tr>
+                                                <th>Assinatura Obrigatória</th>
+                                                <th>Enviado Para</th>
+                                                <th>Status</th>
+                                                <th>Ação</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
-                    <button type="submit" form="documento" class="btn btn-info float-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
-                    &nbsp Aguarde...">Salvar</button>
-                </div>
+              
                 <!-- /.card-footer -->
               </form>
-            </div>
+              
             <!-- /.card -->
+           
 
           </div>
+        
         </div>
+       
     </section>
+    
 </div>
 
 
 @endsection
 @section('scripts-adicionais')
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
 <script src="{{ asset('js/tramite.js') }}"></script>

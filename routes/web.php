@@ -43,6 +43,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/encaminhar', ['uses' => 'DocumentoController@encaminhar']);
     });
 
+    Route::group(['prefix' => 'documento-tramite', 'where' => ['prefix' => 'documento-tramite']], function () {
+        Route::get('/list/{id}', ['uses' => 'DocumentoTramiteController@list']);
+        Route::get('/create/{id}', ['uses' => 'DocumentoTramiteController@create']);
+        Route::post('/store/{id}', ['uses' => 'DocumentoTramiteController@store']);
+    });
+
     Route::group(['prefix' => 'anexos', 'where' => ['prefix' => 'anexos']], function () {
         Route::post('/store/{id}', ['uses' => 'AnexoController@store']);
         Route::get('/list/{id}', ['uses' => 'AnexoController@list']);
@@ -58,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
     // lembrar de por as rotas pro metodo 'list' mais acima,
     // para que o laravel não sobrescreva(comportamento padrão do resources)
     Route::resource('modelo-documento', 'ModeloDocumentoController');
+    Route::resource('documento-tramite', 'DocumentoTramiteController');
     Route::resource('usuario-setor', 'UserSetorsController');
     Route::resource('secretaria', 'SecretariaController');
     Route::resource('processo', 'ProcessoController');

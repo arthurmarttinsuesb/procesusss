@@ -34,7 +34,7 @@ class RequestDocumentoTramite extends FormRequest
                 return [
                     'assinatura' =>'required',
                     'envio' =>'required',
-                    'colaborador' =>'required'
+                    'usuario' =>'required'
                 ];
             }
     }
@@ -44,7 +44,7 @@ class RequestDocumentoTramite extends FormRequest
                 'assinatura' =>'Assinatura',
                 'envio' =>'Enviar Para',
                 'setor' =>'Setor',
-                'colaborador' =>'Colaborador',
+                'usuario' =>'Colaborador',
            ];
     }
 }

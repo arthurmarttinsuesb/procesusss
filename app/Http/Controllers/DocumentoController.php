@@ -78,9 +78,9 @@ class DocumentoController extends Controller
                             title="Alterar" data-toggle="tooltip">
                             <i class="fas fa-pencil-alt"></i>
                         </a>
-                        <a href="/documento/create/'.$modelo->id.'"
+                        <a href="/documento-tramite/create/'.$modelo->id.'"
                             class="btn bg-gray"
-                            title="Encaminhar" data-toggle="tooltip">
+                            title="Encaminhar Documento" data-toggle="tooltip">
                             <i class="fas fa-share-alt"></i>
                         </a>
                         <a href="#"
