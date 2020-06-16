@@ -34,7 +34,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-2 float-right">
-                            <a href="{{ URL::to('setor') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Setor</a>
+                            <a href="{{ URL::to('setor') }}" class="btn btn-block btn-outline-info "><i
+                                    class="fa fa-list-alt"></i> Listar Setor</a>
                         </div>
                     </div>
 
@@ -54,7 +55,9 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <strong>Titulo <span style="color: red;">*</span></strong>
-                                    <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo', 'setor') is-invalid @enderror" value=" {{ old('titulo') }}">
+                                    <input type="text" autocomplete="off" id="titulo" name="titulo"
+                                        class="form-control @error('titulo', 'setor') is-invalid @enderror"
+                                        value=" {{ old('titulo') }}">
                                     @error('titulo','setor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -63,7 +66,9 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <strong>Sigla <span style="color: red;">*</span></strong>
-                                    <input type="text" autocomplete="off" id="sigla" name="sigla" class="form-control @error('sigla', 'setor') is-invalid @enderror" value="{{ old('sigla') }}">
+                                    <input type="text" autocomplete="off" id="sigla" name="sigla"
+                                        class="form-control @error('sigla', 'setor') is-invalid @enderror"
+                                        value="{{ old('sigla') }}">
                                     @error('sigla','setor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -74,21 +79,31 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <strong>Secretaria <span style="color: red;">*</span></strong>
-                                    <select class="form-control select2 form-control @error('fk_secretaria', 'setor') is-invalid @enderror" name="fk_secretaria">
-                                        @foreach ($secretarias as $secretaria)
-                                        @if (old('fk_secretaria') == $secretaria->id)
-                                        <option value="{{$secretaria->id}}" selected>{{$secretaria->titulo}}</option>
-                                        @else
-                                        <option value="{{$secretaria->id}}">{{$secretaria->titulo}}</option>
-                                        @endif
+                                    <<<<<<< HEAD <select
+                                        class="form-control select2 form-control @error('fk_secretaria', 'setor') is-invalid @enderror"
+                                        name="fk_secretaria">
 
-                                        @endforeach
-                                    </select>
-                                    @error('fk_secretaria','setor')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+
+                                        =======
+                                        <select
+                                            class="form-control select2 form-control @error('fk_secretaria', 'setor') is-invalid @enderror"
+                                            name="fk_secretaria">
+                                            >>>>>>> 01da465a0354562d8a75c5386eaf74faabee934f
+                                            @foreach ($secretarias as $secretaria)
+                                            @if (old('fk_secretaria') == $secretaria->id)
+                                            <option value="{{$secretaria->id}}" selected>{{$secretaria->titulo}}
+                                            </option>
+                                            @else
+                                            <option value="{{$secretaria->id}}">{{$secretaria->titulo}}</option>
+                                            @endif
+
+                                            @endforeach
+                                        </select>
+                                        @error('fk_secretaria','setor')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                 </div>
                             </div>
 
