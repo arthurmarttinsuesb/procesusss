@@ -51,6 +51,9 @@
                         <p>Usuario Setor</p>
                     </a>
                 </li>
+                @else
+                <div class="alert alert-warning m-2">Por favor, ative o usuario.</div>
+                @endif
                 <li class="nav-item">
                     <a href="{{ url('/logout') }}" class="nav-link" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
@@ -64,9 +67,6 @@
                         <input type="submit" value="logout" style="display: none;">
                     </form>
                 </li>
-                @else
-                <div class="alert alert-warning m-2">Por favor, ative o usuario.</div>
-                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
