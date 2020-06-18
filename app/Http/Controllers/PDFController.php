@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ModeloDocumento;
 use App\ProcessoDocumento;
 use PDF;
+
 class PDFController extends Controller
 {
     public function modelo_documento($id)

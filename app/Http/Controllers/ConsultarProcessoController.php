@@ -32,7 +32,7 @@ class ConsultarProcessoController extends Controller
     {
         $processo = Processo::where('numero', $numero)->get();
         return DataTables::of($processo)->editColumn('acao', function ($processo) {
-            return BotoesDatatable::criarBotoes($processo->id, 'processo');
+            return BotoesDatatable::criarBotaoVisualizar($processo->id, 'processo');
         })->escapeColumns([0])->make(true);
     }
 }

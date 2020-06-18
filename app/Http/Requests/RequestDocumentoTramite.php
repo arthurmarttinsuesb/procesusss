@@ -30,7 +30,7 @@ class RequestDocumentoTramite extends FormRequest
                 'envio' =>'required',
                 'setor' =>'required'
             ];
-        }else if($this->envio=='setor'){
+        }else if($this->envio=='colaborador'){
                 return [
                     'assinatura' =>'required',
                     'envio' =>'required',
