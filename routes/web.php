@@ -45,16 +45,16 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/encaminhar', ['uses' => 'DocumentoController@encaminhar']);
         });
 
-    Route::group(['prefix' => 'documento-tramite', 'where' => ['prefix' => 'documento-tramite']], function () {
-        Route::get('/list/{id}', ['uses' => 'DocumentoTramiteController@list']);
-        Route::get('/create/{id}', ['uses' => 'DocumentoTramiteController@create']);
-        Route::post('/store/{id}', ['uses' => 'DocumentoTramiteController@store']);
-    });
+        Route::group(['prefix' => 'documento-tramite', 'where' => ['prefix' => 'documento-tramite']], function () {
+            Route::get('/list/{id}', ['uses' => 'DocumentoTramiteController@list']);
+            Route::get('/create/{id}', ['uses' => 'DocumentoTramiteController@create']);
+            Route::post('/store/{id}', ['uses' => 'DocumentoTramiteController@store']);
+        });
 
-    Route::group(['prefix' => 'anexos', 'where' => ['prefix' => 'anexos']], function () {
-        Route::post('/store/{id}', ['uses' => 'AnexoController@store']);
-        Route::get('/list/{id}', ['uses' => 'AnexoController@list']);
-    });
+        Route::group(['prefix' => 'anexos', 'where' => ['prefix' => 'anexos']], function () {
+            Route::post('/store/{id}', ['uses' => 'AnexoController@store']);
+            Route::get('/list/{id}', ['uses' => 'AnexoController@list']);
+        });
 
         // rotas para o metodo 'list'
         Route::get('/usuario-setor/list', 'UserSetorsController@list');
@@ -62,18 +62,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/processo/list', 'ProcessoController@list');
         Route::get('/setor/list', 'SetorController@list');
         Route::get('/ativar-usuarios/list', 'AtivarUsuariosController@list');
+        Route::get('/consultar-processo/list/{numero}', 'ConsultarProcessoController@list');
 
-    // lembrar de por as rotas pro metodo 'list' mais acima,
-    // para que o laravel não sobrescreva(comportamento padrão do resources)
-    Route::resource('modelo-documento', 'ModeloDocumentoController');
-    Route::resource('documento-tramite', 'DocumentoTramiteController');
-    Route::resource('usuario-setor', 'UserSetorsController');
-    Route::resource('secretaria', 'SecretariaController');
-    Route::resource('processo', 'ProcessoController');
-    Route::resource('setor', 'SetorController');
-    Route::resource('documento', 'DocumentoController');
-    Route::resource('anexos', 'AnexoController');
-    Route::resource('ativar-usuarios', 'AtivarUsuariosController');
-});
-
+        // lembrar de por as rotas pro metodo 'list' mais acima,
+        // para que o laravel não sobrescreva(comportamento padrão do resources)
+        Route::resource('modelo-documento', 'ModeloDocumentoController');
+        Route::resource('usuario-setor', 'UserSetorsController');
+        Route::resource('secretaria', 'SecretariaController');
+        Route::resource('processo', 'ProcessoController');
+        Route::resource('setor', 'SetorController');
+        Route::resource('documento', 'DocumentoController');
+        Route::resource('anexos', 'AnexoController');
+        Route::resource('ativar-usuarios', 'AtivarUsuariosController');
+        Route::resource('consultar-processo', 'ConsultarProcessoController');
+    });
 });

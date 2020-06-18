@@ -13,7 +13,7 @@ class BotoesDatatable
     {
 
         return '<div class="btn-group btn-group-sm">
-            <a href="/pdf/' . $route . '/' . $id . '"
+            <a href="/' . $route . '/' . $id . '"
                 class="btn bg-teal color-palette"
                 title="Visualizar" data-toggle="tooltip" target="_blank">
                 <i class="fas fa-eye"></i>
@@ -89,5 +89,17 @@ class BotoesDatatable
         $botoes = $botoes . '</div>';
 
         return $botoes;
+    }
+
+    public static function criarBotaoVisualizar($id, $route)
+    {
+
+        return '<div class="btn-group btn-group-sm">
+            <a href="' . $route . '/' . $id . '"
+                class="btn bg-teal color-palette"
+                title="Visualizar" data-toggle="tooltip" target="_blank">
+                <i class="fas fa-eye"></i>
+            </a>
+        </div>';
     }
 }
