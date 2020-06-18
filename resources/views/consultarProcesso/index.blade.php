@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Setor')
-@section('contentheader_title', 'Setor')
+@section('htmlheader_title', 'Consultar Processo')
+@section('contentheader_title', 'Consultar Processo')
 
 @section('conteudo')
 <!-- DataTables -->
@@ -15,12 +15,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Setores</h1>
+                    <h1>Consultar Processo</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                        <li class="breadcrumb-item active">Setor</li>
+                        <li class="breadcrumb-item active">Consultar Processo</li>
                     </ol>
                 </div>
             </div>
@@ -33,8 +33,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-3 float-right">
-                            <a href="{{ URL::to('setor/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Setor</a>
+                        <div class="col-4 float-right">
+                            <div class="row">
+                                <div class="col-4 pt-1">
+                                    <label>Buscar Processo: </label>
+                                </div>
+                                <div class="col">
+                                    <input id="buscaProcesso" placeholder="Numero do processo" type="text"
+                                        autocomplete="off" class="form-control" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     @if (Session::has('message'))
@@ -43,12 +51,12 @@
                     <!-- /.card-header -->
 
                     <div class="card-body">
-                        <table id="table_setors" class="table table-bordered table-hover">
+                        <table id="table_processos" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Titulo</th>
-                                    <th>Sigla</th>
-                                    <th>Secretaria</th>
+                                    <th>Numero</th>
+                                    <th>Tipo</th>
+                                    <th>Status</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
@@ -70,5 +78,5 @@
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/setor.js') }}"></script>
+<script src="{{ asset('js/consultar-processo.js') }}"></script>
 @endsection
