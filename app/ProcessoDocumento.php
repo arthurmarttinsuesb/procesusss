@@ -10,11 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 class ProcessoDocumento extends Model
 {
     use HasSlug;
-    
-    protected $fillable = 
+
+    protected $fillable =
     [
-        'fk_processo','fk_user','fk_modelo_documento','titulo','slug','descricao','conteudo','status'
-    ]; 
+        'fk_processo', 'fk_user', 'fk_modelo_documento', 'titulo', 'slug', 'descricao', 'conteudo', 'status'
+    ];
 
     public function processo()
     {
@@ -31,17 +31,22 @@ class ProcessoDocumento extends Model
         return $this->belongsTo(ModeloDocumento::class, 'fk_modelo_documento');
     }
 
-     //toda vez que eu criar um titulo ele irá gerar um slug automaticamente.
-     public function getSlugOptions() : SlugOptions
-     {
-         return SlugOptions::create()
-             ->generateSlugsFrom('titulo')
-             ->saveSlugsTo('slug');
-     }
-     
-   //estou substituindo o id como identificação padrão para o slug
-     public function getRouteKeyName()
-     {
-         return 'slug';
-     }
+    public function tramite()
+    {
+        return $this->hasMany(DocumentoTramite::class, 'fk_processo_documento');
+    }
+
+    //toda vez que eu criar um titulo ele irá gerar um slug automaticamente.
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('titulo')
+            ->saveSlugsTo('slug');
+    }
+
+    //estou substituindo o id como identificação padrão para o slug
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

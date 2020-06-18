@@ -3,6 +3,8 @@
 @section('htmlheader_title', 'Home')
 @section('contentheader_title', 'Home')
 
+@inject('documento', 'App\DocumentoTramite')
+
 @section('conteudo')
 
 <!-- Content Wrapper. Contains page content -->
@@ -46,90 +48,116 @@
     <!-- Main content -->
     <section class="content">
        
-
-
+    
     <!-- Main content -->
       <div class="container-fluid">
+      
         <h4>Processos Recebidos</h4>
+      
+        
+          
+
         <!-- Timelime example  -->
+        
         <div class="row">
           <div class="col-md-12">
             <!-- The time line -->
+            
             <div class="timeline">
+            
               <!-- timeline time label -->
+              
+              @foreach($docs as $documento_visualizar)
+              @if($documento_visualizar->assinatura == FALSE)
+              <!-- repete inicio -->
               <div class="time-label">
-                <span class="bg-teal
-">10 Feb. 2014</span>
+                <span class="bg-teal"> {{Carbon\Carbon::parse($documento_visualizar->updated_at)->format('d/m/Y H:i')}} </span>
               </div>
+              
               <!-- /.timeline-label -->
               <!-- timeline item -->
+              
+              
               <div>
+              
                 <i class="fas fa-folder-open bg-lightblue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                  <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                  <span class="time"><i class="fas fa-clock"> {{Carbon\Carbon::parse($documento_visualizar->updated_at)->format('d/m/Y H:i')}} </i> </span>
+                  <h3 class="timeline-header"><a href="#">Visualizações Pendentes:</a> Você possui processos que precisam ser lidos</h3>
 
                   <div class="timeline-body">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                    quora plaxo ideeli hulu weebly balihoo...
+                    Acesse o menu de processos para visualizar.
                   </div>
-                  <div class="timeline-footer">
-                    <a class="btn btn-primary btn-sm">Read more</a>
-                    <a class="btn btn-danger btn-sm">Delete</a>
-                  </div>
+                   
                 </div>
+                
+                
               </div>
+              <!-- repete fim -->
+              @endif
+              @endforeach
               <!-- END timeline item -->
             </div>
+            
           </div>
           <!-- /.col -->
         </div>
+           
+   
         <hr>
         <h4>Documentos Recebidos</h4>
+        
                 <!-- Timelime example  -->
+                
                 <div class="row">
           <div class="col-md-12">
             <!-- The time line -->
+           
             <div class="timeline">
               <!-- timeline time label -->
+             
+             @foreach($docs as $documento_assinar)
+             @if($documento_assinar->assinatura == TRUE)
+              <!-- repete inicio -->
               <div class="time-label">
-                <span class="bg-teal
-">10 Feb. 2014</span>
+                <span class="bg-teal"> {{Carbon\Carbon::parse($documento_assinar->updated_at)->format('d/m/Y H:i')}} </span>
               </div>
+              
               <!-- /.timeline-label -->
               <!-- timeline item -->
               <div>
+              
                 <i class="fas fa-file-alt bg-lightblue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fas fa-clock"></i> 12:05</span>
-                  <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                  <span class="time"><i class="fas fa-clock"> {{Carbon\Carbon::parse($documento_assinar->updated_at)->format('d/m/Y H:i')}} </i> </span>
+                  <h3 class="timeline-header"><a href="#">Assinaturas Pendentes:</a> Você possui documentos que precisam ser assinados</h3>
 
                   <div class="timeline-body">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                    quora plaxo ideeli hulu weebly balihoo...
+                    Acesse o menu de processos para assinar.
                   </div>
-                  <div class="timeline-footer">
-                    <a class="btn btn-primary btn-sm">Read more</a>
-                    <a class="btn btn-danger btn-sm">Delete</a>
-                  </div>
+                  
                 </div>
+                
+                
               </div>
+              @endif
+              @endforeach
+              <!-- repete fim -->
               <!-- END timeline item -->
-            </div>
+            </div> 
+            
           </div>
           <!-- /.col -->
         </div>
- 
+        
 
 
 
-                      
+    </div> 
+                   
     </section>
     <!-- /.content -->
 
 
     @endsection
+    

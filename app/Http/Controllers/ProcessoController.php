@@ -16,6 +16,7 @@ use Redirect;
 #class
 
 use App\Processo;
+use App\DocumentoTramite;
 use App\Http\Utility\BotoesDatatable;
 
 class ProcessoController extends Controller
@@ -27,22 +28,36 @@ class ProcessoController extends Controller
      */
     public function index()
     {
+
+        $modelo = Processo::where('status', "Ativo")->get();
+
         return view('processo.index');
     }
 
     public function list(Request $request)
     {
-        if (Auth::user()->hasRole('administrador')) {
-            $modelo = Processo::where('status', "Ativo")->get();
+
+        $user = Auth::user(); // 
+
+        if ($user->hasRole('administrador')) {
+            $processos = Processo::where('status', "Ativo")->with('d/cumentos')->with('documentos.tramite')->get();
         } else {
-            $modelo = Processo::where('fk_user', Auth::user()->id)->where('status', "Ativo")->get();
+            $processos = Processo::where('fk_user', $user->id)->where('status', "Ativo")->with('documentos')->with('documentos.tramite')->get();
         }
-        return Datatables::of($modelo)
-            ->editColumn('acao', function ($modelo) {
-                return BotoesDatatable::criarBotoes($modelo->id, 'processo');
+
+
+        return $processos;
+
+
+
+        return Datatables::of($processos->flatMap->documentos)
+            ->editColumn('acao', function ($doc) {
+                return BotoesDatatable::criarBotoesProcesso($doc->id, 'processo', $doc->tramite->flatMap->assinatura);
             })->escapeColumns([0])
             ->make(true);
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -51,7 +66,6 @@ class ProcessoController extends Controller
      */
     public function create(Request $request)
     {
-       
     }
 
     /**
