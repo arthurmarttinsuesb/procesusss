@@ -131,7 +131,7 @@
                         <!-- timeline time label -->
                         @foreach($docs as $documento_assinar)
                         @if($documento_assinar->assinatura == TRUE)
-                        @foreach($process as $processo_doc)
+
                         <!-- repete inicio -->
                         <div class="time-label">
                             <span class="bg-teal">
@@ -151,9 +151,9 @@
                                     documentos que precisam ser assinados</h3>
 
                                 <div class="timeline-body">
-                                    <b>Titulo:</b> {{$processo_doc->titulo}} <br> <b> Descrição: </b>
-                                    {{$processo_doc->descricao}} <br>
-                                    <b>Conteúdo: </b> {{$processo_doc->conteudo}}
+                                    <b>Titulo:</b> {{$documento_assinar->titulo}} <br> <b> Descrição: </b>
+                                    {{$documento_assinar->descricao}} <br>
+                                    <b>Conteúdo: </b> {{$documento_assinar->conteudo}}
                                 </div>
 
                                 <div class="timeline-footer">
@@ -167,7 +167,7 @@
 
 
                         </div>
-                        @endforeach
+
                         @endif
                         @endforeach
                         <!-- repete fim -->
