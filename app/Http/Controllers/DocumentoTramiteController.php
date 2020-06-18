@@ -161,7 +161,7 @@ class DocumentoTramiteController extends Controller
                  }
             })
             ->editColumn('envio', function ($modelo) {
-                if($modelo->fk_setor==" "){
+                if($modelo->fk_setor==null){
                     return  $modelo->user->nome;
                 }else{
                     return $modelo->setor->titulo;

@@ -45,7 +45,6 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/encaminhar', ['uses' => 'DocumentoController@encaminhar']);
         });
 
-<<<<<<< HEAD
     Route::group(['prefix' => 'documento-tramite', 'where' => ['prefix' => 'documento-tramite']], function () {
         Route::get('/list/{id}', ['uses' => 'DocumentoTramiteController@list']);
         Route::get('/create/{id}', ['uses' => 'DocumentoTramiteController@create']);
@@ -56,12 +55,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store/{id}', ['uses' => 'AnexoController@store']);
         Route::get('/list/{id}', ['uses' => 'AnexoController@list']);
     });
-=======
-        Route::group(['prefix' => 'anexos', 'where' => ['prefix' => 'anexos']], function () {
-            Route::post('/store/{id}', ['uses' => 'AnexoController@store']);
-            Route::get('/list/{id}', ['uses' => 'AnexoController@list']);
-        });
->>>>>>> d80c45bb725c6e8438a7c9e505347abb6af4cf37
 
         // rotas para o metodo 'list'
         Route::get('/usuario-setor/list', 'UserSetorsController@list');
@@ -70,7 +63,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/setor/list', 'SetorController@list');
         Route::get('/ativar-usuarios/list', 'AtivarUsuariosController@list');
 
-<<<<<<< HEAD
     // lembrar de por as rotas pro metodo 'list' mais acima,
     // para que o laravel não sobrescreva(comportamento padrão do resources)
     Route::resource('modelo-documento', 'ModeloDocumentoController');
@@ -82,17 +74,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('documento', 'DocumentoController');
     Route::resource('anexos', 'AnexoController');
     Route::resource('ativar-usuarios', 'AtivarUsuariosController');
-=======
-        // lembrar de por as rotas pro metodo 'list' mais acima,
-        // para que o laravel não sobrescreva(comportamento padrão do resources)
-        Route::resource('modelo-documento', 'ModeloDocumentoController');
-        Route::resource('usuario-setor', 'UserSetorsController');
-        Route::resource('secretaria', 'SecretariaController');
-        Route::resource('processo', 'ProcessoController');
-        Route::resource('setor', 'SetorController');
-        Route::resource('documento', 'DocumentoController');
-        Route::resource('anexos', 'AnexoController');
-        Route::resource('ativar-usuarios', 'AtivarUsuariosController');
-    });
->>>>>>> d80c45bb725c6e8438a7c9e505347abb6af4cf37
+   });
 });
