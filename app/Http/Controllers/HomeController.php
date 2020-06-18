@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\DocumentoTramite;
+use App\ProcessoDocumento;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $consulta =  DocumentoTramite::where('fk_user', Auth::user()->id)->where('status', '=', 'Ativo')->get();
-        return view('home', ['docs'=>$consulta] );
+        $processo = ProcessoDocumento::where('fk_user', Auth::user()->id)->where('status', '=', 'Ativo')->get();
+        return view('home', ['docs' => $consulta, 'process' => $processo]);
     }
 }
