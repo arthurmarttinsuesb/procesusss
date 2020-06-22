@@ -67,13 +67,12 @@
                     <div class="timeline">
 
                         <!-- timeline time label -->
-
-                        @foreach($docs as $documento_visualizar)
-                        @if($documento_visualizar->assinatura == FALSE)
+                        @foreach($process as $processo_visualizar)
+                        @if($processo_visualizar->status == 'Ativo')
                         <!-- repete inicio -->
                         <div class="time-label">
                             <span class="bg-teal">
-                                {{Carbon\Carbon::parse($documento_visualizar->updated_at)->format('d/m/Y H:i')}} </span>
+                                {{Carbon\Carbon::parse($processo_visualizar->updated_at)->format('d/m/Y H:i')}} </span>
                         </div>
 
                         <!-- /.timeline-label -->
@@ -85,21 +84,23 @@
                             <i class="fas fa-folder-open bg-lightblue"></i>
                             <div class="timeline-item">
                                 <span class="time"><i class="fas fa-clock">
-                                        {{Carbon\Carbon::parse($documento_visualizar->updated_at)->format('d/m/Y H:i')}}
+                                        {{Carbon\Carbon::parse($processo_visualizar->updated_at)->format('d/m/Y H:i')}}
                                     </i> </span>
                                 <h3 class="timeline-header"><a href="#">Visualizações Pendentes:</a> Você possui
                                     processos que precisam ser lidos</h3>
 
                                 <div class="timeline-body">
 
-                                    Acesse o menu de processos para assinar.
+                                    <b> Tipo do Processo: </b> {{$processo_visualizar->tipo}} <br>
+                                    <b> Número do Processo</b> {{$processo_visualizar->numero}}
 
                                 </div>
 
                                 <div class="timeline-footer">
-                                    <a href="#" class="btn bg-success color-palette btnAssinar" title="Assinar"
+                                    <a href="/processo/{{$processo_visualizar->id}}/edit"
+                                        class="btn bg-info color-palette btnEditar" title="Assinar"
                                         data-toggle="tooltip">
-                                        <i class="fa fa-edit">Assinar</i>
+                                        <i class="fas fa-pencil-alt"> Editar</i>
                                     </a>
                                 </div>
 

@@ -42,7 +42,6 @@ $(document).ready(function($) {
         language: { url: "/plugins/datatables/traducao.json" }
     });
 
-
     $(document).on('click', '.add_anexo', function() {
         var dados = new FormData($("#form_anexo")[0]); //pega os dados do form
         $.ajax({
