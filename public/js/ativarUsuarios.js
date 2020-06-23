@@ -12,6 +12,7 @@ $(document).on("click", ".btnAtivar", function () {
         nomeModulo: "Usuario(a)",
         rota: "ativar-usuarios",
         idTable: "table_users",
+        element: $(this),
     });
 });
 

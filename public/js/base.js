@@ -89,17 +89,10 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
 // rota é a rota para ativar que será feita o post, sem barras
 // idTable é o id do datatable
 // dataId é o nome da prop que ficará o id a ser ativo no botão, exemplo:
-// <button type="button" data-id="1" /> "id" é o nome.
-// o valor padrão já é id, então não é necessario preencher caso use o mesmo nome
-// btnClass é o nome da classe do botao de ativar, por padrao ja fica btnAtivar
-function ativarDialog({
-    nomeModulo,
-    rota,
-    idTable,
-    dataId = "id",
-    btnClass = "btnAtivar",
-}) {
-    id = $(`.${btnClass}`).data(dataId);
+// <button type="button" data-id="1" /> "id" é o nome e já é o padrão.
+
+function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
+    const id = element.data(dataId);
     swalWithBootstrapButtons
         .fire({
             title: `Deseja ativar o(a) ${nomeModulo}?`,
