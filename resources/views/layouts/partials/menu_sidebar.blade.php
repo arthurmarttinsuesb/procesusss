@@ -2,8 +2,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/home" class="brand-link elevation-4">
-    <span class="logo-mini"><img src="{{url('img/icone-processus.png')}}" 
-         alt="PROCESSUS-ÍCONE" style="width: 40px; height: 40px; padding: 4px;"></span>
+        <span class="logo-mini"><img src="{{url('img/icone-processus.png')}}" alt="PROCESSUS-ÍCONE"
+                style="width: 40px; height: 40px; padding: 4px;"></span>
         <span class="brand-text">Processus</span>
     </a>
     <!-- Sidebar -->
@@ -15,6 +15,12 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-header">MENU</li>
                 @if (auth()->user()->status == 'Ativo')
+                <li class="nav-item">
+                    <a href="/consultar-processo" class="nav-link">
+                        <i class="nav-icon fas fa-file"></i>
+                        <p>Consultar Processo</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="/ativar-usuarios" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
