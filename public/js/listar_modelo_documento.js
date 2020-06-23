@@ -1,4 +1,4 @@
-$(document).ready(function($) {
+$(document).ready(function ($) {
     var table = $("#table").DataTable({
         ajax: base_url + "/modelo-documento/list/",
         scrollCollapse: true,
@@ -10,20 +10,19 @@ $(document).ready(function($) {
         searching: false,
         columns: [
             { data: "titulo", name: "titulo" },
-            { data: "acao", name: "acao" }
+            { data: "acao", name: "acao" },
         ],
-        language: { url: "/plugins/datatables/traducao.json" }
+        language: { url: "/plugins/datatables/traducao.json" },
     });
 
-
-    $(document).on("click", ".btnExcluir", function() {
+    $(document).on("click", ".btnExcluir", function () {
         deleteDialog({
             nomeModulo: "Modelo",
             rota: "modelo-documento",
             idTable: "table",
+            element: $(this),
         });
     });
-
 
     // $(document).on('click', '.btnVisualizar', function() {
     //     var id = $(this).data("id");
@@ -41,6 +40,4 @@ $(document).ready(function($) {
     //         },
     //     });
     // });
-
-
 });

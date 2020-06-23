@@ -3,6 +3,7 @@ $(document).on("click", ".btnExcluir", function () {
         nomeModulo: "Usuario Setor",
         rota: "usuario-setor",
         idTable: "table_usuario-setor",
+        element: $(this),
     });
 });
 

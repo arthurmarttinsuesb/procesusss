@@ -3,6 +3,7 @@ $(document).on("click", ".btnExcluir", function () {
         nomeModulo: "Secretaria",
         rota: "secretaria",
         idTable: "table_secretarias",
+        element: $(this),
     });
 });
 

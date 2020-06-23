@@ -20,6 +20,7 @@ $(document).ready(function ($) {
             nomeModulo: "Processo",
             rota: "processo",
             idTable: "table",
+            element: $(this),
         });
     });
 });
