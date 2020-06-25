@@ -17,7 +17,7 @@
                 @if (auth()->user()->status == 'Ativo')
                 <li class="nav-item">
                     <a href="/consultar-processo" class="nav-link">
-                        <i class="nav-icon fas fa-file"></i>
+                        <i class="nav-icon fa fa-search"></i>
                         <p>Consultar Processo</p>
                     </a>
                 </li>
