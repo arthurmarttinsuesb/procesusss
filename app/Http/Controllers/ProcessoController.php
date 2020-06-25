@@ -40,19 +40,14 @@ class ProcessoController extends Controller
         $user = Auth::user(); // 
 
         if ($user->hasRole('administrador')) {
-            $processos = Processo::where('status', "Ativo")->with('d/cumentos')->with('documentos.tramite')->get();
+            $processos = Processo::where('status', "Ativo")->with('documentos')->with('documentos.tramite')->get();
         } else {
             $processos = Processo::where('fk_user', $user->id)->where('status', "Ativo")->with('documentos')->with('documentos.tramite')->get();
         }
 
-
-        return $processos;
-
-
-
-        return Datatables::of($processos->flatMap->documentos)
-            ->editColumn('acao', function ($doc) {
-                return BotoesDatatable::criarBotoesProcesso($doc->id, 'processo', $doc->tramite->flatMap->assinatura);
+        return Datatables::of($processos)
+            ->editColumn('acao', function ($processo) {
+                return BotoesDatatable::criarBotoes($processo->id, 'processo');
             })->escapeColumns([0])
             ->make(true);
     }

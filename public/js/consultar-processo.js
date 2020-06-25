@@ -3,6 +3,7 @@ $(document).on("click", ".btnExcluir", function () {
         nomeModulo: "Setor",
         rota: "setor",
         idTable: "table_processos",
+        element: $(this),
     });
 });
 

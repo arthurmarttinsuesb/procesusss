@@ -1,10 +1,10 @@
-$(document).ready(function($) {
-    $('.todo-list').sortable({
-        placeholder: 'sort-highlight',
-        handle: '.handle',
+$(document).ready(function ($) {
+    $(".todo-list").sortable({
+        placeholder: "sort-highlight",
+        handle: ".handle",
         forcePlaceholderSize: true,
-        zIndex: 999999
-    })
+        zIndex: 999999,
+    });
 
     var id_processo = $("#processo").val();
     var table = $("#table_documento").DataTable({
@@ -20,9 +20,9 @@ $(document).ready(function($) {
             { data: "titulo", name: "titulo" },
             { data: "tipo", name: "tipo" },
             { data: "status", name: "status" },
-            { data: "acao", name: "acao" }
+            { data: "acao", name: "acao" },
         ],
-        language: { url: "/plugins/datatables/traducao.json" }
+        language: { url: "/plugins/datatables/traducao.json" },
     });
 
     var table = $("#table_anexo").DataTable({
@@ -37,54 +37,55 @@ $(document).ready(function($) {
         columns: [
             { data: "titulo", name: "titulo" },
             { data: "usuario", name: "usuario" },
-            { data: "acao", name: "acao" }
+            { data: "acao", name: "acao" },
         ],
-        language: { url: "/plugins/datatables/traducao.json" }
+        language: { url: "/plugins/datatables/traducao.json" },
     });
 
-    $(document).on('click', '.add_anexo', function() {
+    $(document).on("click", ".add_anexo", function () {
         var dados = new FormData($("#form_anexo")[0]); //pega os dados do form
         $.ajax({
-            type: 'post',
-            url: base_url + '/anexos/store/' + id_processo,
-            dataType: 'json',
+            type: "post",
+            url: base_url + "/anexos/store/" + id_processo,
+            dataType: "json",
             headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                    "content"
-                ),
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
             data: dados,
             processData: false,
             contentType: false,
-            success: function(data) {
-                $('#table_anexo').DataTable().draw(false);
+            success: function (data) {
+                $("#table_anexo").DataTable().draw(false);
             },
-            error: function(data) {
-                $('.erros').show(); //exibe a div de erro
-                $('.erros').find('ul').text(""); //limpa a div para erros successivos
+            error: function (data) {
+                $(".erros").show(); //exibe a div de erro
+                $(".erros").find("ul").text(""); //limpa a div para erros successivos
 
-                $.each(data.responseJSON.errors, function(nome, mensagem) {
-                    $('.erros').find("ul").append(mensagem + "</br>");
+                $.each(data.responseJSON.errors, function (nome, mensagem) {
+                    $(".erros")
+                        .find("ul")
+                        .append(mensagem + "</br>");
                 });
             },
         });
     });
 
-    $(document).on("click", ".btnExcluir", function() {
+    $(document).on("click", ".btnExcluir", function () {
         deleteDialog({
             nomeModulo: "Documento",
             rota: "documento",
             idTable: "table_documento",
+            element: $(this),
         });
     });
 
-    $(document).on("click", ".btnExcluirAnexo", function() {
+    $(document).on("click", ".btnExcluirAnexo", function () {
         deleteDialog({
             nomeModulo: "Anexo",
             rota: "anexos",
             idTable: "table_anexo",
             btnClass: "btnExcluirAnexo",
+            element: $(this),
         });
     });
-
 });

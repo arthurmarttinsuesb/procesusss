@@ -1,5 +1,5 @@
 //Proteção da aplicação contra ataques de falsificação de solicitações entre sites (CSRF).
-$(document).ready(function($) {
+$(document).ready(function ($) {
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -17,22 +17,14 @@ var base_url = location.protocol + "//" + window.location.host.toString();
 // rota é a rota de delete que será feita o post, sem barras
 // idTable é o id do datatable
 // dataId é o nome da prop que ficará o id a ser deletado no botão, exemplo:
-// <button type="button" data-id="1" /> "id" é o nome.
-// o valor padrão já é id, então não é necessario preencher caso use o
-// mesmo nome
-// btnClass é o nome da classe do botao de excluir, por padrao ja fica btnExcluir
+// <button type="button" data-id="1" /> "id" é o nome e é o padrão.
 
-function deleteDialog({
-    nomeModulo,
-    rota,
-    idTable,
-    dataId = "id",
-    btnClass = "btnExcluir",
-}) {
-    id = $(`.${btnClass}`).data(dataId);
+function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
+    const id = element.data(dataId);
+
     swalWithBootstrapButtons
         .fire({
-            title: `Deseja excluir essa ${nomeModulo}?`,
+            title: `Deseja excluir essa(e) ${nomeModulo}?`,
             text: "",
             icon: "warning",
             showCancelButton: true,
@@ -51,7 +43,7 @@ function deleteDialog({
                         ),
                     },
                     data: {},
-                    success: function(data) {
+                    success: function (data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -65,7 +57,7 @@ function deleteDialog({
                                     "Exclusão Realizada",
                                     "success"
                                 )
-                                .then(function(result) {
+                                .then(function (result) {
                                     if (result.value) {
                                         $("#" + idTable)
                                             .DataTable()
@@ -74,7 +66,7 @@ function deleteDialog({
                                 });
                         }
                     },
-                    error: function() {
+                    error: function () {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Exclusão cancelada, tente novamente mais tarde.",
@@ -97,17 +89,10 @@ function deleteDialog({
 // rota é a rota para ativar que será feita o post, sem barras
 // idTable é o id do datatable
 // dataId é o nome da prop que ficará o id a ser ativo no botão, exemplo:
-// <button type="button" data-id="1" /> "id" é o nome.
-// o valor padrão já é id, então não é necessario preencher caso use o mesmo nome
-// btnClass é o nome da classe do botao de ativar, por padrao ja fica btnAtivar
-function ativarDialog({
-    nomeModulo,
-    rota,
-    idTable,
-    dataId = "id",
-    btnClass = "btnAtivar",
-}) {
-    id = $(`.${btnClass}`).data(dataId);
+// <button type="button" data-id="1" /> "id" é o nome e já é o padrão.
+
+function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
+    const id = element.data(dataId);
     swalWithBootstrapButtons
         .fire({
             title: `Deseja ativar o(a) ${nomeModulo}?`,
@@ -131,7 +116,7 @@ function ativarDialog({
                     data: {
                         ativar: true, // mando esse campo pra confirmar q quero ativar, e nao atualizar outra info
                     },
-                    success: function(data) {
+                    success: function (data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -141,7 +126,7 @@ function ativarDialog({
                         } else {
                             swalWithBootstrapButtons
                                 .fire("Sucesso", "Usuario ativado!", "success")
-                                .then(function(result) {
+                                .then(function (result) {
                                     if (result.value) {
                                         $("#" + idTable)
                                             .DataTable()
@@ -150,7 +135,7 @@ function ativarDialog({
                                 });
                         }
                     },
-                    error: function() {
+                    error: function () {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Exclusão ativação cancelada, tente novamente mais tarde.",

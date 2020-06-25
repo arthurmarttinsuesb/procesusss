@@ -39,8 +39,9 @@
                                     <label>Buscar Processo: </label>
                                 </div>
                                 <div class="col">
-                                    <input id="buscaProcesso" placeholder="Numero do processo" type="text"
-                                        autocomplete="off" class="form-control" />
+                                    <input id="buscaProcesso" data-toggle="tooltip" data-placement="top"
+                                        title="Pressione Enter para pesquisar" placeholder="Numero do processo"
+                                        type="text" autocomplete="off" class="form-control" />
                                 </div>
                             </div>
                         </div>
