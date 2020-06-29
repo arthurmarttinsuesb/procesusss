@@ -48,7 +48,7 @@ class AnexoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestAnexo $request,$id)
+    public function store(RequestAnexo $request, $id)
     {
 
         try {
@@ -56,7 +56,7 @@ class AnexoController extends Controller
             $modelo->titulo = $request->tipo;
             $modelo->fk_user = Auth::id();
             $modelo->fk_processo = $id;
-            
+
 
             $arquivoNome = time() . '.' . $request->file('arquivo')->getClientOriginalExtension();
             if ($request->file('arquivo')->storeAs('public/processo_anexos/', $arquivoNome)) {
@@ -111,9 +111,22 @@ class AnexoController extends Controller
         //
     }
 
+    public function autentica($id)
+    {
+        try {
+            $modelo = ProcessoAnexo::find($id);
+            $modelo->fk_user_atenticacao =  Auth::user()->id;
+            $modelo->save();
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
+        }
+    }
+
     public function list($id)
     {
-        $modelo = ProcessoAnexo::where('fk_processo', $id)->where('status','Ativo')->get();
+        $modelo = ProcessoAnexo::where('fk_processo', $id)->where('status', 'Ativo')->get();
         return Datatables::of($modelo)
             ->editColumn('tipo', function ($modelo) {
                 return $modelo->tipo;
@@ -122,18 +135,25 @@ class AnexoController extends Controller
                 return $modelo->user->nome;
             })
             ->editColumn('acao', function ($modelo) {
-                         return '<div class="btn-group btn-group-sm">
-                                <a href="/anexo/' .$modelo->arquivo. '"
+                return '<div class="btn-group btn-group-sm">
+                                <a href="/anexo/' . $modelo->arquivo . '"
                                     class="btn bg-teal color-palette"
                                     title="Visualizar" data-toggle="tooltip" target="_blank">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="#"
                                     class="btn bg-danger color-palette btnExcluirAnexo"
-                                    data-id="'.$modelo->id.'"
+                                    data-id="' . $modelo->id . '"
                                     title="Excluir" data-toggle="tooltip">
                                     <i class="fas fa-trash"></i>
                                 </a>
+
+                                <button type="button"
+                                    class="btn bg-primary color-palette btnAutenticar"
+                                    data-id="' . $modelo->id . '"
+                                    title="Autenticar Documento" data-toggle="tooltip">
+                                    <i class="fa fa-key"></i>
+                                </button>
                             </div>';
             })->escapeColumns([0])
             ->make(true);

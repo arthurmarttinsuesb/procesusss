@@ -23,4 +23,25 @@ $(document).ready(function ($) {
             element: $(this),
         });
     });
+
+    $(document).on("click", ".btnAutenticar", function () {
+        Swal.fire({
+            title: "Você tem certeza que deseja autenticar o documento?",
+            text: "Você não poderá reverter isso!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar!",
+            confirmButtonText: "Sim, desejo autenticar!",
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    "Autenticado!",
+                    "documento autenticado com sucesso.",
+                    "success"
+                );
+            }
+        });
+    });
 });

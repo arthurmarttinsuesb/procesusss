@@ -18,9 +18,10 @@ class CreateProcessoAnexosTable extends Migration
             $table->string('titulo');
             $table->string('arquivo');
             $table->integer('fk_user'); #Usuário
-            $table->foreign('fk_user')->references('id')-> on('users');
+            $table->foreign('fk_user')->references('id')->on('users');
+            $table->integer('fk_user_atenticacao')->nullable();
             $table->integer('fk_processo'); #processo
-            $table->foreign('fk_processo')->references('id')-> on('processos');
+            $table->foreign('fk_processo')->references('id')->on('processos');
             $table->string('status', 10)->default('Ativo');
             $table->timestamps();
         });

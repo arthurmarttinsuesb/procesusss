@@ -37,6 +37,7 @@ $(document).ready(function ($) {
         columns: [
             { data: "titulo", name: "titulo" },
             { data: "usuario", name: "usuario" },
+            { data: "fk_user_atenticacao", name: "fk_user_atenticacao" },
             { data: "acao", name: "acao" },
         ],
         language: { url: "/plugins/datatables/traducao.json" },
@@ -85,6 +86,16 @@ $(document).ready(function ($) {
             rota: "anexos",
             idTable: "table_anexo",
             btnClass: "btnExcluirAnexo",
+            element: $(this),
+        });
+    });
+
+    $(document).on("click", ".btnAutenticar", function () {
+        autenticarDialog({
+            nomeModulo: "Anexo",
+            rota: "anexos/autentica",
+            idTable: "table_anexo",
+            btnClass: "btnAutenticar",
             element: $(this),
         });
     });
