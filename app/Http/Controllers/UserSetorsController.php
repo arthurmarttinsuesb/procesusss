@@ -8,6 +8,8 @@ use DataTables;
 
 use App\UserSetor;
 use App\User;
+use Auth;
+use DB;
 use App\Setor;
 use App\Http\Utility\BotoesDatatable;
 
