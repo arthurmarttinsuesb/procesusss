@@ -76,5 +76,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('anexos', 'AnexoController');
         Route::resource('ativar-usuarios', 'AtivarUsuariosController');
         Route::resource('consultar-processo', 'ConsultarProcessoController');
+        Route::resource('processo.tramite', 'ProcessoTramitacaoController')->only(['store', 'index']);
     });
 });

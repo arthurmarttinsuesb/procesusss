@@ -8,6 +8,7 @@ use DB;
 use App\DocumentoTramite;
 use App\ProcessoDocumento;
 use App\ProcessoTramitacao;
+use App\UserSetor;
 
 class HomeController extends Controller
 {
@@ -28,14 +29,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$consulta =  DocumentoTramite::where('fk_user', Auth::user()->id)->where('status', '=', 'Ativo')->get();
-        //$processo = ProcessoDocumento::where('fk_user', Auth::user()->id)->where('status', '=', 'Ativo')->get();
-        $processo = DB::table('processo_tramitacaos')
-            ->join('processos', 'processo_tramitacaos.fk_processo', '=', 'processos.id')->where('processo_tramitacaos.fk_user', Auth::user()->id)->where('processo_tramitacaos.status', '=', 'em andamento')->where('processos.status', '=', 'Ativo')->get();
+        $setor  = UserSetor::where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
 
+        $processo  = ProcessoTramitacao::where('fk_user', Auth::user()->id)->orWhere('fk_setor', $setor->fk_setor)->get();
+        $documento  = DocumentoTramite::where('fk_user', Auth::user()->id)->orWhere('fk_setor', $setor->fk_setor)->where('status','Pendente')->orderBy('created_at','desc')->get();
 
-        $consulta  = DB::table('documento_tramites')
-            ->join('processo_documentos', 'documento_tramites.fk_processo_documento', '=', 'processo_documentos.id')->where('documento_tramites.fk_user', Auth::user()->id)->where('documento_tramites.status', '=', 'Ativo')->get();
-        return view('home', ['docs' => $consulta, 'process' => $processo]);
+        return view('home', compact('documento','processo'));
+
     }
+
 }

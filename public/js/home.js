@@ -1,5 +1,5 @@
-$(document).ready(function ($) {
-    $(document).on("click", ".btnAssinar", function () {
+$(document).ready(function($) {
+    $(document).on("click", ".btnAssinar", function() {
         Swal.fire({
             title: "Você tem certeza que deseja assinar o documento?",
             text: "Você não poderá reverter isso!",

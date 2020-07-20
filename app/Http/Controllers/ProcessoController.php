@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-use Response;
-use DataTables;
-use DB;
+
 use Auth;
-use Validator;
+use DataTables;
 
 use Session;
 use Redirect;
 #class
 
 use App\Processo;
+use App\User;
+use App\Setor;
 use App\DocumentoTramite;
 use App\Http\Utility\BotoesDatatable;
 
@@ -109,8 +109,10 @@ class ProcessoController extends Controller
     public function edit($id)
     {
         $processo = Processo::find($id);
+        $setores = Setor::where('status', 'Ativo')->get();
+        $users = User::where('status', 'Ativo')->get();
 
-        return view('processo.edit', ['processo' => $processo]);
+        return view('processo.edit', ['processo' => $processo, 'setores' => $setores, 'users' => $users]);
     }
 
     /**
