@@ -23,6 +23,7 @@ use App\Processo;
 use App\ProcessoDocumento;
 use App\ModeloDocumento;
 use App\DocumentoTramite;
+use App\DocumentoAssinatura;
 
 use App\Http\Utility\BotoesDatatable;
 
@@ -67,29 +68,52 @@ class DocumentoController extends Controller
                 }
             })
             ->editColumn('acao', function ($modelo) {
+            $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->get();
+            if($documento_tramite->count()==0){
                 return '<div class="btn-group btn-group-sm">
-                        <a href="/pdf/documento/'.$modelo->id.'"
-                            class="btn bg-teal color-palette"
-                            title="Visualizar" data-toggle="tooltip" target="_blank">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a href="/documento/'.$modelo->id.'/edit"
-                            class="btn btn-info"
-                            title="Alterar" data-toggle="tooltip">
-                            <i class="fas fa-pencil-alt"></i>
-                        </a>
-                        <a href="/documento-tramite/create/'.$modelo->id.'"
-                            class="btn bg-gray"
-                            title="Encaminhar Documento" data-toggle="tooltip">
-                            <i class="fas fa-share-alt"></i>
-                        </a>
-                        <a href="#"
-                            class="btn bg-danger color-palette btnExcluir"
-                            data-id="'.$modelo->id.'"
-                            title="Excluir" data-toggle="tooltip">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </div>';
+                            <a href="/pdf/documento/'.$modelo->id.'"
+                                class="btn bg-teal color-palette"
+                                title="Visualizar" data-toggle="tooltip" target="_blank">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="/documento/'.$modelo->id.'/edit"
+                                class="btn btn-info"
+                                title="Alterar" data-toggle="tooltip">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href="/documento-tramite/create/'.$modelo->id.'"
+                                class="btn bg-gray"
+                                title="Encaminhar Documento" data-toggle="tooltip">
+                                <i class="fas fa-share-alt"></i>
+                            </a>
+                            <a href="#"
+                                class="btn bg-danger color-palette btnExcluir"
+                                data-id="'.$modelo->id.'"
+                                title="Excluir" data-toggle="tooltip">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>';
+                }else{
+                return '<div class="btn-group btn-group-sm">
+                            <a href="/pdf/documento/'.$modelo->id.'"
+                                class="btn bg-teal color-palette"
+                                title="Visualizar" data-toggle="tooltip" target="_blank">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="/documento-tramite/create/'.$modelo->id.'"
+                                class="btn bg-gray"
+                                title="Encaminhar Documento" data-toggle="tooltip">
+                                <i class="fas fa-share-alt"></i>
+                            </a>
+                            <a href="#"
+                                class="btn bg-danger color-palette btnExcluir"
+                                data-id="'.$modelo->id.'"
+                                title="Excluir" data-toggle="tooltip">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>';
+                }
+               
                 
             })->escapeColumns([0])
             ->make(true);
@@ -157,5 +181,23 @@ class DocumentoController extends Controller
         }
     }
 
+    public function assinatura_documento($id)
+    {
+        try {
+            $modelo =  new DocumentoAssinatura();
+            $modelo->ip = $request->processo;
+            $modelo->dispositivo = $request->processo;
+            $modelo->fk_processo_documento = $id;
+            $modelo->fk_user = Auth::user()->id;
+
+            DB::transaction(function () use ($modelo) {
+                $modelo->save();
+            });
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
+        }
+    }
   
 }

@@ -5,7 +5,7 @@
 
 @section('conteudo')
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{asset('plugins/jquery-ui/jquery-ui.min.css') }}">
 
 <div class="content-wrapper">
@@ -34,28 +34,37 @@
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Documentos</a>
+                                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                                    href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                                    aria-selected="true">Documentos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Anexos</a>
+                                <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
+                                    href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
+                                    aria-selected="false">Anexos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">Tramitação</a>
+                                <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill"
+                                    href="#custom-tabs-four-messages" role="tab"
+                                    aria-controls="custom-tabs-four-messages" aria-selected="false">Tramitação</a>
                             </li>
                         </ul>
                     </div>
                     <div class="card-body">
-                        <input type='hidden' id='processo' name='processo'  value='{{$processo->id}}'/>
+                        <input type='hidden' id='processo' name='processo' value='{{$processo->id}}' />
                         <div class="tab-content" id="custom-tabs-four-tabContent">
-                            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                              @include('processo.tab_documento')
+                            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                                aria-labelledby="custom-tabs-four-home-tab">
+                                @include('processo.tab_documento')
                             </div>
-                            
-                            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+
+                            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                                aria-labelledby="custom-tabs-four-profile-tab">
                                 @include('processo.tab_anexo')
                             </div>
-                            <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">
-                            @include('processo.tab_tramitacao')
+                            <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel"
+                                aria-labelledby="custom-tabs-four-messages-tab">
+                                @include('processo.tab_tramitacao')
                             </div>
                         </div>
                     </div>
@@ -188,7 +197,8 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
-                        <button type="button" class="btn btn-info float-right"><i class="fas fa-plus"></i> Add item</button>
+                        <button type="button" class="btn btn-info float-right"><i class="fas fa-plus"></i> Add
+                            item</button>
                     </div>
                 </div>
                 <!-- /.card -->
@@ -200,6 +210,7 @@
 </div>
 </section>
 </div>
+@include('sweetalert::alert')
 @endsection
 @section('scripts-adicionais')
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>

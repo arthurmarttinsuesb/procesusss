@@ -152,3 +152,74 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
             }
         });
 }
+
+function autenticarDialog({
+    nomeModulo,
+    rota,
+    idTable,
+    dataId = "id",
+    element,
+}) {
+    const id = element.data(dataId);
+
+    swalWithBootstrapButtons
+        .fire({
+            title: `Deseja autenticar essa(e) ${nomeModulo}?`,
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, quero autenticar!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true,
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "post",
+                    url: base_url + `/${rota}/${id}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    data: {},
+                    success: function (data) {
+                        if (data.error_banco) {
+                            Swal.fire(
+                                "Atenção",
+                                "Autenticação cancelada, tente novamente mais tarde.",
+                                "error"
+                            );
+                        } else {
+                            swalWithBootstrapButtons
+                                .fire(
+                                    "Sucesso",
+                                    "Autenticação Realizada",
+                                    "success"
+                                )
+                                .then(function (result) {
+                                    if (result.value) {
+                                        $("#" + idTable)
+                                            .DataTable()
+                                            .draw(false);
+                                    }
+                                });
+                        }
+                    },
+                    error: function () {
+                        swalWithBootstrapButtons.fire(
+                            "Atenção",
+                            "Autenticação cancelada, tente novamente mais tarde.",
+                            "error"
+                        );
+                    },
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    "Atenção",
+                    "Autenticação cancelada.",
+                    "error"
+                );
+            }
+        });
+}

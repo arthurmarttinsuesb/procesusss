@@ -54,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'anexos', 'where' => ['prefix' => 'anexos']], function () {
             Route::post('/store/{id}', ['uses' => 'AnexoController@store']);
             Route::get('/list/{id}', ['uses' => 'AnexoController@list']);
+            Route::post('/autentica/{id}', ['uses' => 'AnexoController@autentica']);
         });
 
         // rotas para o metodo 'list'

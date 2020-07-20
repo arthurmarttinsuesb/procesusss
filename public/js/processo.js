@@ -37,6 +37,7 @@ $(document).ready(function ($) {
         columns: [
             { data: "titulo", name: "titulo" },
             { data: "usuario", name: "usuario" },
+            { data: "fk_user_atenticacao", name: "fk_user_atenticacao" },
             { data: "acao", name: "acao" },
         ],
         language: { url: "/plugins/datatables/traducao.json" },
@@ -88,6 +89,7 @@ $(document).ready(function ($) {
             element: $(this),
         });
     });
+
 
     var id_processo = $("#processo").val();
     $("#table_tramite").DataTable({
@@ -174,5 +176,15 @@ $(document).on("click", ".add_tramite", function () {
                     .append(mensagem + "</br>");
             });
         },
+
+    $(document).on("click", ".btnAutenticar", function () {
+        autenticarDialog({
+            nomeModulo: "Anexo",
+            rota: "anexos/autentica",
+            idTable: "table_anexo",
+            btnClass: "btnAutenticar",
+            element: $(this),
+        });
+        
     });
 });
