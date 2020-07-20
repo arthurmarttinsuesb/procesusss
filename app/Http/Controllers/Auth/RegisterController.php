@@ -135,7 +135,7 @@ class RegisterController extends Controller
             });
             try {
                 Mail::to($user->email)->send(new SendMailUser($user));
-            } catch (\Exception  $erro) {
+            }   catch (\Exception  $erro) {
             }
 
             app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();

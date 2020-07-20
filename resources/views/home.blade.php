@@ -2,9 +2,6 @@
 
 @section('htmlheader_title', 'Home')
 @section('contentheader_title', 'Home')
-
-@inject('documento', 'App\DocumentoTramite')
-
 @section('conteudo')
 
 <!-- Content Wrapper. Contains page content -->
@@ -48,129 +45,111 @@
 
     <!-- Main content -->
     <section class="content">
-
-
         <!-- Main content -->
         <div class="container-fluid">
-
             <h4>Processos Recebidos</h4>
-
-
-
-
-            <!-- Timelime example  -->
-
             <div class="row">
                 <div class="col-md-12">
                     <!-- The time line -->
-
                     <div class="timeline">
-
                         <!-- timeline time label -->
-                        @foreach($process as $processo_visualizar)
-                        @if($processo_visualizar->status == 'Ativo')
-                        <!-- repete inicio -->
-                        <div class="time-label">
-                            <span class="bg-teal">
-                                {{Carbon\Carbon::parse($processo_visualizar->updated_at)->format('d/m/Y H:i')}} </span>
-                        </div>
-
-                        <!-- /.timeline-label -->
-                        <!-- timeline item -->
-
-
-                        <div>
-
-                            <i class="fas fa-folder-open bg-lightblue"></i>
-                            <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock">
-                                        {{Carbon\Carbon::parse($processo_visualizar->updated_at)->format('d/m/Y H:i')}}
-                                    </i> </span>
-                                <h3 class="timeline-header"><a href="#">Visualizações Pendentes:</a> Você possui
-                                    processos que precisam ser lidos</h3>
-
-                                <div class="timeline-body">
-
-                                    <b> Tipo do Processo: </b> {{$processo_visualizar->tipo}} <br>
-                                    <b> Número do Processo</b> {{$processo_visualizar->numero}}
-
-                                </div>
-
-                                <div class="timeline-footer">
-                                    <a href="/processo/{{$processo_visualizar->id}}/edit"
-                                        class="btn bg-info color-palette btnEditar" title="Assinar"
-                                        data-toggle="tooltip">
-                                        <i class="fas fa-pencil-alt"> Editar</i>
-                                    </a>
-                                </div>
-
+                        @if($processo->count()>0)
+                            @foreach($processo as $processo_visualizar)
+                            <div class="time-label">
+                                <span class="bg-teal">
+                                    {{Carbon\Carbon::parse($processo_visualizar->updated_at)->format('d/m/Y H:i')}} </span>
                             </div>
+                            <div>
+                                <i class="fas fa-folder-open bg-lightblue"></i>
+                                <div class="timeline-item">
+                                    <span class="time"><i class="fas fa-clock">
+                                            {{Carbon\Carbon::parse($processo_visualizar->updated_at)->format('d/m/Y H:i')}}
+                                        </i> </span>
+                                    <h3 class="timeline-header"><a href="#">Visualizações Pendentes:</a> Você possui
+                                        processos que precisam ser lidos</h3>
 
+                                    <div class="timeline-body">
+                                        <b> Tipo do Processo: </b> {{$processo_visualizar->tipo}} <br>
+                                        <b> Número do Processo</b> {{$processo_visualizar->numero}}
+                                    </div>
 
-                        </div>
-                        <!-- repete fim -->
+                                    <div class="timeline-footer">
+                                        <a href="/processo/{{$processo_visualizar->id}}/edit"
+                                            class="btn bg-info color-palette btnEditar" title="Assinar"
+                                            data-toggle="tooltip">
+                                            <i class="fas fa-pencil-alt"> Editar</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        @else
+                            <div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h5><i class="icon fas fa-info"></i> Atenção!</h5>No momento não possui processos encaminhados para você ou para o seu setor.
+                            </div>
                         @endif
-                        @endforeach
-                        <!-- END timeline item -->
                     </div>
-
                 </div>
                 <!-- /.col -->
             </div>
-
-
             <hr>
             <h4>Documentos Recebidos</h4>
-
-            <!-- Timelime example  -->
-
             <div class="row">
                 <div class="col-md-12">
                     <!-- The time line -->
-
                     <div class="timeline">
                         <!-- timeline time label -->
-                        @foreach($docs as $documento_assinar)
-                        @if($documento_assinar->assinatura == TRUE)
-
+                    @if($documento->count()>0)    
+                        @foreach($documento as $documentos)
                         <!-- repete inicio -->
                         <div class="time-label">
                             <span class="bg-teal">
-                                {{Carbon\Carbon::parse($documento_assinar->updated_at)->format('d/m/Y H:i')}} </span>
+                                {{Carbon\Carbon::parse($documentos->updated_at)->format('d/m/Y H:i')}} </span>
                         </div>
-
-                        <!-- /.timeline-label -->
-                        <!-- timeline item -->
                         <div>
-
                             <i class="fas fa-file-alt bg-lightblue"></i>
                             <div class="timeline-item">
                                 <span class="time"><i class="fas fa-clock">
-                                        {{Carbon\Carbon::parse($documento_assinar->updated_at)->format('d/m/Y H:i')}}
+                                        {{Carbon\Carbon::parse($documentos->updated_at)->format('d/m/Y H:i')}}
                                     </i> </span>
-                                <h3 class="timeline-header"><a href="#">Assinaturas Pendentes:</a> Você possui
-                                    documentos que precisam ser assinados</h3>
+                                <h3 class="timeline-header"><b>Documento:</b> {{$documentos->processo_documento->titulo}}</h3>
 
                                 <div class="timeline-body">
-                                    <b>Titulo:</b> {{$documento_assinar->titulo}} <br> <b> Descrição: </b>
-                                    {{$documento_assinar->descricao}} <br>
-                                    <b>Conteúdo: </b> {{$documento_assinar->conteudo}}
+                                     <b> Descrição: </b>
+                                    <p align='justify'>{{$documentos->processo_documento->descricao}}</p> <br>
                                 </div>
-
                                 <div class="timeline-footer">
-                                    <a href="#" class="btn bg-success color-palette btnAssinar" title="Assinar"
-                                        data-toggle="tooltip">
-                                        <i class="fa fa-edit">Assinar</i>
-                                    </a>
+                                   @if($documentos->assinatura == TRUE)
+                                        <div class="btn-group btn-group-sm">
+                                            <button type='button' class="btn bg-success color-palette btnAssinar"
+                                            data-id="" title="Excluir" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Assinar
+                                            </button>
+                                            <a href="/pdf/documento/{{$documentos->processo_documento->id}}" target='_blank' class="btn bg-info color-palette btnAssinar" title="Visualizar Documento Completo"
+                                                data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
+                                            </a>
+                                        </div>
+                                        @else
+                                        <div class="btn-group btn-group-sm">
+                                            <button type='button' class="btn bg-success color-palette btnAssinar"
+                                            data-id="" title="Excluir" data-toggle="tooltip"><i class="fa fa-envelope-open-text"></i></i> Marcar como lido
+                                            </button>
+                                            <a href="/pdf/documento/" target='_blank' class="btn bg-info color-palette btnAssinar" title="Visualizar Documento Completo"
+                                                data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
+                                            </a>
+                                        </div>
+
+                                    @endif
                                 </div>
-
                             </div>
-
-
                         </div>
-
-                        @endif
                         @endforeach
+                    @else
+                    <div class="alert alert-info alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h5><i class="icon fas fa-info"></i> Atenção!</h5>No momento não possui documentos encaminhados para você ou para o seu setor.
+                    </div>
+                    @endif
                         <!-- repete fim -->
                         <!-- END timeline item -->
                     </div>
@@ -186,10 +165,6 @@
 
     </section>
     @include('sweetalert::alert')
-    <!-- /.content -->
-
-    <!-- jQuery -->
-
     <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -197,6 +172,4 @@
     <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('js/base.js') }}"></script>
     <script src="{{ asset('js/home.js') }}"></script>
-
-
     @endsection
