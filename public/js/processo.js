@@ -100,6 +100,16 @@ $(document).ready(function ($) {
         });
     });
 
+    $(document).on("click", ".btnAutenticar", function () {
+        autenticarDialog({
+            nomeModulo: "Anexo",
+            rota: "anexos/autentica",
+            idTable: "table_anexo",
+            btnClass: "btnAutenticar",
+            element: $(this),
+        });
+    });
+
     $("#table_tramite").DataTable({
         ajax: `${base_url}/processo/${id_processo}/tramite`,
         scrollCollapse: true,
@@ -186,15 +196,5 @@ $(document).on("click", ".add_tramite", function () {
                     .append(mensagem + "</br>");
             });
         },
-    });
-
-    $(document).on("click", ".btnAutenticar", function () {
-        autenticarDialog({
-            nomeModulo: "Anexo",
-            rota: "anexos/autentica",
-            idTable: "table_anexo",
-            btnClass: "btnAutenticar",
-            element: $(this),
-        });
     });
 });
