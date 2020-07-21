@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Usuarios e Setores')
-@section('contentheader_title', 'Usuarios e Setores')
+@section('htmlheader_title', 'Colaboradores')
+@section('contentheader_title', 'Colaboradores')
 
 <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
@@ -14,12 +14,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Usuarios e Setores</h1>
+                    <h1>Alterar Colaborador</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Usuarios e Setores</li>
+                        <li class="breadcrumb-item active">Colaboradores</li>
                     </ol>
                 </div>
             </div>
@@ -33,9 +33,9 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-2 float-right">
+                        <div class="col-3 float-right">
                             <a href="{{ URL::to('usuario-setor') }}" class="btn btn-block btn-outline-info "><i
-                                    class="fa fa-list-alt"></i> Listar Usuarios e Setores</a>
+                                    class="fa fa-list-alt"></i>Listar Colaboradores</a>
                         </div>
                     </div>
 

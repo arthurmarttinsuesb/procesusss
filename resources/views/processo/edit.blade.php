@@ -46,7 +46,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill"
                                     href="#custom-tabs-four-messages" role="tab"
-                                    aria-controls="custom-tabs-four-messages" aria-selected="false">Tramitação</a>
+                                    aria-controls="custom-tabs-four-messages" aria-selected="false">Tramitar Processo</a>
                             </li>
                         </ul>
                     </div>

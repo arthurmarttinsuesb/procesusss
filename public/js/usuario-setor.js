@@ -1,4 +1,4 @@
-$(document).on("click", ".btnExcluir", function () {
+$(document).on("click", ".btnExcluir", function() {
     deleteDialog({
         nomeModulo: "Usuario Setor",
         rota: "usuario-setor",
@@ -21,30 +21,28 @@ if (Object.keys(table).length !== 0) {
         pageLength: 10,
 
         columns: [
-            { data: "user.nome", name: "usuario" },
-            { data: "setor.titulo", name: "setor" },
+            { data: "usuario", name: "usuario" },
+            { data: "setor", name: "setor" },
             { data: "data_entrada", name: "data_entrada" },
             { data: "data_saida", name: "data_saida" },
             { data: "acao", name: "acao" },
         ],
-        columnDefs: [
-            {
-                targets: 2, //index of column starting from 0
-                data: "acao", //this name should exist in your JSON response
-                render: function (data, type, full, meta) {
-                    return (
-                        '<span class="label label-danger">' +
-                        new Date(data.split("-")).toLocaleDateString() +
-                        "</span>"
-                    );
-                },
+        columnDefs: [{
+            targets: 2, //index of column starting from 0
+            data: "acao", //this name should exist in your JSON response
+            render: function(data, type, full, meta) {
+                return (
+                    '<span class="label label-danger">' +
+                    new Date(data.split("-")).toLocaleDateString() +
+                    "</span>"
+                );
             },
-        ],
+        }, ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     const select = $(".select2");
 
     if (Object.keys(select).length !== 0 && select.length > 0) {
