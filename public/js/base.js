@@ -1,5 +1,5 @@
 //Proteção da aplicação contra ataques de falsificação de solicitações entre sites (CSRF).
-$(document).ready(function ($) {
+$(document).ready(function($) {
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -43,7 +43,7 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                         ),
                     },
                     data: {},
-                    success: function (data) {
+                    success: function(data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -57,7 +57,7 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                     "Exclusão Realizada",
                                     "success"
                                 )
-                                .then(function (result) {
+                                .then(function(result) {
                                     if (result.value) {
                                         $("#" + idTable)
                                             .DataTable()
@@ -66,7 +66,7 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                 });
                         }
                     },
-                    error: function () {
+                    error: function() {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Exclusão cancelada, tente novamente mais tarde.",
@@ -116,7 +116,7 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                     data: {
                         ativar: true, // mando esse campo pra confirmar q quero ativar, e nao atualizar outra info
                     },
-                    success: function (data) {
+                    success: function(data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -126,7 +126,7 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                         } else {
                             swalWithBootstrapButtons
                                 .fire("Sucesso", "Usuario ativado!", "success")
-                                .then(function (result) {
+                                .then(function(result) {
                                     if (result.value) {
                                         $("#" + idTable)
                                             .DataTable()
@@ -135,7 +135,7 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                 });
                         }
                     },
-                    error: function () {
+                    error: function() {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Exclusão ativação cancelada, tente novamente mais tarde.",
@@ -183,7 +183,7 @@ function autenticarDialog({
                         ),
                     },
                     data: {},
-                    success: function (data) {
+                    success: function(data) {
                         if (data.error_banco) {
                             Swal.fire(
                                 "Atenção",
@@ -197,7 +197,7 @@ function autenticarDialog({
                                     "Autenticação Realizada",
                                     "success"
                                 )
-                                .then(function (result) {
+                                .then(function(result) {
                                     if (result.value) {
                                         $("#" + idTable)
                                             .DataTable()
@@ -206,7 +206,7 @@ function autenticarDialog({
                                 });
                         }
                     },
-                    error: function () {
+                    error: function() {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Autenticação cancelada, tente novamente mais tarde.",
@@ -218,6 +218,70 @@ function autenticarDialog({
                 swalWithBootstrapButtons.fire(
                     "Atenção",
                     "Autenticação cancelada.",
+                    "error"
+                );
+            }
+        });
+}
+
+function assinarDialog({
+    nomeModulo,
+    rota,
+    idTable,
+    dataId = "id",
+    element,
+}) {
+    const id = element.data(dataId);
+
+    swalWithBootstrapButtons
+        .fire({
+            title: `Deseja assinar esse ${nomeModulo}?`,
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, quero assinar!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true,
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "post",
+                    url: base_url + `/${rota}/${id}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    data: {},
+                    success: function(data) {
+                        if (data.error_banco) {
+                            Swal.fire(
+                                "Atenção",
+                                "Assinatura cancelada, tente novamente mais tarde.",
+                                "error"
+                            );
+                        } else {
+                            swalWithBootstrapButtons
+                                .fire(
+                                    "Sucesso",
+                                    "Assinatura Realizada",
+                                    "success"
+                                );
+                        }
+                    },
+                    error: function() {
+                        swalWithBootstrapButtons.fire(
+                            "Atenção",
+                            "Assinatura cancelada, tente novamente mais tarde.",
+                            "error"
+                        );
+                    },
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    "Atenção",
+                    "Assinatura cancelada.",
                     "error"
                 );
             }

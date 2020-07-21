@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/create/{id}', ['uses' => 'DocumentoTramiteController@create']);
             Route::post('/store/{id}', ['uses' => 'DocumentoTramiteController@store']);
             Route::post('/encaminhar', ['uses' => 'DocumentoController@encaminhar']);
+            Route::post('/assinar/{id}', ['uses' => 'DocumentoController@assinatura_documento']);
         });
 
         Route::group(['prefix' => 'documento-tramite', 'where' => ['prefix' => 'documento-tramite']], function () {

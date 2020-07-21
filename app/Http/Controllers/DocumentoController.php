@@ -184,19 +184,25 @@ class DocumentoController extends Controller
     public function assinatura_documento($id)
     {
         try {
-            $modelo =  new DocumentoAssinatura();
-            $modelo->ip = $request->processo;
-            $modelo->dispositivo = $request->processo;
-            $modelo->fk_processo_documento = $id;
-            $modelo->fk_user = Auth::user()->id;
+            $documento_tramite = DocumentoTramite::find($id);
+            $documento_tramite->status = "Finalizado";
+            
+            $documento_assinatura =  new DocumentoAssinatura();
+            $documento_assinatura->ip = "";
+            $documento_assinatura->dispositivo = "";
+            $documento_assinatura->fk_processo_documento = $documento_tramite->fk_processo_documento;
+            $documento_assinatura->fk_user = Auth::user()->id;
 
-            DB::transaction(function () use ($modelo) {
-                $modelo->save();
+            
+
+            DB::transaction(function () use ($documento_assinatura,$documento_tramite) {
+                $documento_assinatura->save();
+                $documento_tramite->save();
             });
 
             return response()->json(array('status' => "OK"));
         } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "ERRO"));
+            return response()->json(array('errors' => $erro));
         }
     }
   
