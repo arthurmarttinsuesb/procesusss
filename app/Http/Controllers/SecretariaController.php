@@ -33,7 +33,7 @@ class SecretariaController extends Controller
 
         return DataTables::of($secretaria)
             ->editColumn('acao', function ($secretaria) {
-                return BotoesDatatable::criarBotoes($secretaria->id, 'secretaria');
+                return BotoesDatatable::criarBotoesPrincipais($secretaria->id, 'secretaria');
             })->escapeColumns([0])
             ->make(true);
     }

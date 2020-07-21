@@ -55,11 +55,9 @@
                 @enderror
             </div>
         </div>
-
     </div>
     <div class="float-right">
-        <button type='button' class="btn btn-block btn-outline-info add_tramite"><i class="fa fa-plus"></i> Adicionar
-            Tramite</button>
+        <button type='button' class="btn btn-block btn-outline-info add_tramite"><i class="fa fa-share-square"></i> Enviar Processo</button>
     </div>
 </form>
 <br>

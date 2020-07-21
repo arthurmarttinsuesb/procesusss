@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Usuario Setor')
-@section('contentheader_title', 'Usuario Setor')
+@section('htmlheader_title', 'Colaboradores')
+@section('contentheader_title', 'Colaboradores')
 
 @section('conteudo')
 <!-- DataTables -->
@@ -15,12 +15,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Usuario Setor</h1>
+                    <h1>Colaboradores</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                        <li class="breadcrumb-item active">Usuario Setor</li>
+                        <li class="breadcrumb-item active">Colaboradores</li>
                     </ol>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-3 float-right">
-                            <a href="{{ URL::to('usuario-setor/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Usuario-Setor</a>
+                            <a href="{{ URL::to('usuario-setor/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i>Adicionar Colaborador</a>
                         </div>
                     </div>
                     @if (Session::has('message'))

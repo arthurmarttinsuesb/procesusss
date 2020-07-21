@@ -32,6 +32,24 @@ class BotoesDatatable
         </div>';
     }
 
+    public static function criarBotoesPrincipais($id, $route, $btnExcluirClassName = 'btnExcluir')
+    {
+
+        return '<div class="btn-group btn-group-sm">
+                    <a href="/' . $route . '/' . $id . '/edit"
+                        class="btn btn-info"
+                        title="Alterar" data-toggle="tooltip">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a href="#"
+                        class="btn bg-danger color-palette ' . $btnExcluirClassName . '"
+                        data-id="' . $id . '"
+                        title="Excluir" data-toggle="tooltip">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>';
+    }
+
     public static function criarBotoesAtivar($id, $route)
     {
         return '<div class="btn-group btn-group-sm">

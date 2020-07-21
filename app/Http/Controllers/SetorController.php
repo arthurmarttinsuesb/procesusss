@@ -35,7 +35,7 @@ class SetorController extends Controller
         $setor = Setor::where('status', 'Ativo')->with('secretaria')->get();
         return DataTables::of($setor)
             ->editColumn('acao', function ($setor) {
-                return BotoesDatatable::criarBotoes($setor->id, 'setor');
+                return BotoesDatatable::criarBotoesPrincipais($setor->id, 'setor');
             })->escapeColumns([0])
             ->make(true);
     }

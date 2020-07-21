@@ -32,12 +32,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="col-3 float-right">
-                            <a href="{{ URL::to('setor/create') }}" class="btn btn-block btn-outline-info"><i
-                                    class="fa fa-plus"></i> Adicionar Setor</a>
-                        </div>
-                    </div>
+                    
                     @if (Session::has('message'))
                     <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                     @endif

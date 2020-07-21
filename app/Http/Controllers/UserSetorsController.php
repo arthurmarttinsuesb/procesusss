@@ -34,8 +34,14 @@ class UserSetorsController extends Controller
         $usuarioSetor = UserSetor::where('status', 'Ativo')->with('user')->with('setor')->get();
 
         return DataTables::of($usuarioSetor)
+        ->editColumn('usuario', function ($modelo) {
+                return  $modelo->user->nome;
+        })
+        ->editColumn('setor', function ($modelo) {
+                return  $modelo->setor->titulo;
+        })
             ->editColumn('acao', function ($usuarioSetor) {
-                return BotoesDatatable::criarBotoes($usuarioSetor->id, 'usuario-setor');
+                return BotoesDatatable::criarBotoesPrincipais($usuarioSetor->id, 'usuario-setor');
             })->escapeColumns([0])
             ->make(true);
     }
@@ -74,11 +80,6 @@ class UserSetorsController extends Controller
                 Session::flash('message', 'Usuario já vinculado em um setor!');
                 return back()->withInput();
             }
-            $checkSetor = UserSetor::where('fk_setor', $request->fk_setor)->where('status', 'Ativo')->get();
-            if (!$checkSetor->isEmpty()) {
-                Session::flash('message', 'Setor já vinculado a um usuario!');
-                return back()->withInput();
-            }
 
             $userSetor = new UserSetor();
 
@@ -104,18 +105,6 @@ class UserSetorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-
-        try {
-            $userSetor = UserSetor::find($id)->where('status', 'Ativo')->get();
-
-            return View::make('usuarioSetor.show', ['userSetor' => $userSetor]);
-        } catch (Exception  $erro) {
-            Session::flash('message', 'Não foi possível encontrar o registro!');
-            return back();
-        }
-    }
 
     public function edit($id)
     {
