@@ -9,7 +9,7 @@ namespace App\Http\Utility;
 class BotoesDatatable
 {
 
-    public static function criarBotoes($id, $route)
+    public static function criarBotoes($id, $route, $btnExcluirClassName = 'btnExcluir')
     {
 
         return '<div class="btn-group btn-group-sm">
@@ -24,7 +24,7 @@ class BotoesDatatable
                 <i class="fas fa-pencil-alt"></i>
             </a>
             <a href="#"
-                class="btn bg-danger color-palette btnExcluir"
+                class="btn bg-danger color-palette ' . $btnExcluirClassName . '"
                 data-id="' . $id . '"
                 title="Excluir" data-toggle="tooltip">
                 <i class="fas fa-trash"></i>

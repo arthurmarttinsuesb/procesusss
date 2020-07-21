@@ -79,6 +79,7 @@ $(document).ready(function ($) {
             element: $(this),
         });
     });
+    var id_processo = $("#processo").val();
 
     $(document).on("click", ".btnExcluirAnexo", function () {
         deleteDialog({
@@ -90,8 +91,15 @@ $(document).ready(function ($) {
         });
     });
 
+    $(document).on("click", ".btnExcluirTramite", function () {
+        deleteDialog({
+            nomeModulo: "Tramite",
+            rota: `processo/${id_processo}/tramite`,
+            idTable: "table_tramite",
+            element: $(this),
+        });
+    });
 
-    var id_processo = $("#processo").val();
     $("#table_tramite").DataTable({
         ajax: `${base_url}/processo/${id_processo}/tramite`,
         scrollCollapse: true,
@@ -102,7 +110,7 @@ $(document).ready(function ($) {
         deferRender: true,
         searching: false,
         columns: [
-            { data: "user", name: "usuario" },
+            { data: "usuario", name: "usuario" },
             { data: "setor", name: "setor" },
             { data: "status", name: "status" },
             { data: "acao", name: "acao" },
@@ -130,6 +138,7 @@ selectUser.onchange = () => {
     selectCheck("user");
 };
 
+var id_processo = $("#processo").val();
 $(document).on("click", ".add_tramite", function () {
     var id_processo = $("#processo").val();
     if (selectUser.value === "selecione" && selectSetor.value === "selecione") {
@@ -149,6 +158,7 @@ $(document).on("click", ".add_tramite", function () {
             class: "bg-warning mt-2 mr-2",
             body: "Você deve selecionar um setor OU um usuario",
         });
+
         return false;
     }
 
@@ -176,6 +186,7 @@ $(document).on("click", ".add_tramite", function () {
                     .append(mensagem + "</br>");
             });
         },
+    });
 
     $(document).on("click", ".btnAutenticar", function () {
         autenticarDialog({
@@ -185,71 +196,5 @@ $(document).on("click", ".add_tramite", function () {
             btnClass: "btnAutenticar",
             element: $(this),
         });
-<<<<<<< HEAD
-
-    var id_processo = $("#processo").val();
-    $("#table_tramite").DataTable({
-        ajax: `${base_url}/processo/${id_processo}/tramite`,
-        scrollCollapse: true,
-        responsive: true,
-        paging: false,
-        processing: true,
-        serverSide: true,
-        deferRender: true,
-        searching: false,
-        columns: [
-            { data: "user", name: "usuario" },
-            { data: "setor", name: "setor" },
-            { data: "status", name: "status" },
-            { data: "acao", name: "acao" },
-        ],
-        language: { url: "/plugins/datatables/traducao.json" },
-    
-});
-
-const selectSetor = document.getElementById("select_secretaria");
-const selectUser = document.getElementById("select_user");
-
-function selectCheck(name) {
-    if (name === "secretaria") {
-        selectUser.value = "selecione";
-    } else {
-        selectSetor.value = "selecione";
-    }
-}
-
-console.log("asdad");
-
-selectSetor.onchange = () => {
-    console.log("asdad");
-    selectCheck("secretaria");
-};
-
-selectUser.onchange = () => {
-    selectCheck("user");
-};
-
-$(document).on("click", ".add_tramite", function () {
-    var id_processo = $("#processo").val();
-    if (selectUser.value === "selecione" && selectSetor.value === "selecione") {
-        $(document).Toasts("create", {
-            title: "Atenção",
-            class: "bg-warning mt-2 mr-2",
-            body: "Por favor, selecione um setor ou um usuario!",
-        });
-        return false;
-    }
-
-    // muito dificil chegar aqui,
-    // mas vai que consegue né
-    if (selectUser.value !== "selecione" && selectSetor.value !== "selecione") {
-        $(document).Toasts("create", {
-            title: "Atenção",
-            class: "bg-warning mt-2 mr-2",
-            body: "Você deve selecionar um setor OU um usuario",
-        });
-=======
-        
->>>>>>> 56757943e98ba4a1066596f5fb09ba0b573a268e
     });
 });

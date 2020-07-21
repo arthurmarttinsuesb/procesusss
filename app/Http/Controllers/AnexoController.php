@@ -115,7 +115,7 @@ class AnexoController extends Controller
     {
         try {
             $modelo = ProcessoAnexo::find($id);
-            $modelo->fk_user_atenticacao =  Auth::user()->id;
+            $modelo->fk_user_atenticacao = Auth::user()->id;
             $modelo->save();
 
             return response()->json(array('status' => "OK"));
@@ -132,7 +132,10 @@ class AnexoController extends Controller
                 return $modelo->tipo;
             })
             ->editColumn('usuario', function ($modelo) {
-                return $modelo->user->nome;
+                return isset($modelo->user->nome) ? $modelo->user->nome : '';
+            })
+            ->editColumn('fk_user_atenticacao', function ($modelo) {
+                return isset($modelo->fk_user_atenticacao) ? $modelo->userAthenticated->nome : '(Sem autenticação)';
             })
             ->editColumn('acao', function ($modelo) {
                 return '<div class="btn-group btn-group-sm">

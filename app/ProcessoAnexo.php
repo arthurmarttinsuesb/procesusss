@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProcessoAnexo extends Model
 {
-    protected $fillable = 
+    protected $fillable =
     [
-        'fk_processo','fk_user','titulo','arquivo','status'
-    ]; 
+        'fk_processo', 'fk_user', 'titulo', 'arquivo', 'status'
+    ];
 
     public function processo()
     {
@@ -20,5 +20,9 @@ class ProcessoAnexo extends Model
     {
         return $this->belongsTo(User::class, 'fk_user');
     }
-    
+
+    public function userAthenticated()
+    {
+        return $this->belongsTo(User::class, 'fk_user_atenticacao');
+    }
 }
