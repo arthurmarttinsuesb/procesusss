@@ -22,9 +22,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/ativar-usuarios" class="nav-link">
-                        <i class="nav-icon fa fa-user-plus"></i>
-                        <p>Ativar Usuarios</p>
+                    <a href="/processo" class="nav-link">
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>Processo</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -40,21 +40,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/processo" class="nav-link">
-                        <i class="nav-icon fas fa-archive"></i>
-                        <p>Processo</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="/setor" class="nav-link">
                         <i class="nav-icon 	fas fa-landmark"></i>
                         <p>Setor</p>
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="/ativar-usuarios" class="nav-link">
+                        <i class="nav-icon fa fa-user-plus"></i>
+                        <p>Ativar Usuarios</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="/usuario-setor" class="nav-link">
                         <i class="nav-icon fa fa-user"></i>
-                        <p>Usuario Setor</p>
+                        <p>Colaboradores</p>
                     </a>
                 </li>
                 <li class="nav-item">

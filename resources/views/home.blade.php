@@ -111,9 +111,9 @@
                             <i class="fas fa-file-alt bg-lightblue"></i>
                             <div class="timeline-item">
                                 <span class="time"><i class="fas fa-clock">
-                                        {{Carbon\Carbon::parse($documentos->updated_at)->format('d/m/Y H:i')}}
+                                       {{Carbon\Carbon::parse($documentos->updated_at)->format('d/m/Y H:i')}}
                                     </i> </span>
-                                <h3 class="timeline-header"><b>Documento:</b> {{$documentos->processo_documento->titulo}}</h3>
+                                <h3 class="timeline-header"><b> {{$documentos->id}} -  Documento:</b> {{$documentos->processo_documento->titulo}}</h3>
 
                                 <div class="timeline-body">
                                      <b> Descrição: </b>
@@ -123,7 +123,7 @@
                                    @if($documentos->assinatura == TRUE)
                                         <div class="btn-group btn-group-sm">
                                             <button type='button' class="btn bg-success color-palette btnAssinar"
-                                            data-id="" title="Excluir" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Assinar
+                                            data-id="{{$documentos->id}}" title="Assinar Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Assinar
                                             </button>
                                             <a href="/pdf/documento/{{$documentos->processo_documento->id}}" target='_blank' class="btn bg-info color-palette btnAssinar" title="Visualizar Documento Completo"
                                                 data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
@@ -132,7 +132,7 @@
                                         @else
                                         <div class="btn-group btn-group-sm">
                                             <button type='button' class="btn bg-success color-palette btnAssinar"
-                                            data-id="" title="Excluir" data-toggle="tooltip"><i class="fa fa-envelope-open-text"></i></i> Marcar como lido
+                                            data-id="{{$documentos->id}}" title="Marcar documento como lido" data-toggle="tooltip"><i class="fa fa-envelope-open-text"></i></i> Marcar como lido
                                             </button>
                                             <a href="/pdf/documento/" target='_blank' class="btn bg-info color-palette btnAssinar" title="Visualizar Documento Completo"
                                                 data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar

@@ -5,31 +5,71 @@ namespace App\Http\Utility;
 // basta importar essa classe no controller; use App\Http\Utility\BotoesDatatable;
 // e depois no return do Datatable chamar o metodo criarBotoes passando o id e a rota, exemplo
 // return BotoesDatatable::criarBotoes($usuarios->id, 'usuarios');
-
+//$btnExcluirClassName é caso você queira mudar a classe do botao pra buscar no seletor
+//no javascript depois. Caso o padrao seja 'btnExcluir' n precisa ser passado na funcao.
+//$btns é caso queira apenas um ou dois botoes, por padrao vem todos e nao precisa
+// ser passado na chamada da funcao.
+//$status é se o registro está ativo ou não (no caso do tramite, exibe os inativos)
 class BotoesDatatable
 {
 
-    public static function criarBotoes($id, $route, $btnExcluirClassName = 'btnExcluir')
+    public static function criarBotoes($id, $route, $btnExcluirClassName = 'btnExcluir', $btns = 'all', $status = 'Ativo')
     {
 
-        return '<div class="btn-group btn-group-sm">
+        $retorno = '<div class="btn-group btn-group-sm">';
+
+        $disabled = 'disabled';
+        if ($status == 'Ativo') {
+            $disabled = '';
+        }
+
+        if (strpos($btns, 'ver') !== false || $btns == 'all') {
+            $retorno = $retorno . '
             <a href="/' . $route . '/' . $id . '"
                 class="btn bg-teal color-palette"
                 title="Visualizar" data-toggle="tooltip" target="_blank">
                 <i class="fas fa-eye"></i>
-            </a>
-            <a href="/' . $route . '/' . $id . '/edit"
+            </a>';
+        }
+
+        if (strpos($btns, 'editar') !== false || $btns == 'all') {
+            $retorno = $retorno . '<a href="/' . $route . '/' . $id . '/edit"
                 class="btn btn-info"
                 title="Alterar" data-toggle="tooltip">
                 <i class="fas fa-pencil-alt"></i>
-            </a>
-            <a href="#"
-                class="btn bg-danger color-palette ' . $btnExcluirClassName . '"
+            </a>';
+        }
+
+        if (strpos($btns, 'deletar') !== false || $btns == 'all') {
+            $retorno = $retorno . '<a href="#"
+                class="btn bg-danger color-palette ' . $disabled . ' ' . $btnExcluirClassName . '"
                 data-id="' . $id . '"
                 title="Excluir" data-toggle="tooltip">
                 <i class="fas fa-trash"></i>
-            </a>
-        </div>';
+            </a>';
+        }
+
+        $retorno = $retorno . '</div>';
+
+        return $retorno;
+    }
+
+    public static function criarBotoesPrincipais($id, $route, $btnExcluirClassName = 'btnExcluir')
+    {
+
+        return '<div class="btn-group btn-group-sm">
+                    <a href="/' . $route . '/' . $id . '/edit"
+                        class="btn btn-info"
+                        title="Alterar" data-toggle="tooltip">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <a href="#"
+                        class="btn bg-danger color-palette ' . $btnExcluirClassName . '"
+                        data-id="' . $id . '"
+                        title="Excluir" data-toggle="tooltip">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>';
     }
 
     public static function criarBotoesAtivar($id, $route)

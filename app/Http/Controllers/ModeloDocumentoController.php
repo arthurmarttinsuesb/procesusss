@@ -47,6 +47,24 @@ class ModeloDocumentoController extends Controller
 
         return Datatables::of($modelo)
             ->editColumn('acao', function ($modelo) {
+                return '<div class="btn-group btn-group-sm">
+                                <a href="/pdf/modelo-documento/'.$modelo->id.'"
+                                class="btn bg-teal color-palette"
+                                title="Visualizar" data-toggle="tooltip" target="_blank">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="/modelo-documento/' . $modelo->id . '/edit"
+                                class="btn btn-info"
+                                title="Alterar" data-toggle="tooltip">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href="#"
+                                class="btn bg-danger color-palette btnExcluir"
+                                data-id="' . $modelo->id . '"
+                                title="Excluir" data-toggle="tooltip">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>';
                 return BotoesDatatable::criarBotoes($modelo->id, 'modelo-documento');
             })->escapeColumns([0])
             ->make(true);
