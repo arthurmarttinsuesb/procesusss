@@ -57,6 +57,12 @@
                         <p>Usuario Setor</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/fullcalendar" class="nav-link">
+                        <i class="nav-icon fa fa-address-book"></i>
+                        <p>Agenda</p>
+                    </a>
+                </li>
                 @else
                 <div class="alert alert-warning m-2">Por favor, ative o usuario.</div>
                 @endif

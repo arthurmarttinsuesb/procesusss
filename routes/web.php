@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::get('/load-events', 'EventsController@loadEvents')->name('routeLoadEvents');
+
     // Rotas que precisam do usuario ativo
     Route::group(['middleware' => 'userAtived'], function () {
         Route::group(['prefix' => 'modelo-documento', 'where' => ['prefix' => 'modelo-documento']], function () {
@@ -72,6 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('secretaria', 'SecretariaController');
         Route::resource('processo', 'ProcessoController');
         Route::resource('setor', 'SetorController');
+        Route::resource('fullcalendar', 'FullCalendarController');
         Route::resource('documento', 'DocumentoController');
         Route::resource('anexos', 'AnexoController');
         Route::resource('ativar-usuarios', 'AtivarUsuariosController');
