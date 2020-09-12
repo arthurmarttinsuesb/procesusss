@@ -22,6 +22,8 @@ var base_url = location.protocol + "//" + window.location.host.toString();
 function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
     const id = element.data(dataId);
 
+    console.log("vou deletar", `/${rota}/${id}`);
+
     swalWithBootstrapButtons
         .fire({
             title: `Deseja excluir essa(e) ${nomeModulo}?`,

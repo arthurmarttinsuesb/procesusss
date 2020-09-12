@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-        
+
         /*
          * Application Service Providers...
          */
@@ -180,6 +180,7 @@ return [
         //datatables
         Yajra\DataTables\DataTablesServiceProvider::class,
         Elibyy\TCPDF\ServiceProvider::class,
+        Acaronlex\LaravelCalendar\ServiceProvider::class,
     ],
 
     /*
@@ -233,7 +234,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'PDF' => Elibyy\TCPDF\Facades\TCPDF::class,
-        'Alert' => RealRashid\SweetAlert\Facades\Alert::class
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Calendar' => Acaronlex\LaravelCalendar\Facades\Calendar::class
     ],
 
 ];

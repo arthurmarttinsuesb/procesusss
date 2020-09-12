@@ -22,7 +22,7 @@ class ProcessoTramitacaoController extends Controller
             return Datatables::of($tramites)
                 ->editColumn('acao', function ($tramite) {
                     $tramiteRoute = "processo/" . $tramite->fk_processo . "/tramite";
-                    return BotoesDatatable::criarBotoes($tramite->id, $tramiteRoute, 'btnExcluirTramite');
+                    return BotoesDatatable::criarBotoes($tramite->id, $tramiteRoute, 'btnExcluirTramite', 'deletar', $tramite->status);
                 })
                 ->editColumn('usuario', function ($user) {
                     return isset($user->user->nome) ? $user->user->nome : '';
@@ -78,10 +78,10 @@ class ProcessoTramitacaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idProcesso, $idTramite)
     {
         try {
-            $tramite = ProcessoTramitacao::find($id);
+            $tramite = ProcessoTramitacao::find($idTramite);
             $tramite->status = 'Inativo';
             $tramite->save();
 
