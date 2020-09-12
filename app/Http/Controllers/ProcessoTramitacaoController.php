@@ -7,6 +7,7 @@ use DataTables;
 use Illuminate\Http\Request;
 
 use App\ProcessoTramitacao;
+use App\ProcessoLog;
 use App\Http\Utility\BotoesDatatable;
 
 class ProcessoTramitacaoController extends Controller
@@ -57,6 +58,12 @@ class ProcessoTramitacaoController extends Controller
 
             $tramite->save();
 
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $processo;
+            $log->status = "Processo encaminhado por: <b>".Auth::user()->nome."</b>";
+            $log->save();
+
             return Response::json(array('status' => 'Ok'));
         } catch (\Exception  $erro) {
             return Response::json(array('errors' => $erro));
@@ -77,6 +84,12 @@ class ProcessoTramitacaoController extends Controller
             $tramite = ProcessoTramitacao::find($id);
             $tramite->status = 'Inativo';
             $tramite->save();
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $tramite->fk_processo;
+            $log->status = "Encaminhamento do Processo removido por: <b>".Auth::user()->nome."</b>";
+            $log->save();
 
             return response()->json(array('status' => "OK"));
         } catch (\Exception  $erro) {

@@ -1,4 +1,4 @@
-$(document).ready(function ($) {
+$(document).ready(function($) {
     const select = $(".select2");
     if (Object.keys(select).length !== 0) {
         select.select2({
@@ -8,7 +8,7 @@ $(document).ready(function ($) {
         });
     }
 
-    $(document).on("change", "#envio", function () {
+    $(document).on("change", "#envio", function() {
         var envio = $("#envio option:selected").val();
         if (envio == "setor") {
             $(".setor").show();
@@ -38,7 +38,7 @@ $(document).ready(function ($) {
         language: { url: "/plugins/datatables/traducao.json" },
     });
 
-    $(document).on("click", ".btnExcluir", function () {
+    $(document).on("click", ".btnExcluir", function() {
         deleteDialog({
             nomeModulo: "Trâmite Documento",
             rota: "documento-tramite",

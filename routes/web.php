@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'documento-tramite', 'where' => ['prefix' => 'documento-tramite']], function () {
             Route::get('/list/{id}', ['uses' => 'DocumentoTramiteController@list']);
             Route::get('/create/{id}', ['uses' => 'DocumentoTramiteController@create']);
-            Route::post('/store/{id}', ['uses' => 'DocumentoTramiteController@store']);
+            Route::post('/store/{slug}', ['uses' => 'DocumentoTramiteController@store']);
         });
 
         Route::group(['prefix' => 'anexos', 'where' => ['prefix' => 'anexos']], function () {
@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/processo/list', 'ProcessoController@list');
         Route::get('/setor/list', 'SetorController@list');
         Route::get('/ativar-usuarios/list', 'AtivarUsuariosController@list');
+        Route::post('/ativar-usuarios/ativar/{id}', 'AtivarUsuariosController@ativar_usuario');
         Route::get('/consultar-processo/list/{numero}', 'ConsultarProcessoController@list');
 
         // lembrar de por as rotas pro metodo 'list' mais acima,
@@ -77,6 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('anexos', 'AnexoController');
         Route::resource('ativar-usuarios', 'AtivarUsuariosController');
         Route::resource('consultar-processo', 'ConsultarProcessoController');
+        Route::resource('documento-tramite', 'DocumentoTramiteController');
         Route::resource('processo.tramite', 'ProcessoTramitacaoController')->only(['store', 'index', 'destroy']);
     });
 });

@@ -1,4 +1,4 @@
-$(document).on("click", ".btnExcluir", function () {
+$(document).on("click", ".btnExcluir", function() {
     deleteDialog({
         nomeModulo: "Setor",
         rota: "setor",
@@ -30,7 +30,7 @@ if (Object.keys(table).length !== 0) {
     });
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     const select = $(".select2");
 
     if (Object.keys(select).length !== 0) {

@@ -80,11 +80,12 @@
                         </h3>
                         <div class="card-tools">
                             <ul class="pagination pagination-sm">
-                                <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
+                               {{ $log->links() }}
+                                <!-- <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
                                 <li class="page-item"><a href="#" class="page-link">1</a></li>
                                 <li class="page-item"><a href="#" class="page-link">2</a></li>
                                 <li class="page-item"><a href="#" class="page-link">3</a></li>
-                                <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
+                                <li class="page-item"><a href="#" class="page-link">&raquo;</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -93,14 +94,16 @@
                         <ul class="todo-list" data-widget="todo-list">
                             <li>
                                 <!-- drag handle -->
-                                <span class="handle">
-                                    <i class="fas fa-arrow-right"></i>
-                                </span>
+                               
                                 <!-- checkbox -->
                                 <!-- todo text -->
-                                <span class="text">Design a nice theme</span>
-                                <!-- Emphasis label -->
-                                <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
+                                @foreach($log as $logs)
+                                    <span class="handle">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span><?php echo $logs->status ?>
+                                    <!-- Emphasis label -->
+                                    <small class="badge badge-success"><i class="far fa-calendar-alt"></i> {{date('d/m/Y - H:s', strtotime($logs->created_at))}}</small><hr>
+                                @endforeach
                             </li>
                         </ul>
                     </div>

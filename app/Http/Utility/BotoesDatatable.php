@@ -53,23 +53,23 @@ class BotoesDatatable
     public static function criarBotoesAtivar($id, $route)
     {
         return '<div class="btn-group btn-group-sm">
-            <a href="#"
-                class="btn btn-info btnAtivar"
-                data-id="' . $id . '"
-                title="Ativar" data-toggle="tooltip">
-                <i class="fas fa-signal"></i>
-            </a>    
-            <a href="/pdf/' . $route . '/' . $id . '"
-                class="btn bg-teal color-palette"
-                title="Visualizar" data-toggle="tooltip" target="_blank">
-                <i class="fas fa-eye"></i>
-            </a>
-            <a href="#"
-                class="btn bg-danger color-palette btnExcluir"
-                data-id="' . $id . '"
-                title="Excluir" data-toggle="tooltip">
-                <i class="fas fa-trash"></i>
-            </a>
+                <a href="#"
+                    class="btn bg-teal color-palette btnAtivar"
+                    data-id="' . $id . '"
+                    title="Ativar" data-toggle="tooltip">
+                    <i class="fas fa-user-lock"></i>
+                </a> 
+                <a href="/' . $route . '/' . $id . '/edit"
+                    class="btn btn-info"
+                    title="Alterar" data-toggle="tooltip">
+                    <i class="fas fa-pencil-alt"></i>
+                </a> 
+                <a href="#"
+                    class="btn bg-danger color-palette btnExcluir"
+                    data-id="' . $id . '"
+                    title="Excluir" data-toggle="tooltip">
+                    <i class="fas fa-trash"></i>
+                </a>
         </div>';
     }
 

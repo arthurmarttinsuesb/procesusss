@@ -23,12 +23,20 @@ class AtivarUsuariosController extends Controller
     {
         return View::make('ativarUsuarios.index');
     }
+    public function edit($id)
+    {   
+        $modelo = User::where('id', $id)->first();
+        return view('ativarUsuarios.edit', compact('modelo'));
+    }
 
     public function list()
     {
         $usuario = User::where('status', 'Inativo')->with('cidade')->with('estado')->get();
 
         return DataTables::of($usuario)
+            ->editColumn('nascimento', function ($usuario) {
+                return date("d/m/Y", strtotime($usuario->nascimento));
+            })
             ->editColumn('acao', function ($usuario) {
                 return BotoesDatatable::criarBotoesAtivar($usuario->id, 'ativar-usuarios');
             })->escapeColumns([0])
@@ -42,13 +50,34 @@ class AtivarUsuariosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
+    {
+        try {
+            $modelo = User::find($id);
+            $modelo->fk_modelo_documento = $request->tipo;
+            $modelo->titulo = $request->titulo;
+            $modelo->descricao = $request->descricao;
+            $modelo->conteudo = $request->conteudo;
+
+            DB::transaction(function () use ($modelo) {
+                $modelo->save();
+            });
+
+            Session::flash('message', 'Usuário Alterado!');
+            return Redirect::to('processo/'.$modelo->fk_processo.'/edit');
+        } catch (\Exception  $errors) {
+            Session::flash('message', 'Não foi possível alterar usuário, tente novamente mais tarde.!');
+            return back()->withInput();
+        }
+    }
+
+    public function ativar_usuario($id)
     {
         try {
             $user = User::find($id);
             $user->status = 'Ativo';
             $user->save();
-
 
             try{
                 Mail::to($user->email)->send(new UsuarioAtivado($user));

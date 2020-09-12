@@ -106,7 +106,7 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
         .then((result) => {
             if (result.value) {
                 $.ajax({
-                    type: "put",
+                    type: "post",
                     url: base_url + `/${rota}/${id}`,
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -199,9 +199,7 @@ function autenticarDialog({
                                 )
                                 .then(function(result) {
                                     if (result.value) {
-                                        $("#" + idTable)
-                                            .DataTable()
-                                            .draw(false);
+                                        $("#" + idTable).DataTable().draw(false);
                                     }
                                 });
                         }

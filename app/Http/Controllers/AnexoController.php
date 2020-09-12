@@ -18,6 +18,7 @@ use App\Http\Utility\BotoesDatatable;
 #class
 
 use App\ProcessoAnexo;
+use App\ProcessoLog;
 
 
 class AnexoController extends Controller
@@ -65,8 +66,15 @@ class AnexoController extends Controller
                 Session::flash('message', 'Não foi possível enviar anexo, tente novamente mais tarde.!');
             }
 
-            DB::transaction(function () use ($modelo) {
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $id;
+            $log->status = "Anexo ".$request->tipo." adicionado por: <b>".Auth::user()->nome."</b>";
+
+
+            DB::transaction(function () use ($modelo,$log) {
                 $modelo->save();
+                $log->save();
             });
 
             return Response::json(array('status' => 'Ok'));
@@ -117,6 +125,12 @@ class AnexoController extends Controller
             $modelo = ProcessoAnexo::find($id);
             $modelo->fk_user_atenticacao = Auth::user()->id;
             $modelo->save();
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $modelo->fk_processo;
+            $log->status = "Anexo ".$modelo->titulo." autenticado por: <b>".Auth::user()->nome."</b>";
+            $log->save();
 
             return response()->json(array('status' => "OK"));
         } catch (\Exception  $erro) {
@@ -174,6 +188,12 @@ class AnexoController extends Controller
             $modelo = ProcessoAnexo::find($id);
             $modelo->status = 'Inativo';
             $modelo->save();
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $modelo->fk_processo;
+            $log->status = "Anexo ".$modelo->titulo." excluído por: <b>".Auth::user()->nome."</b>";
+            $log->save();
 
             return response()->json(array('status' => "OK"));
         } catch (\Exception  $erro) {

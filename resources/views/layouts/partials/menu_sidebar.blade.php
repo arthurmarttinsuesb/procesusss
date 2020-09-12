@@ -15,48 +15,15 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-header">MENU</li>
                 @if (auth()->user()->status == 'Ativo')
-                <li class="nav-item">
-                    <a href="/consultar-processo" class="nav-link">
-                        <i class="nav-icon fa fa-search"></i>
-                        <p>Consultar Processo</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/processo" class="nav-link">
-                        <i class="nav-icon fas fa-archive"></i>
-                        <p>Processo</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/modelo-documento" class="nav-link">
-                        <i class="nav-icon fa fa-file"></i>
-                        <p>Modelo Documento</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/secretaria" class="nav-link">
-                        <i class="nav-icon fa fa-university"></i>
-                        <p>Secretaria</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/setor" class="nav-link">
-                        <i class="nav-icon 	fas fa-landmark"></i>
-                        <p>Setor</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/ativar-usuarios" class="nav-link">
-                        <i class="nav-icon fa fa-user-plus"></i>
-                        <p>Ativar Usuarios</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="/usuario-setor" class="nav-link">
-                        <i class="nav-icon fa fa-user"></i>
-                        <p>Colaboradores</p>
-                    </a>
-                </li>
+                   @foreach(Auth::user()->getRoleNames() as $nome)
+                        @if($nome=="administrador")
+                            @include('layouts.partials.menu.administrador')
+                        @elseif($nome=="funcionario")
+                            @include('layouts.partials.menu.funcionario')
+                        @elseif($nome=="cidadao")
+                            @include('layouts.partials.menu.cidadao')
+                        @endif
+                    @endforeach
                 @else
                 <div class="alert alert-warning m-2">Por favor, ative o usuario.</div>
                 @endif

@@ -51,7 +51,7 @@
                 </div>
               @endif
            
-              <form  method="POST" id="tramite_documento" action="/documento-tramite/store/{{$modelo->id}}">
+              <form  method="POST" id="tramite_documento" action="/documento-tramite/store/{{$modelo->slug}}">
                  @csrf
                 <div class="card-body">
                       (<span style="color: red;">*</span>) Campos Obrigatórios

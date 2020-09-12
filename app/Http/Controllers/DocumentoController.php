@@ -21,6 +21,7 @@ use Redirect;
 
 use App\Processo;
 use App\ProcessoDocumento;
+use App\ProcessoLog;
 use App\ModeloDocumento;
 use App\DocumentoTramite;
 use App\DocumentoAssinatura;
@@ -55,7 +56,7 @@ class DocumentoController extends Controller
                 return $modelo->modelo_documento->titulo;
             })
             ->editColumn('status', function ($modelo) {
-                $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->get();
+                $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','!=','Inativo')->get();
                 if($documento_tramite->count()==0){
                     return  '<span class="right badge badge-success">criado</span>';
                 }else{
@@ -68,7 +69,7 @@ class DocumentoController extends Controller
                 }
             })
             ->editColumn('acao', function ($modelo) {
-            $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->get();
+            $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','!=','Inativo')->get();
             if($documento_tramite->count()==0){
                 return '<div class="btn-group btn-group-sm">
                             <a href="/pdf/documento/'.$modelo->id.'"
@@ -130,8 +131,15 @@ class DocumentoController extends Controller
             $modelo->descricao = $request->descricao;
             $modelo->conteudo = $request->conteudo;
 
-            DB::transaction(function () use ($modelo) {
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $request->processo;
+            $log->status = 'Documento "'.$request->titulo.'" adicionado por: <b>'.Auth::user()->nome.'</b>';
+
+            DB::transaction(function () use ($modelo,$log) {
                 $modelo->save();
+                $log->save();
             });
 
             Session::flash('message', 'Documento criado!');
@@ -151,14 +159,21 @@ class DocumentoController extends Controller
             $modelo->descricao = $request->descricao;
             $modelo->conteudo = $request->conteudo;
 
-            DB::transaction(function () use ($modelo) {
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $modelo->fk_processo;
+            $log->status = 'Documento "'.$request->titulo.'" alterado por: <b>'.Auth::user()->nome.'</b>';
+
+            DB::transaction(function () use ($modelo,$log) {
                 $modelo->save();
+                $log->save();
             });
 
             Session::flash('message', 'Documento Alterado!');
             return Redirect::to('processo/'.$modelo->fk_processo.'/edit');
         } catch (\Exception  $errors) {
-            Session::flash('message', 'Não foi possível alterar documento, tente novamente mais tarde.!');
+            Session::flash('message','Não foi possível alterar documento, tente novamente mais tarde.!');
             return back()->withInput();
         }
     }
@@ -174,6 +189,12 @@ class DocumentoController extends Controller
             $modelo = ProcessoDocumento::find($id);
             $modelo->status = 'Inativo';
             $modelo->save();
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $modelo->fk_processo;
+            $log->status = 'Documento "'.$modelo->titulo.'" excluído por: <b>'.Auth::user()->nome.'</b>';
+            $log->save();
 
             return response()->json(array('status' => "OK"));
         } catch (\Exception  $erro) {

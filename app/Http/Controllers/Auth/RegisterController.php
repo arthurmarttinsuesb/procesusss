@@ -113,9 +113,9 @@ class RegisterController extends Controller
         try {
             $user =  new User();
             $user->nome = $data['nome'];
+            $user->tipo = $data['tipo'];
             $user->sexo = $data['sexo'];
             $user->nascimento = $data['nascimento'];
-            $user->tipo = $data['tipo'];
             $user->telefone = $data['telefone'];
             $user->cpf_cnpj = $data['cpf_cnpj'];
             $user->logradouro = $data['logradouro'];
@@ -133,13 +133,10 @@ class RegisterController extends Controller
                 $user->save();
                 $user->assignRole('cidadao');
             });
-            try {
-                Mail::to($user->email)->send(new SendMailUser($user));
-            }   catch (\Exception  $erro) {
-            }
 
-            app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
             return $user;
+            app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+            
         } catch (\Exception  $erro) {
             return response()->json(array('erros' => $erro));
         }

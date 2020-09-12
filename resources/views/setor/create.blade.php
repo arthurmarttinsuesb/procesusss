@@ -86,12 +86,12 @@
                                         name="fk_secretaria">
 
                                         @foreach ($secretarias as $secretaria)
-                                        @if (old('fk_secretaria') == $secretaria->id)
-                                        <option value="{{$secretaria->id}}" selected>{{$secretaria->titulo}}
-                                        </option>
-                                        @else
-                                        <option value="{{$secretaria->id}}">{{$secretaria->titulo}}</option>
-                                        @endif
+                                            @if (old('fk_secretaria') == $secretaria->id)
+                                            <option value="{{$secretaria->id}}" selected>{{$secretaria->titulo}}
+                                            </option>
+                                            @else
+                                            <option value="{{$secretaria->id}}">{{$secretaria->titulo}}</option>
+                                            @endif
 
                                         @endforeach
                                     </select>

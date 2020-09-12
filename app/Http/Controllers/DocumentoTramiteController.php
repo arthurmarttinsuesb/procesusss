@@ -20,6 +20,7 @@ use Redirect;
 
 use App\Processo;
 use App\ProcessoDocumento;
+use App\ProcessoLog;
 use App\DocumentoTramite;
 use App\User;
 use App\Setor;
@@ -61,15 +62,21 @@ class DocumentoTramiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestDocumentoTramite $request,$id)
+    public function store(RequestDocumentoTramite $request,ProcessoDocumento $slug)
     {
         try {
-            DB::transaction(function () use ($id,$request) {
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $slug->fk_processo;
+            $log->status = 'Documento "'.$slug->titulo.'" encaminhado por: <b>'.Auth::user()->nome.'</b>';
+            
+            DB::transaction(function () use ($slug,$request,$log) {
                 if($request->envio=='setor'){
                     foreach($request->setor as $setores){
                         DocumentoTramite::create(array("assinatura"=>$request->assinatura,
                         "leitura"=>'false',
-                        "fk_processo_documento"=>$id,
+                        "fk_processo_documento"=>$slug->id,
                         "fk_setor"=>$setores,
                         "fk_user"=>null,
                         "status"=>"Pendente"));
@@ -78,19 +85,19 @@ class DocumentoTramiteController extends Controller
                     foreach($request->usuario as $colaboradores){
                         DocumentoTramite::create(array("assinatura"=>$request->assinatura,
                         "leitura"=>'false',
-                        "fk_processo_documento"=>$id,
+                        "fk_processo_documento"=>$slug->id,
                         "fk_setor"=>null,
                         "fk_user"=>$colaboradores,
                         "status"=>"Pendente"));
                     }
                 }
-                
+                $log->save();
             });
 
             Session::flash('message_success', 'Documento encaminhado!');
             return back()->withInput();
         } catch (\Exception  $errors) {
-            Session::flash('message', 'Não foi possível encaminhar documento, tente novamente mais tarde.!');
+            Session::flash('message', $errors.'Não foi possível encaminhar documento, tente novamente mais tarde.!');
             return back()->withInput();
         }
 
@@ -142,6 +149,12 @@ class DocumentoTramiteController extends Controller
             $modelo = DocumentoTramite::find($id);
             $modelo->status = 'Inativo';
             $modelo->save();
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $modelo->processo_documento->fk_processo;
+            $log->status = 'Encaminhamento do Documento "'.$modelo->processo_documento->titulo.'" excluído por: <b>'.Auth::user()->nome.'</b>';
+            $log->save();
 
             return response()->json(array('status' => "OK"));
         } catch (\Exception  $erro) {

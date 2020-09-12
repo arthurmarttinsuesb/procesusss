@@ -17,6 +17,7 @@ use App\Processo;
 use App\User;
 use App\Setor;
 use App\DocumentoTramite;
+use App\ProcessoLog;
 use App\Http\Utility\BotoesDatatable;
 
 class ProcessoController extends Controller
@@ -73,14 +74,19 @@ class ProcessoController extends Controller
     {
         try {
             $id = Auth::id();
-
+            $numero_processo = 'pmj.' . time() . '.' . date('Y');
             $processo = new Processo();
-            $processo->numero = 'pmj.' . time() . '.' . date('Y');
+            $processo->numero = $numero_processo;
             $processo->tipo = $request->tipo;
             $processo->fk_user = $id;
             $processo->status = 'Ativo';
-
             $processo->save();
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $processo->id;
+            $log->status = 'Processo nº "'.$numero_processo.'" criado por: <b>'.Auth::user()->nome.'</b>';
+            $log->save();
 
             return Redirect::to('processo/' . $processo->id . '/edit');
         } catch (\Exception  $erro) {
@@ -111,8 +117,9 @@ class ProcessoController extends Controller
         $processo = Processo::find($id);
         $setores = Setor::where('status', 'Ativo')->get();
         $users = User::where('status', 'Ativo')->get();
+        $log = ProcessoLog::where('fk_processo', $id)->paginate(15);
 
-        return view('processo.edit', ['processo' => $processo, 'setores' => $setores, 'users' => $users]);
+        return view('processo.edit', ['processo' => $processo, 'setores' => $setores, 'users' => $users,'log' => $log]);
     }
 
     /**
