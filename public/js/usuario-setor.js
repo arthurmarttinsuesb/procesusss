@@ -26,17 +26,7 @@ if (Object.keys(table).length !== 0) {
             { data: "secretaria", name: "secretaria" },
             { data: "acao", name: "acao" },
         ],
-        columnDefs: [{
-            targets: 2, //index of column starting from 0
-            data: "acao", //this name should exist in your JSON response
-            render: function(data, type, full, meta) {
-                return (
-                    '<span class="label label-danger">' +
-                    new Date(data.split("-")).toLocaleDateString() +
-                    "</span>"
-                );
-            },
-        }, ],
+
         language: { url: "/plugins/datatables/traducao.json" },
     });
 }
