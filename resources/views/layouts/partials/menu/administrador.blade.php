@@ -40,10 +40,10 @@
         <p>Colaboradores</p>
     </a>
 </li>
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a href="/fullcalendar" class="nav-link">
         <i class="nav-icon fa fa-address-book"></i>
         <p>Agenda</p>
     </a>
-</li>
+</li> -->
               

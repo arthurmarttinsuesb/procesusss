@@ -31,7 +31,6 @@ class ProcessoController extends Controller
     {
 
         $modelo = Processo::where('status', "Ativo")->get();
-
         return view('processo.index');
     }
 
@@ -39,16 +38,40 @@ class ProcessoController extends Controller
     {
 
         $user = Auth::user(); // 
-
         if ($user->hasRole('administrador')) {
-            $processos = Processo::where('status', "Ativo")->with('documentos')->with('documentos.tramite')->get();
+            $processos = Processo::where('status',"!=", "Finalizado")->with('documentos')->with('documentos.tramite')->get();
         } else {
             $processos = Processo::where('fk_user', $user->id)->where('status', "Ativo")->with('documentos')->with('documentos.tramite')->get();
         }
 
         return Datatables::of($processos)
+            ->editColumn('status', function ($processos) {
+                if($processos->status=='Ativo'){
+                    return  '<span class="right badge badge-success">criado</span>';
+                } else if($processos->status=='Encaminhado'){
+                    return  '<span class="right badge badge-info">encaminhado</span>';
+                }else  if($processos->status=='Finalizado'){
+                    return  '<span class="right badge badge-danger">encerrado</span>';
+                }
+            })
+            ->editColumn('usuario', function ($processo) {
+                return  $processo->user->nome;
+            })
+            ->editColumn('data', function ($processo) {
+                return  date('d/m/Y', strtotime($processo->created_at));
+            })
             ->editColumn('acao', function ($processo) {
-                return BotoesDatatable::criarBotoes($processo->id, 'processo');
+                return '<div class="btn-group btn-group-sm">
+                                <a href="/processo/' . $processo->id . '/edit"
+                                    class="btn btn-info"
+                                    title="Alterar" data-toggle="tooltip">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a> 
+                        </div>';
+            })  
+            ->editColumn('criado', function ($processo) {
+                return  $processo->created_at;
+               
             })->escapeColumns([0])
             ->make(true);
     }
@@ -117,7 +140,7 @@ class ProcessoController extends Controller
         $processo = Processo::find($id);
         $setores = Setor::where('status', 'Ativo')->get();
         $users = User::where('status', 'Ativo')->get();
-        $log = ProcessoLog::where('fk_processo', $id)->paginate(15);
+        $log = ProcessoLog::where('fk_processo', $id)->paginate(10);
 
         return view('processo.edit', ['processo' => $processo, 'setores' => $setores, 'users' => $users,'log' => $log]);
     }

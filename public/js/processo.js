@@ -1,4 +1,4 @@
-$(document).ready(function ($) {
+$(document).ready(function($) {
     $(".todo-list").sortable({
         placeholder: "sort-highlight",
         handle: ".handle",
@@ -43,7 +43,24 @@ $(document).ready(function ($) {
         language: { url: "/plugins/datatables/traducao.json" },
     });
 
-    $(document).on("click", ".add_anexo", function () {
+    $("#table_tramite").DataTable({
+        ajax: `${base_url}/processo/${id_processo}/tramite`,
+        scrollCollapse: true,
+        responsive: true,
+        paging: false,
+        processing: true,
+        serverSide: true,
+        deferRender: true,
+        searching: false,
+        columns: [
+            { "width": "45%", data: "usuario", name: "usuario" },
+            { "width": "45%", data: "setor", name: "setor" },
+            { "width": "10%", data: "acao", name: "acao" },
+        ],
+        language: { url: "/plugins/datatables/traducao.json" },
+    });
+
+    $(document).on("click", ".add_anexo", function() {
         var dados = new FormData($("#form_anexo")[0]); //pega os dados do form
         $.ajax({
             type: "post",
@@ -55,14 +72,14 @@ $(document).ready(function ($) {
             data: dados,
             processData: false,
             contentType: false,
-            success: function (data) {
+            success: function(data) {
                 $("#table_anexo").DataTable().draw(false);
             },
-            error: function (data) {
+            error: function(data) {
                 $(".erros").show(); //exibe a div de erro
                 $(".erros").find("ul").text(""); //limpa a div para erros successivos
 
-                $.each(data.responseJSON.errors, function (nome, mensagem) {
+                $.each(data.responseJSON.errors, function(nome, mensagem) {
                     $(".erros")
                         .find("ul")
                         .append(mensagem + "</br>");
@@ -71,7 +88,7 @@ $(document).ready(function ($) {
         });
     });
 
-    $(document).on("click", ".btnExcluir", function () {
+    $(document).on("click", ".btnExcluir", function() {
         deleteDialog({
             nomeModulo: "Documento",
             rota: "documento",
@@ -81,7 +98,7 @@ $(document).ready(function ($) {
     });
     var id_processo = $("#processo").val();
 
-    $(document).on("click", ".btnExcluirAnexo", function () {
+    $(document).on("click", ".btnExcluirAnexo", function() {
         deleteDialog({
             nomeModulo: "Anexo",
             rota: "anexos",
@@ -91,7 +108,7 @@ $(document).ready(function ($) {
         });
     });
 
-    $(document).on("click", ".btnExcluirTramite", function () {
+    $(document).on("click", ".btnExcluirTramite", function() {
         deleteDialog({
             nomeModulo: "Tramite",
             rota: `processo/${id_processo}/tramite`,
@@ -100,7 +117,7 @@ $(document).ready(function ($) {
         });
     });
 
-    $(document).on("click", ".btnAutenticar", function () {
+    $(document).on("click", ".btnAutenticar", function() {
         autenticarDialog({
             nomeModulo: "Anexo",
             rota: "anexos/autentica",
@@ -110,23 +127,6 @@ $(document).ready(function ($) {
         });
     });
 
-    $("#table_tramite").DataTable({
-        ajax: `${base_url}/processo/${id_processo}/tramite`,
-        scrollCollapse: true,
-        responsive: true,
-        paging: false,
-        processing: true,
-        serverSide: true,
-        deferRender: true,
-        searching: false,
-        columns: [
-            { data: "usuario", name: "usuario" },
-            { data: "setor", name: "setor" },
-            { data: "status", name: "status" },
-            { data: "acao", name: "acao" },
-        ],
-        language: { url: "/plugins/datatables/traducao.json" },
-    });
 });
 
 const selectSetor = document.getElementById("select_secretaria");
@@ -149,7 +149,7 @@ selectUser.onchange = () => {
 };
 
 var id_processo = $("#processo").val();
-$(document).on("click", ".add_tramite", function () {
+$(document).on("click", ".add_tramite", function() {
     var id_processo = $("#processo").val();
     if (selectUser.value === "selecione" && selectSetor.value === "selecione") {
         $(document).Toasts("create", {
@@ -183,14 +183,14 @@ $(document).on("click", ".add_tramite", function () {
         data: dados,
         processData: false,
         contentType: false,
-        success: function (data) {
+        success: function(data) {
             $("#table_tramite").DataTable().draw(false);
         },
-        error: function (data) {
+        error: function(data) {
             $(".erros").show(); //exibe a div de erro
             $(".erros").find("ul").text(""); //limpa a div para erros successivos
 
-            $.each(data.responseJSON.errors, function (nome, mensagem) {
+            $.each(data.responseJSON.errors, function(nome, mensagem) {
                 $(".erros")
                     .find("ul")
                     .append(mensagem + "</br>");

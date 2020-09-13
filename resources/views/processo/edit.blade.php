@@ -46,7 +46,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill"
                                     href="#custom-tabs-four-messages" role="tab"
-                                    aria-controls="custom-tabs-four-messages" aria-selected="false">Tramitar Processo</a>
+                                    aria-controls="custom-tabs-four-messages" aria-selected="false">Encaminhar Processo</a>
                             </li>
                         </ul>
                     </div>
@@ -70,7 +70,7 @@
                     </div>
                 </div> <!-- /.card -->
             </div>
-            <div class="col-4">
+            <div class="col-4" >
                 <!-- TO DO List -->
                 <div class="card">
                     <div class="card-header">
@@ -81,11 +81,6 @@
                         <div class="card-tools">
                             <ul class="pagination pagination-sm">
                                {{ $log->links() }}
-                                <!-- <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-                                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                <li class="page-item"><a href="#" class="page-link">3</a></li>
-                                <li class="page-item"><a href="#" class="page-link">&raquo;</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -93,15 +88,10 @@
                     <div class="card-body">
                         <ul class="todo-list" data-widget="todo-list">
                             <li>
-                                <!-- drag handle -->
-                               
-                                <!-- checkbox -->
-                                <!-- todo text -->
                                 @foreach($log as $logs)
                                     <span class="handle">
                                         <i class="fas fa-arrow-right"></i>
                                     </span><?php echo $logs->status ?>
-                                    <!-- Emphasis label -->
                                     <small class="badge badge-success"><i class="far fa-calendar-alt"></i> {{date('d/m/Y - H:s', strtotime($logs->created_at))}}</small><hr>
                                 @endforeach
                             </li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Response;
+use Auth;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -16,19 +17,17 @@ class ProcessoTramitacaoController extends Controller
     public function index(Request $request, $processo)
     {
         try {
-
-            $tramites = ProcessoTramitacao::where('fk_processo', $processo)->with('user')->with('setor')->with('processo')->get();
-
+            $tramites = ProcessoTramitacao::where('fk_processo', $processo)->where('status','Criado')->with('user')->with('setor')->with('processo')->get();
             return Datatables::of($tramites)
                 ->editColumn('acao', function ($tramite) {
                     $tramiteRoute = "processo/" . $tramite->fk_processo . "/tramite";
                     return BotoesDatatable::criarBotoes($tramite->id, $tramiteRoute, 'btnExcluirTramite', 'deletar', $tramite->status);
                 })
                 ->editColumn('usuario', function ($user) {
-                    return isset($user->user->nome) ? $user->user->nome : '';
+                    return isset($user->user->nome) ? $user->user->nome : 'não determinado';
                 })
                 ->editColumn('setor', function ($setor) {
-                    return isset($setor->setor->titulo) ? $setor->setor->titulo : '';
+                    return isset($setor->setor->titulo) ? $setor->setor->titulo : 'não determinado';
                 })
                 ->escapeColumns([0])
                 ->make(true);

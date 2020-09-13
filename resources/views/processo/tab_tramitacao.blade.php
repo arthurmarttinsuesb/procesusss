@@ -23,7 +23,7 @@
                     @endif
 
                     @endforeach
-                    <option value="selecione">Selecione</option>
+                    <option value="selecione" selected>Selecione</option>
                 </select>
                 @error('fk_setor','setor')
                 <span class="invalid-feedback" role="alert">
@@ -46,7 +46,7 @@
                     @endif
 
                     @endforeach
-                    <option value="selecione">Selecione</option>
+                    <option value="selecione" selected>Selecione</option>
                 </select>
                 @error('fk_user','setor')
                 <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
         </div>
     </div>
     <div class="float-right">
-        <button type='button' class="btn btn-block btn-outline-info add_tramite"><i class="fa fa-share-square"></i> Enviar Processo</button>
+        <button type='button' class="btn btn-block btn-outline-info add_tramite"><i class="fa fa-share-square"></i> Encaminhar</button>
     </div>
 </form>
 <br>
@@ -65,9 +65,8 @@
 <table id="table_tramite" class="table table-bordered table-hover" style="width:100%">
     <thead>
         <tr>
-            <th>Usuario</th>
-            <th>Secretaria</th>
-            <th>Status</th>
+            <th>Usuário</th>
+            <th>Setor</th>
             <th>Ação</th>
         </tr>
     </thead>

@@ -29,14 +29,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = Auth::user(); 
         $setor  = UserSetor::where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
-        
-
-        if(empty($setor)){
+        if ($user->hasRole('cidadao')) {
             return view('home_cidadao');
         }else{
-            $processo  = ProcessoTramitacao::where('fk_user', Auth::user()->id)->orWhere('fk_setor', $setor->fk_setor)->get();
-        $documento  = DocumentoTramite::whereRaw("(fk_user='".Auth::user()->id."' OR fk_setor='".$setor->fk_setor."')")->where('status','Pendente')->orderBy('created_at','desc')->get();
+            $processo  = ProcessoTramitacao::where('status','Criado')->where('fk_user', Auth::user()->id)->orWhere('fk_setor', $setor->fk_setor)->get();
+            $documento  = DocumentoTramite::whereRaw("(fk_user='".Auth::user()->id."' OR fk_setor='".$setor->fk_setor."')")->where('status','Pendente')->orderBy('created_at','desc')->get();
             return view('home', compact('documento','processo'));
         }
 

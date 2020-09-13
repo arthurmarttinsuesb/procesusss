@@ -57,29 +57,28 @@
                             @foreach($processo as $processo_visualizar)
                             <div class="time-label">
                                 <span class="bg-teal">
-                                    {{Carbon\Carbon::parse($processo_visualizar->updated_at)->format('d/m/Y H:i')}} </span>
+                                    {{date('d/m/Y', strtotime($processo_visualizar->created_at))}} </span>
                             </div>
                             <div>
                                 <i class="fas fa-folder-open bg-lightblue"></i>
                                 <div class="timeline-item">
                                     <span class="time"><i class="fas fa-clock">
-                                            {{Carbon\Carbon::parse($processo_visualizar->updated_at)->format('d/m/Y H:i')}}
+                                              {{date('d/m/Y H:i', strtotime($processo_visualizar->created_at))}}
                                         </i> </span>
-                                    <h3 class="timeline-header"><a href="#">Visualizações Pendentes:</a> Você possui
-                                        processos que precisam ser lidos</h3>
+                                    <h3 class="timeline-header"><b>Processo:</b> {{$processo_visualizar->processo->numero}}</h3>
 
                                     <div class="timeline-body">
-                                        <b> Tipo do Processo: </b> {{$processo_visualizar->tipo}} <br>
-                                        <b> Número do Processo</b> {{$processo_visualizar->numero}}
+                                        <b> Tipo do Processo: </b> {{$processo_visualizar->processo->tipo}} <br>
+                                        <b> Criado Por: </b> {{$processo_visualizar->processo->user->nome}} <br>
                                     </div>
-
                                     <div class="timeline-footer">
-                                        <a href="/processo/{{$processo_visualizar->id}}/edit"
-                                            class="btn bg-info color-palette btnEditar" title="Assinar"
-                                            data-toggle="tooltip">
-                                            <i class="fas fa-pencil-alt"> Editar</i>
-                                        </a>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="/processo/{{$processo_visualizar->processo->id}}/edit" class="btn bg-info color-palette" title="Visualizar Documento Completo"
+                                                data-toggle="tooltip"><i class="fa fa-eye"></i> Acessar
+                                            </a>
+                                        </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                             @endforeach
@@ -104,17 +103,17 @@
                         @foreach($documento as $documentos)
                         <!-- repete inicio -->
                         <div class="time-label">
-                            <span class="bg-teal">
-                                {{Carbon\Carbon::parse($documentos->updated_at)->format('d/m/Y H:i')}} </span>
+                            <span class="bg-teal">{{date('d/m/Y H:i', strtotime($documentos->created_at))}} </span>
                         </div>
                         <div>
                             <i class="fas fa-file-alt bg-lightblue"></i>
                             <div class="timeline-item">
-                                <span class="time"><i class="fas fa-clock">
-                                       {{Carbon\Carbon::parse($documentos->updated_at)->format('d/m/Y H:i')}}
-                                    </i> </span>
-                                <h3 class="timeline-header"><b> {{$documentos->id}} -  Documento:</b> {{$documentos->processo_documento->titulo}}</h3>
-
+                                <span class="time">
+                                    <i class="fas fa-clock">
+                                       {{date('d/m/Y H:i', strtotime($documentos->created_at))}}
+                                    </i> 
+                                </span>
+                                <h3 class="timeline-header"><b>Documento:</b> {{$documentos->processo_documento->titulo}}</h3>
                                 <div class="timeline-body">
                                      <b> Descrição: </b>
                                     <p align='justify'>{{$documentos->processo_documento->descricao}}</p> <br>

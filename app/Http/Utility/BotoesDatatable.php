@@ -19,7 +19,7 @@ class BotoesDatatable
         $retorno = '<div class="btn-group btn-group-sm">';
 
         $disabled = 'disabled';
-        if ($status == 'Ativo') {
+        if ($status == 'Criado') {
             $disabled = '';
         }
 

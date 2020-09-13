@@ -44,15 +44,35 @@
                     <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                     @endif
                     <div class="card-body">
-                        <table id="table" class="table table-bordered table-hover">
+                    @if(Auth::user()->hasRole('administrador'))
+                        <table id="table_administrador" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                   <th>Criado Por</th>
                                     <th>Número Processo</th>
+                                    <th>Data de Abertura</th>
+                                    <th>Tipo</th>
+                                    <th>Status</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
                         </table>
+                    @else
+                        <table id="table_usuario" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Número Processo</th>
+                                    <th>Data de Abertura</th>
+                                    <th>Tipo</th>
+                                    <th>Status</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        </table>
+
+                    @endif
                     </div>
                     <!-- /.card-body -->
                 </div>
