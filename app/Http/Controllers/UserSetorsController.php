@@ -119,7 +119,6 @@ class UserSetorsController extends Controller
 
     public function edit($id)
     {
-       
         try {
             $userSetor = UserSetor::find($id);
             $users = User::where('status', 'Ativo')->get();
