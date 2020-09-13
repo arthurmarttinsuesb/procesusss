@@ -53,7 +53,7 @@
                             <br><br>
 
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <strong>Usuario <span style="color: red;">*</span></strong>
                                     <select
                                         class="form-control select2 form-control @error('fk_user', 'usuario-setor') is-invalid @enderror"
@@ -73,7 +73,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <strong>Setor <span style="color: red;">*</span></strong>
                                     <select
                                         class="form-control select2 form-control @error('fk_setor', 'usuario-setor') is-invalid @enderror"
@@ -93,9 +93,22 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-2">
+                                    <strong>Tipo de Usuário <span style="color: red;">*</span></strong>
+                                    <select
+                                        class="form-control select2 form-control @error('tipo') is-invalid @enderror"
+                                        name="tipo">
+                                        <option value="">Selecione</option>
+                                        <option value="administrador">Administrador</option>
+                                        <option value="funcionario">Funcionário</option>
+                                    </select>
+                                    @error('tipo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-2">
                                     <strong>Data Entrada <span style="color: red;">*</span></strong>
                                     <input type="text" autocomplete="off" id="data_entrada" name="data_entrada"
                                         class="form-control @error('data_entrada', 'usuario-setor') is-invalid @enderror"
@@ -107,8 +120,8 @@
                                     </span>
                                     @enderror
                                 </div>
-
                             </div>
+                            
                             <!-- /.card-body -->
                         </form>
                     </div>

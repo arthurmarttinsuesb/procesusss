@@ -31,14 +31,20 @@ class UserSetorsController extends Controller
 
     public function list()
     {
-        $usuarioSetor = UserSetor::where('status', 'Ativo')->with('user')->with('setor')->get();
+        $usuarioSetor = UserSetor::where('status', 'Ativo')->get();
 
         return DataTables::of($usuarioSetor)
-        ->editColumn('usuario', function ($modelo) {
-                return  $modelo->user->nome;
+        ->editColumn('nome', function ($usuarioSetor) {
+                return  $usuarioSetor->user->nome;
         })
-        ->editColumn('setor', function ($modelo) {
-                return  $modelo->setor->titulo;
+        ->editColumn('tipo', function ($usuarioSetor) {
+            return  $usuarioSetor->user->getRoleNames();
+        })
+        ->editColumn('setor', function ($usuarioSetor) {
+                return  $usuarioSetor->setor->titulo;
+        })
+        ->editColumn('secretaria', function ($usuarioSetor) {
+            return  $usuarioSetor->setor->secretaria->titulo;
         })
             ->editColumn('acao', function ($usuarioSetor) {
                 return BotoesDatatable::criarBotoesPrincipais($usuarioSetor->id, 'usuario-setor');
@@ -66,6 +72,7 @@ class UserSetorsController extends Controller
             $validator = Validator::make($request->all(), [
                 'fk_user' => 'required',
                 'fk_setor' => 'required',
+                'tipo' => 'required',
                 'data_entrada' => 'required',
             ]);
 
@@ -87,8 +94,12 @@ class UserSetorsController extends Controller
             $userSetor->fk_setor = $request->fk_setor;
             $userSetor->data_entrada = date('Y-m-d', strtotime(str_replace("/", "-", $request->data_entrada)));
             $userSetor->status = 'Ativo';
-
             $userSetor->save();
+
+            $user = User::where('id',$request->fk_user)->first();
+            $user->removeRole($user->getRoleNames()->implode(', '));
+            $user->assignRole($request->tipo);
+
 
             Session::flash('message', 'Usuario vinculado com sucesso!');
             return Redirect::to('usuario-setor');
@@ -108,8 +119,9 @@ class UserSetorsController extends Controller
 
     public function edit($id)
     {
+       
         try {
-            $userSetor = UserSetor::find($id)->where('status', 'Ativo')->first();
+            $userSetor = UserSetor::find($id);
             $users = User::where('status', 'Ativo')->get();
             $setores = Setor::where('status', 'Ativo')->get();
 
@@ -146,8 +158,11 @@ class UserSetorsController extends Controller
             $userSetor->fk_user = isset($request->fk_user) ? $request->fk_user : $userSetor->fk_user;
             $userSetor->fk_setor = isset($request->fk_setor) ? $request->fk_setor : $userSetor->fk_setor;
             $userSetor->data_entrada = isset($request->data_entrada) ? $request->data_entrada : $userSetor->data_entrada;
-
             $userSetor->save();
+
+            $user = User::where('id',$request->fk_user)->first();
+            $user->removeRole($user->getRoleNames()->implode(', '));
+            $user->assignRole($request->tipo);
 
             Session::flash('message', 'Usuario atualizado!');
             return Redirect::to('usuario-setor');

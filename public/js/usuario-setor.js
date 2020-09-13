@@ -19,12 +19,11 @@ if (Object.keys(table).length !== 0) {
         deferRender: true,
         searching: true,
         pageLength: 10,
-
         columns: [
-            { data: "usuario", name: "usuario" },
+            { data: "nome", name: "nome" },
+            { data: "tipo", name: "tipo" },
             { data: "setor", name: "setor" },
-            { data: "data_entrada", name: "data_entrada" },
-            { data: "data_saida", name: "data_saida" },
+            { data: "secretaria", name: "secretaria" },
             { data: "acao", name: "acao" },
         ],
         columnDefs: [{

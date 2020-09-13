@@ -46,10 +46,10 @@
                         <table id="table_usuario-setor" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Usuario</th>
+                                    <th>Nome</th>
+                                    <th>Tipo</th>
                                     <th>Setor</th>
-                                    <th>Data Entrada</th>
-                                    <th>Data Saida</th>
+                                    <th>Secretaria</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>

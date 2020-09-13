@@ -54,18 +54,13 @@
                             <br><br>
 
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <strong>Usuario <span style="color: red;">*</span></strong>
                                     <select
                                         class="form-control select2 form-control @error('fk_user', 'usuario-setor') is-invalid @enderror"
                                         name="fk_user">
                                         @foreach ($users as $user)
-                                        @if (old('fk_user') == $user->id)
-                                        <option value="{{$user->id}}" selected>{{$user->nome}}</option>
-                                        @else
-                                        <option value="{{$user->id}}">{{$user->nome}}</option>
-                                        @endif
-
+                                            <option value="{{$user->id}}" {{ ($usuarioSetor->fk_user == $user->id ? "selected":"") }}>{{$user->nome}}</option>
                                         @endforeach
                                     </select>
                                     @error('fk_user','usuario-setor')
@@ -74,19 +69,13 @@
                                     </span>
                                     @enderror
                                 </div>
-
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <strong>Setor <span style="color: red;">*</span></strong>
                                     <select
                                         class="form-control select2 form-control @error('fk_setor', 'usuario-setor') is-invalid @enderror"
                                         name="fk_setor">
                                         @foreach ($setores as $setor)
-                                        @if ($usuarioSetor->fk_setor == $setor->id)
-                                        <option value="{{$setor->id}}" selected>{{$setor->titulo}}</option>
-                                        @else
-                                        <option value="{{$setor->id}}">{{$setor->titulo}}</option>
-                                        @endif
-
+                                             <option value="{{$setor->id}}" {{ ($usuarioSetor->fk_setor == $setor->id ? "selected":"") }} >{{$setor->titulo}}</option>
                                         @endforeach
                                     </select>
                                     @error('fk_setor','usuario-setor')
@@ -95,9 +84,22 @@
                                     </span>
                                     @enderror
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-2">
+                                    <strong>Tipo de Usuário <span style="color: red;">*</span></strong>
+                                    <select
+                                        class="form-control select2 form-control @error('tipo') is-invalid @enderror"
+                                        name="tipo">
+                                        <option value="">Selecione</option>
+                                        <option value="administrador" @if("administrador"==$usuarioSetor->user->getRoleNames()->implode(', ') ) Selected @endif>Administrador</option>
+                                        <option value="funcionario" @if("funcionario"==$usuarioSetor->user->getRoleNames()->implode(', ') ) Selected @endif>Funcionário</option>
+                                    </select>
+                                    @error('tipo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-2">
                                     <strong>Data Entrada <span style="color: red;">*</span></strong>
                                     <input type="text"
                                         value="{{ old('data_entrada', date('d-m-Y', strtotime($usuarioSetor->data_entrada))) }}"
@@ -111,7 +113,6 @@
                                     </span>
                                     @enderror
                                 </div>
-
                             </div>
                             <!-- /.card-body -->
                         </form>
