@@ -33,18 +33,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-4 float-right">
-                            <div class="row">
-                                <div class="col-4 pt-1">
-                                    <label>Buscar Processo: </label>
-                                </div>
-                                <div class="col">
-                                    <input id="buscaProcesso" data-toggle="tooltip" data-placement="top"
-                                        title="Pressione Enter para pesquisar" placeholder="Numero do processo"
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                             <input id="buscaProcesso" data-toggle="tooltip" data-placement="top"
+                                        placeholder="Digite o nº do processo e precione Enter para pesquisar"
                                         type="text" autocomplete="off" class="form-control" />
-                                </div>
-                            </div>
                         </div>
+                    </div>
+                           
                     </div>
                     @if (Session::has('message'))
                     <div class="alert alert-info m-2">{{ Session::get('message') }}</div>

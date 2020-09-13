@@ -21,9 +21,6 @@ var base_url = location.protocol + "//" + window.location.host.toString();
 
 function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
     const id = element.data(dataId);
-
-    console.log("vou deletar", `/${rota}/${id}`);
-
     swalWithBootstrapButtons
         .fire({
             title: `Deseja excluir essa(e) ${nomeModulo}?`,
@@ -53,19 +50,11 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                 "error"
                             );
                         } else {
-                            swalWithBootstrapButtons
-                                .fire(
-                                    "Sucesso",
-                                    "Exclusão Realizada",
-                                    "success"
-                                )
-                                .then(function(result) {
-                                    if (result.value) {
-                                        $("#" + idTable)
-                                            .DataTable()
-                                            .draw(false);
-                                    }
-                                });
+                            swalWithBootstrapButtons.fire("Sucesso", "Exclusão Realizada", "success").then(function(result) {
+                                if (result.value) {
+                                    $("#" + idTable).DataTable().draw(false);
+                                }
+                            });
                         }
                     },
                     error: function() {
@@ -126,15 +115,11 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                 "error"
                             );
                         } else {
-                            swalWithBootstrapButtons
-                                .fire("Sucesso", "Usuario ativado!", "success")
-                                .then(function(result) {
-                                    if (result.value) {
-                                        $("#" + idTable)
-                                            .DataTable()
-                                            .draw(false);
-                                    }
-                                });
+                            swalWithBootstrapButtons.fire("Sucesso", "Usuário Ativado!", "success").then(function(result) {
+                                if (result.value) {
+                                    $("#" + idTable).DataTable().draw(false);
+                                }
+                            });
                         }
                     },
                     error: function() {
