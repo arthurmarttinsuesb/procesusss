@@ -901,5 +901,14 @@ class SetorSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Protocolo',
+            'sigla' => 'Protocolo',
+            'fk_secretaria' => 16,
+            'status' => 'Ativo',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

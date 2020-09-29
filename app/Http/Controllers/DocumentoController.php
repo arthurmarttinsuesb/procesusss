@@ -53,18 +53,18 @@ class DocumentoController extends Controller
 
         return Datatables::of($modelo)
             ->editColumn('tipo', function ($modelo) {
-                return $modelo->modelo_documento->titulo;
+                return $modelo->tipo;
             })
             ->editColumn('status', function ($modelo) {
                 $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','!=','Inativo')->get();
                 if($documento_tramite->count()==0){
-                    return  '<span class="right badge badge-success">criado</span>';
+                    return  '<span class="right badge badge-success">em andamento</span>';
                 }else{
                     $documento_tramite_pendente = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Pendente')->get();
                     if($documento_tramite_pendente->count()==0){
-                        return  '<span class="right badge badge-secondary">finalizado</span>';
+                        return  '<span class="right badge badge-secondary">concluído</span>';
                     }else{
-                        return  '<span class="right badge badge-info">encaminhado</span>';
+                        return  '<span class="right badge badge-info">enviado</span>';
                     }
                 }
             })
@@ -84,7 +84,7 @@ class DocumentoController extends Controller
                             </a>
                             <a href="/documento-tramite/create/'.$modelo->id.'"
                                 class="btn bg-gray"
-                                title="Encaminhar Documento" data-toggle="tooltip">
+                                title="Enviar Documento" data-toggle="tooltip">
                                 <i class="fas fa-share-alt"></i>
                             </a>
                             <a href="#"

@@ -35,9 +35,10 @@
                     <div class="card-header">
                     <div class="form-group row">
                         <div class="col-sm-6">
-                             <input id="buscaProcesso" data-toggle="tooltip" data-placement="top"
-                                        placeholder="Digite o nº do processo e precione Enter para pesquisar"
-                                        type="text" autocomplete="off" class="form-control" />
+                            <input  data-toggle="tooltip" data-placement="top" placeholder="Digite o Nº ou Autor(a) do Processo" type="text" autocomplete="off" class="form-control" id='campo_busca' />
+                        </div>
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-info float-left busca_processo" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>&nbsp Aguarde..."> <i class='fa fa-search'></i> Buscar</button>
                         </div>
                     </div>
                            
@@ -51,6 +52,7 @@
                         <table id="table_processos" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>Autor(a)</th>
                                     <th>Numero</th>
                                     <th>Tipo</th>
                                     <th>Status</th>

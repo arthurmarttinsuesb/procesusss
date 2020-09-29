@@ -130,5 +130,13 @@ class SecretariaSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('secretarias')->insert([
+            'titulo' => 'Protocolo',
+            'sigla' => 'Protocolo',
+            'status' => 'Ativo',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

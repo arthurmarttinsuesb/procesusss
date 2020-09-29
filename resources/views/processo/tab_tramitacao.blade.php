@@ -32,7 +32,8 @@
                 @enderror
             </div>
 
-            <div class="form-group col-6">
+            <!-- verifico se o tipo de usuário é cidadão, se for o campo do tipo usuário não vai ser mostrado-->
+            <div class="form-group col-6" @foreach(Auth::user()->getRoleNames() as $nome)   @if($nome=="cidadao") hidden @endif  @endforeach>
                 <strong>Usuario <span style="color: red;">*</span></strong>
                 <select id="select_user"
                     class="form-control select2 form-control @error('fk_user', 'setor') is-invalid @enderror"
@@ -54,6 +55,7 @@
                 </span>
                 @enderror
             </div>
+               
         </div>
     </div>
     <div class="float-right">
@@ -62,13 +64,16 @@
 </form>
 <br>
 <br>
-<table id="table_tramite" class="table table-bordered table-hover" style="width:100%">
-    <thead>
-        <tr>
-            <th>Usuário</th>
-            <th>Setor</th>
-            <th>Ação</th>
-        </tr>
-    </thead>
-    <tbody>
-</table>
+    <table id="table_tramite" class="table table-bordered table-hover" style="width:100%">
+        <thead>
+            <tr>
+                <th>Usuário</th>
+                <th>Setor</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+    </table>
+
+
+

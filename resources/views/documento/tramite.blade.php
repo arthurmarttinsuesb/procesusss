@@ -76,8 +76,15 @@
                                     <strong>Enviar Para <span style="color: red;">*</span></strong>
                                     <select  name="envio" id="envio" class="form-control select2 @error('envio') is-invalid @enderror" required>
                                        <option value="" >Selecione</option>
-                                       <option value="setor" >Setor</option>
-                                       <option value="colaborador" >Colaborador</option>
+                                       @foreach(Auth::user()->getRoleNames() as $nome)
+                                            @if($nome!="cidadao")
+                                            <option value="setor" >Setor</option>
+                                            <option value="colaborador" >Colaborador</option>
+                                            @else
+                                               <option value="setor" >Setor</option>
+                                            @endif   
+                                        @endforeach
+                                      
                                     </select>
                                     @error('envio')
                                         <span class="invalid-feedback" role="alert">
@@ -118,7 +125,7 @@
                                 </div>
                                 <div class="form-group col-md-2">
                                     <br>
-                                      <button type="submit" form="tramite_documento" class=" form-control btn btn-info" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>&nbsp Aguarde..."> <i class='fa fa-plus'></i> Adicionar</button>
+                                      <button type="submit" form="tramite_documento" class=" form-control btn btn-info" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>&nbsp Aguarde..."> <i class='fa fa-plus'></i> Enviar</button>
                                  </div> 
                             </div>   
                             <hr>

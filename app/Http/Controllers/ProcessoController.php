@@ -14,6 +14,9 @@ use Redirect;
 #class
 
 use App\Processo;
+use App\ProcessoAnexo;
+use App\ProcessoDocumento;
+use App\ProcessoTramitacao;
 use App\User;
 use App\Setor;
 use App\DocumentoTramite;
@@ -47,9 +50,9 @@ class ProcessoController extends Controller
         return Datatables::of($processos)
             ->editColumn('status', function ($processos) {
                 if($processos->status=='Ativo'){
-                    return  '<span class="right badge badge-success">criado</span>';
+                    return  '<span class="right badge badge-success">em andamento</span>';
                 } else if($processos->status=='Encaminhado'){
-                    return  '<span class="right badge badge-info">encaminhado</span>';
+                    return  '<span class="right badge badge-info">em andamento</span>';
                 }else  if($processos->status=='Finalizado'){
                     return  '<span class="right badge badge-danger">encerrado</span>';
                 }
@@ -67,6 +70,11 @@ class ProcessoController extends Controller
                                     title="Alterar" data-toggle="tooltip">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a> 
+                                <a href="/processo/' . $processo->id . '"
+                                class="btn bg-teal color-palette"
+                                title="Visualizar" data-toggle="tooltip">
+                                <i class="fas fa-eye"></i>
+                            </a> 
                         </div>';
             })  
             ->editColumn('criado', function ($processo) {
@@ -126,7 +134,23 @@ class ProcessoController extends Controller
      */
     public function show($id)
     {
-        //
+        $processo = Processo::find($id);
+        foreach(Auth::user()->getRoleNames() as $nome){
+            //verifico se o usuário logado é cidadão 
+            if($nome!=="cidadao" || $processo->fk_user == Auth::user()->id){
+                
+                $processo_anexo = ProcessoAnexo::where('fk_processo', $id)->where('status', 'Ativo')->get();
+                $processo_documento = ProcessoDocumento::where('fk_processo', $id)->where('status','Ativo')->get();
+                $processo_tramitacao = ProcessoTramitacao::where('fk_processo', $id)->where('status','Criado')->with('user')->with('setor')->with('processo')->get();
+                $log = ProcessoLog::where('fk_processo', $id)->paginate(10);
+                
+                return view('processo.show',compact('processo','log','processo_documento','processo_anexo','processo_tramitacao'));
+            }else{
+                abort(401);
+            }
+        }
+        
+
     }
 
     /**

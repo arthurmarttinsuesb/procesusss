@@ -16,7 +16,7 @@
         <thead>
         <tr>
             <th>Título</th>
-            <th>Tipo</th>
+            <th>Conteúdo</th>
             <th>Status</th>
             <th>Ação</th>
         </tr>

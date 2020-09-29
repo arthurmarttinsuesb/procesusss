@@ -50,6 +50,10 @@ $(document).ready(function() {
         formatarCnpjCpf($);
     });
 
+
+    $("#telefone").inputmask("(99) 99999-9999");
+
+
     function formatarCnpjCpf($) {
         $("[data-mask]").inputmask();
 
