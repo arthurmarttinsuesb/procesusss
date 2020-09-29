@@ -152,26 +152,50 @@ class AnexoController extends Controller
                 return isset($modelo->fk_user_atenticacao) ? $modelo->userAthenticated->nome : '(Sem autenticação)';
             })
             ->editColumn('acao', function ($modelo) {
-                return '<div class="btn-group btn-group-sm">
-                                <a href="/anexo/' . $modelo->arquivo . '"
-                                    class="btn bg-teal color-palette"
-                                    title="Visualizar" data-toggle="tooltip" target="_blank">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="#"
-                                    class="btn bg-danger color-palette btnExcluirAnexo"
-                                    data-id="' . $modelo->id . '"
-                                    title="Excluir" data-toggle="tooltip">
-                                    <i class="fas fa-trash"></i>
-                                </a>
 
-                                <button type="button"
-                                    class="btn bg-primary color-palette btnAutenticar"
-                                    data-id="' . $modelo->id . '"
-                                    title="Autenticar Documento" data-toggle="tooltip">
-                                    <i class="fa fa-key"></i>
-                                </button>
-                            </div>';
+
+                foreach(Auth::user()->getRoleNames() as $nome){
+                    //se for do tipo cidadão retirar a autenticação
+                    if($nome=="cidadao"){
+                        
+                        return '<div class="btn-group btn-group-sm">
+                                    <a href="/anexo/' . $modelo->arquivo . '"
+                                        class="btn bg-teal color-palette"
+                                        title="Visualizar" data-toggle="tooltip" target="_blank">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#"
+                                        class="btn bg-danger color-palette btnExcluirAnexo"
+                                        data-id="' . $modelo->id . '"
+                                        title="Excluir" data-toggle="tooltip">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>';
+                    }else{
+
+                        return '<div class="btn-group btn-group-sm">
+                                    <a href="/anexo/' . $modelo->arquivo . '"
+                                        class="btn bg-teal color-palette"
+                                        title="Visualizar" data-toggle="tooltip" target="_blank">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="#"
+                                        class="btn bg-danger color-palette btnExcluirAnexo"
+                                        data-id="' . $modelo->id . '"
+                                        title="Excluir" data-toggle="tooltip">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+
+                                    <button type="button"
+                                        class="btn bg-primary color-palette btnAutenticar"
+                                        data-id="' . $modelo->id . '"
+                                        title="Autenticar Documento" data-toggle="tooltip">
+                                        <i class="fa fa-key"></i>
+                                    </button>
+                                </div>';
+                    }
+                }   
+
             })->escapeColumns([0])
             ->make(true);
     }

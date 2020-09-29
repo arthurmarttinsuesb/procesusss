@@ -24,10 +24,10 @@ class ProcessoTramitacaoController extends Controller
                     return BotoesDatatable::criarBotoes($tramite->id, $tramiteRoute, 'btnExcluirTramite', 'deletar', $tramite->status);
                 })
                 ->editColumn('usuario', function ($user) {
-                    return isset($user->user->nome) ? $user->user->nome : 'não determinado';
+                    return isset($user->user->nome) ? $user->user->nome : 'não possui';
                 })
                 ->editColumn('setor', function ($setor) {
-                    return isset($setor->setor->titulo) ? $setor->setor->titulo : 'não determinado';
+                    return isset($setor->setor->titulo) ? $setor->setor->titulo : 'não possui';
                 })
                 ->escapeColumns([0])
                 ->make(true);

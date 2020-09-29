@@ -13,10 +13,15 @@
             @csrf
             <div class="row">
                 <div class="form-group col-12">
-                    <strong>Tipo</strong>
+                    <strong>Teor do Processo</strong>
                     <select type="text" name="tipo" class="form-control">
                         <option>Público</option>
+                        <option>Privado</option>
                     </select>
+                </div>
+                <div class="form-group col-12">
+                    <strong>Descrição do Processo</strong>
+                    <textarea class="textarea form-control" name='descricao'></textarea>
                 </div>
             </div>
             <div class="modal-footer">

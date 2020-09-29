@@ -1,4 +1,4 @@
-$(document).on("click", ".btnExcluir", function () {
+$(document).on("click", ".btnExcluir", function() {
     deleteDialog({
         nomeModulo: "Setor",
         rota: "setor",
@@ -7,19 +7,17 @@ $(document).on("click", ".btnExcluir", function () {
     });
 });
 
-const campoBusca = document.getElementById("buscaProcesso");
-
-campoBusca.addEventListener("keyup", (event) => {
-    if (event.keyCode === 13) {
-        buscarProcesso(campoBusca.value);
-    }
+$(document).on("click", ".busca_processo", function() {
+    var busca = $('#campo_busca').val();
+    buscarProcesso(busca);
 });
 
 const table = $("#table_processos");
-function buscarProcesso(numero) {
+
+function buscarProcesso(busca) {
     if (Object.keys(table).length !== 0) {
         table.DataTable({
-            ajax: base_url + `/consultar-processo/list/${numero}`,
+            ajax: base_url + `/consultar-processo/list/${busca}`,
             scrollCollapse: true,
             responsive: true,
             paging: false,
@@ -30,6 +28,7 @@ function buscarProcesso(numero) {
             destroy: true,
             pageLength: 10,
             columns: [
+                { data: "nome", name: "nome" },
                 { data: "numero", name: "numero" },
                 { data: "tipo", name: "tipo" },
                 { data: "status", name: "status" },
@@ -39,13 +38,3 @@ function buscarProcesso(numero) {
         });
     }
 }
-
-$(document).ready(function () {
-    const select = $(".select2");
-
-    if (Object.keys(select).length !== 0) {
-        select.select2({
-            theme: "bootstrap4",
-        });
-    }
-});
