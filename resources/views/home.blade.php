@@ -78,7 +78,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             @endforeach
@@ -99,7 +99,7 @@
                     <!-- The time line -->
                     <div class="timeline">
                         <!-- timeline time label -->
-                    @if($documento->count()>0)    
+                    @if($documento->count()>0)
                         @foreach($documento as $documentos)
                         <!-- repete inicio -->
                         <div class="time-label">
@@ -111,7 +111,7 @@
                                 <span class="time">
                                     <i class="fas fa-clock">
                                        {{date('d/m/Y H:i', strtotime($documentos->created_at))}}
-                                    </i> 
+                                    </i>
                                 </span>
                                 <h3 class="timeline-header"><b>Documento:</b> {{$documentos->processo_documento->titulo}}</h3>
                                 <div class="timeline-body">

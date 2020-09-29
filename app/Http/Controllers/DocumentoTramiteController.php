@@ -47,7 +47,7 @@ class DocumentoTramiteController extends Controller
     public function create($id)
     {
         $modelo = ProcessoDocumento::where('id', $id)->where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
-        $usuario = User::where('status','Ativo')->role('funcionario')->get();
+        $usuario = User::where('status','Ativo')-> role(['funcionario','administrador'])->get();
         $secretaria = Secretaria::where('status','Ativo')->get();
         if(empty($modelo)){
             abort(401);
@@ -70,7 +70,7 @@ class DocumentoTramiteController extends Controller
             $log->fk_user = Auth::user()->id;
             $log->fk_processo = $slug->fk_processo;
             $log->status = 'Documento "'.$slug->titulo.'" encaminhado por: <b>'.Auth::user()->nome.'</b>';
-            
+
             DB::transaction(function () use ($slug,$request,$log) {
                 if($request->envio=='setor'){
                     foreach($request->setor as $setores){
@@ -200,8 +200,8 @@ class DocumentoTramiteController extends Controller
                                     </a>
                                 </div>';
                 }
-               
-                
+
+
             })->escapeColumns([0])
             ->make(true);
     }

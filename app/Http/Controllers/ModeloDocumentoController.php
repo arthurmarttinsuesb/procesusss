@@ -64,6 +64,7 @@ class ModeloDocumentoController extends Controller
                                 title="Excluir" data-toggle="tooltip">
                                 <i class="fas fa-trash"></i>
                             </a>
+
                         </div>';
                 return BotoesDatatable::criarBotoes($modelo->id, 'modelo-documento');
             })->escapeColumns([0])
@@ -135,6 +136,6 @@ class ModeloDocumentoController extends Controller
         } catch (\Exception  $erro) {
             return Response::json(array('errors' => 'true'));
         }
-        
+
     }
 }

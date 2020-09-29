@@ -37,7 +37,7 @@ class ProcessoController extends Controller
     public function list(Request $request)
     {
 
-        $user = Auth::user(); // 
+        $user = Auth::user(); //
         if ($user->hasRole('administrador')) {
             $processos = Processo::where('status',"!=", "Finalizado")->with('documentos')->with('documentos.tramite')->get();
         } else {
@@ -66,12 +66,12 @@ class ProcessoController extends Controller
                                     class="btn btn-info"
                                     title="Alterar" data-toggle="tooltip">
                                     <i class="fas fa-pencil-alt"></i>
-                                </a> 
+                                </a>
                         </div>';
-            })  
+            })
             ->editColumn('criado', function ($processo) {
                 return  $processo->created_at;
-               
+
             })->escapeColumns([0])
             ->make(true);
     }

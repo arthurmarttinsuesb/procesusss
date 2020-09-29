@@ -37,7 +37,7 @@ class DocumentoController extends Controller
         return view('documento.create',compact('id','tipo','processo'));
     }
     public function edit($id)
-    {   
+    {
         $tipo = ModeloDocumento::where('status', "Ativo")->get();
         $modelo = ProcessoDocumento::where('id', $id)->where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
         if(empty($modelo)){
@@ -114,8 +114,6 @@ class DocumentoController extends Controller
                             </a>
                         </div>';
                 }
-               
-                
             })->escapeColumns([0])
             ->make(true);
     }
@@ -207,14 +205,14 @@ class DocumentoController extends Controller
         try {
             $documento_tramite = DocumentoTramite::find($id);
             $documento_tramite->status = "Finalizado";
-            
+
             $documento_assinatura =  new DocumentoAssinatura();
             $documento_assinatura->ip = "";
             $documento_assinatura->dispositivo = "";
             $documento_assinatura->fk_processo_documento = $documento_tramite->fk_processo_documento;
             $documento_assinatura->fk_user = Auth::user()->id;
 
-            
+
 
             DB::transaction(function () use ($documento_assinatura,$documento_tramite) {
                 $documento_assinatura->save();
@@ -226,5 +224,5 @@ class DocumentoController extends Controller
             return response()->json(array('errors' => $erro));
         }
     }
-  
+
 }

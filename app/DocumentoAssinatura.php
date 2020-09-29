@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocumentoAssinatura extends Model
 {
-    protected $fillable = 
+    protected $fillable =
     [
         'fk_processo_documento','fk_user','dispositivo','ip','status'
-    ]; 
+    ];
 
     public function processo_documento()
     {
