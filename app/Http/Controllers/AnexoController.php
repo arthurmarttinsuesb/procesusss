@@ -55,6 +55,7 @@ class AnexoController extends Controller
         try {
             $modelo =  new ProcessoAnexo();
             $modelo->titulo = $request->tipo;
+            $modelo->tipo = "Público";
             $modelo->fk_user = Auth::id();
             $modelo->fk_processo = $id;
 

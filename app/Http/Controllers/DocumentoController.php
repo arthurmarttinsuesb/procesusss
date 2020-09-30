@@ -128,6 +128,7 @@ class DocumentoController extends Controller
             $modelo->titulo = $request->titulo;
             $modelo->descricao = $request->descricao;
             $modelo->conteudo = $request->conteudo;
+            $modelo->tipo = "Público";
 
 
             $log =  new ProcessoLog();
@@ -156,7 +157,7 @@ class DocumentoController extends Controller
             $modelo->titulo = $request->titulo;
             $modelo->descricao = $request->descricao;
             $modelo->conteudo = $request->conteudo;
-
+            $modelo->tipo = "Público";
 
             $log =  new ProcessoLog();
             $log->fk_user = Auth::user()->id;
