@@ -1,8 +1,3 @@
-<div class="alert alert-danger alert-dismissible erros" style="display:none">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <h5><i class="icon fas fa-ban"></i> Atenção!</h5><br>
-    <ul></ul>
-</div>
 <form method="POST" id="form_tramite" enctype="multipart/form-data">
     @csrf
     <div class="card-body">

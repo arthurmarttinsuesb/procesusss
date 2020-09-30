@@ -8,7 +8,7 @@ use App\Http\Requests;
 
 use Auth;
 use DataTables;
-
+use DB;
 use Session;
 use Redirect;
 #class
@@ -107,6 +107,8 @@ class ProcessoController extends Controller
             $id = Auth::id();
             $numero_processo = 'pmj.' . time() . '.' . date('Y');
             $processo = new Processo();
+            $processo->titulo = $request->titulo;
+            $processo->descricao = $request->descricao;
             $processo->numero = $numero_processo;
             $processo->tipo = $request->tipo;
             $processo->fk_user = $id;
@@ -178,7 +180,22 @@ class ProcessoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $processo = Processo::find($id);
+            $processo->titulo = $request->titulo;
+            $processo->descricao = $request->descricao;
+            $processo->tipo = $request->tipo;
+
+            DB::transaction(function () use ($processo) {
+                $processo->save();
+            });
+
+            Session::flash('message_sucesso', 'Dados alterados.');
+            return Redirect::to('processo/' . $processo->id . '/edit');
+        } catch (\Exception  $erro) {
+            Session::flash('message_erro', 'Não foi possível alterar os dados do processo, tente novamente mais tarde.!');
+            return back()->withInput();
+        }
     }
 
     /**

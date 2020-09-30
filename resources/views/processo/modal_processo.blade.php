@@ -13,14 +13,18 @@
             @csrf
             <div class="row">
                 <div class="form-group col-12">
-                    <strong>Teor do Processo</strong>
-                    <select type="text" name="tipo" class="form-control">
+                    <strong>Processo <span style="color: red;">*</span></strong>
+                    <select type="text" name="tipo" class="form-control" required>
                         <option>Público</option>
                         <option>Privado</option>
                     </select>
                 </div>
                 <div class="form-group col-12">
-                    <strong>Descrição do Processo</strong>
+                    <strong>Título <span style="color: red;">*</span></strong>
+                    <input type='text' class="textarea form-control" name='titulo' required></textarea>
+                </div>
+                <div class="form-group col-12">
+                    <strong>Descrição</strong>
                     <textarea class="textarea form-control" name='descricao'></textarea>
                 </div>
             </div>

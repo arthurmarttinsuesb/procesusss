@@ -30,11 +30,30 @@
     <section class="content">
         <div class="row">
             <div class="col-md-8">
+            @if (Session::has('message_sucesso'))
+                <div class="alert alert-info alert-dismissible col-12">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    {{ Session::get('message_sucesso') }}
+                </div>
+            @endif
+
+            @if (Session::has('message_erro'))
+                <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
+                     {{ Session::get('message') }}
+                </div>
+            @endif
                 <div class="card card-primary card-outline card-outline-tabs">
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                                <a class="nav-link active" id="custom-tabs-four-processo-tab" data-toggle="pill"
+                                    href="#custom-tabs-four-processo" role="tab" aria-controls="custom-tabs-four-processo"
+                                    aria-selected="true">Processo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-four-home-tab" data-toggle="pill"
                                     href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
                                     aria-selected="true">Documentos</a>
                             </li>
@@ -53,7 +72,11 @@
                     <div class="card-body">
                         <input type='hidden' id='processo' name='processo' value='{{$processo->id}}' />
                         <div class="tab-content" id="custom-tabs-four-tabContent">
-                            <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                            <div class="tab-pane fade show active" id="custom-tabs-four-processo" role="tabpanel"
+                                aria-labelledby="custom-tabs-four-processo-tab">
+                                @include('processo.tab_processo')
+                            </div>
+                            <div class="tab-pane fade show" id="custom-tabs-four-home" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-home-tab">
                                 @include('processo.tab_documento')
                             </div>

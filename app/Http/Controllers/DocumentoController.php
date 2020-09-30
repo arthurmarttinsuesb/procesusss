@@ -141,10 +141,10 @@ class DocumentoController extends Controller
                 $log->save();
             });
 
-            Session::flash('message', 'Documento criado!');
+            Session::flash('message_sucesso', 'Documento criado!');
             return Redirect::to('processo/'.$request->processo.'/edit');
         } catch (\Exception  $errors) {
-            Session::flash('message', 'Não foi possível cadastrar documento, tente novamente mais tarde.!');
+            Session::flash('message_erro', 'Não foi possível cadastrar documento, tente novamente mais tarde.!');
             return back()->withInput();
         }
     }
@@ -169,10 +169,10 @@ class DocumentoController extends Controller
                 $log->save();
             });
 
-            Session::flash('message', 'Documento Alterado!');
+            Session::flash('message_sucesso', 'Documento Alterado!');
             return Redirect::to('processo/'.$modelo->fk_processo.'/edit');
         } catch (\Exception  $errors) {
-            Session::flash('message','Não foi possível alterar documento, tente novamente mais tarde.!');
+            Session::flash('message_erro','Não foi possível alterar documento, tente novamente mais tarde.!');
             return back()->withInput();
         }
     }
