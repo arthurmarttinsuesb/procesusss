@@ -29,7 +29,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-8">
+            <div class="col-md-8">
             
             <!-- DOCUMENTOS -->
                 <div class="row">
@@ -174,7 +174,7 @@
 
 
             </div>
-            <div class="col-4" >
+            <div class="col-md-4" >
                 <!-- TO DO List -->
                 <div class="card">
                     <div class="card-header">
