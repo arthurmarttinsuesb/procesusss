@@ -35,9 +35,9 @@ class DocumentoController extends Controller
 
         $tipo = ModeloDocumento::where('status', "Ativo")->get();
         $processo = Processo::where('id', $id)->first();
-        return view('documento.create',compact('id','tipo','processo'));
+        return view('processo.documento.create',compact('id','tipo','processo'));
 
-        
+
     }
     public function edit($id)
     {
@@ -46,7 +46,7 @@ class DocumentoController extends Controller
         if(empty($modelo)){
             abort(401);
         }else{
-            return view('documento.edit', compact('modelo','tipo'));
+            return view('processo.documento.edit', compact('modelo','tipo'));
         }
     }
 
@@ -72,53 +72,50 @@ class DocumentoController extends Controller
                 }
             })
             ->editColumn('acao', function ($modelo) {
-            $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','!=','Inativo')->get();
-            if($documento_tramite->count()==0){
-                return '<div class="btn-group btn-group-sm">
-                            <a href="/pdf/documento/'.$modelo->id.'"
-                                class="btn bg-teal color-palette"
-                                title="Visualizar" data-toggle="tooltip" target="_blank">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="/documento/'.$modelo->id.'/edit"
-                                class="btn btn-info"
-                                title="Alterar" data-toggle="tooltip">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            <a href="/documento-tramite/create/'.$modelo->id.'"
-                                class="btn bg-gray"
-                                title="Enviar Documento" data-toggle="tooltip">
-                                <i class="fas fa-share-alt"></i>
-                            </a>
-                            <a href="#"
+                $visualizar = '<a href="/pdf/documento/'.$modelo->id.'"
+                                    class="btn bg-teal color-palette"
+                                    title="Visualizar" data-toggle="tooltip" target="_blank">
+                                    <i class="fas fa-eye"></i>
+                                </a>';
+                   $editar =   '<a href="/pdf/documento/'.$modelo->id.'"
+                                        class="btn bg-teal color-palette"
+                                        title="Visualizar" data-toggle="tooltip" target="_blank">
+                                        <i class="fas fa-eye"></i>
+                                </a>';    
+               $encaminhar =  '<a href="/documento-tramite/create/'.$modelo->id.'"
+                                            class="btn bg-gray"
+                                            title="Enviar Documento" data-toggle="tooltip">
+                                            <i class="fas fa-share-alt"></i>
+                                </a>'; 
+                $excluir = ' <a href="#"
                                 class="btn bg-danger color-palette btnExcluir"
                                 data-id="'.$modelo->id.'"
                                 title="Excluir" data-toggle="tooltip">
                                 <i class="fas fa-trash"></i>
-                            </a>
-                        </div>';
-                }else{
-                return '<div class="btn-group btn-group-sm">
-                            <a href="/pdf/documento/'.$modelo->id.'"
-                                class="btn bg-teal color-palette"
-                                title="Visualizar" data-toggle="tooltip" target="_blank">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a href="/documento-tramite/create/'.$modelo->id.'"
-                                class="btn bg-gray"
-                                title="Encaminhar Documento" data-toggle="tooltip">
-                                <i class="fas fa-share-alt"></i>
-                            </a>
-                            <a href="#"
-                                class="btn bg-danger color-palette btnExcluir"
-                                data-id="'.$modelo->id.'"
-                                title="Excluir" data-toggle="tooltip">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>';
-                }
-            })->escapeColumns([0])
-            ->make(true);
+                            </a>';
+               
+                    //se o status do tramite do documento for liberado, pode ser fazer qualquer coisa ainda
+                    //caso seja bloqueado só pode ser visualizado
+                    if($modelo->tramite=="Liberado"){
+                        $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','!=','Inativo')->get();
+                        //se o documento estiver traminando o usuário não pode excluir ou editar.
+                        if($documento_tramite->count()==0){
+                            return '<div class="btn-group btn-group-sm">
+                                        '.$visualizar.$editar.$encaminhar.$excluir.'                          
+                                    </div>';
+                            }else{
+                            return '<div class="btn-group btn-group-sm">
+                                        '.$visualizar.$encaminhar.' 
+                                    </div>';
+                            }
+                    }else if($modelo->tramite=="Bloqueado"){
+
+                        return '<div class="btn-group btn-group-sm">
+                                    '.$visualizar.$encaminhar.' 
+                                </div>';
+                    }
+                    })->escapeColumns([0])
+                    ->make(true);
     }
 
     public function store(RequestDocumento $request)

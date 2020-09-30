@@ -52,7 +52,7 @@ class DocumentoTramiteController extends Controller
         if(empty($modelo)){
             abort(401);
         }else{
-            return view('documento.tramite', compact('modelo','usuario','secretaria'));
+            return view('processo.documento.tramite', compact('modelo','usuario','secretaria'));
         }
     }
 
@@ -190,7 +190,11 @@ class DocumentoTramiteController extends Controller
                 }
             })
             ->editColumn('acao', function ($modelo) {
-                if($modelo->status!='Finalizado'){
+                //se o processo documento desse tramite estiver bloqueado, então não poderar adicionar 
+                //outros envios do documento ou até mesmo excluir;
+
+             if($modelo->processo_documento->tramite=="Liberado"){
+                if($modelo->status!=='Finalizado'){
                     return '<div class="btn-group btn-group-sm">
                                         <a href="#"
                                         class="btn bg-danger color-palette btnExcluir"
@@ -200,7 +204,9 @@ class DocumentoTramiteController extends Controller
                                     </a>
                                 </div>';
                 }
-
+            }else {
+                    return "";
+                }
 
             })->escapeColumns([0])
             ->make(true);

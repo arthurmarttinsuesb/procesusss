@@ -19,6 +19,7 @@ use App\Http\Utility\BotoesDatatable;
 
 use App\ProcessoAnexo;
 use App\ProcessoLog;
+use App\Processo;
 
 
 class AnexoController extends Controller
@@ -40,7 +41,7 @@ class AnexoController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -78,11 +79,12 @@ class AnexoController extends Controller
                 $log->save();
             });
 
-            return Response::json(array('status' => 'Ok'));
+            Session::flash('message_sucesso', 'Anexo adicionado!');
+            return Redirect::to('processo/'.$id.'/edit');
+
         } catch (\Exception  $errors) {
-            // Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!');
-            // return back()->withInput();
-            return Response::json(array('errors' => $errors));
+            Session::flash('message', 'Não foi possível adicionar anexo, tente novamente mais tarde.!');
+            return back()->withInput();
         }
     }
 
@@ -94,7 +96,8 @@ class AnexoController extends Controller
      */
     public function show($id)
     {
-        //
+        $processo = Processo::where('id', $id)->first();
+        return view('processo.anexo.create',compact('processo'));
     }
 
     /**
@@ -154,48 +157,52 @@ class AnexoController extends Controller
             })
             ->editColumn('acao', function ($modelo) {
 
+                $visualizar = ' <a href="/anexo/' . $modelo->arquivo . '"
+                                    class="btn bg-teal color-palette"
+                                    title="Visualizar" data-toggle="tooltip" target="_blank">
+                                    <i class="fas fa-eye"></i>
+                                </a>';
+                $autenticar = '<button type="button"
+                                    class="btn bg-primary color-palette btnAutenticar"
+                                    data-id="' . $modelo->id . '"
+                                    title="Autenticar Documento" data-toggle="tooltip">
+                                    <i class="fa fa-key"></i>
+                                </button>';
 
-                foreach(Auth::user()->getRoleNames() as $nome){
-                    //se for do tipo cidadão retirar a autenticação
-                    if($nome=="cidadao"){
-                        
-                        return '<div class="btn-group btn-group-sm">
-                                    <a href="/anexo/' . $modelo->arquivo . '"
-                                        class="btn bg-teal color-palette"
-                                        title="Visualizar" data-toggle="tooltip" target="_blank">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="#"
-                                        class="btn bg-danger color-palette btnExcluirAnexo"
-                                        data-id="' . $modelo->id . '"
-                                        title="Excluir" data-toggle="tooltip">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </div>';
-                    }else{
-
-                        return '<div class="btn-group btn-group-sm">
-                                    <a href="/anexo/' . $modelo->arquivo . '"
-                                        class="btn bg-teal color-palette"
-                                        title="Visualizar" data-toggle="tooltip" target="_blank">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="#"
-                                        class="btn bg-danger color-palette btnExcluirAnexo"
-                                        data-id="' . $modelo->id . '"
-                                        title="Excluir" data-toggle="tooltip">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-
-                                    <button type="button"
-                                        class="btn bg-primary color-palette btnAutenticar"
-                                        data-id="' . $modelo->id . '"
-                                        title="Autenticar Documento" data-toggle="tooltip">
-                                        <i class="fa fa-key"></i>
-                                    </button>
-                                </div>';
-                    }
-                }   
+                $excluir = ' <a href="#"
+                                class="btn bg-danger color-palette btnExcluirAnexo"
+                                data-id="' . $modelo->id . '"
+                                title="Excluir" data-toggle="tooltip">
+                                <i class="fas fa-trash"></i>
+                            </a>';
+                            
+                 //verifico se o anexo está liberado para visualizar, autenticar e excluir, caso não esteja ele só pode visualizar           
+                if($modelo->tramite=="Liberado"){
+                    foreach(Auth::user()->getRoleNames() as $nome){
+                        //se for do tipo cidadão retirar a autenticação
+                        if($nome=="cidadao"){
+                            return '<div class="btn-group btn-group-sm">
+                                        '.$visualizar.$excluir.'
+                                    </div>';
+                        }else{
+                            //verifico se o documento já se encontra autenticado, se já tiver retirar o botão
+                            if($modelo->fk_user_atenticacao==NULL){
+                                return '<div class="btn-group btn-group-sm">
+                                            '.$visualizar.$autenticar.$excluir.'
+                                        </div>';
+                            }else{
+                                return '<div class="btn-group btn-group-sm">
+                                            '.$visualizar.$excluir.'
+                                        </div>';
+                            }   
+                        }
+                    }  
+                }else{
+                    return '<div class="btn-group btn-group-sm">
+                                '.$visualizar.'
+                            </div>';
+                }
+                 
 
             })->escapeColumns([0])
             ->make(true);
