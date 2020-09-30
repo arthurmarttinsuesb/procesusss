@@ -5,7 +5,7 @@
     </div>
 
     @if (Session::has('message'))
-        <div class="alert alert-info alert-dismissible col-6">
+        <div class="alert alert-info alert-dismissible col-12">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             {{ Session::get('message') }}
         </div>

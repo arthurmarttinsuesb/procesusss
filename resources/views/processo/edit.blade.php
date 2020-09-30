@@ -29,7 +29,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-8">
+            <div class="col-md-8">
                 <div class="card card-primary card-outline card-outline-tabs">
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
@@ -70,7 +70,7 @@
                     </div>
                 </div> <!-- /.card -->
             </div>
-            <div class="col-4" >
+            <div class="col-md-4" >
                 <!-- TO DO List -->
                 <div class="card">
                     <div class="card-header">
