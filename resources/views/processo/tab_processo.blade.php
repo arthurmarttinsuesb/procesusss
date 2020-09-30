@@ -13,8 +13,15 @@
                 <div class="form-group col-4">
                     <strong>Processo <span style="color: red;">*</span></strong>
                     <select type="text" name="tipo" class="form-control" required>
-                        <option {{ ($processo->tipo == "Público" ? "selected":"") }}>Público</option>
-                        <option {{ ($processo->tipo == "Privado" ? "selected":"") }}>Privado</option>
+                        @foreach(Auth::user()->getRoleNames() as $nome)
+                            @if($nome=="cidadao")
+                                <option>Público</option>
+                            @else
+                               <option {{ ($processo->tipo == "Público" ? "selected":"") }}>Público</option>
+                               <option {{ ($processo->tipo == "Privado" ? "selected":"") }}>Privado</option>
+                            @endif  
+                        @endforeach
+                        
                     </select>
                 </div>
                 <div class="form-group col-12">
