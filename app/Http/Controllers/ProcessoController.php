@@ -186,8 +186,15 @@ class ProcessoController extends Controller
             $processo->descricao = $request->descricao;
             $processo->tipo = $request->tipo;
 
-            DB::transaction(function () use ($processo) {
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $id;
+            $log->status = "Dados do processo foram alteradas por: <b>".Auth::user()->nome."</b>";
+            
+
+            DB::transaction(function () use ($processo,$log) {
                 $processo->save();
+                $log->save();
             });
 
             Session::flash('message_sucesso', 'Dados alterados.');
