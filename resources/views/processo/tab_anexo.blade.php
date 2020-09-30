@@ -9,11 +9,11 @@
         (<span style="color: red;">*</span>) Campos Obrigatórios
         <br><br>
         <div class="row">
-            <div class="form-group col-6">
+            <div class="form-group col-md-6">
                 <strong>Tipo <span style="color: red;">*</span></strong>
                 <input type="text" autocomplete="off" id="tipo" name="tipo" class="form-control">
             </div>
-            <div class="form-group col-6">
+            <div class="form-group col-md-6">
                 <strong>Arquivo <span style="color: red;">*</span></strong>
                 <input type="file" autocomplete="off" id="arquivo" name="arquivo" class="form-control">
             </div>

@@ -9,7 +9,7 @@
         (<span style="color: red;">*</span>) Campos Obrigatórios
         <br><br>
         <div class="row">
-            <div class="form-group col-6">
+            <div class="form-group col-md-6">
                 <strong>Setor <span style="color: red;">*</span></strong>
                 <select id="select_secretaria"
                     class="form-control select2 form-control @error('fk_setor', 'setor') is-invalid @enderror"
@@ -33,7 +33,7 @@
             </div>
 
             <!-- verifico se o tipo de usuário é cidadão, se for o campo do tipo usuário não vai ser mostrado-->
-            <div class="form-group col-6" @foreach(Auth::user()->getRoleNames() as $nome)   @if($nome=="cidadao") hidden @endif  @endforeach>
+            <div class="form-group col-md-6" @foreach(Auth::user()->getRoleNames() as $nome)   @if($nome=="cidadao") hidden @endif  @endforeach>
                 <strong>Usuario <span style="color: red;">*</span></strong>
                 <select id="select_user"
                     class="form-control select2 form-control @error('fk_user', 'setor') is-invalid @enderror"
