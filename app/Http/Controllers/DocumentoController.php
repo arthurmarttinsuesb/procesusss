@@ -32,9 +32,12 @@ class DocumentoController extends Controller
 {
     public function show($id)
     {
+
         $tipo = ModeloDocumento::where('status', "Ativo")->get();
         $processo = Processo::where('id', $id)->first();
         return view('documento.create',compact('id','tipo','processo'));
+
+        
     }
     public function edit($id)
     {

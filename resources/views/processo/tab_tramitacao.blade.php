@@ -62,9 +62,7 @@
     <table id="table_tramite" class="table table-bordered table-hover" style="width:100%">
         <thead>
             <tr>
-                <th>Usuário</th>
-                <th>Setor</th>
-                <th>Ação</th>
+                <th>Trâmite</th>
             </tr>
         </thead>
         <tbody>

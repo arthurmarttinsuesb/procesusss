@@ -29,7 +29,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
             @if (Session::has('message_sucesso'))
                 <div class="alert alert-info alert-dismissible col-12">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -67,9 +67,14 @@
                                     href="#custom-tabs-four-messages" role="tab"
                                     aria-controls="custom-tabs-four-messages" aria-selected="false">Encaminhar Processo</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-four-informacoes-tab" data-toggle="pill"
+                                    href="#custom-tabs-four-informacoes" role="tab" aria-controls="custom-tabs-four-informacoes"
+                                    aria-selected="false">Informações do Processo</a>
+                            </li>
                         </ul>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body " >
                         <input type='hidden' id='processo' name='processo' value='{{$processo->id}}' />
                         <div class="tab-content" id="custom-tabs-four-tabContent">
                             <div class="tab-pane fade show active" id="custom-tabs-four-processo" role="tabpanel"
@@ -89,44 +94,14 @@
                                 aria-labelledby="custom-tabs-four-messages-tab">
                                 @include('processo.tab_tramitacao')
                             </div>
+                            <div class="tab-pane fade table-responsive p-0" id="custom-tabs-four-informacoes" role="tabpanel"
+                                aria-labelledby="custom-tabs-four-informacoes-tab" style="height: 500px;">
+                                @include('processo.tab_informacoes')
+                            </div>
                         </div>
                     </div>
                 </div> <!-- /.card -->
             </div>
-            <div class="col-md-4" >
-                <!-- TO DO List -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="ion ion-clipboard mr-1"></i>
-                            Informações do Processo
-                        </h3>
-                        <div class="card-tools">
-                            <ul class="pagination pagination-sm">
-                               {{ $log->links() }}
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <ul class="todo-list" data-widget="todo-list">
-                            <li>
-                                @foreach($log as $logs)
-                                    <span class="handle">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </span><?php echo $logs->status ?>
-                                    <small class="badge badge-success"><i class="far fa-calendar-alt"></i> {{date('d/m/Y - H:s', strtotime($logs->created_at))}}</small><hr>
-                                @endforeach
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-
-
-
         </div>
 </div>
 </section>

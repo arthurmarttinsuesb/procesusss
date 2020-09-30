@@ -53,9 +53,7 @@ $(document).ready(function($) {
         deferRender: true,
         searching: false,
         columns: [
-            { width: "45%", data: "usuario", name: "usuario" },
-            { width: "45%", data: "setor", name: "setor" },
-            { width: "10%", data: "acao", name: "acao" },
+            { width: "100%", data: "tramite", name: "tramite" },
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });

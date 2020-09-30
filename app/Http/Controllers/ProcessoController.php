@@ -83,6 +83,7 @@ class ProcessoController extends Controller
             })->escapeColumns([0])
             ->make(true);
     }
+    
 
 
 
@@ -166,7 +167,7 @@ class ProcessoController extends Controller
         $processo = Processo::find($id);
         $setores = Setor::where('status', 'Ativo')->get();
         $users = User::where('status', 'Ativo')->get();
-        $log = ProcessoLog::where('fk_processo', $id)->paginate(10);
+        $log = ProcessoLog::where('fk_processo', $id)->get();
 
         return view('processo.edit', ['processo' => $processo, 'setores' => $setores, 'users' => $users,'log' => $log]);
     }
