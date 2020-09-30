@@ -51,12 +51,7 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                             );
                         } else {
                             swalWithBootstrapButtons
-                                .fire(
-                                    "Sucesso",
-                                    "Exclusão Realizada",
-                                    "success"
-                                )
-                                .then(function(result) {
+                                .fire("Sucesso", "Exclusão Realizada", "success").then(function(result) {
                                     if (result.value) {
                                         $("#" + idTable).DataTable().draw(false);
                                     }
@@ -122,9 +117,7 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                             swalWithBootstrapButtons
                                 .fire("Sucesso", "Usuário Ativado!", "success")
                                 .then(function(result) {
-                                    if (result.value) {
-                                        $("#" + idTable).DataTable().draw(false);
-                                    }
+                                    if (result.value) { $("#" + idTable).DataTable().draw(false); }
                                 });
                         }
                     },
@@ -182,9 +175,7 @@ function autenticarDialog({ nomeModulo, rota, idTable, dataId = "id", element })
                                     "success"
                                 )
                                 .then(function(result) {
-                                    if (result.value) {
-                                        $("#" + idTable).DataTable().draw(false);
-                                    }
+                                    if (result.value) { $("#" + idTable).DataTable().draw(false); }
                                 });
                         }
                     },

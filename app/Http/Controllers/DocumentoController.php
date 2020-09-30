@@ -77,10 +77,10 @@ class DocumentoController extends Controller
                                     title="Visualizar" data-toggle="tooltip" target="_blank">
                                     <i class="fas fa-eye"></i>
                                 </a>';
-                   $editar =   '<a href="/pdf/documento/'.$modelo->id.'"
-                                        class="btn bg-teal color-palette"
-                                        title="Visualizar" data-toggle="tooltip" target="_blank">
-                                        <i class="fas fa-eye"></i>
+                   $editar =   '<a href="/documento/'.$modelo->id.'/edit"
+                                        class="btn btn-info"
+                                        title="Editar" data-toggle="tooltip" target="_blank">
+                                        <i class="fas fa-pencil-alt"></i>
                                 </a>';    
                $encaminhar =  '<a href="/documento-tramite/create/'.$modelo->id.'"
                                             class="btn bg-gray"
@@ -142,6 +142,7 @@ class DocumentoController extends Controller
             });
 
             Session::flash('message_sucesso', 'Documento criado!');
+            Session::flash('tab', 'tab_documento');
             return Redirect::to('processo/'.$request->processo.'/edit');
         } catch (\Exception  $errors) {
             Session::flash('message_erro', 'Não foi possível cadastrar documento, tente novamente mais tarde.!');
@@ -169,6 +170,7 @@ class DocumentoController extends Controller
                 $log->save();
             });
 
+            Session::flash('tab', 'tab_documento');
             Session::flash('message_sucesso', 'Documento Alterado!');
             return Redirect::to('processo/'.$modelo->fk_processo.'/edit');
         } catch (\Exception  $errors) {

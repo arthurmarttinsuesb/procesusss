@@ -13,6 +13,9 @@ $(document).ready(function($) {
         responsive: true,
         paging: true,
         searching: true,
+        processing: true,
+        serverSide: true,
+        deferRender: true,
         columns: [
             { data: "titulo", name: "titulo" },
             { data: "tipo", name: "tipo" },
@@ -28,6 +31,9 @@ $(document).ready(function($) {
         responsive: true,
         paging: true,
         searching: true,
+        processing: true,
+        serverSide: true,
+        deferRender: true,
         columns: [
             { data: "titulo", name: "titulo" },
             { data: "usuario", name: "usuario" },
@@ -51,34 +57,34 @@ $(document).ready(function($) {
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
+    /*
+        $(document).on("click", ".add_anexo", function() {
+            var dados = new FormData($("#form_anexo")[0]); //pega os dados do form
+            $.ajax({
+                type: "post",
+                url: base_url + "/anexos/store/" + id_processo,
+                dataType: "json",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: dados,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    $("#table_anexo").DataTable().draw(false);
+                },
+                error: function(data) {
+                    $(".erros").show(); //exibe a div de erro
+                    $(".erros").find("ul").text(""); //limpa a div para erros successivos
 
-    $(document).on("click", ".add_anexo", function() {
-        var dados = new FormData($("#form_anexo")[0]); //pega os dados do form
-        $.ajax({
-            type: "post",
-            url: base_url + "/anexos/store/" + id_processo,
-            dataType: "json",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            data: dados,
-            processData: false,
-            contentType: false,
-            success: function(data) {
-                $("#table_anexo").DataTable().draw(false);
-            },
-            error: function(data) {
-                $(".erros").show(); //exibe a div de erro
-                $(".erros").find("ul").text(""); //limpa a div para erros successivos
-
-                $.each(data.responseJSON.errors, function(nome, mensagem) {
-                    $(".erros")
-                        .find("ul")
-                        .append(mensagem + "</br>");
-                });
-            },
-        });
-    });
+                    $.each(data.responseJSON.errors, function(nome, mensagem) {
+                        $(".erros")
+                            .find("ul")
+                            .append(mensagem + "</br>");
+                    });
+                },
+            });
+        });*/
 
     $(document).on("click", ".btnExcluir", function() {
         deleteDialog({

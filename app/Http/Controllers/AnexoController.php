@@ -79,6 +79,7 @@ class AnexoController extends Controller
                 $log->save();
             });
 
+            Session::flash('tab', 'tab_anexo');
             Session::flash('message_sucesso', 'Anexo adicionado!');
             return Redirect::to('processo/'.$id.'/edit');
 

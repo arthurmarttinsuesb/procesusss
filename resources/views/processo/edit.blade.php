@@ -44,32 +44,34 @@
                      {{ Session::get('message') }}
                 </div>
             @endif
+
+               <input type='hidden' id='tab'  @if (Session::has('tab')) value="{{ Session::get('tab') }}" @else value='tab_processo' @endif>
                 <div class="card card-primary card-outline card-outline-tabs">
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="custom-tabs-four-processo-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-processo" role="tab" aria-controls="custom-tabs-four-processo"
+                                    href="#tab_processo" role="tab" aria-controls="custom-tabs-four-processo"
                                     aria-selected="true">Processo</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-four-home-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                                    href="#tab_documento" role="tab" aria-controls="custom-tabs-four-home"
                                     aria-selected="true">Documentos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
+                                    href="#tab_anexo" role="tab" aria-controls="custom-tabs-four-profile"
                                     aria-selected="false">Anexos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-messages" role="tab"
+                                    href="#tab_tramite" role="tab"
                                     aria-controls="custom-tabs-four-messages" aria-selected="false">Encaminhar Processo</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-four-informacoes-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-informacoes" role="tab" aria-controls="custom-tabs-four-informacoes"
+                                    href="#tab_informacoes" role="tab" aria-controls="custom-tabs-four-informacoes"
                                     aria-selected="false">Informações do Processo</a>
                             </li>
                         </ul>
@@ -77,24 +79,24 @@
                     <div class="card-body " >
                         <input type='hidden' id='processo' name='processo' value='{{$processo->id}}' />
                         <div class="tab-content" id="custom-tabs-four-tabContent">
-                            <div class="tab-pane fade show active" id="custom-tabs-four-processo" role="tabpanel"
+                            <div class="tab-pane fade show active" id="tab_processo" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-processo-tab">
                                 @include('processo.tab_processo')
                             </div>
-                            <div class="tab-pane fade show" id="custom-tabs-four-home" role="tabpanel"
+                            <div class="tab-pane fade" id="tab_documento" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-home-tab">
                                 @include('processo.tab_documento')
                             </div>
 
-                            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                            <div class="tab-pane fade" id="tab_anexo" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-profile-tab">
                                 @include('processo.tab_anexo')
                             </div>
-                            <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel"
+                            <div class="tab-pane fade" id="tab_tramite" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-messages-tab">
                                 @include('processo.tab_tramitacao')
                             </div>
-                            <div class="tab-pane fade table-responsive p-0" id="custom-tabs-four-informacoes" role="tabpanel"
+                            <div class="tab-pane fade table-responsive p-0" id="tab_informacoes" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-informacoes-tab" style="height: 500px;">
                                 @include('processo.tab_informacoes')
                             </div>
@@ -109,6 +111,7 @@
 @include('sweetalert::alert')
 @endsection
 @section('scripts-adicionais')
+
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
@@ -116,4 +119,10 @@
 <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
 <script src="{{ asset('js/processo.js') }}"></script>
+<script>
+    $(document).ready(function($) { 
+        var tab = $("#tab").val();
+        $('#custom-tabs-four-tab a[href="#'+tab+'"]').tab('show');
+    });
+</script>
 @endsection
