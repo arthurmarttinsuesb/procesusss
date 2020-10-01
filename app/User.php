@@ -31,6 +31,11 @@ class User extends Authenticatable
         return $this->belongsTo(Estado::class, 'fk_estado');
     }
 
+    public function file()
+    {
+        return $this->hasOne(File::class, 'fk_user');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

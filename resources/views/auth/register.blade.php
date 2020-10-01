@@ -142,7 +142,8 @@
                     <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Repetir a Senha de Acesso" name="password_confirmation" />
                 </div>
             </div>
-           
+
+            <hr>
             <div class="container lst">
 
 
@@ -151,14 +152,14 @@
     <div class="input-group hdtuto control-group lst increment" >
       <input type="file" name="filenames[]" class="myfrm form-control">
       <div class="input-group-btn"> 
-        <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+        <button class="btn btn-success" type="button"><i class="fas fa-plus"></i></button>
       </div>
     </div>
     <div class="clone hide">
       <div class="hdtuto control-group lst input-group" style="margin-top:10px">
         <input type="file" name="filenames[]" class="myfrm form-control">
         <div class="input-group-btn"> 
-          <button class="btn btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
+          <button class="btn btn-danger" type="button"><i class="fas fa-trash"></i></button>
         </div>
       </div>
     </div>
