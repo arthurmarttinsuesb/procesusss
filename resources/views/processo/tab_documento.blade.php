@@ -1,7 +1,7 @@
  <!-- Main content -->
 
     <div class="float-right">
-        <a href="/documento/{{$processo->id}} " class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Documento</a>
+        <a href="/documento/{{$processo->id}}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Documento</a>
     </div>
     <br>
     <br>

@@ -4,18 +4,23 @@ $(document).ready(function($) {
         handle: ".handle",
         forcePlaceholderSize: true,
         zIndex: 999999,
+
     });
+
+    //retorno das tabs
+    var tab = $("#tab").val();
+    $('#custom-tabs-four-tab a[href="#' + tab + '"]').tab('show');
 
     var id_processo = $("#processo").val();
     var table = $("#table_documento").DataTable({
         ajax: base_url + "/documento/list/" + id_processo,
         scrollCollapse: true,
         responsive: true,
-        paging: false,
+        paging: true,
+        searching: true,
         processing: true,
         serverSide: true,
         deferRender: true,
-        searching: false,
         columns: [
             { data: "titulo", name: "titulo" },
             { data: "tipo", name: "tipo" },
@@ -29,11 +34,11 @@ $(document).ready(function($) {
         ajax: base_url + "/anexos/list/" + id_processo,
         scrollCollapse: true,
         responsive: true,
-        paging: false,
+        paging: true,
+        searching: true,
         processing: true,
         serverSide: true,
         deferRender: true,
-        searching: false,
         columns: [
             { data: "titulo", name: "titulo" },
             { data: "usuario", name: "usuario" },
@@ -44,49 +49,47 @@ $(document).ready(function($) {
     });
 
     $("#table_tramite").DataTable({
-        ajax: `${base_url}/processo/${id_processo}/tramite`,
+        ajax: `${base_url}/processo-tramitacao/list/${id_processo}`,
         scrollCollapse: true,
         responsive: true,
-        paging: false,
+        paging: true,
         processing: true,
         serverSide: true,
         deferRender: true,
-        searching: false,
+        searching: true,
         columns: [
-            { width: "45%", data: "usuario", name: "usuario" },
-            { width: "45%", data: "setor", name: "setor" },
-            { width: "10%", data: "acao", name: "acao" },
+            { width: "100%", data: "tramite", name: "tramite" },
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
+    /*
+        $(document).on("click", ".add_anexo", function() {
+            var dados = new FormData($("#form_anexo")[0]); //pega os dados do form
+            $.ajax({
+                type: "post",
+                url: base_url + "/anexos/store/" + id_processo,
+                dataType: "json",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                },
+                data: dados,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    $("#table_anexo").DataTable().draw(false);
+                },
+                error: function(data) {
+                    $(".erros").show(); //exibe a div de erro
+                    $(".erros").find("ul").text(""); //limpa a div para erros successivos
 
-    $(document).on("click", ".add_anexo", function() {
-        var dados = new FormData($("#form_anexo")[0]); //pega os dados do form
-        $.ajax({
-            type: "post",
-            url: base_url + "/anexos/store/" + id_processo,
-            dataType: "json",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-            },
-            data: dados,
-            processData: false,
-            contentType: false,
-            success: function(data) {
-                $("#table_anexo").DataTable().draw(false);
-            },
-            error: function(data) {
-                $(".erros").show(); //exibe a div de erro
-                $(".erros").find("ul").text(""); //limpa a div para erros successivos
-
-                $.each(data.responseJSON.errors, function(nome, mensagem) {
-                    $(".erros")
-                        .find("ul")
-                        .append(mensagem + "</br>");
-                });
-            },
-        });
-    });
+                    $.each(data.responseJSON.errors, function(nome, mensagem) {
+                        $(".erros")
+                            .find("ul")
+                            .append(mensagem + "</br>");
+                    });
+                },
+            });
+        });*/
 
     $(document).on("click", ".btnExcluir", function() {
         deleteDialog({
@@ -125,75 +128,5 @@ $(document).ready(function($) {
             btnClass: "btnAutenticar",
             element: $(this),
         });
-    });
-});
-
-const selectSetor = document.getElementById("select_secretaria");
-const selectUser = document.getElementById("select_user");
-
-function selectCheck(name) {
-    if (name === "secretaria") {
-        selectUser.value = "selecione";
-    } else {
-        selectSetor.value = "selecione";
-    }
-}
-
-selectSetor.onchange = () => {
-    selectCheck("secretaria");
-};
-
-selectUser.onchange = () => {
-    selectCheck("user");
-};
-
-var id_processo = $("#processo").val();
-$(document).on("click", ".add_tramite", function() {
-    var id_processo = $("#processo").val();
-    if (selectUser.value === "selecione" && selectSetor.value === "selecione") {
-        $(document).Toasts("create", {
-            title: "Atenção",
-            class: "bg-warning mt-2 mr-2",
-            body: "Por favor, selecione um setor ou um usuario!",
-        });
-        return false;
-    }
-
-    // muito dificil chegar aqui,
-    // mas vai que consegue né
-    if (selectUser.value !== "selecione" && selectSetor.value !== "selecione") {
-        $(document).Toasts("create", {
-            title: "Atenção",
-            class: "bg-warning mt-2 mr-2",
-            body: "Você deve selecionar um setor OU um usuario",
-        });
-
-        return false;
-    }
-
-    var dados = new FormData($("#form_tramite")[0]); //pega os dados do form
-    $.ajax({
-        type: "post",
-        url: `${base_url}/processo/${id_processo}/tramite`,
-        dataType: "json",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        data: dados,
-        processData: false,
-        contentType: false,
-        success: function(data) {
-            $("#table_tramite").DataTable().draw(false);
-        },
-        error: function(data) {
-            $(".erros").show(); //exibe a div de erro
-            $(".erros").find("ul").text(""); //limpa a div para erros successivos
-
-            $.each(data.responseJSON.errors, function(nome, mensagem) {
-                $(".erros")
-                    .find("ul")
-                    .append(mensagem + "</br>");
-            });
-        },
     });
 });

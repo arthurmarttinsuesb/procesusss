@@ -14,7 +14,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-8">
-            <h1>Encaminhar Documento {{$modelo->numero}} </h1>
+            <h1>Encaminhar Documento {{$modelo->processo->numero}} </h1>
           </div>
           <div class="col-sm-4">
             <ol class="breadcrumb float-sm-right">
@@ -54,6 +54,8 @@
               <form  method="POST" id="tramite_documento" action="/documento-tramite/store/{{$modelo->slug}}">
                  @csrf
                 <div class="card-body">
+
+                @if($modelo->tramite=="Liberado" && Auth::user()->id==$modelo->fk_user)
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
                         <div class="form-row">
@@ -129,6 +131,10 @@
                                  </div> 
                             </div>   
                             <hr>
+                @else
+                     <input type="hidden"  name="processo" value="{{$modelo->fk_processo}}">
+                     <input type="hidden"  id="processo_documento" value="{{$modelo->id}}">            
+                @endif            
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                         <table id="table_tramite_documento" class="table table-bordered table-hover" width="100%">
@@ -152,6 +158,7 @@
               </form>
               
             <!-- /.card -->
+           
            
 
           </div>

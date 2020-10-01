@@ -29,7 +29,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
             @if (Session::has('message_sucesso'))
                 <div class="alert alert-info alert-dismissible col-12">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -44,89 +44,66 @@
                      {{ Session::get('message') }}
                 </div>
             @endif
+
+               <input type='hidden' id='tab'  @if (Session::has('tab')) value="{{ Session::get('tab') }}" @else value='tab_processo' @endif>
                 <div class="card card-primary card-outline card-outline-tabs">
                     <div class="card-header p-0 border-bottom-0">
                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="custom-tabs-four-processo-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-processo" role="tab" aria-controls="custom-tabs-four-processo"
+                                    href="#tab_processo" role="tab" aria-controls="custom-tabs-four-processo"
                                     aria-selected="true">Processo</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-four-home-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                                    href="#tab_documento" role="tab" aria-controls="custom-tabs-four-home"
                                     aria-selected="true">Documentos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
+                                    href="#tab_anexo" role="tab" aria-controls="custom-tabs-four-profile"
                                     aria-selected="false">Anexos</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill"
-                                    href="#custom-tabs-four-messages" role="tab"
+                                    href="#tab_tramite" role="tab"
                                     aria-controls="custom-tabs-four-messages" aria-selected="false">Encaminhar Processo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-four-informacoes-tab" data-toggle="pill"
+                                    href="#tab_informacoes" role="tab" aria-controls="custom-tabs-four-informacoes"
+                                    aria-selected="false">Informações do Processo</a>
                             </li>
                         </ul>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body " >
                         <input type='hidden' id='processo' name='processo' value='{{$processo->id}}' />
                         <div class="tab-content" id="custom-tabs-four-tabContent">
-                            <div class="tab-pane fade show active" id="custom-tabs-four-processo" role="tabpanel"
+                            <div class="tab-pane fade show active" id="tab_processo" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-processo-tab">
                                 @include('processo.tab_processo')
                             </div>
-                            <div class="tab-pane fade show" id="custom-tabs-four-home" role="tabpanel"
+                            <div class="tab-pane fade" id="tab_documento" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-home-tab">
                                 @include('processo.tab_documento')
                             </div>
 
-                            <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                            <div class="tab-pane fade" id="tab_anexo" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-profile-tab">
                                 @include('processo.tab_anexo')
                             </div>
-                            <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel"
+                            <div class="tab-pane fade" id="tab_tramite" role="tabpanel"
                                 aria-labelledby="custom-tabs-four-messages-tab">
                                 @include('processo.tab_tramitacao')
+                            </div>
+                            <div class="tab-pane fade table-responsive p-0" id="tab_informacoes" role="tabpanel"
+                                aria-labelledby="custom-tabs-four-informacoes-tab" style="height: 500px;">
+                                @include('processo.tab_informacoes')
                             </div>
                         </div>
                     </div>
                 </div> <!-- /.card -->
             </div>
-            <div class="col-md-4" >
-                <!-- TO DO List -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="ion ion-clipboard mr-1"></i>
-                            Informações do Processo
-                        </h3>
-                        <div class="card-tools">
-                            <ul class="pagination pagination-sm">
-                               {{ $log->links() }}
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <ul class="todo-list" data-widget="todo-list">
-                            <li>
-                                @foreach($log as $logs)
-                                    <span class="handle">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </span><?php echo $logs->status ?>
-                                    <small class="badge badge-success"><i class="far fa-calendar-alt"></i> {{date('d/m/Y - H:s', strtotime($logs->created_at))}}</small><hr>
-                                @endforeach
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-
-
-
         </div>
 </div>
 </section>
@@ -134,6 +111,7 @@
 @include('sweetalert::alert')
 @endsection
 @section('scripts-adicionais')
+
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
