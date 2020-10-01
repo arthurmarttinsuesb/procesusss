@@ -19,15 +19,15 @@ if (Object.keys(table).length !== 0) {
             { data: "cidade.nome", name: "cidade" },
             { data: "estado.nome", name: "estado" },
             { data: "email", name: "email" },
+            { data: "file.filenames", name: "documentos" },
             { data: "acao", name: "acao" },
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
 }
 
-$(document).ready(function() {
-
-    $(document).on("click", ".btnExcluir", function() {
+$(document).ready(function () {
+    $(document).on("click", ".btnExcluir", function () {
         deleteDialog({
             nomeModulo: "Usuarios",
             rota: "ativar-usuarios",
@@ -36,7 +36,7 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("click", ".btnAtivar", function() {
+    $(document).on("click", ".btnAtivar", function () {
         ativarDialog({
             nomeModulo: "Usuario(a)",
             rota: "ativar-usuarios/ativar",
@@ -45,14 +45,11 @@ $(document).ready(function() {
         });
     });
 
-
-    $(document).on("change", "#tipo", function() {
+    $(document).on("change", "#tipo", function () {
         formatarCnpjCpf($);
     });
 
-
     $("#telefone").inputmask("(99) 99999-9999");
-
 
     function formatarCnpjCpf($) {
         $("[data-mask]").inputmask();
@@ -74,19 +71,23 @@ $(document).ready(function() {
         });
     }
 
-    $(document).on('change', '#estado', function() {
+    $(document).on("change", "#estado", function () {
         var id = $("#estado option:selected").val();
         //variavel que adiciona as opções
-        var option = '';
-        $.getJSON(base_url + '/selecionar-cidade/' + id, function(dados) {
+        var option = "";
+        $.getJSON(base_url + "/selecionar-cidade/" + id, function (dados) {
             //Atibuindo valores à variavel com os dados da consulta
             option += '<option value="">Selecione</option>';
-            $.each(dados.cidades, function(i, cidade) {
-                option += '<option value="' + cidade.id + '" >' + cidade.nome + '</option>';
+            $.each(dados.cidades, function (i, cidade) {
+                option +=
+                    '<option value="' +
+                    cidade.id +
+                    '" >' +
+                    cidade.nome +
+                    "</option>";
             });
             //passando para o select de cidades
-            $('#cidade').html(option).show();
+            $("#cidade").html(option).show();
         });
     });
-
 });

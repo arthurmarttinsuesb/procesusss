@@ -49,6 +49,7 @@
                                     <th>Cidade</th>
                                     <th>Estado</th>
                                     <th>Email</th>
+                                    <th>Documentos</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
