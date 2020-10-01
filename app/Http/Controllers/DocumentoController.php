@@ -35,7 +35,7 @@ class DocumentoController extends Controller
 
         $tipo = ModeloDocumento::where('status', "Ativo")->get();
         $processo = Processo::where('id', $id)->first();
-        
+
         return view('processo.documento.create',compact('id','tipo','processo'));
 
 
@@ -82,19 +82,19 @@ class DocumentoController extends Controller
                                         class="btn btn-info"
                                         title="Editar" data-toggle="tooltip" target="_blank">
                                         <i class="fas fa-pencil-alt"></i>
-                                </a>';    
+                                </a>';
                $encaminhar =  '<a href="/documento-tramite/create/'.$modelo->id.'"
                                             class="btn bg-gray"
                                             title="Enviar Documento" data-toggle="tooltip">
                                             <i class="fas fa-share-alt"></i>
-                                </a>'; 
+                                </a>';
                 $excluir = ' <a href="#"
                                 class="btn bg-danger color-palette btnExcluir"
                                 data-id="'.$modelo->id.'"
                                 title="Excluir" data-toggle="tooltip">
                                 <i class="fas fa-trash"></i>
                             </a>';
-               
+
                     //se o status do tramite do documento for liberado, pode ser fazer qualquer coisa ainda
                     //caso seja bloqueado só pode ser visualizado
                     if($modelo->tramite=="Liberado"){
@@ -102,17 +102,17 @@ class DocumentoController extends Controller
                         //se o documento estiver traminando o usuário não pode excluir ou editar.
                         if($documento_tramite->count()==0){
                             return '<div class="btn-group btn-group-sm">
-                                        '.$visualizar.$editar.$encaminhar.$excluir.'                          
+                                        '.$visualizar.$editar.$encaminhar.$excluir.'
                                     </div>';
                             }else{
                             return '<div class="btn-group btn-group-sm">
-                                        '.$visualizar.$encaminhar.' 
+                                        '.$visualizar.$encaminhar.'
                                     </div>';
                             }
                     }else if($modelo->tramite=="Bloqueado"){
 
                         return '<div class="btn-group btn-group-sm">
-                                    '.$visualizar.$encaminhar.' 
+                                    '.$visualizar.$encaminhar.'
                                 </div>';
                     }
                     })->escapeColumns([0])
@@ -129,8 +129,12 @@ class DocumentoController extends Controller
             $modelo->titulo = $request->titulo;
             $modelo->descricao = $request->descricao;
             $modelo->conteudo = $request->conteudo;
-            $modelo->tipo = "Público";
 
+            if($request->categoria == "privado"){
+                $modelo->tipo = "Privado";
+            }else {
+                $modelo->tipo = "Público";
+            }
 
             $log =  new ProcessoLog();
             $log->fk_user = Auth::user()->id;
@@ -159,7 +163,12 @@ class DocumentoController extends Controller
             $modelo->titulo = $request->titulo;
             $modelo->descricao = $request->descricao;
             $modelo->conteudo = $request->conteudo;
-            $modelo->tipo = "Público";
+
+            if($request->categoria == "privado"){
+                $modelo->tipo = "Privado";
+            }else {
+                $modelo->tipo = "Público";
+            }
 
             $log =  new ProcessoLog();
             $log->fk_user = Auth::user()->id;

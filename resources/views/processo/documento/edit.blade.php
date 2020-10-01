@@ -1,11 +1,11 @@
 @extends('layouts.app')
- 
+
  @section('htmlheader_title', 'Documento')
  @section('contentheader_title', 'Documento')
- 
- @section('conteudo') 
+
+ @section('conteudo')
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
-  
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -42,7 +42,7 @@
                      {{ Session::get('message') }}
                 </div>
               @endif
-           
+
               <form  method="POST" id="documento" action="/documento/{{$modelo->id}}">
                  @csrf
                  @method('PUT')
@@ -50,7 +50,7 @@
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
                        <div class="row">
-                            <div class="form-group col-8">
+                            <div class="form-group col-4">
                                 <strong>Titulo <span style="color: red;">*</span></strong>
                                 <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo') is-invalid @enderror" value="{{$modelo->titulo}}">
                                 @error('titulo')
@@ -59,8 +59,8 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-4">
-                                <strong>Tipo <span style="color: red;">*</span></strong>
+                            <div class="form-group col-7">
+                                <strong>Modelo de Documento <span style="color: red;">*</span></strong>
                                 <select id="tipo" name='tipo' class="form-control @error('tipo') is-invalid @enderror">
                                     <option value=' '>Selecione</option>
                                     @foreach($tipo as $modelo_documento)
@@ -73,6 +73,22 @@
                                     </span>
                                 @enderror
                             </div>
+                            @role('administrador|funcionario')
+                            <div class="form-group col-1">
+                                <strong>Conteúdo <span style="color: red;">*</span></strong>
+                                <select id="categoria" name='categoria' class="form-control @error('tipo') is-invalid @enderror">
+                                    @if($modelo->tipo == 'Privado')
+                                    <option value=''>Selecione</option>
+                                    <option value='publico'>Público</option>
+                                    <option value='privado' selected>Privado</option>
+                                    @else
+                                    <option value=''>Selecione</option>
+                                    <option value='publico' selected>Público</option>
+                                    <option value='privado'>Privado</option>
+                                    @endif
+                                </select>
+                            </div>
+                            @endrole
                         </div>
                         <div class="row">
                             <div class="form-group col-12">

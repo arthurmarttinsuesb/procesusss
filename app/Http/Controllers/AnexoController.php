@@ -41,7 +41,7 @@ class AnexoController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -56,10 +56,14 @@ class AnexoController extends Controller
         try {
             $modelo =  new ProcessoAnexo();
             $modelo->titulo = $request->tipo;
-            $modelo->tipo = "Público";
             $modelo->fk_user = Auth::id();
             $modelo->fk_processo = $id;
 
+            if($request->categoria == "privado"){
+                $modelo->tipo = "Privado";
+            }else {
+                $modelo->tipo = "Público";
+            }
 
             $arquivoNome = time() . '.' . $request->file('arquivo')->getClientOriginalExtension();
             if ($request->file('arquivo')->storeAs('public/processo_anexos/', $arquivoNome)) {
@@ -176,8 +180,8 @@ class AnexoController extends Controller
                                 title="Excluir" data-toggle="tooltip">
                                 <i class="fas fa-trash"></i>
                             </a>';
-                            
-                 //verifico se o anexo está liberado para visualizar, autenticar e excluir, caso não esteja ele só pode visualizar           
+
+                 //verifico se o anexo está liberado para visualizar, autenticar e excluir, caso não esteja ele só pode visualizar
                 if($modelo->tramite=="Liberado"){
                     foreach(Auth::user()->getRoleNames() as $nome){
                         //se for do tipo cidadão retirar a autenticação
@@ -195,15 +199,15 @@ class AnexoController extends Controller
                                 return '<div class="btn-group btn-group-sm">
                                             '.$visualizar.$excluir.'
                                         </div>';
-                            }   
+                            }
                         }
-                    }  
+                    }
                 }else{
                     return '<div class="btn-group btn-group-sm">
                                 '.$visualizar.'
                             </div>';
                 }
-                 
+
 
             })->escapeColumns([0])
             ->make(true);

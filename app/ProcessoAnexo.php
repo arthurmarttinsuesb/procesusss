@@ -8,7 +8,7 @@ class ProcessoAnexo extends Model
 {
     protected $fillable =
     [
-        'fk_processo', 'fk_user', 'titulo', 'arquivo', 'status'
+        'fk_processo', 'fk_user', 'titulo', 'arquivo','tipo', 'status'
     ];
 
     public function processo()

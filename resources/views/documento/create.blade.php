@@ -32,7 +32,7 @@
            <div class="card">
               <div class="card-header">
                     <div class="float-right">
-                        <a href="/processo/{{$id}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
+                        <a href="/processo/{{$id}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Documentos</a>
                     </div>
               </div>
               @if (Session::has('message'))
@@ -49,7 +49,7 @@
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
                        <div class="row">
-                            <div class="form-group col-7">
+                            <div class="form-group col-8">
                                 <strong>Titulo <span style="color: red;">*</span></strong>
                                 <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}">
                                 <input type="hidden"  name="processo" value="{{$processo->id}}">
@@ -59,7 +59,6 @@
                                     </span>
                                 @enderror
                             </div>
-
                             <div class="form-group col-4">
                                 <strong>Modelo de Documento <span style="color: red;">*</span></strong>
                                 <select id="tipo" name='tipo' class="form-control @error('tipo') is-invalid @enderror">
@@ -74,16 +73,6 @@
                                     </span>
                                 @enderror
                             </div>
-                            @role('administrador|funcionario')
-                            <div class="form-group col-md-1">
-                                <strong>Conteúdo <span style="color: red;">*</span></strong>
-                                <select id="categoria" name='categoria' class="form-control @error('tipo') is-invalid @enderror">
-                                    <option value=''>Selecione</option>
-                                    <option value='publico'>Público</option>
-                                    <option value='privado'>Privado</option>
-                                </select>
-                            </div>
-                            @endrole
                         </div>
                         <div class="row">
                             <div class="form-group col-12">

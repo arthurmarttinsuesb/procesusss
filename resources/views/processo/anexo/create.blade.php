@@ -1,9 +1,9 @@
 @extends('layouts.app')
- 
+
  @section('htmlheader_title', 'Anexo')
  @section('contentheader_title', 'Anexo')
- 
- @section('conteudo') 
+
+ @section('conteudo')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -40,21 +40,31 @@
                      {{ Session::get('message') }}
                  </div>
               @endif
-           
+
                 <form method="POST" id="anexo" action="/anexos/store/{{$processo->id}}" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         (<span style="color: red;">*</span>) Campos Obrigatórios
                         <br><br>
                         <div class="row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-7">
                                 <strong>Tipo <span style="color: red;">*</span></strong>
                                 <input type="text" autocomplete="off" id="tipo" name="tipo" class="form-control">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <strong>Arquivo <span style="color: red;">*</span></strong>
                                 <input type="file" autocomplete="off" id="arquivo" name="arquivo" class="form-control">
                             </div>
+                            @role('administrador|funcionario')
+                            <div class="form-group col-md-1">
+                                <strong>Conteúdo <span style="color: red;">*</span></strong>
+                                <select id="categoria" name='categoria' class="form-control @error('tipo') is-invalid @enderror">
+                                    <option value=''>Selecione</option>
+                                    <option value='publico'>Público</option>
+                                    <option value='privado'>Privado</option>
+                                </select>
+                            </div>
+                            @endrole
                         </div>
                     </div>
                     <div class="card-footer">
