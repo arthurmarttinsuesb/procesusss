@@ -5,7 +5,7 @@
 <div class="login-box">
         <div class="login-logo">
                 <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}" 
-                   alt="Processus" style="width: 60%; height: auto;"></a>
+                   alt="Processus" style="width: 50%; height: auto;"></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -65,6 +65,13 @@
             <p class="mb-0">
                 <a href="{{route('register')}}" class="text-center">Ainda não possui uma conta, cadastre-se.</a>
             </p>
+            <br>
+            <hr>
+            <div class="login-logo">
+                    <a href="{{ url('/home') }}"><img src="{{url('/img/footer_logo.jpeg')}}" 
+                    alt="Processus" style="width: 100%; height: auto;"></a>
+            </div>
+              
             </div>
             <!-- /.login-card-body -->
         </div>

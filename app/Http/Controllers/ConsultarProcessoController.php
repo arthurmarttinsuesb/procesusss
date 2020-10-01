@@ -11,6 +11,7 @@ use DB;
 use App\ProcessoDocumento;
 use App\Processo;
 use App\ProcessoAnexo;
+use App\ProcessoTramitacao;
 use App\Http\Utility\BotoesDatatable;
 
 
@@ -36,7 +37,7 @@ class ConsultarProcessoController extends Controller
         ->join('users', 'processos.fk_user', '=', 'users.id')
         ->where('processos.numero', 'ILIKE', "%{$busca}%")
         ->orWhere('users.nome', 'ILIKE', "%{$busca}%")
-        ->select('users.nome','processos.id','processos.numero','processos.tipo','processos.status')
+        ->select('users.nome','processos.*')
         ->get();
        
         return DataTables::of($processo)->editColumn('acao', function ($processo) {
@@ -50,7 +51,27 @@ class ConsultarProcessoController extends Controller
             }else{
                 return  '<span class="right badge badge-danger">Processo Privado</span>';
             }
-           
+        })
+        ->editColumn('titulo', function ($processo) {
+            return $processo->titulo;
+        })
+        ->editColumn('descricao', function ($processo) {
+            return $processo->descricao;
+        })
+        ->editColumn('encaminhamento', function ($processo) {
+            $tramites = ProcessoTramitacao::where('fk_processo', $processo->id)->orderBy('id')->limit(1)->get();
+
+            if($tramites->count()>0){
+                foreach($tramites as $tramite){
+                    if($tramite->fk_setor==NULL){
+                        return "Enviado para: <b>".$tramite->user->nome."</b>";
+                    }else{
+                        return "Enviado para: <b>".$tramite->setor->titulo."</b>";
+                    }
+                }
+            }else{
+                return "Não encaminhado";
+            }
 
         })
         ->editColumn('status', function ($processo) {
