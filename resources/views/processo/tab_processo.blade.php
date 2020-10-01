@@ -30,7 +30,10 @@
                 </div>
         </div>
     </div>
-    <div class="float-right">
-        <button type='submit' class="btn btn-info">Salvar</button>
-    </div>
+    <!-- se o processo estiber bloqueado não pode alterar mais nada -->
+    @if($processo->tramite=="Liberado")
+        <div class="float-right">
+            <button type='submit' class="btn btn-info">Salvar</button>
+        </div>
+    @endif
 </form>

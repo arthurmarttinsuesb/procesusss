@@ -32,7 +32,6 @@ class ProcessoTramitacaoController extends Controller
 
     public function list(Request $request, $processo)
     {
-
         try {
             $tramites = ProcessoTramitacao::where('fk_processo', $processo)->where('status','Criado')->with('user')->with('setor')->with('processo')->get();
             return Datatables::of($tramites)
@@ -44,8 +43,6 @@ class ProcessoTramitacaoController extends Controller
         } catch (\Exception  $erro) {
             return false;
         }
-
-
     }
 
    
@@ -94,11 +91,19 @@ class ProcessoTramitacaoController extends Controller
             $processo = Processo::find($id);
             $processo->tramite = "Bloqueado";
             
+            //verifico pra onde foi enviado o processo, e mostro no log especificando se foi setor ou usuário;
+            if($fk_setor==null){
+                $user = User::find($fk_user);
+                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$user->nome."</b>"; 
+            }else{
+                $setor = Setor::find($fk_setor);
+                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>"; 
+            }
 
             $log =  new ProcessoLog();
             $log->fk_user = Auth::user()->id;
             $log->fk_processo = $id;
-            $log->status = "Processo encaminhado por: <b>".Auth::user()->nome."</b>";
+            $log->status = $status_log;
             
             $tramite->save();
 
