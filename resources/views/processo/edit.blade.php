@@ -119,10 +119,4 @@
 <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
 <script src="{{ asset('js/processo.js') }}"></script>
-<script>
-    $(document).ready(function($) { 
-        var tab = $("#tab").val();
-        $('#custom-tabs-four-tab a[href="#'+tab+'"]').tab('show');
-    });
-</script>
 @endsection

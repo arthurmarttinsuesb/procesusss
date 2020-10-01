@@ -35,6 +35,7 @@ class DocumentoController extends Controller
 
         $tipo = ModeloDocumento::where('status', "Ativo")->get();
         $processo = Processo::where('id', $id)->first();
+        
         return view('processo.documento.create',compact('id','tipo','processo'));
 
 

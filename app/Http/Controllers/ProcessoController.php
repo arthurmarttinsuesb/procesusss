@@ -17,8 +17,7 @@ use App\Processo;
 use App\ProcessoAnexo;
 use App\ProcessoDocumento;
 use App\ProcessoTramitacao;
-use App\User;
-use App\Setor;
+
 use App\DocumentoTramite;
 use App\ProcessoLog;
 use App\Http\Utility\BotoesDatatable;
@@ -165,11 +164,9 @@ class ProcessoController extends Controller
     public function edit($id)
     {
         $processo = Processo::find($id);
-        $setores = Setor::where('status', 'Ativo')->get();
-        $users = User::where('status', 'Ativo')->get();
         $log = ProcessoLog::where('fk_processo', $id)->get();
 
-        return view('processo.edit', ['processo' => $processo, 'setores' => $setores, 'users' => $users,'log' => $log]);
+        return view('processo.edit', ['processo' => $processo,'log' => $log]);
     }
 
     /**

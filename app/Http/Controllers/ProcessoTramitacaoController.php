@@ -8,17 +8,29 @@ use DataTables;
 use DB;
 use Illuminate\Http\Request;
 
+use App\User;
+use App\Setor;
 use App\ProcessoTramitacao;
 use App\ProcessoLog;
 use App\ProcessoAnexo;
 use App\ProcessoDocumento;
 use App\Processo;
+
 use App\Http\Utility\BotoesDatatable;
 
 class ProcessoTramitacaoController extends Controller
 {
 
-    public function index(Request $request, $processo)
+
+    public function create($id) {
+        $setores = Setor::where('status', 'Ativo')->get();
+        $users = User::where('status', 'Ativo')->get();
+        $processo = Processo::where('id', $id)->first();
+        return view('processo.tramite.create',compact('processo','setores','users'));
+    }
+
+
+    public function list(Request $request, $processo)
     {
 
         try {
@@ -36,6 +48,7 @@ class ProcessoTramitacaoController extends Controller
 
     }
 
+   
 
     // public function index(Request $request, $processo)
     // {
@@ -89,7 +102,7 @@ class ProcessoTramitacaoController extends Controller
             
             $tramite->save();
 
-            DB::transaction(function () use ($tramite,$processo,$log) {
+            DB::transaction(function () use ($tramite,$processo,$log,$id) {
                 $processo->save();
                 $log->save();
 

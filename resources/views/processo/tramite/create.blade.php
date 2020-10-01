@@ -2,10 +2,7 @@
  
  @section('htmlheader_title', 'Encaminhamento')
  @section('contentheader_title', 'Encaminhamento')
- 
  @section('conteudo') 
-  <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
-  
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -32,7 +29,7 @@
            <div class="card">
               <div class="card-header">
                     <div class="float-right">
-                        <a href="/processo/{{$id}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Retornar ao Processo</a>
+                         <a href="/processo/{{$processo->id}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
                     </div>
               </div>
               @if (Session::has('message'))
@@ -42,70 +39,67 @@
                      {{ Session::get('message') }}
                 </div>
               @endif
-           
-              <form  method="POST" id="documento" action="/documento">
-                 @csrf
-                <div class="card-body">
-                      (<span style="color: red;">*</span>) Campos Obrigatórios
-                      <br><br>
-                       <div class="row">
-                            <div class="form-group col-8">
-                                <strong>Titulo <span style="color: red;">*</span></strong>
-                                <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}">
-                                <input type="hidden"  name="processo" value="{{$processo->id}}">
-                                @error('titulo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group col-4">
-                                <strong>Tipo <span style="color: red;">*</span></strong>
-                                <select id="tipo" name='tipo' class="form-control @error('tipo') is-invalid @enderror">
-                                    <option value=''>Selecione</option>
-                                    @foreach($tipo as $modelo_documento)
-                                        <option value='{{$modelo_documento->id}}'>{{$modelo_documento->titulo}}</option>
+
+                <form  method="POST" id="tramite">
+                    @csrf
+                    <div class="card-body">
+                        (<span style="color: red;">*</span>) Campos Obrigatórios
+                        <br><br>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                            <input type="hidden" id="processo" value='{{$processo->id}}'>
+                                <strong>Setor <span style="color: red;">*</span></strong>
+                                <select id="select_secretaria"
+                                    class="form-control select2 form-control @error('fk_setor', 'setor') is-invalid @enderror"
+                                    name="fk_setor">
+                                    @foreach ($setores as $setor)
+                                        @if (old('fk_setor') == $setor->id)
+                                        <option value="{{$setor->id}}" selected>{{$setor->titulo}}
+                                        </option>
+                                        @else
+                                        <option value="{{$setor->id}}">{{$setor->titulo}}</option>
+                                        @endif
                                     @endforeach
+                                    <option value="selecione" selected>Selecione</option>
                                 </select>
-                                @error('tipo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                @error('fk_setor','setor')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <!-- verifico se o tipo de usuário é cidadão, se for o campo do tipo usuário não vai ser mostrado-->
+                            <div class="form-group col-md-6" @foreach(Auth::user()->getRoleNames() as $nome)   @if($nome=="cidadao") hidden @endif  @endforeach>
+                                <strong>Usuario <span style="color: red;">*</span></strong>
+                                <select id="select_user"
+                                    class="form-control select2 form-control @error('fk_user', 'setor') is-invalid @enderror"
+                                    name="fk_user">
+                                    @foreach ($users as $user)
+                                        @if (old('fk_user') == $user->id)
+                                        <option value="{{$user->id}}" selected>{{$user->nome}}
+                                        </option>
+                                        @else
+                                        <option value="{{$user->id}}">{{$user->nome}}</option>
+                                        @endif
+                                    @endforeach
+                                    <option value="selecione" selected>Selecione</option>
+                                </select>
+                                @error('fk_user','setor')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <strong>Descrição <span style="color: red;">*</span></strong>
-                                <textarea class="textarea form-control @error('descricao') is-invalid @enderror" name='descricao'>{{ old('descricao') }}</textarea>
-                                @error('descricao')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <strong>Conteúdo <span style="color: red;">*</span></strong>
-                               
-                                   <textarea class="textarea form-control @error('conteudo') is-invalid @enderror" name='conteudo' id='conteudo' placeholder="Place some text here"
-                                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('conteudo') }}</textarea>
-                                    @error('conteudo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                        </div>
-                </div>
-                <!-- /.card-body -->
-                <div class="card-footer">
-                    <button type="submit" form="documento" class="btn btn-info float-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
-                    &nbsp Aguarde...">Salvar</button>
-                </div>
-                <!-- /.card-footer -->
-              </form>
+                    </div>
+
+                    <div class="card-footer">
+                        <button type="button" form="tramite" class="btn btn-info float-right add_tramite" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                        &nbsp Aguarde...">Salvar</button>
+                    </div>
+                    <!-- /.card-footer -->
+                </form>
             </div>
             <!-- /.card -->
 
@@ -117,9 +111,8 @@
 
 @endsection
 @section('scripts-adicionais')
-<script src="{{asset('plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/documento.js') }}"></script>
+<script src="{{ asset('js/processo_tramitacao.js') }}"></script>
 @endsection
 
 

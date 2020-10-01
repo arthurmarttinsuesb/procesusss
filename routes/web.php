@@ -61,6 +61,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/autentica/{id}', ['uses' => 'AnexoController@autentica']);
         });
 
+        Route::group(['prefix' => 'processo-tramitacao', 'where' => ['prefix' => 'processo-tramitacao']], function () {
+            Route::get('/create/{id}', ['uses' => 'ProcessoTramitacaoController@create']);
+            Route::post('/store/{id}', ['uses' => 'ProcessoTramitacaoController@store']);
+            Route::get('/list/{id}', ['uses' => 'ProcessoTramitacaoController@list']);
+        });
+
         // rotas para o metodo 'list'
         Route::get('/usuario-setor/list', 'UserSetorsController@list');
         Route::get('/secretaria/list', 'SecretariaController@list');
@@ -83,6 +89,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('ativar-usuarios', 'AtivarUsuariosController');
         Route::resource('consultar-processo', 'ConsultarProcessoController');
         Route::resource('documento-tramite', 'DocumentoTramiteController');
-        Route::resource('processo.tramite', 'ProcessoTramitacaoController')->only(['store', 'index', 'destroy']);
+        Route::resource('processo-tramitacao', 'ProcessoTramitacaoController');
     });
 });

@@ -46,14 +46,11 @@ class DocumentoTramiteController extends Controller
      */
     public function create($id)
     {
-        $modelo = ProcessoDocumento::where('id', $id)->where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
+        $modelo = ProcessoDocumento::where('id', $id)->where('status', 'Ativo')->first();
         $usuario = User::where('status','Ativo')-> role(['funcionario','administrador'])->get();
         $secretaria = Secretaria::where('status','Ativo')->get();
-        if(empty($modelo)){
-            abort(401);
-        }else{
-            return view('processo.documento.tramite', compact('modelo','usuario','secretaria'));
-        }
+       
+        return view('processo.documento.tramite', compact('modelo','usuario','secretaria'));
     }
 
     /**
