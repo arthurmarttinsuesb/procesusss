@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 
 use App\User;
 use App\Setor;
+use App\ProcessoDocumento;
 use App\ProcessoTramitacao;
 use App\ProcessoLog;
 use App\ProcessoAnexo;
-use App\ProcessoDocumento;
 use App\Processo;
 
 use App\Http\Utility\BotoesDatatable;
@@ -83,6 +83,9 @@ class ProcessoTramitacaoController extends Controller
                 $fk_setor = null;
             }
 
+            $processo_documento = ProcessoDocumento::where('fk_processo',$id)->get();
+        if($processo_documento->count()>0){
+
             $tramite = new ProcessoTramitacao();
             $tramite->fk_setor = $fk_setor;
             $tramite->fk_user = $fk_user;
@@ -114,8 +117,11 @@ class ProcessoTramitacaoController extends Controller
                 ProcessoAnexo::where('fk_processo',$id)->where('fk_user',Auth::user()->id)->update(['tramite' => 'Bloqueado']);
                 ProcessoDocumento::where('fk_processo',$id)->where('fk_user',Auth::user()->id)->update(['tramite' => 'Bloqueado']);
             });
-
                 return Response::json(array('status' => 'Ok'));
+            }else{
+                return Response::json(array('status' => 'Assinatura'));
+            }
+            
             } catch (\Exception  $erro) {
                 return Response::json(array('errors' => $erro));
             }
