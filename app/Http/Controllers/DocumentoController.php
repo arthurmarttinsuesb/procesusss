@@ -82,11 +82,17 @@ class DocumentoController extends Controller
                                         class="btn btn-info"
                                         title="Editar" data-toggle="tooltip" target="_blank">
                                         <i class="fas fa-pencil-alt"></i>
+                                </a>';  
+                $assinatura =   '<a href="#"
+                                    class="btn bg-purple btnAssinarAutor"
+                                    data-id="'.$modelo->id.'"
+                                    title="Assinar Documento" data-toggle="tooltip">
+                                    <i class="fas fa-user-edit"></i>
                                 </a>';    
                $encaminhar =  '<a href="/documento-tramite/create/'.$modelo->id.'"
                                             class="btn bg-gray"
                                             title="Enviar Documento" data-toggle="tooltip">
-                                            <i class="fas fa-share-alt"></i>
+                                            <i class="fas fa-paper-plane"></i>
                                 </a>'; 
                 $excluir = ' <a href="#"
                                 class="btn bg-danger color-palette btnExcluir"
@@ -102,7 +108,7 @@ class DocumentoController extends Controller
                         //se o documento estiver traminando o usuário não pode excluir ou editar.
                         if($documento_tramite->count()==0){
                             return '<div class="btn-group btn-group-sm">
-                                        '.$visualizar.$editar.$encaminhar.$excluir.'                          
+                                        '.$visualizar.$editar.$encaminhar.$assinatura.$excluir.'                          
                                     </div>';
                             }else{
                             return '<div class="btn-group btn-group-sm">
@@ -216,6 +222,35 @@ class DocumentoController extends Controller
             $documento_assinatura->fk_processo_documento = $documento_tramite->fk_processo_documento;
             $documento_assinatura->fk_user = Auth::user()->id;
 
+
+
+            DB::transaction(function () use ($documento_assinatura,$documento_tramite) {
+                $documento_assinatura->save();
+                $documento_tramite->save();
+            });
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('errors' => $erro));
+        }
+    }
+
+    public function assinatura_documento_autor($id)
+    {
+        try {
+            $documento_tramite = new DocumentoTramite();
+            $documento_tramite->assinatura = true;
+            $documento_tramite->leitura = false;
+            $documento_tramite->fk_processo_documento = $id;
+            $documento_tramite->fk_setor = null;
+            $documento_tramite->fk_user = Auth::user()->id;
+            $documento_tramite->status = "Finalizado";
+
+            $documento_assinatura =  new DocumentoAssinatura();
+            $documento_assinatura->ip = "";
+            $documento_assinatura->dispositivo = "";
+            $documento_assinatura->fk_processo_documento = $id;
+            $documento_assinatura->fk_user = Auth::user()->id;
 
 
             DB::transaction(function () use ($documento_assinatura,$documento_tramite) {

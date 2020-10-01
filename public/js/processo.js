@@ -7,6 +7,15 @@ $(document).ready(function($) {
 
     });
 
+    $(document).on("click", ".btnAssinarAutor", function(dados) {
+        assinarDialog({
+            nomeModulo: "Documento",
+            rota: "documento/assinar-autor",
+            idTable: "table",
+            element: $(this),
+        });
+    });
+
     //retorno das tabs
     var tab = $("#tab").val();
     $('#custom-tabs-four-tab a[href="#' + tab + '"]').tab('show');
