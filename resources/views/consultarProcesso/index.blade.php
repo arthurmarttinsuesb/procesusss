@@ -55,7 +55,7 @@
                                     <th>Autor(a)</th>
                                     <th>Numero</th>
                                     <th>Título</th>
-                                    <th>Descricao</th>
+                                    <th>Descrição</th>
                                     <th>Encaminhamento</th>
                                     <th>Status</th>
                                     <th>Ação</th>
