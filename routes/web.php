@@ -84,5 +84,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('consultar-processo', 'ConsultarProcessoController');
         Route::resource('documento-tramite', 'DocumentoTramiteController');
         Route::resource('processo.tramite', 'ProcessoTramitacaoController')->only(['store', 'index', 'destroy']);
+
+
+        Route::get('file','FileController@create');
+Route::post('file','FileController@store');
     });
 });

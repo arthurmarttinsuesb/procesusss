@@ -24,7 +24,7 @@
     </div>
     @endif
     <div class="card-body register-card-body">
-        <form action="{{ url('/register') }}" method="post" id="form">
+        <form action="{{ url('/register') }}" method="post" enctype="multipart/form-data" id="form">
             @csrf
             <div class="row">
                 <div class="form-group col-md-8">
@@ -142,7 +142,32 @@
                     <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="Repetir a Senha de Acesso" name="password_confirmation" />
                 </div>
             </div>
-            <div class="row">
+           
+            <div class="container lst">
+
+
+<h4 class="well">Anexe os Documentos:</h4>
+
+    <div class="input-group hdtuto control-group lst increment" >
+      <input type="file" name="filenames[]" class="myfrm form-control">
+      <div class="input-group-btn"> 
+        <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+      </div>
+    </div>
+    <div class="clone hide">
+      <div class="hdtuto control-group lst input-group" style="margin-top:10px">
+        <input type="file" name="filenames[]" class="myfrm form-control">
+        <div class="input-group-btn"> 
+          <button class="btn btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+
+</div>
+<div class="row">
                 <div class="col-md-6">
                     <button type="button" class="btn btn-block btn-flat" data-toggle="modal" data-target="#termsModal">Ler os termos</button>
                 </div><!-- /.col -->
@@ -159,6 +184,7 @@
                 <div class="col-md-3"></div>
             </div>
 
+
         </form>
 
     </div>
@@ -166,6 +192,17 @@
 
 @endsection
 @section('scripts-adicionais')
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(".btn-success").click(function(){ 
+          var lsthmtl = $(".clone").html();
+          $(".increment").after(lsthmtl);
+      });
+      $("body").on("click",".btn-danger",function(){ 
+          $(this).parents(".hdtuto").remove();
+      });
+    });
+</script>
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{asset('plugins/inputmask/jquery.inputmask.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>

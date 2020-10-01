@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Traits\HasRoles;
 use DB;
 use App\User;
+use App\File;
 use Auth;
 use Mail;
 use App\Mail\SendMailUser;
@@ -70,6 +71,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'terms' => ['required'],
+            'filenames' => ['required'],
+            'filenames.*' => ['mimes:doc,pdf,docx']
         );
 
         $attributeNames = array(
@@ -110,6 +113,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        
         try {
             $user =  new User();
             $user->nome = $data['nome'];
@@ -125,19 +129,38 @@ class RegisterController extends Controller
             $user->complemento = $data['complemento'];
             $user->fk_estado = $data['estado'];
             $user->fk_cidade = $data['cidade'];
-
+            
             $user->email = $data['email'];
             $user->password = bcrypt($data['password']);
-
+            
             DB::transaction(function () use ($user) {
                 $user->save();
                 $user->assignRole('cidadao');
             });
-
+            
+            try{
+            
+                
+                foreach($data['filenames'] as $file)
+                {
+                    $name = time().'.'.$file->extension();
+                    $file->move(public_path().'/files/', $name);  
+                    $files_upload[] = $name;  
+                }
+ 
+                
+                $file= new File();
+                $file->filenames=json_encode($files_upload);
+                $file->fk_user = $user->id;
+                $file->save();
+         } catch (\Exception  $erro) {
+             return response()->json(array('as' => $erro));
+         }
+            
             return $user;
             app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
             
-        } catch (\Exception  $erro) {
+        } catch (Exception  $erro) {
             return response()->json(array('erros' => $erro));
         }
     }
