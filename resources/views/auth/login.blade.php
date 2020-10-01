@@ -5,7 +5,7 @@
 <div class="login-box">
         <div class="login-logo">
                 <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}" 
-                   alt="Processus" style="width: 60%; height: auto;"></a>
+                   alt="Processus" style="width: 50%; height: auto;"></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
