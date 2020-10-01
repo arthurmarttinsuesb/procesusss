@@ -30,7 +30,9 @@ function buscarProcesso(busca) {
             columns: [
                 { data: "nome", name: "nome" },
                 { data: "numero", name: "numero" },
-                { data: "tipo", name: "tipo" },
+                { data: "titulo", name: "titulo" },
+                { data: "descricao", name: "descricao" },
+                { data: "encaminhamento", name: "encaminhamento" },
                 { data: "status", name: "status" },
                 { data: "acao", name: "acao" },
             ],

@@ -65,6 +65,13 @@
             <p class="mb-0">
                 <a href="{{route('register')}}" class="text-center">Ainda não possui uma conta, cadastre-se.</a>
             </p>
+            <br>
+            <hr>
+            <div class="login-logo">
+                    <a href="{{ url('/home') }}"><img src="{{url('/img/footer_logo.jpeg')}}" 
+                    alt="Processus" style="width: 100%; height: auto;"></a>
+            </div>
+              
             </div>
             <!-- /.login-card-body -->
         </div>

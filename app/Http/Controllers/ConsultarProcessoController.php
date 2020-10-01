@@ -11,6 +11,7 @@ use DB;
 use App\ProcessoDocumento;
 use App\Processo;
 use App\ProcessoAnexo;
+use App\ProcessoTramitacao;
 use App\Http\Utility\BotoesDatatable;
 
 
@@ -50,8 +51,15 @@ class ConsultarProcessoController extends Controller
             }else{
                 return  '<span class="right badge badge-danger">Processo Privado</span>';
             }
-           
-
+        })
+        ->editColumn('encaminhamento', function ($processo) {
+            if($processo->status=='Ativo'){
+                return  '<span class="right badge badge-success">em andamento</span>';
+            } else if($processo->status=='Encaminhado'){
+                return  '<span class="right badge badge-info">em andamento</span>';
+            }else  if($processo->status=='Finalizado'){
+                return  '<span class="right badge badge-danger">encerrado</span>';
+            }
         })
         ->editColumn('status', function ($processo) {
             if($processo->status=='Ativo'){
