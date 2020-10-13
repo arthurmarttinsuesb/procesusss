@@ -24,7 +24,7 @@ class AtivarUsuariosController extends Controller
         return View::make('ativarUsuarios.index');
     }
     public function edit($id)
-    {   
+    {
         $modelo = User::where('id', $id)->first();
         return view('ativarUsuarios.edit', compact('modelo'));
     }
@@ -39,7 +39,7 @@ class AtivarUsuariosController extends Controller
         })
         ->editColumn('file.filenames', function ($usuario) {
             $docsHtml = '';
-        
+
             $docs = json_decode($usuario->file->filenames, true);
             foreach($docs as $doc){
                 $docsHtml = $docsHtml. "<a href='/files/".$doc."' target='_blank'>".$doc."</a> <br>";

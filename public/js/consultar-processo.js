@@ -1,4 +1,4 @@
-$(document).on("click", ".btnExcluir", function() {
+$(document).on("click", ".btnExcluir", function () {
     deleteDialog({
         nomeModulo: "Setor",
         rota: "setor",
@@ -7,8 +7,8 @@ $(document).on("click", ".btnExcluir", function() {
     });
 });
 
-$(document).on("click", ".busca_processo", function() {
-    var busca = $('#campo_busca').val();
+$(document).on("click", ".busca_processo", function () {
+    var busca = $("#campo_busca").val();
     buscarProcesso(busca);
 });
 

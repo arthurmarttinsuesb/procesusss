@@ -39,7 +39,7 @@ class ConsultarProcessoController extends Controller
         ->orWhere('users.nome', 'ILIKE', "%{$busca}%")
         ->select('users.nome','processos.*')
         ->get();
-       
+
         return DataTables::of($processo)->editColumn('acao', function ($processo) {
             if($processo->tipo=="Público"){
                 foreach(Auth::user()->getRoleNames() as $nome){

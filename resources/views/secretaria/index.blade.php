@@ -33,8 +33,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-3 float-right">
+                        <div class="row">
+                            <div class="col-xl-10 col-sm-9">
+                            </div>
+                            <div class="col-xl-2 col-sm-3">
                             <a href="{{ URL::to('secretaria/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Secretaria</a>
+                            </div>
                         </div>
                     </div>
                     @if (Session::has('message'))
@@ -42,7 +46,7 @@
                     @endif
                     <!-- /.card-header -->
 
-                    <div class="card-body">
+                    <div class="card-body table-responsive-sm">
                         <table id="table_secretarias" class="table table-bordered table-hover">
                             <thead>
                                 <tr>

@@ -82,7 +82,7 @@ class ProcessoController extends Controller
             })->escapeColumns([0])
             ->make(true);
     }
-    
+
 
 
 
@@ -188,7 +188,7 @@ class ProcessoController extends Controller
             $log->fk_user = Auth::user()->id;
             $log->fk_processo = $id;
             $log->status = "Dados do processo foram alteradas por: <b>".Auth::user()->nome."</b>";
-            
+
 
             DB::transaction(function () use ($processo,$log) {
                 $processo->save();

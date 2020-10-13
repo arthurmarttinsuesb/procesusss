@@ -1,11 +1,11 @@
 @extends('layouts.app')
- 
+
  @section('htmlheader_title', 'Modelo Documento')
  @section('contentheader_title', 'Modelo Documento')
- 
- @section('conteudo') 
+
+ @section('conteudo')
   <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
-  
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -31,9 +31,13 @@
 
            <div class="card">
               <div class="card-header">
-                    <div class="col-2 float-right">
+                <div class="row">
+                    <div class="col-xl-10 col-sm-9">
+                    </div>
+                    <div class="col-xl-2 col-sm-3">
                         <a href="/modelo-documento" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Modelos</a>
                     </div>
+                </div>
               </div>
               @if (Session::has('message'))
               <div class="alert alert-danger alert-dismissible">
@@ -42,7 +46,7 @@
                      {{ Session::get('message') }}
                 </div>
               @endif
-           
+
               <form  method="POST" id="form" action="/modelo-documento">
                  @csrf
                 <div class="card-body">
@@ -69,7 +73,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    
+
                                 </div>
                         </div>
                 </div>
