@@ -21,7 +21,7 @@ class RequestDocumento extends FormRequest
         return [
             'titulo' =>'required',
             'tipo' =>'required',
-            'descricao' =>['required','min:30'],
+            'descricao' =>['required'],
             'conteudo' =>'required'
         ];
     }

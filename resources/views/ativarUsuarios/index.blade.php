@@ -32,13 +32,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    
+
                     @if (Session::has('message'))
                     <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                     @endif
                     <!-- /.card-header -->
 
-                    <div class="card-body">
+                    <div class="card-body table-responsive-sm">
                         <table id="table_users" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -49,6 +49,7 @@
                                     <th>Cidade</th>
                                     <th>Estado</th>
                                     <th>Email</th>
+                                    <th>Documentos</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>

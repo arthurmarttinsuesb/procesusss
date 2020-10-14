@@ -24,20 +24,29 @@ class AtivarUsuariosController extends Controller
         return View::make('ativarUsuarios.index');
     }
     public function edit($id)
-    {   
+    {
         $modelo = User::where('id', $id)->first();
         return view('ativarUsuarios.edit', compact('modelo'));
     }
 
     public function list()
     {
-        $usuario = User::where('status', 'Inativo')->with('cidade')->with('estado')->get();
+        $usuario = User::where('status', 'Inativo')->with('cidade')->with('estado')->with('file')->get();
 
         return DataTables::of($usuario)
-            ->editColumn('nascimento', function ($usuario) {
-                return date("d/m/Y", strtotime($usuario->nascimento));
-            })
-            ->editColumn('acao', function ($usuario) {
+        ->editColumn('nascimento', function ($usuario) {
+            return date("d/m/Y", strtotime($usuario->nascimento));
+        })
+        ->editColumn('file.filenames', function ($usuario) {
+            $docsHtml = '';
+
+            $docs = json_decode($usuario->file->filenames, true);
+            foreach($docs as $doc){
+                $docsHtml = $docsHtml. "<a href='/files/".$doc."' target='_blank'>".$doc."</a> <br>";
+            }
+            return $docsHtml;
+        })
+        ->editColumn('acao', function ($usuario) {
                 return BotoesDatatable::criarBotoesAtivar($usuario->id, 'ativar-usuarios');
             })->escapeColumns([0])
             ->make(true);

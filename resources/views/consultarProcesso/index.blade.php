@@ -41,14 +41,14 @@
                             <button type="button" class="btn btn-info float-left busca_processo" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>&nbsp Aguarde..."> <i class='fa fa-search'></i> Buscar</button>
                         </div>
                     </div>
-                           
+
                     </div>
                     @if (Session::has('message'))
                     <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                     @endif
                     <!-- /.card-header -->
 
-                    <div class="card-body">
+                    <div class="card-body table-responsive-sm">
                         <table id="table_processos" class="table table-bordered table-hover">
                             <thead>
                                 <tr>

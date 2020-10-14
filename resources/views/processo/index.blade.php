@@ -33,22 +33,28 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-3 float-right">
-                            <button data-toggle="modal" data-target="#modal-processo"
-                                class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar
-                                Processo</button>
+                        <div class="row">
+                            <div class="col-9 col-sm-1">
+                            </div>
+                            <div class="col-3 col-sm-11 ">
+                                <div class="float-right">
+                                    <button data-toggle="modal" data-target="#modal-processo"
+                                        class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar
+                                        Processo</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.card-header -->
                     @if (Session::has('message'))
                     <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                     @endif
-                    <div class="card-body">
+                    <div class="card-body table-responsive-sm">
                     @if(Auth::user()->hasRole('administrador'))
                         <table id="table_administrador" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                   <th>Criado Por</th>
+                                    <th>Criado Por</th>
                                     <th>Número Processo</th>
                                     <th>Data de Abertura</th>
                                     <th>Tipo</th>

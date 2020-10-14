@@ -62,7 +62,9 @@ $(document).ready(function($) {
                         success: function(data) {
                             if (data.errors) {
                                 Swal.fire("Atenção", "Encaminhamento cancelado, tente novamente mais tarde.", "error");
-                            } else {
+                            } else if (data.status == "Assinatura") {
+                                Swal.fire("Atenção", "Encaminhamento cancelado, você precisa ter no mínimo um documento criado para encaminhar o processo.", "error");
+                            } else if (data.status == "Ok") {
                                 swalWithBootstrapButtons.fire("Sucesso", "Processo Encaminhado", "success").then(function(result) {
                                     if (result.value) {
                                         window.location.href = base_url + "/processo/" + id_processo + "/edit";

@@ -93,11 +93,14 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card-footer">
+                <!-- se o processo estiber bloqueado não pode alterar mais nada -->
+                @if($processo->tramite=="Liberado")
+                     <div class="card-footer">
                         <button type="button" form="tramite" class="btn btn-info float-right add_tramite" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                         &nbsp Aguarde...">Salvar</button>
                     </div>
+                  @endif
+                  
                     <!-- /.card-footer -->
                 </form>
             </div>
