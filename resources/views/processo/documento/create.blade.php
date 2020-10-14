@@ -49,7 +49,7 @@
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
                        <div class="row">
-                            <div class="form-group col-7">
+                            <div class="form-group col-xl-7 col-sm-7">
                                 <strong>Titulo <span style="color: red;">*</span></strong>
                                 <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo') is-invalid @enderror" value="{{ old('titulo') }}">
                                 <input type="hidden"  name="processo" value="{{$processo->id}}">
@@ -60,7 +60,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-4">
+                            <div class="form-group col-xl-4 col-sm-4">
                                 <strong>Modelo de Documento <span style="color: red;">*</span></strong>
                                 <select id="tipo" name='tipo' class="form-control @error('tipo') is-invalid @enderror">
                                     <option value=''>Selecione</option>

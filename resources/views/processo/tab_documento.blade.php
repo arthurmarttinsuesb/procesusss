@@ -5,7 +5,7 @@
     </div>
     <br>
     <br>
-    <table id="table_documento" class="table table-bordered table-hover" width="100%">
+    <table id="table_documento" class="table table-bordered table-hover table-responsive-sm" width="100%">
         <thead>
         <tr>
             <th>Título</th>

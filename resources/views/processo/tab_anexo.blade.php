@@ -6,7 +6,7 @@
 </div>
 <br>
 <br>
-<table id="table_anexo" class="table table-bordered table-hover" style="width:100%">
+<table id="table_anexo" class="table table-bordered table-hover table-responsive-sm" style="width:100%">
     <thead>
         <tr>
             <th>Tipo</th>
