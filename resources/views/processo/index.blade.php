@@ -34,9 +34,9 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-9 col-sm-1">
+                            <div class="col-xl-9 col-sm-1">
                             </div>
-                            <div class="col-3 col-sm-11 ">
+                            <div class="col-xl-3 col-sm-11">
                                 <div class="float-right">
                                     <button data-toggle="modal" data-target="#modal-processo"
                                         class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar

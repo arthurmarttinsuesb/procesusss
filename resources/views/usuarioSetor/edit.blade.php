@@ -33,9 +33,13 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-3 float-right">
-                            <a href="{{ URL::to('usuario-setor') }}" class="btn btn-block btn-outline-info "><i
+                        <div class="row">
+                            <div class="col-xl-10 col-sm-9">
+                            </div>
+                            <div class="col-xl-2 col-sm-3">
+                                <a href="{{ URL::to('usuario-setor') }}" class="btn btn-block btn-outline-info "><i
                                     class="fa fa-list-alt"></i>Listar Colaboradores</a>
+                            </div>
                         </div>
                     </div>
 
@@ -54,7 +58,7 @@
                             <br><br>
 
                             <div class="row">
-                                <div class="form-group col-4">
+                                <div class="form-group col-xl-4 col-sm-4">
                                     <strong>Usuario <span style="color: red;">*</span></strong>
                                     <select
                                         class="form-control select2 form-control @error('fk_user', 'usuario-setor') is-invalid @enderror"
@@ -69,7 +73,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-4">
+                                <div class="form-group col-xl-4 col-sm-4">
                                     <strong>Setor <span style="color: red;">*</span></strong>
                                     <select
                                         class="form-control select2 form-control @error('fk_setor', 'usuario-setor') is-invalid @enderror"
@@ -84,7 +88,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-xl-2 col-sm-2">
                                     <strong>Tipo de Usuário <span style="color: red;">*</span></strong>
                                     <select
                                         class="form-control select2 form-control @error('tipo') is-invalid @enderror"
@@ -99,7 +103,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-2">
+                                <div class="form-group col-xl-2 col-sm-2">
                                     <strong>Data Entrada <span style="color: red;">*</span></strong>
                                     <input type="text"
                                         value="{{ old('data_entrada', date('d-m-Y', strtotime($usuarioSetor->data_entrada))) }}"
