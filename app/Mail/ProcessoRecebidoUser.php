@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\User;
 
-class SendMailUser extends Mailable
+class ProcessoRecebidoUser extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -35,6 +35,6 @@ class SendMailUser extends Mailable
             ->with([
                 'user' => $this->user,
             ])
-            ->view('emails.processoRecebido');
+            ->view('emails.processoRecebidoUser');
     }
 }

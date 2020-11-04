@@ -100,6 +100,18 @@
                                     </span>
                                     @enderror
                                 </div>
+
+                                <div class="form-group col-md-6">
+                                    <strong>Email <span style="color: red;">*</strong></label>
+                                   
+                                        <input value="{{ old('email', $setor->email) }}" type="text" autocomplete="off" id="email" name="email" class="form-control @error('email', 'email') is-invalid @enderror">
+                                   
+                                    @error('email','setor')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
                     </form>
 
