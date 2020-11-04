@@ -166,7 +166,17 @@ class ProcessoController extends Controller
         $processo = Processo::find($id);
         $log = ProcessoLog::where('fk_processo', $id)->get();
 
-        return view('processo.edit', ['processo' => $processo,'log' => $log]);
+        $id_user_logado = Auth::user()->id;
+
+        $user_parte_processo = Processo::where('fk_user', $id_user_logado)->where('id', $processo->id)->first();
+        $user_parte_doc = ProcessoTramitacao::where('fk_user', $id_user_logado)->where('fk_processo', $processo->id)->first();
+
+        if(isset($user_parte_processo) || isset($user_parte_doc)){
+            return view('processo.edit', ['processo' => $processo,'log' => $log]);
+        }
+        else{
+            return Redirect::to('home/');
+        }
     }
 
     /**
