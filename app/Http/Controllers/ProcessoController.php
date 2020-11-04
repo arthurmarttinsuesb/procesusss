@@ -195,7 +195,6 @@ class ProcessoController extends Controller
             }else{
                 $verifica_setor = ParticipacaoProcesso::participacao_processo_setor($usuario_setor->fk_setor,$id);
 
-<<<<<<< HEAD
                 if($verifica_usuario==true || $verifica_setor==true){
                     return view('processo.edit', ['processo' => $processo,'log' => $log]);
                 }else{
@@ -225,19 +224,6 @@ class ProcessoController extends Controller
             }
         }
         
-=======
-        $id_user_logado = Auth::user()->id;
-
-        $user_parte_processo = Processo::where('fk_user', $id_user_logado)->where('id', $processo->id)->first();
-        $user_parte_doc = ProcessoTramitacao::where('fk_user', $id_user_logado)->where('fk_processo', $processo->id)->first();
-
-        if(isset($user_parte_processo) || isset($user_parte_doc)){
-            return view('processo.edit', ['processo' => $processo,'log' => $log]);
-        }
-        else{
-            return Redirect::to('home/');
-        }
->>>>>>> c261f162179a642868188129f6480fded01c595e
     }
 
     /**
