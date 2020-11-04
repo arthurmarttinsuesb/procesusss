@@ -91,7 +91,7 @@ class AtivarUsuariosController extends Controller
             try{
                 Mail::to($user->email)->send(new UsuarioAtivado($user));
             }catch(\Exception $erro){
-                return response()->json(array('erro' => "ERRO_EMAIL"));
+                return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
             }
 
             return response()->json(array('status' => "OK"));

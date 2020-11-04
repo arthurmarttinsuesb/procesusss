@@ -153,6 +153,13 @@ class RegisterController extends Controller
                 $file->filenames=json_encode($files_upload);
                 $file->fk_user = $user->id;
                 $file->save();
+
+
+                try{
+                    Mail::to($user->email)->send(new SendMailUser($user));
+                }catch(\Exception $erro){
+                    return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
+                }
          } catch (\Exception  $erro) {
              return response()->json(array('as' => $erro));
          }
