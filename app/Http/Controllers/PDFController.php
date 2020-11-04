@@ -55,9 +55,9 @@ class PDFController extends Controller
                 $usuario = user::where('id', $vlr->fk_user)->first();
                 $data = date('d/m/Y H:s',strtotime($vlr->created_at));
 
-                $assinou =$assinou."<tr>
-                                <td>Documento Assinado Eletronicamente por <strong>$usuario->nome</strong>, em $data, conforme horário oficial de Brasilia.</td>
-                            </tr>
+                $assinou =$assinou."<br><br><br><br><br><br><tr>
+                                        <td>Documento Assinado Eletronicamente por <strong>$usuario->nome</strong>, em $data, conforme horário oficial de Brasilia, conforme Decreto XX/XXXX</td>
+                                    </tr>
                             <hr>";
             }
             // $usuario = user::where('id', $assinatura->fk_user)->first();
