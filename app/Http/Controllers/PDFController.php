@@ -7,6 +7,10 @@ use App\ModeloDocumento;
 use App\ProcessoDocumento;
 use App\DocumentoAssinatura;
 use App\User;
+use App\Processo;
+use App\ProcessoTramitacao;
+use Auth;
+use Redirect;
 
 use PDF;
 
@@ -109,11 +113,27 @@ class PDFController extends Controller
                 </html>";
         }
 
-        $pdf = new PDF();
-        $pdf::SetTitle($modelo->titulo);
-        $pdf::AddPage();
-        $pdf::writeHTML($html, true, false, true, false, '');
-        return $pdf::Output('modelo.pdf');
+        if($modelo->tipo == 'Público'){
+            $pdf = new PDF();
+            $pdf::SetTitle($modelo->titulo);
+            $pdf::AddPage();
+            $pdf::writeHTML($html, true, false, true, false, '');
+            return $pdf::Output('modelo.pdf');
+        }
+        else{
+            $id_user_logado = Auth::user()->id;
+            $user_parte_doc = ProcessoTramitacao::where('fk_user', $id_user_logado)->where('fk_processo', $modelo->fk_processo)->first();
 
+            if($modelo->fk_user == $id_user_logado || isset($user_parte_doc)){
+                $pdf = new PDF();
+                $pdf::SetTitle($modelo->titulo);
+                $pdf::AddPage();
+                $pdf::writeHTML($html, true, false, true, false, '');
+                return $pdf::Output('modelo.pdf');
+            }
+            else{
+                return Redirect::to('home/');
+            }
+        }
     }
 }
