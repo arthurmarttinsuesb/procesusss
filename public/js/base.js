@@ -234,6 +234,7 @@ function assinarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                 "Assinatura Realizada",
                                 "success"
                             );
+                            setTimeout(function () { document.location.reload(true); }, 5000);
                         }
                     },
                     error: function() {

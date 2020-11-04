@@ -238,9 +238,7 @@ class DocumentoController extends Controller
                 $documento_tramite->save();
             });
 
-            Session::flash('message_success', 'Documento assinado');
-           return Redirect::to('home');
-           
+            return response()->json(array('status' => "OK"));
         } catch (\Exception  $erro) {
             return response()->json(array('errors' => $erro));
         }
