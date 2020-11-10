@@ -6,8 +6,10 @@ use Response;
 use Auth;
 use DataTables;
 use DB;
+use Mail;
 use Illuminate\Http\Request;
-
+use App\Mail\ProcessoRecebidoUser;
+use App\Mail\ProcessoRecebidoSetor;
 use App\User;
 use App\Setor;
 use App\ProcessoDocumento;
@@ -98,9 +100,21 @@ class ProcessoTramitacaoController extends Controller
             if($fk_setor==null){
                 $user = User::find($fk_user);
                 $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$user->nome."</b>";
+                try{
+                    Mail::to($user->email)->send(new ProcessoRecebidoUser($user));
+                }catch(\Exception $erro){
+                    return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                }
             }else{
                 $setor = Setor::find($fk_setor);
                 $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>";
+
+
+                try{
+                    Mail::to($setor->email)->send(new ProcessoRecebidoSetor($setor));
+                }catch(\Exception $erro){
+                    return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                }
             }
 
             $log =  new ProcessoLog();

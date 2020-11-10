@@ -7,9 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-use App\User;
+use App\Setor;
 
-class SendMailUser extends Mailable
+class ProcessoRecebidoSetor extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,9 +18,9 @@ class SendMailUser extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Setor $setor)
     {
-        $this->user = $user;
+        $this->setor = $setor;
     }
 
     /**
@@ -31,10 +31,10 @@ class SendMailUser extends Mailable
     public function build()
     {
         return $this->from('prefeitura@email.com')
-            ->subject('Cadastro realizado com sucesso!')
+            ->subject('Processo recebido!')
             ->with([
-                'user' => $this->user,
+                'user' => $this->setor,
             ])
-            ->view('emails.user');
+            ->view('emails.processoRecebidoSetor');
     }
 }

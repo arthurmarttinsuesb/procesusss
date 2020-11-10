@@ -12,7 +12,8 @@ use DB;
 use Session;
 use Redirect;
 #class
-
+use Str;
+use App\UserSetor;
 use App\Processo;
 use App\ProcessoAnexo;
 use App\ProcessoDocumento;
@@ -21,6 +22,9 @@ use App\ProcessoTramitacao;
 use App\DocumentoTramite;
 use App\ProcessoLog;
 use App\Http\Utility\BotoesDatatable;
+use App\Http\Utility\ParticipacaoProcesso;
+
+
 
 class ProcessoController extends Controller
 {
@@ -82,8 +86,6 @@ class ProcessoController extends Controller
             })->escapeColumns([0])
             ->make(true);
     }
-
-
 
 
     /**
@@ -152,7 +154,6 @@ class ProcessoController extends Controller
             }
         }
 
-
     }
 
     /**
@@ -165,18 +166,58 @@ class ProcessoController extends Controller
     {
         $processo = Processo::find($id);
         $log = ProcessoLog::where('fk_processo', $id)->get();
+        //verifico qual o tipo de usuário logado
+        $tipo_usuario = Str::of(Auth::user()->getRoleNames())->replaceMatches('/[^A-Za-z0-9]++/', '');
+         /*criei uma função para verificar se o usuário logado está participando do processo, 
+         seja como autor ou na tramitação*/
+        $verifica_usuario = ParticipacaoProcesso::participacao_processo_user(Auth::user()->id,$id);
+        //verifico se o usuário logado está inserido em algum setor
+        $usuario_setor = UserSetor::where('fk_user',Auth::user()->id)->where('status','Ativo')->first();
+       
+        /*Verifico se o processo é privado, se for e o usuário for do tipo cidadão utilizo a função que consulta 
+         as tabelas necessárias para saber se o usuário faz parte do processo, se ele fizer pode acessar
+         o caminho determinado, se não ele é redirecionado para uma página que informa que ele 
+         não possui autorização de acesso a essa página, a mesma verificação é feita para o usuário 
+         que é colaborador/funcionário */
 
-        $id_user_logado = Auth::user()->id;
+        if($processo->tipo=="Privado"){
+            if($tipo_usuario=="cidadao"){
+                if($verifica_usuario==true){
+                    return view('processo.edit', ['processo' => $processo,'log' => $log]);
+                }else{
+                    abort(401);
+                }
+            }else{
+                $verifica_setor = ParticipacaoProcesso::participacao_processo_setor($usuario_setor->fk_setor,$id);
 
-        $user_parte_processo = Processo::where('fk_user', $id_user_logado)->where('id', $processo->id)->first();
-        $user_parte_doc = ProcessoTramitacao::where('fk_user', $id_user_logado)->where('fk_processo', $processo->id)->first();
+                if($verifica_usuario==true || $verifica_setor==true){
+                    return view('processo.edit', ['processo' => $processo,'log' => $log]);
+                }else{
+                    abort(401);
+                }
+            }
 
-        if(isset($user_parte_processo) || isset($user_parte_doc)){
-            return view('processo.edit', ['processo' => $processo,'log' => $log]);
+        /*Diferente do tipo privado caso o cidadão ou o colaborador não faça parte do processo como autor/tramitação
+        então o usuário é redirecionado para visualização da proposta e não para a edição, limitando assim o seu acesso. */
+
+        } if($processo->tipo=="Público"){
+
+            if($tipo_usuario=="cidadao"){
+                if($verifica_usuario==true){
+                    return view('processo.edit', ['processo' => $processo,'log' => $log]);
+                }else{
+                    return Redirect::to('processo/'.$id);
+                }
+            }else{
+                $verifica_setor = ParticipacaoProcesso::participacao_processo_setor($usuario_setor->fk_setor,$id);
+                if($verifica_usuario==true || $verifica_setor==true){
+                    return view('processo.edit', ['processo' => $processo,'log' => $log]);
+                }else{
+                    return Redirect::to('processo/'.$id);
+                }
+            }
         }
-        else{
-            return Redirect::to('home/');
-        }
+        
     }
 
     /**
@@ -210,6 +251,41 @@ class ProcessoController extends Controller
         } catch (\Exception  $erro) {
             Session::flash('message_erro', 'Não foi possível alterar os dados do processo, tente novamente mais tarde.!');
             return back()->withInput();
+        }
+    }
+
+
+    public function devolver($id)
+    {
+        try {
+            $processo = Processo::find($id);
+            $processo->tramite = "Liberado";
+            $processo->status = "Ativo";
+
+            DB::transaction(function () use ($processo) {
+                $processo->save();
+            });
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
+        }
+    }
+
+    public function encerrar($id)
+    {
+        try {
+            $processo = Processo::find($id);
+            $processo->status = "Encerrado";
+            $processo->tramite = "Encerrado";
+
+            DB::transaction(function () use ($processo) {
+                $processo->save();
+            });
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
         }
     }
 

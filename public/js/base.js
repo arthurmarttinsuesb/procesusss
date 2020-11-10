@@ -51,9 +51,16 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                             );
                         } else {
                             swalWithBootstrapButtons
-                                .fire("Sucesso", "Exclusão Realizada", "success").then(function(result) {
+                                .fire(
+                                    "Sucesso",
+                                    "Exclusão Realizada",
+                                    "success"
+                                )
+                                .then(function(result) {
                                     if (result.value) {
-                                        $("#" + idTable).DataTable().draw(false);
+                                        $("#" + idTable)
+                                            .DataTable()
+                                            .draw(false);
                                     }
                                 });
                         }
@@ -101,7 +108,9 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                     type: "post",
                     url: base_url + `/${rota}/${id}`,
                     headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
                     },
                     data: {
                         ativar: true, // mando esse campo pra confirmar q quero ativar, e nao atualizar outra info
@@ -117,7 +126,11 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                             swalWithBootstrapButtons
                                 .fire("Sucesso", "Usuário Ativado!", "success")
                                 .then(function(result) {
-                                    if (result.value) { $("#" + idTable).DataTable().draw(false); }
+                                    if (result.value) {
+                                        $("#" + idTable)
+                                            .DataTable()
+                                            .draw(false);
+                                    }
                                 });
                         }
                     },
@@ -139,7 +152,13 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
         });
 }
 
-function autenticarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
+function autenticarDialog({
+    nomeModulo,
+    rota,
+    idTable,
+    dataId = "id",
+    element,
+}) {
     const id = element.data(dataId);
     swalWithBootstrapButtons
         .fire({
@@ -157,7 +176,9 @@ function autenticarDialog({ nomeModulo, rota, idTable, dataId = "id", element })
                     type: "post",
                     url: base_url + `/${rota}/${id}`,
                     headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
                     },
                     data: {},
                     success: function(data) {
@@ -175,7 +196,11 @@ function autenticarDialog({ nomeModulo, rota, idTable, dataId = "id", element })
                                     "success"
                                 )
                                 .then(function(result) {
-                                    if (result.value) { $("#" + idTable).DataTable().draw(false); }
+                                    if (result.value) {
+                                        $("#" + idTable)
+                                            .DataTable()
+                                            .draw(false);
+                                    }
                                 });
                         }
                     },
@@ -234,6 +259,9 @@ function assinarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                 "Assinatura Realizada",
                                 "success"
                             );
+                            setTimeout(function() {
+                                document.location.reload(true);
+                            }, 5000);
                         }
                     },
                     error: function() {
@@ -248,6 +276,128 @@ function assinarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                 swalWithBootstrapButtons.fire(
                     "Atenção",
                     "Assinatura cancelada.",
+                    "error"
+                );
+            }
+        });
+}
+
+
+function encerrarDialog({ rota, element }) {
+    swalWithBootstrapButtons
+        .fire({
+            title: `Deseja encerrar esse processo?`,
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, quero encerrar!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true,
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "post",
+                    url: base_url + `/${rota}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    data: {},
+                    success: function(data) {
+                        if (data.error_banco) {
+                            Swal.fire(
+                                "Atenção",
+                                "Encerramento do processo cancelado, tente novamente mais tarde.",
+                                "error"
+                            );
+                        } else {
+                            swalWithBootstrapButtons.fire(
+                                "Sucesso",
+                                "Processo Encerrado",
+                                "success"
+                            ).then(function(result) {
+                                if (result.value) {
+                                    window.location.href = base_url + "/processo";
+                                }
+                            });
+                        }
+                    },
+                    error: function() {
+                        swalWithBootstrapButtons.fire(
+                            "Atenção",
+                            "Encerramento do processo cancelado, tente novamente mais tarde.",
+                            "error"
+                        );
+                    },
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    "Atenção",
+                    "Encerramento do processo cancelado.",
+                    "error"
+                );
+            }
+        });
+}
+
+
+function devolverDialog({ rota, element }) {
+
+    swalWithBootstrapButtons
+        .fire({
+            title: `Deseja devolver esse processo?`,
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, quero devolver!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true,
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "post",
+                    url: base_url + `/${rota}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    data: {},
+                    success: function(data) {
+                        if (data.error_banco) {
+                            Swal.fire(
+                                "Atenção",
+                                "Devolução cancelada, tente novamente mais tarde.",
+                                "error"
+                            );
+                        } else {
+                            swalWithBootstrapButtons.fire(
+                                "Sucesso",
+                                "Processo Devolvido.",
+                                "success"
+                            ).then(function(result) {
+                                if (result.value) {
+                                    window.location.href = base_url + "/processo";
+                                }
+                            });
+
+                        }
+                    },
+                    error: function() {
+                        swalWithBootstrapButtons.fire(
+                            "Atenção",
+                            "Devolução cancelada, tente novamente mais tarde.",
+                            "error"
+                        );
+                    },
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    "Atenção",
+                    "Devolução cancelada.",
                     "error"
                 );
             }

@@ -147,8 +147,11 @@
             <div class="container lst">
 
 
-<h4 class="well">Anexe os Documentos:</h4>
-    <p>Os documentos que podem ser anexados são RG, CPF, Comprovante de residência e uma foto 3 x 4</p>
+<h4 class="well">Anexar Documentos:</h4>
+<h5 class="well">- Comprovante de Residência</h5>
+<h5 class="well">- Uma Selfie</h5>
+<h5 class="well">- Documento de Identificação</h5>
+
     <div class="input-group hdtuto control-group lst increment" >
       <input type="file" name="filenames[]" class="myfrm form-control">
       <div class="input-group-btn">

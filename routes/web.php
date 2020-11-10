@@ -68,6 +68,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/list/{id}', ['uses' => 'ProcessoTramitacaoController@list']);
         });
 
+        Route::group(['prefix' => 'processo', 'where' => ['prefix' => 'processo']], function () {
+            Route::get('/list', ['uses' => 'ProcessoController@list']);
+            Route::post('/{id}/encerrar', ['uses' => 'ProcessoController@encerrar']);
+            Route::post('/{id}/devolver', ['uses' => 'ProcessoController@devolver']);
+        });
+
         // rotas para o metodo 'list'
         Route::get('/usuario-setor/list', 'UserSetorsController@list');
         Route::get('/unidade/list', 'SecretariaController@list');

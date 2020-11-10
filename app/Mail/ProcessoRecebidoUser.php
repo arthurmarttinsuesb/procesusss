@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\User;
 
-class SendMailUser extends Mailable
+class ProcessoRecebidoUser extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,10 +31,10 @@ class SendMailUser extends Mailable
     public function build()
     {
         return $this->from('prefeitura@email.com')
-            ->subject('Cadastro realizado com sucesso!')
+            ->subject('Processo recebido!')
             ->with([
                 'user' => $this->user,
             ])
-            ->view('emails.user');
+            ->view('emails.processoRecebidoUser');
     }
 }

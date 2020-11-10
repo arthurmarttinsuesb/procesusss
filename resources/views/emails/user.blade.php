@@ -335,10 +335,10 @@
                                             <table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;border-radius:4px;background-color:#FFFFFF;" width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff" role="presentation">
                                                 <tr style="border-collapse:collapse;">
                                                     <td class="es-m-txt-l" bgcolor="#ffffff" align="left" style="Margin:0;padding-top:20px;padding-bottom:20px;padding-left:30px;padding-right:30px;">
-                                                        <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:18px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:27px;color:#666666;">Olá {{ $user->nome }}, você acabou de criar a sua conta, agora basta apenas ativa-la!</p>
+                                                        <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:18px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:27px;color:#666666;">Olá {{ $user->nome }}, você acabou de criar a sua conta, agora basta esperar sua ativação!</p>
                                                     </td>
                                                 </tr>
-                                                <tr style="border-collapse:collapse;">
+                                              <!--  <tr style="border-collapse:collapse;">
                                                     <td class="es-m-txt-l" align="left" style="padding:0;Margin:0;padding-top:20px;padding-left:30px;padding-right:30px;">
                                                         <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:18px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:27px;color:#666666;">Para ativar sua conta, será necessario realizar os seguintes passos:</p>
                                                     </td>
@@ -353,7 +353,7 @@
                                                             <li style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:18px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:27px;Margin-bottom:15px;color:#666666;">Foto 3 x 4</li>
                                                         </ul>
                                                     </td>
-                                                </tr>
+                                                </tr> -->
                                                 <tr style="border-collapse:collapse;">
                                                     <td class="es-m-txt-l" align="left" style="Margin:0;padding-top:20px;padding-left:30px;padding-right:30px;padding-bottom:40px;">
                                                         <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:18px;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:27px;color:#666666;">Muito obrigado,</p>

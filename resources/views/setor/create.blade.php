@@ -105,6 +105,17 @@
                                     </span>
                                     @enderror
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <strong>Email <span style="color: red;">*</span></strong>
+                                   
+                                        <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="email@exemplo.com" value="{{old('email')}}" />
+                                   
+                                    @error('email','setor')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
 
                             <!-- /.card-body -->
