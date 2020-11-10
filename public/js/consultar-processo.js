@@ -9,7 +9,9 @@ $(document).on("click", ".btnExcluir", function () {
 
 $(document).on("click", ".busca_processo", function () {
     var busca = $("#campo_busca").val();
-    buscarProcesso(busca);
+
+    if (busca != "") buscarProcesso(busca);
+    else alert("Campo de busca em branco, Preencha com os dados da busca!!!");
 });
 
 const table = $("#table_processos");

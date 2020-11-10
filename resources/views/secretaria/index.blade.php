@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Secretaria')
-@section('contentheader_title', 'Secretaria')
+@section('htmlheader_title', 'Unidade')
+@section('contentheader_title', 'Unidade')
 
 @section('conteudo')
 <!-- DataTables -->
@@ -15,12 +15,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Secretarias</h1>
+                    <h1>Unidades</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                        <li class="breadcrumb-item active">Secretaria</li>
+                        <li class="breadcrumb-item active">Unidade</li>
                     </ol>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                             <div class="col-xl-10 col-sm-9">
                             </div>
                             <div class="col-xl-2 col-sm-3">
-                            <a href="{{ URL::to('secretaria/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Secretaria</a>
+                            <a href="{{ URL::to('unidade/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Unidade</a>
                             </div>
                         </div>
                     </div>
