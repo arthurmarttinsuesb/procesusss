@@ -50,7 +50,8 @@
                     </div>
                     @endif
                     <form method="POST" action="/secretaria/{{$secretaria->id}}" id="form">
-
+                    @csrf
+                        @method('PUT')
                         <div class="card-body">
                             (<span style="color: red;">*</span>) Campos Obrigatórios
                             <br><br>
@@ -80,10 +81,10 @@
                 <!-- /.card-body -->
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                    <button type="submit" form="form" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                     &nbsp Aguarde...">Salvar</button>
-                <!-- /.card-footer -->
-            </div>
+                    <!-- /.card-footer -->
+                </div>
             <!-- /.card -->
         </div>
 </div>

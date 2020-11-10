@@ -1,16 +1,38 @@
-<div class="float-right">
-<a href="/processo-tramitacao/create/{{$processo->id}}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Encaminhamento</a>
-</div>
-<br>
-<br>
-    <table id="table_tramite" class="table table-bordered table-hover" style="width:100%">
-        <thead>
+<div class=" float-right">
+    <div class="table-responsive">
+        <table>
             <tr>
-                <th>Trâmite</th>
+                @if($processo->fk_user !== Auth::user()->id)
+                    <td>
+                        <a href="#" class="btn btn-block btn-outline-warning btnDevolver"><i class="fa fa-undo-alt"></i> Devolver o Processo</a>
+                    </td>
+                @endif
+                @if($processo->tramite !== 'Bloqueado' )
+                    <td>
+                        <a href="#" class="btn btn-block btn-outline-danger btnEncerrar"><i class="fa fa-times"></i> Encerrar o Processo</a>
+                    </td>
+                @endif
+
+                <td>
+                    <a href="/processo-tramitacao/create/{{$processo->id}}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Encaminhamento</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-    </table>
+        </table>
+    </div>
+</div>
+
+   
+
+<br>
+<br>
+<table id="table_tramite" class="table table-bordered table-hover" style="width:100%">
+    <thead>
+        <tr>
+            <th>Trâmite</th>
+        </tr>
+    </thead>
+    <tbody>
+</table>
 
 
 
