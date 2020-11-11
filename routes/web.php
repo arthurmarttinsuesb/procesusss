@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/processo/list', 'ProcessoController@list');
         Route::get('/setor/list', 'SetorController@list');
         Route::get('/processo/listar_processos', 'ProcessoController@listar_processos');
-        Route::get('/documento/listar_documentos', 'ProcessoController@listar_documentos');
+        Route::get('/documento/listar_documentos', 'DocumentoController@listar_documentos');
         Route::get('/ativar-usuarios/list', 'AtivarUsuariosController@list');
         Route::post('/ativar-usuarios/ativar/{id}', 'AtivarUsuariosController@ativar_usuario');
         Route::get('/consultar-processo/list/{busca}', 'ConsultarProcessoController@list');

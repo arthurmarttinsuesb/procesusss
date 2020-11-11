@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Processo')
-@section('contentheader_title', 'Processo')
+@section('htmlheader_title', 'Documento')
+@section('contentheader_title', 'Documento')
 
 @section('conteudo')
 <!-- DataTables -->
@@ -14,13 +14,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Processos Recebidos</h1>
+                    <h1>Documento Recebidos</h1>
                 </div>
 
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Processos Recebidos</li>
+                        <li class="breadcrumb-item active">Documento Recebidos</li>
                     </ol>
                 </div>
             </div>
@@ -48,29 +48,41 @@
                     <div class="card-body table-responsive-sm">
                     @if(Auth::user()->hasRole('administrador') || Auth::user()->hasRole('funcionario') )
                         
-                        <table id="table_processo_lista" class="table table-bordered table-hover">
+                        <table id="table_documento_lista" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Número Processo</th>
-                                    <th>Tipo de Processo</th>
-                                    <th>Criado por</th>
+                                    <th>Documento</th>
+                                    <th>Descrição</th>
                                     <th>Data de Abertura</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($processo as $processos)
+                                @foreach($documento as $documentos)
                                     <tr>
-                                        <td>{{$processos->processo->numero}}</td>
-                                        <td>{{$processos->processo->tipo}}</td>
-                                        
-                                        <td>{{$processos->processo->user->nome}}</td>
-                                        <td>{{date('d/m/Y H:i', strtotime($processos->created_at))}}</td>
-                                        <td><div class="btn-group btn-group-sm">
-                                            <a href="/processo/{{$processos->processo->id}}/edit" class="btn bg-info color-palette" title="Visualizar Documento Completo"
-                                                data-toggle="tooltip"><i class="fa fa-eye"></i> Acessar
+                                        <td>{{$documentos->processo_documento->titulo}}</td>
+                                        <td>{{$documentos->processo_documento->descricao}}</td>
+                                        <td>{{date('d/m/Y H:i', strtotime($documentos->created_at))}}</td>
+                                        <td>@if($documentos->assinatura == TRUE)
+                                        <div class="btn-group btn-group-sm">
+                                            <button type='button' class="btn bg-success color-palette btnAssinar"
+                                            data-id="{{$documentos->id}}" title="Assinar Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Assinar
+                                            </button>
+                                            <a href="/pdf/documento/{{$documentos->processo_documento->id}}" target='_blank' class="btn bg-info color-palette" title="Visualizar Documento Completo"
+                                                data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
                                             </a>
-                                        </div></td>
+                                        </div>
+                                        @else
+                                        <div class="btn-group btn-group-sm">
+                                            <button type='button' class="btn bg-success color-palette btnAssinar"
+                                            data-id="{{$documentos->id}}" title="Marcar documento como lido" data-toggle="tooltip"><i class="fa fa-envelope-open-text"></i></i> Marcar como lido
+                                            </button>
+                                            <a href="/pdf/documento/" target='_blank' class="btn bg-info color-palette" title="Visualizar Documento Completo"
+                                                data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
+                                            </a>
+                                        </div>
+
+                                    @endif</td>
                                     </tr>
                                 @endforeach    
                             </tbody>

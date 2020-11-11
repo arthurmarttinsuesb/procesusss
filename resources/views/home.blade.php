@@ -172,6 +172,22 @@
                             }
                            ?>
                         @endforeach
+                        @if($documento->count()> 5)
+                           
+                           <div class="row">
+                               <div class="col-xl-10 col-sm-9">
+                               </div>
+                               <div class=" col-xl-2 col-sm-3">
+                                   <div class=" btn-group-sm">
+                                               <a href="/documento/listar_documentos" class="btn bg-info color-palette" title="Ver mais documentos"
+                                                   data-toggle="tooltip"><i class="fa fa-eye"></i> Ver mais documentos
+                                               </a>
+                                           </div>
+                               </div>
+                           </div>
+                      
+                                      
+                               @endif
                     @else
                     <div class="alert alert-info alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
