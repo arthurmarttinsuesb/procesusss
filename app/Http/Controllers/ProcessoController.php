@@ -86,7 +86,53 @@ class ProcessoController extends Controller
             })->escapeColumns([0])
             ->make(true);
     }
+    public function listar_processos()
+    {
+        $user = Auth::user(); 
+        if ($user->hasRole('administrador') || $user->hasRole('funcionario')) {
 
+            $setor  = UserSetor::where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
+            $processo  = ProcessoTramitacao::where('status','Criado')->where('fk_user', Auth::user()->id)->orWhere('fk_setor', $setor->fk_setor)->get();
+            return view('processo.processo_lista', compact('processo'));
+        }
+    }
+   /* public function list_processo(Request $request)
+    {
+
+        $user = Auth::user(); //
+       
+        if ($user->hasRole('administrador') || $user->hasRole('funcionario')) {
+            $processo  = Processo::where('status','Criado')->get();
+        }
+        
+        return Datatables::of($processo)
+            ->editColumn('numero', function ($processo) {
+                return  $processo->numero;
+            })
+            ->editColumn('tipo', function ($processo) {
+                return  $processo->tipo;
+            })
+            ->editColumn('criador', function ($processo) {
+                return  $processo->user->nome;
+            })
+            ->editColumn('data', function ($processo) {
+                return  date('d/m/Y', strtotime($processo->created_at));
+            })
+            ->editColumn('acao', function ($processo) {
+                return '<div class="btn-group btn-group-sm">
+                                <a href="/processo/' . $processo->id . '"
+                                class="btn bg-teal color-palette"
+                                title="Visualizar" data-toggle="tooltip">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>';
+            })
+            ->editColumn('criado', function ($processo) {
+                return  $processo->created_at;
+
+            })->escapeColumns([0])
+            ->make(true);
+    }*/
 
 
 
@@ -140,7 +186,7 @@ class ProcessoController extends Controller
      */
     public function show($id)
     {
-        $processo = Processo::find($id);
+       /* $processo = Processo::find($id);
         foreach(Auth::user()->getRoleNames() as $nome){
             //verifico se o usuário logado é cidadão
             if($nome!=="cidadao" || $processo->fk_user == Auth::user()->id){
@@ -155,7 +201,7 @@ class ProcessoController extends Controller
                 abort(401);
             }
         }
-
+*/
     }
 
     /**
