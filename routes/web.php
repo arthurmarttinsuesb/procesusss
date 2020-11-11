@@ -69,9 +69,15 @@ Route::group(['middleware' => 'auth'], function () {
             
         });
 
+        Route::group(['prefix' => 'processo', 'where' => ['prefix' => 'processo']], function () {
+            Route::get('/list', ['uses' => 'ProcessoController@list']);
+            Route::post('/{id}/encerrar', ['uses' => 'ProcessoController@encerrar']);
+            Route::post('/{id}/devolver', ['uses' => 'ProcessoController@devolver']);
+        });
+
         // rotas para o metodo 'list'
         Route::get('/usuario-setor/list', 'UserSetorsController@list');
-        Route::get('/secretaria/list', 'SecretariaController@list');
+        Route::get('/unidade/list', 'SecretariaController@list');
         Route::get('/processo/list', 'ProcessoController@list');
         Route::get('/setor/list', 'SetorController@list');
         Route::get('/processo/listar_processos', 'ProcessoController@listar_processos');
@@ -84,7 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
         // para que o laravel não sobrescreva(comportamento padrão do resources)
         Route::resource('modelo-documento', 'ModeloDocumentoController');
         Route::resource('usuario-setor', 'UserSetorsController');
-        Route::resource('secretaria', 'SecretariaController');
+        Route::resource('unidade', 'SecretariaController');
         Route::resource('processo', 'ProcessoController');
         Route::resource('setor', 'SetorController');
         Route::resource('fullcalendar', 'FullCalendarController');

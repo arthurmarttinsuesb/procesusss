@@ -80,12 +80,12 @@ class BotoesDatatable
                     data-id="' . $id . '"
                     title="Ativar" data-toggle="tooltip">
                     <i class="fas fa-user-lock"></i>
-                </a> 
+                </a>
                 <a href="/' . $route . '/' . $id . '/edit"
                     class="btn btn-info"
                     title="Alterar" data-toggle="tooltip">
                     <i class="fas fa-pencil-alt"></i>
-                </a> 
+                </a>
                 <a href="#"
                     class="btn bg-danger color-palette btnExcluir"
                     data-id="' . $id . '"
@@ -119,7 +119,7 @@ class BotoesDatatable
         if ($assinatura) {
 
             $botoes = $botoes . ' <a href="#"
-                class="btn bg-secondary color-palette btnAssinar" 
+                class="btn bg-secondary color-palette btnAssinar"
                 data-id="' . $id . '"
                 title="Assinar" data-toggle="tooltip">
                 <i class="fa fa-edit"></i>

@@ -1,8 +1,8 @@
 @extends('layouts.app')
- 
+
  @section('htmlheader_title', 'Encaminhamento')
  @section('contentheader_title', 'Encaminhamento')
- @section('conteudo') 
+ @section('conteudo')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -49,16 +49,19 @@
                             <div class="form-group col-md-6">
                             <input type="hidden" id="processo" value='{{$processo->id}}'>
                                 <strong>Setor <span style="color: red;">*</span></strong>
+                                @inject('secretaria', 'App\Secretaria')
                                 <select id="select_secretaria"
                                     class="form-control select2 form-control @error('fk_setor', 'setor') is-invalid @enderror"
                                     name="fk_setor">
                                     @foreach ($setores as $setor)
-                                        @if (old('fk_setor') == $setor->id)
-                                        <option value="{{$setor->id}}" selected>{{$setor->titulo}}
-                                        </option>
-                                        @else
-                                        <option value="{{$setor->id}}">{{$setor->titulo}}</option>
-                                        @endif
+                                        @foreach ($secretaria->where('id', $setor->id)->get() as $secSigla)
+                                            @if (old('fk_setor') == $setor->id)
+                                            <option value="{{$setor->id}}" selected>{{$secSigla->sigla}} - {{$setor->sigla}}
+                                            </option>
+                                            @else
+                                            <option value="{{$setor->id}}">{{$secSigla->sigla}} - {{$setor->sigla}}</option>
+                                            @endif
+                                        @endforeach
                                     @endforeach
                                     <option value="selecione" selected>Selecione</option>
                                 </select>
@@ -100,7 +103,7 @@
                         &nbsp Aguarde...">Salvar</button>
                     </div>
                   @endif
-                  
+
                     <!-- /.card-footer -->
                 </form>
             </div>

@@ -28,7 +28,9 @@
 
     <!-- Main content -->
     <section class="content">
+           
         <div class="row">
+       
             <div class="col-md-12">
             @if (Session::has('message_sucesso'))
                 <div class="alert alert-info alert-dismissible col-12">
@@ -44,6 +46,7 @@
                      {{ Session::get('message') }}
                 </div>
             @endif
+          
 
                <input type='hidden' id='tab'  @if (Session::has('tab')) value="{{ Session::get('tab') }}" @else value='tab_processo' @endif>
                 <div class="card card-primary card-outline card-outline-tabs">

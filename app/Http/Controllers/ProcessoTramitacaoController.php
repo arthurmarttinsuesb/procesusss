@@ -47,7 +47,7 @@ class ProcessoTramitacaoController extends Controller
         }
     }
 
-   
+
 
     // public function index(Request $request, $processo)
     // {
@@ -95,11 +95,11 @@ class ProcessoTramitacaoController extends Controller
 
             $processo = Processo::find($id);
             $processo->tramite = "Bloqueado";
-            
+
             //verifico pra onde foi enviado o processo, e mostro no log especificando se foi setor ou usuário;
             if($fk_setor==null){
                 $user = User::find($fk_user);
-                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$user->nome."</b>"; 
+                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$user->nome."</b>";
                 try{
                     Mail::to($user->email)->send(new ProcessoRecebidoUser($user));
                 }catch(\Exception $erro){
@@ -107,9 +107,9 @@ class ProcessoTramitacaoController extends Controller
                 }
             }else{
                 $setor = Setor::find($fk_setor);
-                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>"; 
-              
-               
+                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>";
+
+
                 try{
                     Mail::to($setor->email)->send(new ProcessoRecebidoSetor($setor));
                 }catch(\Exception $erro){
@@ -121,7 +121,7 @@ class ProcessoTramitacaoController extends Controller
             $log->fk_user = Auth::user()->id;
             $log->fk_processo = $id;
             $log->status = $status_log;
-            
+
             $tramite->save();
 
             DB::transaction(function () use ($tramite,$processo,$log,$id) {
@@ -135,7 +135,7 @@ class ProcessoTramitacaoController extends Controller
             }else{
                 return Response::json(array('status' => 'Assinatura'));
             }
-            
+
             } catch (\Exception  $erro) {
                 return Response::json(array('errors' => $erro));
             }

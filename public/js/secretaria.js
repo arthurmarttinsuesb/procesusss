@@ -1,14 +1,14 @@
 $(document).on("click", ".btnExcluir", function () {
     deleteDialog({
         nomeModulo: "Secretaria",
-        rota: "secretaria",
+        rota: "unidade",
         idTable: "table_secretarias",
         element: $(this),
     });
 });
 
 var tabela = $("#table_secretarias").DataTable({
-    ajax: base_url + "/secretaria/list",
+    ajax: base_url + "/unidade/list",
     scrollCollapse: true,
     responsive: true,
     paging: true,

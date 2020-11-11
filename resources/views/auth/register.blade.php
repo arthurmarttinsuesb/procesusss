@@ -8,7 +8,7 @@
 
 <br><br>
 <div class="login-logo">
-        <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}" 
+        <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}"
         alt="Processus" style="width: 20%; height: auto;"></a>
 </div>
 <!-- /.login-logo -->
@@ -105,7 +105,7 @@
                         <input type="text" class="form-control @error('logradouro') is-invalid @enderror" name="logradouro" id="logradouro" placeholder="Rua/Avenida" value="{{old('logradouro')}}" />
                     </div>
                 </div>
-               
+
             </div>
 
             <div class="row">
@@ -154,14 +154,14 @@
 
     <div class="input-group hdtuto control-group lst increment" >
       <input type="file" name="filenames[]" class="myfrm form-control">
-      <div class="input-group-btn"> 
+      <div class="input-group-btn">
         <button class="btn btn-success" type="button"><i class="fas fa-plus"></i></button>
       </div>
     </div>
     <div class="clone hide">
       <div class="hdtuto control-group lst input-group" style="margin-top:10px">
         <input type="file" name="filenames[]" class="myfrm form-control">
-        <div class="input-group-btn"> 
+        <div class="input-group-btn">
           <button class="btn btn-danger" type="button"><i class="fas fa-trash"></i></button>
         </div>
       </div>
@@ -198,11 +198,11 @@
 @section('scripts-adicionais')
 <script type="text/javascript">
     $(document).ready(function() {
-      $(".btn-success").click(function(){ 
+      $(".btn-success").click(function(){
           var lsthmtl = $(".clone").html();
           $(".increment").after(lsthmtl);
       });
-      $("body").on("click",".btn-danger",function(){ 
+      $("body").on("click",".btn-danger",function(){
           $(this).parents(".hdtuto").remove();
       });
     });

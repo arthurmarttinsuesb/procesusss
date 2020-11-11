@@ -134,8 +134,6 @@ class ProcessoController extends Controller
             ->make(true);
     }*/
 
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -212,8 +210,6 @@ class ProcessoController extends Controller
      */
     public function edit($id)
     {
-
-
         $processo = Processo::find($id);
         $log = ProcessoLog::where('fk_processo', $id)->get();
         //verifico qual o tipo de usuário logado
@@ -231,7 +227,6 @@ class ProcessoController extends Controller
          que é colaborador/funcionário */
 
         if($processo->tipo=="Privado"){
-
             if($tipo_usuario=="cidadao"){
                 if($verifica_usuario==true){
                     return view('processo.edit', ['processo' => $processo,'log' => $log]);
@@ -266,7 +261,6 @@ class ProcessoController extends Controller
                 }else{
                     return Redirect::to('processo/'.$id);
                 }
-
             }
         }
         
@@ -303,6 +297,41 @@ class ProcessoController extends Controller
         } catch (\Exception  $erro) {
             Session::flash('message_erro', 'Não foi possível alterar os dados do processo, tente novamente mais tarde.!');
             return back()->withInput();
+        }
+    }
+
+
+    public function devolver($id)
+    {
+        try {
+            $processo = Processo::find($id);
+            $processo->tramite = "Liberado";
+            $processo->status = "Ativo";
+
+            DB::transaction(function () use ($processo) {
+                $processo->save();
+            });
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
+        }
+    }
+
+    public function encerrar($id)
+    {
+        try {
+            $processo = Processo::find($id);
+            $processo->status = "Encerrado";
+            $processo->tramite = "Encerrado";
+
+            DB::transaction(function () use ($processo) {
+                $processo->save();
+            });
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
         }
     }
 

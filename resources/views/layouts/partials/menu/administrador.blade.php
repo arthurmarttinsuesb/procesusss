@@ -17,9 +17,9 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="/secretaria" class="nav-link">
+    <a href="/unidade" class="nav-link">
         <i class="nav-icon fa fa-university"></i>
-        <p>Secretaria</p>
+        <p>Unidade</p>
     </a>
 </li>
 <li class="nav-item">
@@ -46,4 +46,3 @@
         <p>Agenda</p>
     </a>
 </li> -->
-              
