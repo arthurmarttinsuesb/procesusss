@@ -22,6 +22,9 @@ $(document).ready(function($) {
     if (estadoSelect.selectedIndex !== 0) {
         buscarCidade();
     }
+
+
+    
 });
 
 function formatarCnpjCpf($) {
@@ -57,3 +60,5 @@ function buscarCidade() {
         $("#cidade").html(option).show();
     });
 }
+
+
