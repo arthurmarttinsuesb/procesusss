@@ -22,8 +22,6 @@ use App\ProcessoTramitacao;
 use App\DocumentoTramite;
 use App\ProcessoLog;
 use App\Http\Utility\BotoesDatatable;
-use App\Http\Utility\ParticipacaoProcesso;
-
 
 
 class ProcessoController extends Controller
@@ -213,122 +211,72 @@ class ProcessoController extends Controller
     {
         $processo = Processo::firstWhere('numero',$id);
 
-        if(!isset($processo)){
-            abort(404);
-        }else{
-            $log = ProcessoLog::where('fk_processo', $processo->id)->get();
-
-            /* Independente do tipo de usuário, se sou autor do processo e tenho o tramite = Liberado (Tenho acesso a editar o processo), caso o tramite = Bloqueado (Mesmo sendo autor, só tenho acesso a visualizar o processo)*/
-            if($processo->fk_user==Auth::user()->id && $processo->tramite=="Liberado"){
-                return view('processo.edit', ['processo' => $processo,'log' => $log, 'tramite'=>""]);
-            }else if($processo->fk_user==Auth::user()->id && $processo->tramite=="Bloqueado"){
-                return Redirect::to('processo/'.$processo->numero);
-            }else {
-
-            //verifico qual o tipo de usuário logado
-            $tipo_usuario = Str::of(Auth::user()->getRoleNames())->replaceMatches('/[^A-Za-z0-9]++/', '');
-
-            /*Confiro qual o tipo de usuário logado, se for do tipo cidadão faço as seguintes 
-            verificações para determinar o tipo de acesso:
-                1º - não é autor do processo+teor= Público (Pode acessar a tela de consulta)
-                2º - não é autor do processo+teor= Privado (Redirecionado para a página de erro 401 que é de permissão negada) */
-
-            if($tipo_usuario=="cidadao"){
-                if($processo->fk_user!==Auth::user()->id && $processo->tipo=="Público"){
-                    return Redirect::to('processo/'.$processo->numero);
-                }else if($processo->fk_user!==Auth::user()->id && $processo->tipo=="Privado"){
-                    abort(401);
-                }
+            if(!isset($processo)){
+                abort(404);
             }else{
+                $log = ProcessoLog::where('fk_processo', $processo->id)->get();
 
-                //verifico o setor no qual o colaborador está lotado.
-                $usuario_setor = UserSetor::where('fk_user', Auth::user()->id)->where('status','Ativo')->first();
-
-                /* para liberar o acesso ao usuário do tipo colaborador preciso realizar as devidas verificações na tabela de tramitação
-                - Preciso saber se o usuário faz parte do processo, seja como usuário direto ou como parte do setor com o status dessa tramitação bloqueada ou não*/
-                $processo_tramitacao_user_livre = ProcessoTramitacao::where('fk_processo', $processo->id)->where('fk_user',Auth::user()->id)->where('status','Criado')->first();
-                
-                $processo_tramitacao_user_bloqueado = ProcessoTramitacao::where('fk_processo', $processo->id)->where('fk_user',Auth::user()->id)->where('status','Bloqueado')->first();
-                
-                $processo_tramitacao_setor_livre = ProcessoTramitacao::where('fk_setor', $usuario_setor->fk_setor)->where('fk_processo', $processo->id)->where('status','Criado')->first();
-
-                $processo_tramitacao_setor_bloqueado = ProcessoTramitacao::where('fk_setor', $usuario_setor->fk_setor)->where('fk_processo', $processo->id)->where('status','Bloqueado')->first();
-
-                /*Apesar das repetições quanto ao acesso ao banco nessa etapa eu confirmo se:
-                1º Se o usuário com o seu ID faz parte da tramitação e seu status = Criado (Libero o acesso para editar o processo);
-                2º Se o usuário com o seu ID faz parte da tramiatação mais o seu status = Bloqueado (Libero acesso somente para visualizar o processo);
-                3º Caso o processo foi enviado para o setor do usuário e o status da tramitação = Criado (É liberada o acesso a qualquer usuário que faça parte do setor e qualquer um pode fazer as devidas observações e alterações)
-                4º O processo passou pelo setor mais o status da tramitação = Bloqueado (Liberado somente a visualização)
-                5º Caso nenhuma dessas vericações sejam true, então partimos para o ultimo else que nesse caso o usuário não se faz participante de nenhuma forma do processo mais quer te acesso, diante disso observamos se o processo tem o teor público ou privado, se for público pode visualizar se for privado é enviado para a página de erro 401 que apresenta a mensagem de acesso não autorizado. */
-                if(isset($processo_tramitacao_user_livre)){
-                    return view('processo.edit', ['processo' => $processo,'log' => $log,'tramite'=>$processo_tramitacao_user_livre->id]);
-                }else if(isset($processo_tramitacao_user_bloqueado)){
+                /* Independente do tipo de usuário, se sou autor do processo e tenho o tramite = Liberado (Tenho acesso a editar o processo), caso o tramite = Bloqueado (Mesmo sendo autor, só tenho acesso a visualizar o processo)*/
+                if($processo->fk_user==Auth::user()->id && $processo->tramite=="Liberado"){
+                    return view('processo.edit', ['processo' => $processo,'log' => $log, 'tramite'=>""]);
+                }else if($processo->fk_user==Auth::user()->id && $processo->tramite=="Bloqueado"){
                     return Redirect::to('processo/'.$processo->numero);
-                }else if(isset($processo_tramitacao_setor_livre)){
-                    return view('processo.edit', ['processo' => $processo,'log' => $log,'tramite'=>$processo_tramitacao_setor_livre->id]);
-                }else if(isset($processo_tramitacao_setor_bloqueado)){
-                    return Redirect::to('processo/'.$processo->numero);
-                }else{
-                    if($processo->tipo=="Público"){
+                }else {
+
+                //verifico qual o tipo de usuário logado
+                $tipo_usuario = Str::of(Auth::user()->getRoleNames())->replaceMatches('/[^A-Za-z0-9]++/', '');
+
+                /*Confiro qual o tipo de usuário logado, se for do tipo cidadão faço as seguintes 
+                verificações para determinar o tipo de acesso:
+                    1º - não é autor do processo+teor= Público (Pode acessar a tela de consulta)
+                    2º - não é autor do processo+teor= Privado (Redirecionado para a página de erro 401 que é de permissão negada) */
+
+                if($tipo_usuario=="cidadao"){
+                    if($processo->fk_user!==Auth::user()->id && $processo->tipo=="Público"){
                         return Redirect::to('processo/'.$processo->numero);
-                    }else if($processo->tipo=="Privado"){
+                    }else if($processo->fk_user!==Auth::user()->id && $processo->tipo=="Privado"){
                         abort(401);
+                    }
+                }else{
+
+                    //verifico o setor no qual o colaborador está lotado.
+                    $usuario_setor = UserSetor::where('fk_user', Auth::user()->id)->where('status','Ativo')->first();
+
+                    /* para liberar o acesso ao usuário do tipo colaborador preciso realizar as devidas verificações na tabela de tramitação
+                    - Preciso saber se o usuário faz parte do processo, seja como usuário direto ou como parte do setor com o status dessa tramitação bloqueada ou não*/
+                    $processo_tramitacao_user_livre = ProcessoTramitacao::where('fk_processo', $processo->id)->where('fk_user',Auth::user()->id)->where('status','Criado')->first();
+                    
+                    $processo_tramitacao_user_bloqueado = ProcessoTramitacao::where('fk_processo', $processo->id)->where('fk_user',Auth::user()->id)->where('status','Bloqueado')->first();
+                    
+                    $processo_tramitacao_setor_livre = ProcessoTramitacao::where('fk_setor', $usuario_setor->fk_setor)->where('fk_processo', $processo->id)->where('status','Criado')->first();
+
+                    $processo_tramitacao_setor_bloqueado = ProcessoTramitacao::where('fk_setor', $usuario_setor->fk_setor)->where('fk_processo', $processo->id)->where('status','Bloqueado')->first();
+
+                    /*Apesar das repetições quanto ao acesso ao banco nessa etapa eu confirmo se:
+                    1º Se o usuário com o seu ID faz parte da tramitação e seu status = Criado (Libero o acesso para editar o processo);
+                    2º Se o usuário com o seu ID faz parte da tramiatação mais o seu status = Bloqueado (Libero acesso somente para visualizar o processo);
+                    3º Caso o processo foi enviado para o setor do usuário e o status da tramitação = Criado (É liberada o acesso a qualquer usuário que faça parte do setor e qualquer um pode fazer as devidas observações e alterações)
+                    4º O processo passou pelo setor mais o status da tramitação = Bloqueado (Liberado somente a visualização)
+                    5º Caso nenhuma dessas vericações sejam true, então partimos para o ultimo else que nesse caso o usuário não se faz participante de nenhuma forma do processo mais quer te acesso, diante disso observamos se o processo tem o teor público ou privado, se for público pode visualizar se for privado é enviado para a página de erro 401 que apresenta a mensagem de acesso não autorizado. */
+                    if(isset($processo_tramitacao_user_livre)){
+                        return view('processo.edit', ['processo' => $processo,'log' => $log,'tramite'=>$processo_tramitacao_user_livre->id]);
+                    }else if(isset($processo_tramitacao_user_bloqueado)){
+                        return Redirect::to('processo/'.$processo->numero);
+                    }else if(isset($processo_tramitacao_setor_livre)){
+                        return view('processo.edit', ['processo' => $processo,'log' => $log,'tramite'=>$processo_tramitacao_setor_livre->id]);
+                    }else if(isset($processo_tramitacao_setor_bloqueado)){
+                        return Redirect::to('processo/'.$processo->numero);
+                    }else{
+                        if($processo->tipo=="Público"){
+                            return Redirect::to('processo/'.$processo->numero);
+                        }else if($processo->tipo=="Privado"){
+                            abort(401);
+                        }
                     }
                 }
             }
         }
-    }
 
-
-        //  /*criei uma função para verificar se o usuário logado está participando do processo, 
-        //  seja como autor ou na tramitação*/
-        // $verifica_usuario = ParticipacaoProcesso::participacao_processo_user(Auth::user()->id,$id);
-       
-       
-        // /*Verifico se o processo é privado, se for e o usuário for do tipo cidadão utilizo a função que consulta 
-        //  as tabelas necessárias para saber se o usuário faz parte do processo, se ele fizer pode acessar
-        //  o caminho determinado, se não ele é redirecionado para uma página que informa que ele 
-        //  não possui autorização de acesso a essa página, a mesma verificação é feita para o usuário 
-        //  que é colaborador/funcionário */
-
-        // if($processo->tipo=="Privado"){
-        //     if($tipo_usuario=="cidadao"){
-        //         if($verifica_usuario==true){
-        //             return view('processo.edit', ['processo' => $processo,'log' => $log]);
-        //         }else{
-        //             abort(401);
-        //         }
-        //     }else{
-        //         $verifica_setor = ParticipacaoProcesso::participacao_processo_setor($usuario_setor->fk_setor,$id);
-
-        //         if($verifica_usuario==true || $verifica_setor==true){
-        //             return view('processo.edit', ['processo' => $processo,'log' => $log]);
-        //         }else{
-        //             abort(401);
-        //         }
-        //     }
-
-        // /*Diferente do tipo privado caso o cidadão ou o colaborador não faça parte do processo como autor/tramitação
-        // então o usuário é redirecionado para visualização da proposta e não para a edição, limitando assim o seu acesso. */
-
-        // } if($processo->tipo=="Público"){
-
-        //     if($tipo_usuario=="cidadao"){
-        //         if($verifica_usuario==true){
-        //             return view('processo.edit', ['processo' => $processo,'log' => $log]);
-        //         }else{
-        //             return Redirect::to('processo/'.$id);
-        //         }
-        //     }else{
-        //         $verifica_setor = ParticipacaoProcesso::participacao_processo_setor($usuario_setor->fk_setor,$id);
-        //         if($verifica_usuario==true || $verifica_setor==true){
-        //             return view('processo.edit', ['processo' => $processo,'log' => $log]);
-        //         }else{
-        //             return Redirect::to('processo/'.$id);
-        //         }
-        //     }
-        // }
-        
     }
 
     /**
