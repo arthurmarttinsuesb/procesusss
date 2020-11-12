@@ -43,6 +43,8 @@ $(document).ready(function ($) {
         language: { url: "/plugins/datatables/traducao.json" },
     });
 
+    
+
     $(document).on("click", ".btnExcluir", function () {
         deleteDialog({
             nomeModulo: "Processo",
@@ -72,4 +74,9 @@ $(document).ready(function ($) {
             }
         });
     });
+
+
+    //
+   
+
 });

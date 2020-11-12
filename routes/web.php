@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/create/{id}', ['uses' => 'ProcessoTramitacaoController@create']);
             Route::post('/store/{id}', ['uses' => 'ProcessoTramitacaoController@store']);
             Route::get('/list/{id}', ['uses' => 'ProcessoTramitacaoController@list']);
+            
         });
 
         Route::group(['prefix' => 'processo', 'where' => ['prefix' => 'processo']], function () {
@@ -79,6 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/unidade/list', 'SecretariaController@list');
         Route::get('/processo/list', 'ProcessoController@list');
         Route::get('/setor/list', 'SetorController@list');
+        Route::get('/processo/listar_processos', 'ProcessoController@listar_processos');
+        Route::get('/documento/listar_documentos', 'DocumentoController@listar_documentos');
         Route::get('/ativar-usuarios/list', 'AtivarUsuariosController@list');
         Route::post('/ativar-usuarios/ativar/{id}', 'AtivarUsuariosController@ativar_usuario');
         Route::get('/consultar-processo/list/{busca}', 'ConsultarProcessoController@list');

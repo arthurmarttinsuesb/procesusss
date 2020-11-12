@@ -9,7 +9,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\User;
 
-class UsuarioAtivado extends Mailable
+class DocumentoRecebidoUser extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,10 +31,10 @@ class UsuarioAtivado extends Mailable
     public function build()
     {
         return $this->from('prefeitura@email.com')
-        ->subject('Conta Processus Ativada!')
-        ->with([
-            'user' => $this->user,
-        ])
-        ->view('emails.userActived');
+            ->subject('Documento recebido!')
+            ->with([
+                'user' => $this->user,
+            ])
+            ->view('emails.documentoRecebidoUser');
     }
 }

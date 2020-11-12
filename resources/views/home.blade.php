@@ -54,7 +54,9 @@
                     <div class="timeline">
                         <!-- timeline time label -->
                         @if($processo->count()>0)
+                        <?php   $i = 0; ?>  
                             @foreach($processo as $processo_visualizar)
+                            <?php $i = $i + 1; ?> 
                             <div class="time-label">
                                 <span class="bg-teal">
                                     {{date('d/m/Y', strtotime($processo_visualizar->created_at))}} </span>
@@ -78,10 +80,31 @@
                                             </a>
                                         </div>
                                     </div>
-
+                                    
                                 </div>
                             </div>
+
+                            <?php  if ($i == 5){
+                                break;
+                            }
+                           ?>
                             @endforeach
+                            @if($processo->count()> 5)
+                           
+                        <div class="row">
+                            <div class="col-xl-10 col-sm-9">
+                            </div>
+                            <div class=" col-xl-2 col-sm-3">
+                                <div class=" btn-group-sm">
+                                            <a href="/processo/listar_processos" class="btn bg-info color-palette" title="Ver mais processos"
+                                                data-toggle="tooltip"><i class="fa fa-eye"></i> Ver mais processos
+                                            </a>
+                                        </div>
+                            </div>
+                        </div>
+                   
+                                   
+                            @endif
                         @else
                             <div class="alert alert-info alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -100,7 +123,9 @@
                     <div class="timeline">
                         <!-- timeline time label -->
                     @if($documento->count()>0)
+                    <?php   $i = 0; ?>  
                         @foreach($documento as $documentos)
+                        <?php $i = $i + 1; ?> 
                         <!-- repete inicio -->
                         <div class="time-label">
                             <span class="bg-teal">{{date('d/m/Y H:i', strtotime($documentos->created_at))}} </span>
@@ -142,7 +167,27 @@
                                 </div>
                             </div>
                         </div>
+                        <?php  if ($i == 5){
+                                break;
+                            }
+                           ?>
                         @endforeach
+                        @if($documento->count()> 5)
+                           
+                           <div class="row">
+                               <div class="col-xl-10 col-sm-9">
+                               </div>
+                               <div class=" col-xl-2 col-sm-3">
+                                   <div class=" btn-group-sm">
+                                               <a href="/documento/listar_documentos" class="btn bg-info color-palette" title="Ver mais documentos"
+                                                   data-toggle="tooltip"><i class="fa fa-eye"></i> Ver mais documentos
+                                               </a>
+                                           </div>
+                               </div>
+                           </div>
+                      
+                                      
+                               @endif
                     @else
                     <div class="alert alert-info alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
