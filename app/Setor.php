@@ -8,7 +8,7 @@ class Setor extends Model
 {
     protected $fillable =
     [
-        'titulo', 'sigla', 'status', 'fk_secretaria'
+        'titulo', 'sigla', 'status', 'fk_secretaria', 'email'
     ];
 
     public function secretaria()

@@ -234,6 +234,10 @@ $(document).ready(function() {
         $(this).parents(".hdtuto").remove();
     });
 });
+$("body").on("click", ".btn-danger", function() {
+$(this).parents(".hdtuto").remove();
+});
+});
 </script>
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{asset('plugins/inputmask/jquery.inputmask.js') }}"></script>

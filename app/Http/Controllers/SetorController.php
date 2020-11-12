@@ -53,6 +53,7 @@ class SetorController extends Controller
                 'titulo' => 'required',
                 'sigla' => 'required',
                 'fk_secretaria' => 'required',
+                'email' => 'required|email'
             ]);
 
             if ($validator->fails()) {
@@ -66,6 +67,7 @@ class SetorController extends Controller
             $setor->sigla = $request->sigla;
             $setor->status = 'Ativo';
             $setor->fk_secretaria = $request->fk_secretaria;
+            $setor->email = $request->email;
 
             $setor->save();
 
@@ -123,6 +125,7 @@ class SetorController extends Controller
                 'titulo' => 'required',
                 'sigla' => 'required',
                 'fk_secretaria' => 'required',
+                'email' => 'required|email'
             ]);
 
             if ($validator->fails()) {
@@ -136,7 +139,7 @@ class SetorController extends Controller
             $setor->titulo = isset($request->titulo) ? $request->titulo : $setor->titulo;
             $setor->sigla = isset($request->sigla) ? $request->sigla : $setor->sigla;
             $setor->fk_secretaria = isset($request->fk_secretaria) ? $request->fk_secretaria : $setor->fk_secretaria;
-
+            $setor->email = isset($request->email) ? $request->email : $setor->email;
             $setor->save();
 
             Session::flash('message', 'Setor atualizado!');

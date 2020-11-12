@@ -33,7 +33,7 @@ class SecretariaController extends Controller
 
         return DataTables::of($secretaria)
             ->editColumn('acao', function ($secretaria) {
-                return BotoesDatatable::criarBotoesPrincipais($secretaria->id, 'secretaria');
+                return BotoesDatatable::criarBotoesPrincipais($secretaria->id, 'unidade');
             })->escapeColumns([0])
             ->make(true);
     }
@@ -66,7 +66,7 @@ class SecretariaController extends Controller
             $secretaria->save();
 
             Session::flash('message', 'Secretaria criada!');
-            return Redirect::to('secretaria');
+            return Redirect::to('unidade');
         } catch (\Exception  $erro) {
             Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!');
             return back()->withInput();
@@ -120,7 +120,7 @@ class SecretariaController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return redirect('secretaria/' . $id . '/edit')
+                return redirect('unidade/' . $id . '/edit')
                     ->withErrors($validator, 'secretaria')
                     ->withInput();
             }
@@ -134,7 +134,7 @@ class SecretariaController extends Controller
 
 
             Session::flash('message', 'Secretaria atualizada!');
-            return Redirect::to('secretaria');
+            return Redirect::to('unidade');
         } catch (\Exception  $erro) {
             Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!');
             return back()->withInput();

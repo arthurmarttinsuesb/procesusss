@@ -7,9 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-use App\User;
+use App\Setor;
 
-class UsuarioAtivado extends Mailable
+class ProcessoRecebidoSetor extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,9 +18,9 @@ class UsuarioAtivado extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Setor $setor)
     {
-        $this->user = $user;
+        $this->setor = $setor;
     }
 
     /**
@@ -31,10 +31,10 @@ class UsuarioAtivado extends Mailable
     public function build()
     {
         return $this->from('prefeitura@email.com')
-        ->subject('Conta Processus Ativada!')
-        ->with([
-            'user' => $this->user,
-        ])
-        ->view('emails.userActived');
+            ->subject('Processo recebido!')
+            ->with([
+                'user' => $this->setor,
+            ])
+            ->view('emails.processoRecebidoSetor');
     }
 }

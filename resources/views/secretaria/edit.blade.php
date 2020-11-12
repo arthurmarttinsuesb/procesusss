@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Secretaria')
-@section('contentheader_title', 'Secretaria')
+@section('htmlheader_title', 'Unidade')
+@section('contentheader_title', 'Unidade')
 
 @section('conteudo')
 <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote.min.css') }}">
@@ -14,12 +14,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Editar Secretaria: {{ $secretaria->titulo }}</h1>
+                    <h1>Editar Unidade: {{ $secretaria->titulo }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Secretaria</li>
+                        <li class="breadcrumb-item active">Unidade</li>
                     </ol>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                             <div class="col-xl-10 col-sm-9">
                             </div>
                             <div class="col-xl-2 col-sm-3">
-                                <a href="{{ URL::to('secretaria.index') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Secretarias</a>
+                                <a href="{{ URL::to('unidade.index') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Secretarias</a>
                             </div>
                         </div>
                     </div>
@@ -49,8 +49,9 @@
                         {{ Session::get('message') }}
                     </div>
                     @endif
-                    <form method="POST" action="/secretaria/{{$secretaria->id}}" id="form">
-
+                    <form method="POST" action="/unidade/{{$secretaria->id}}" id="form">
+                        @csrf
+                        @method('PUT')
                         <div class="card-body">
                             (<span style="color: red;">*</span>) Campos Obrigatórios
                             <br><br>
@@ -80,10 +81,14 @@
                 <!-- /.card-body -->
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+<<<<<<< HEAD
+                <button type="submit" form="form" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+=======
+                    <button type="submit" form="form" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+>>>>>>> 13c1e9664d73d73ca6a430f7f15637ad85c1260f
                     &nbsp Aguarde...">Salvar</button>
-                <!-- /.card-footer -->
-            </div>
+                    <!-- /.card-footer -->
+                </div>
             <!-- /.card -->
         </div>
 </div>
