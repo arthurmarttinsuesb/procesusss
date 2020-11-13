@@ -89,6 +89,7 @@ class RegisterController extends Controller
             'email' => 'E-mail',
             'password' => 'Senha',
             'terms' => 'Termos de Uso',
+            'filenames' => 'Arquivo/Foto',
         );
 
         if ($data['tipo'] == "PF") {

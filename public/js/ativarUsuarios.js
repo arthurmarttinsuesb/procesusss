@@ -36,6 +36,17 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on("change", "#sexo", function () {
+        var sexo = $("#sexo option:selected").val();
+        if (sexo == "Outro") {
+            $(".genero").show();
+        } else if (sexo == "Masculino") {
+            $(".genero").hide();
+        } else if (sexo == "Feminino") {
+            $(".genero").hide();
+        }
+    });
+
     $(document).on("click", ".btnAtivar", function () {
         ativarDialog({
             nomeModulo: "Usuario(a)",
