@@ -61,14 +61,14 @@
                         @endif
                     </select>
                 </div>
-                <div class="row outro_genero " style="display: none;" >
-                <div class="  form-group col-md-3 ">
+                <!-- <div class="row outro_genero " style="display: none;"> -->
+                <div class="form-group col-md-3 outro_genero" style="display: none;">
                     <label>Outro Gênero <span style="color: red;">*</span></label>
                     <input type="text" class="form-control " placeholder="Informe o seu gênero" name="genero"
                         id="genero" value="{{ old('genero') }}" />
                 </div>
-                </div>
-                
+                <!-- </div> -->
+
                 <div class=" form-group col-md-2">
                     <label>Tipo <span style="color: red;">*</span></label>
                     <select id="tipo" name="tipo" class="form-control select2 @error('tipo') is-invalid @enderror">
@@ -228,9 +228,6 @@
 @endsection
 @section('scripts-adicionais')
 <script type="text/javascript">
-
-
-
 $(document).ready(function() {
     $(".btn-success").click(function() {
         var lsthmtl = $(".clone").html();
@@ -241,25 +238,21 @@ $(document).ready(function() {
     });
 });
 $("body").on("click", ".btn-danger", function() {
-$(this).parents(".hdtuto").remove();
+    $(this).parents(".hdtuto").remove();
 });
 $(document).on('change', '#sexo', function() {
-        var sexo = $("#sexo option:selected").val();
+    var sexo = $("#sexo option:selected").val();
 
-        if (sexo == "Outro") {
-            $(".outro_genero").show();
-        } else if(sexo == "Outro") {
-            $(".outro_genero").hide();
-        } else if(sexo == "Masculino"){
-            $(".outro_genero").hide();
-        }else if(sexo == "Feminino"){
-            $(".outro_genero").hide();
-        }
-    });
-
-
-
-
+    if (sexo == "Outro") {
+        $(".outro_genero").show();
+    } else if (sexo == "Outro") {
+        $(".outro_genero").hide();
+    } else if (sexo == "Masculino") {
+        $(".outro_genero").hide();
+    } else if (sexo == "Feminino") {
+        $(".outro_genero").hide();
+    }
+});
 </script>
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{asset('plugins/inputmask/jquery.inputmask.js') }}"></script>
