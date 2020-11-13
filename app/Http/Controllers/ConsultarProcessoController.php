@@ -45,7 +45,7 @@ class ConsultarProcessoController extends Controller
                 foreach(Auth::user()->getRoleNames() as $nome){
                     //se for do tipo cidadão retirar a autenticação
                     if($nome!=="cidadao"){
-                        return BotoesDatatable::criarBotaoVisualizar($processo->id, 'processo');
+                        return BotoesDatatable::criarBotaoVisualizar($processo->numero, 'processo');
                     }
                 }
             }else{

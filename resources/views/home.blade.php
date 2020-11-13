@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="timeline-footer">
                                         <div class="btn-group btn-group-sm">
-                                            <a href="/processo/{{$processo_visualizar->processo->id}}/edit" class="btn bg-info color-palette" title="Visualizar Documento Completo"
+                                            <a href="/processo/{{$processo_visualizar->processo->numero}}/edit" class="btn bg-info color-palette" title="Visualizar Documento Completo"
                                                 data-toggle="tooltip"><i class="fa fa-eye"></i> Acessar
                                             </a>
                                         </div>
