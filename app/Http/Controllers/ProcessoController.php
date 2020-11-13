@@ -65,7 +65,7 @@ class ProcessoController extends Controller
             })
             ->editColumn('acao', function ($processo) {
                 return '<div class="btn-group btn-group-sm">
-                                <a href="/processo/' . $processo->id . '/edit"
+                                <a href="/processo/' . $processo->numero . '/edit"
                                     class="btn btn-info"
                                     title="Alterar" data-toggle="tooltip">
                                     <i class="fas fa-pencil-alt"></i>
@@ -143,7 +143,8 @@ class ProcessoController extends Controller
      */
     public function show($id)
     {
-        $processo = Processo::find($id);
+        $processo = Processo::firstWhere('numero',$id);
+
         //se o número do processo não for encontrado o usuário é direcionado para uma página de erro 404
         if(!isset($processo)){
             abort(404);
@@ -199,35 +200,32 @@ class ProcessoController extends Controller
      */
     public function edit($id)
     {
+        $processo = Processo::firstWhere('numero',$id);
 
-
-        $processo = Processo::find($id);
-        $log = ProcessoLog::where('fk_processo', $id)->get();
-        //verifico qual o tipo de usuário logado
-
-        /* Independente do tipo de usuário, se sou autor do processo e tenho o tramite = Liberado (Tenho acesso a editar o processo), caso o tramite = Bloqueado (Mesmo sendo autor, só tenho acesso a visualizar o processo)*/
-        if($processo->fk_user==Auth::user()->id && $processo->tramite=="Liberado"){
-
-            return view('processo.edit', ['processo' => $processo,'log' => $log, 'tramite'=>""]);
-
-        }else if($processo->fk_user==Auth::user()->id && $processo->tramite=="Bloqueado"){
-
-            return Redirect::to('processo/'.$processo->numero);
-        
-        }else{
-
-            /*Confiro qual o tipo de usuário logado, se for do tipo cidadão faço as seguintes 
-            verificações para determinar o tipo de acesso:
-                1º - não é autor do processo+teor= Público (Pode acessar a tela de consulta)
-                2º - não é autor do processo+teor= Privado (Redirecionado para a página de erro 401 que é de permissão negada) */
-
-            if(Auth::user()->hasRole('cidadao')){
-                if($processo->fk_user!==Auth::user()->id && $processo->tipo=="Público"){
-                    return Redirect::to('processo/'.$processo->numero);
-                }else if($processo->fk_user!==Auth::user()->id && $processo->tipo=="Privado"){
-                    abort(401);
-                }
+            if(!isset($processo)){
+                abort(404);
             }else{
+                $log = ProcessoLog::where('fk_processo', $processo->id)->get();
+
+                /* Independente do tipo de usuário, se sou autor do processo e tenho o tramite = Liberado (Tenho acesso a editar o processo), caso o tramite = Bloqueado (Mesmo sendo autor, só tenho acesso a visualizar o processo)*/
+                if($processo->fk_user==Auth::user()->id && $processo->tramite=="Liberado"){
+                    return view('processo.edit', ['processo' => $processo,'log' => $log, 'tramite'=>""]);
+                }else if($processo->fk_user==Auth::user()->id && $processo->tramite=="Bloqueado"){
+                    return Redirect::to('processo/'.$processo->numero);
+                }else {
+
+                /*Confiro qual o tipo de usuário logado, se for do tipo cidadão faço as seguintes 
+                verificações para determinar o tipo de acesso:
+                    1º - não é autor do processo+teor= Público (Pode acessar a tela de consulta)
+                    2º - não é autor do processo+teor= Privado (Redirecionado para a página de erro 401 que é de permissão negada) */
+
+                if(Auth::user()->hasRole('cidadao')){
+                    if($processo->fk_user!==Auth::user()->id && $processo->tipo=="Público"){
+                        return Redirect::to('processo/'.$processo->numero);
+                    }else if($processo->fk_user!==Auth::user()->id && $processo->tipo=="Privado"){
+                        abort(401);
+                    }
+                }else{
                     //verifico o setor no qual o colaborador está lotado.
                     $usuario_setor = UserSetor::where('fk_user', Auth::user()->id)->where('status','Ativo')->first();
 
@@ -262,10 +260,10 @@ class ProcessoController extends Controller
                             abort(401);
                         }
                     }
+                }
             }
-           
         }
-        
+
     }
 
     /**
@@ -299,6 +297,41 @@ class ProcessoController extends Controller
         } catch (\Exception  $erro) {
             Session::flash('message_erro', 'Não foi possível alterar os dados do processo, tente novamente mais tarde.!');
             return back()->withInput();
+        }
+    }
+
+
+    public function devolver($id)
+    {
+        try {
+            $processo = Processo::find($id);
+            $processo->tramite = "Liberado";
+            $processo->status = "Ativo";
+
+            DB::transaction(function () use ($processo) {
+                $processo->save();
+            });
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
+        }
+    }
+
+    public function encerrar($id)
+    {
+        try {
+            $processo = Processo::find($id);
+            $processo->status = "Encerrado";
+            $processo->tramite = "Encerrado";
+
+            DB::transaction(function () use ($processo) {
+                $processo->save();
+            });
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
         }
     }
 
