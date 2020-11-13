@@ -116,23 +116,51 @@ class RegisterController extends Controller
     {
 
         try {
-            $user =  new User();
-            $user->nome = $data['nome'];
-            $user->tipo = $data['tipo'];
-            $user->sexo = $data['sexo'];
-            $user->nascimento = $data['nascimento'];
-            $user->telefone = $data['telefone'];
-            $user->cpf_cnpj = $data['cpf_cnpj'];
-            $user->logradouro = $data['logradouro'];
-            $user->numero = $data['numero'];
-            $user->bairro = $data['bairro'];
-            $user->cep = $data['cep'];
-            $user->complemento = $data['complemento'];
-            $user->fk_estado = $data['estado'];
-            $user->fk_cidade = $data['cidade'];
 
-            $user->email = $data['email'];
-            $user->password = bcrypt($data['password']);
+            if ($data['sexo'] == "Outro"){
+
+                $user =  new User();
+                $user->nome = $data['nome'];
+                $user->tipo = $data['tipo'];
+                $user->sexo = $data['genero'];
+                $user->nascimento = $data['nascimento'];
+                $user->telefone = $data['telefone'];
+                $user->cpf_cnpj = $data['cpf_cnpj'];
+                $user->logradouro = $data['logradouro'];
+                $user->numero = $data['numero'];
+                $user->bairro = $data['bairro'];
+                $user->cep = $data['cep'];
+                $user->complemento = $data['complemento'];
+                $user->fk_estado = $data['estado'];
+                $user->fk_cidade = $data['cidade'];
+
+                $user->email = $data['email'];
+                $user->password = bcrypt($data['password']);
+
+            }
+            else if (($data['sexo'] == "Masculino") or ($data['sexo'] == "Feminino")){
+
+                $user =  new User();
+                $user->nome = $data['nome'];
+                $user->tipo = $data['tipo'];
+                $user->sexo = $data['sexo'];
+                $user->nascimento = $data['nascimento'];
+                $user->telefone = $data['telefone'];
+                $user->cpf_cnpj = $data['cpf_cnpj'];
+                $user->logradouro = $data['logradouro'];
+                $user->numero = $data['numero'];
+                $user->bairro = $data['bairro'];
+                $user->cep = $data['cep'];
+                $user->complemento = $data['complemento'];
+                $user->fk_estado = $data['estado'];
+                $user->fk_cidade = $data['cidade'];
+
+                $user->email = $data['email'];
+                $user->password = bcrypt($data['password']);
+
+            }
+
+            
 
             DB::transaction(function () use ($user) {
                 $user->save();
