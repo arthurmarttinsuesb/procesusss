@@ -209,7 +209,7 @@ class ProcessoController extends Controller
 
                 /* Independente do tipo de usuário, se sou autor do processo e tenho o tramite = Liberado (Tenho acesso a editar o processo), caso o tramite = Bloqueado (Mesmo sendo autor, só tenho acesso a visualizar o processo)*/
                 if($processo->fk_user==Auth::user()->id && $processo->tramite=="Liberado"){
-                    return view('processo.edit', ['processo' => $processo,'log' => $log, 'tramite'=>""]);
+                    return view('processo.edit', ['processo' => $processo,'log' => $log, 'tramite'=>"",'tipo'=>""]);
                 }else if($processo->fk_user==Auth::user()->id && $processo->tramite=="Bloqueado"){
                     return Redirect::to('processo/'.$processo->numero);
                 }else {
@@ -246,11 +246,11 @@ class ProcessoController extends Controller
                     4º O processo passou pelo setor mais o status da tramitação = Bloqueado (Liberado somente a visualização)
                     5º Caso nenhuma dessas vericações sejam true, então partimos para o ultimo else que nesse caso o usuário não se faz participante de nenhuma forma do processo mais quer te acesso, diante disso observamos se o processo tem o teor público ou privado, se for público pode visualizar se for privado é enviado para a página de erro 401 que apresenta a mensagem de acesso não autorizado. */
                     if(isset($processo_tramitacao_user_livre)){
-                        return view('processo.edit', ['processo' => $processo,'log' => $log,'tramite'=>$processo_tramitacao_user_livre->id]);
+                        return view('processo.edit', ['processo' => $processo,'log' => $log,'tramite'=>$processo_tramitacao_user_livre->id,'tipo'=>'usuario']);
                     }else if(isset($processo_tramitacao_user_bloqueado)){
                         return Redirect::to('processo/'.$processo->numero);
                     }else if(isset($processo_tramitacao_setor_livre)){
-                        return view('processo.edit', ['processo' => $processo,'log' => $log,'tramite'=>$processo_tramitacao_setor_livre->id]);
+                        return view('processo.edit', ['processo' => $processo,'log' => $log,'tramite'=>$processo_tramitacao_setor_livre->id,'tipo'=>'setor']);
                     }else if(isset($processo_tramitacao_setor_bloqueado)){
                         return Redirect::to('processo/'.$processo->numero);
                     }else{

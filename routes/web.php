@@ -63,9 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::group(['prefix' => 'processo-tramitacao', 'where' => ['prefix' => 'processo-tramitacao']], function () {
-            Route::get('/create/{id}', ['uses' => 'ProcessoTramitacaoController@create']);
-            Route::post('/store/{id}', ['uses' => 'ProcessoTramitacaoController@store']);
-            Route::get('/list/{id}', ['uses' => 'ProcessoTramitacaoController@list']);
+            Route::get('/create/{processo}/{tramitacao?}', ['uses' => 'ProcessoTramitacaoController@create']);
+            Route::post('/store/{processo}/{tramitacao?}', ['uses' => 'ProcessoTramitacaoController@store']);
+            Route::get('/list/{processo}', ['uses' => 'ProcessoTramitacaoController@list']);
             
         });
 

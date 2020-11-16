@@ -29,7 +29,7 @@
            <div class="card">
               <div class="card-header">
                     <div class="float-right">
-                         <a href="/processo/{{$processo->id}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
+                         <a href="/processo/{{$processo->numero}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
                     </div>
               </div>
               @if (Session::has('message'))
@@ -48,6 +48,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                             <input type="hidden" id="processo" value='{{$processo->id}}'>
+                            <input type="hidden" id="processo" value='{{$tramite}}'>
                                 <strong>Setor <span style="color: red;">*</span></strong>
                                 @inject('secretaria', 'App\Secretaria')
                                 <select id="select_secretaria"
@@ -97,12 +98,10 @@
                         </div>
                     </div>
                 <!-- se o processo estiber bloqueado não pode alterar mais nada -->
-                @if($processo->tramite=="Liberado")
                      <div class="card-footer">
                         <button type="button" form="tramite" class="btn btn-info float-right add_tramite" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                         &nbsp Aguarde...">Salvar</button>
                     </div>
-                  @endif
 
                     <!-- /.card-footer -->
                 </form>

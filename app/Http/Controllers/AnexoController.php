@@ -85,7 +85,7 @@ class AnexoController extends Controller
 
             Session::flash('tab', 'tab_anexo');
             Session::flash('message_sucesso', 'Anexo adicionado!');
-            return Redirect::to('processo/'.$id.'/edit');
+            return Redirect::to('processo/'.$request->processo_numero.'/edit');
 
         } catch (\Exception  $errors) {
             Session::flash('message', 'Não foi possível adicionar anexo, tente novamente mais tarde.!');

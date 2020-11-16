@@ -30,7 +30,7 @@
            <div class="card">
               <div class="card-header">
                     <div class="float-right">
-                        <a href="/processo/{{$processo->id}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
+                        <a href="/processo/{{$processo->numero}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
                     </div>
               </div>
               @if (Session::has('message'))
@@ -50,6 +50,7 @@
                             <div class="form-group col-md-7">
                                 <strong>Tipo <span style="color: red;">*</span></strong>
                                 <input type="text" autocomplete="off" id="tipo" name="tipo" class="form-control">
+                                <input type="hidden"  name="processo_numero" value="{{$processo->numero}}">
                             </div>
                             <div class="form-group col-md-4">
                                 <strong>Arquivo <span style="color: red;">*</span></strong>

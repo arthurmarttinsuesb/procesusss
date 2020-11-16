@@ -1,4 +1,5 @@
 var id_processo = $("#processo").val();
+var id_tramite = $("#tramite").val();
 $(document).ready(function($) {
     const selectSetor = document.getElementById("select_secretaria");
     const selectUser = document.getElementById("select_user");

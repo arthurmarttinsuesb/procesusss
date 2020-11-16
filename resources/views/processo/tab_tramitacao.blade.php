@@ -2,19 +2,19 @@
     <div class="table-responsive">
         <table>
             <tr>
-                @if($processo->fk_user !== Auth::user()->id)
+                @if($tramite!=="")
                     <td>
                         <a href="#" class="btn btn-block btn-outline-warning btnDevolver"><i class="fa fa-undo-alt"></i> Devolver o Processo</a>
                     </td>
                 @endif
-                @if($processo->tramite !== 'Bloqueado' )
+                @if(($processo->user->hasRole('cidadao') & $tramite!=="") || (!Auth::user()->hasRole('cidadao') & $tramite=="" & $processo->tramite=="Liberado"))
                     <td>
                         <a href="#" class="btn btn-block btn-outline-danger btnEncerrar"><i class="fa fa-times"></i> Encerrar o Processo</a>
                     </td>
                 @endif
 
                 <td>
-                    <a href="/processo-tramitacao/create/{{$processo->id}}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Encaminhamento</a>
+                    <a href="/processo-tramitacao/create/{{$processo->numero}}/{{$tramite}}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Encaminhamento</a>
                 </td>
             </tr>
         </table>

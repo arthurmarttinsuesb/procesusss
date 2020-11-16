@@ -24,10 +24,10 @@ class ProcessoTramitacaoController extends Controller
 {
 
 
-    public function create($id) {
+    public function create($processo) {
         $setores = Setor::where('status', 'Ativo')->get();
-        $users = User::where('status', 'Ativo')->get();
-        $processo = Processo::where('id', $id)->first();
+        $users = User::where('status', 'Ativo')->role(['administrador','funcionario'])->get();
+        $processo = Processo::firstWhere('numero', $processo);
         return view('processo.tramite.create',compact('processo','setores','users'));
     }
 

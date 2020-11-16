@@ -34,7 +34,7 @@
            <div class="card">
               <div class="card-header">
                     <div class="float-right">
-                        <a href="/processo/{{$modelo->fk_processo}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
+                        <a href="/processo/{{$modelo->processo->numero}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
                     </div>
               </div>
               @if (Session::has('message'))
