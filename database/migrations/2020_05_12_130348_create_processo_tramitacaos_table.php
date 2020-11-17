@@ -15,6 +15,8 @@ class CreateProcessoTramitacaosTable extends Migration
     {
         Schema::create('processo_tramitacaos', function (Blueprint $table) {
             $table->id();
+            $table->integer('fk_user_remetente')->nullable(); #remetente
+            $table->foreign('fk_user_remetente')->references('id')-> on('users');
             $table->integer('fk_setor')->nullable(); #setor
             $table->foreign('fk_setor')->references('id')-> on('setors');
             $table->integer('fk_user')->nullable(); #Usuário

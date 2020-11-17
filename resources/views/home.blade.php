@@ -70,8 +70,11 @@
                                     <h3 class="timeline-header"><b>Processo:</b> {{$processo_visualizar->processo->numero}}</h3>
 
                                     <div class="timeline-body">
-                                        <b> Tipo do Processo: </b> {{$processo_visualizar->processo->tipo}} <br>
+                                        <b> Teor do Processo: </b> {{$processo_visualizar->processo->tipo}} <br>
                                         <b> Criado Por: </b> {{$processo_visualizar->processo->user->nome}} <br>
+                                        <b> Título: </b> {{$processo_visualizar->processo->titulo}} <br>
+                                        <b> Descricao: </b> {{$processo_visualizar->processo->descricao ?? "Não possui"}} <br>
+                                        
                                     </div>
                                     <div class="timeline-footer">
                                         <div class="btn-group btn-group-sm">

@@ -66,8 +66,10 @@ $(document).ready(function($) {
         serverSide: true,
         deferRender: true,
         searching: true,
+        "order": [1, "ASC"],
         columns: [
             { width: "100%", data: "tramite", name: "tramite" },
+            { data: "criado", name: "criado", visible: false }
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
@@ -109,6 +111,7 @@ $(document).ready(function($) {
         });
     });
     var id_processo = $("#processo").val();
+    var tramitacao = $("#tramitacao").val();
 
     $(document).on("click", ".btnExcluirAnexo", function() {
         deleteDialog({
@@ -148,7 +151,7 @@ $(document).ready(function($) {
 
     $(document).on("click", ".btnDevolver", function() {
         devolverDialog({
-            rota: `processo/${id_processo}/devolver`,
+            rota: `processo/${id_processo}/devolver/${tramitacao}`,
             element: $(this),
         });
     });

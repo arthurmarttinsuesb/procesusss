@@ -42,9 +42,9 @@ class ProcessoController extends Controller
     {
         $user = Auth::user(); //
         if ($user->hasRole('administrador')) {
-            $processos = Processo::where('status',"!=", "Finalizado")->with('documentos')->with('documentos.tramite')->get();
+            $processos = Processo::with('documentos')->with('documentos.tramite')->get();
         } else {
-            $processos = Processo::where('fk_user', $user->id)->where('status', "Ativo")->with('documentos')->with('documentos.tramite')->get();
+            $processos = Processo::where('fk_user', $user->id)->with('documentos')->with('documentos.tramite')->get();
         }
 
         return Datatables::of($processos)
@@ -53,7 +53,7 @@ class ProcessoController extends Controller
                     return  '<span class="right badge badge-success">em andamento</span>';
                 } else if($processos->status=='Encaminhado'){
                     return  '<span class="right badge badge-info">em andamento</span>';
-                }else  if($processos->status=='Finalizado'){
+                }else  if($processos->status=='Finalizado' || $processos->status=='Encerrado'){
                     return  '<span class="right badge badge-danger">encerrado</span>';
                 }
             })
@@ -64,18 +64,32 @@ class ProcessoController extends Controller
                 return  date('d/m/Y', strtotime($processo->created_at));
             })
             ->editColumn('acao', function ($processo) {
-                return '<div class="btn-group btn-group-sm">
+
+                if($processo->status=='Finalizado' || $processo->status=='Encerrado'){
+                    return '<div class="btn-group btn-group-sm">
+                                <a href="/processo/' . $processo->numero . '"
+                                    class="btn bg-teal color-palette"
+                                    title="Visualizar" data-toggle="tooltip">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>';
+                }else{
+
+                    return '<div class="btn-group btn-group-sm">
                                 <a href="/processo/' . $processo->numero . '/edit"
                                     class="btn btn-info"
                                     title="Alterar" data-toggle="tooltip">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
                                 <a href="/processo/' . $processo->numero . '"
-                                class="btn bg-teal color-palette"
-                                title="Visualizar" data-toggle="tooltip">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                        </div>';
+                                    class="btn bg-teal color-palette"
+                                    title="Visualizar" data-toggle="tooltip">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>';
+
+                }
+              
             })
             ->editColumn('criado', function ($processo) {
                 return  $processo->created_at;
@@ -290,6 +304,7 @@ class ProcessoController extends Controller
             DB::transaction(function () use ($processo,$log) {
                 $processo->save();
                 $log->save();
+                
             });
 
             Session::flash('message_sucesso', 'Dados alterados.');
@@ -301,20 +316,29 @@ class ProcessoController extends Controller
     }
 
 
-    public function devolver($id)
+    public function devolver($id, ProcessoTramitacao $tramitacao)
     {
         try {
             $processo = Processo::find($id);
             $processo->tramite = "Liberado";
             $processo->status = "Ativo";
 
-            DB::transaction(function () use ($processo) {
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $id;
+            $log->status = "Processo devolvido por: <b>".Auth::user()->nome."</b> para o autor(a) : <b>".$processo->user->nome."</b>";
+
+            $tramitacao->status = "Bloqueado";
+
+            DB::transaction(function () use ($processo,$tramitacao,$log) {
                 $processo->save();
+                $tramitacao->save();
+                $log->save();
             });
 
-            return response()->json(array('status' => "OK"));
+            return response()->json(array('status' => "Ok"));
         } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "ERRO"));
+            return response()->json(array('errors' => $erro));
         }
     }
 
@@ -325,13 +349,23 @@ class ProcessoController extends Controller
             $processo->status = "Encerrado";
             $processo->tramite = "Encerrado";
 
-            DB::transaction(function () use ($processo) {
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $id;
+            $log->status = "Processo encerrado por: <b>".Auth::user()->nome."</b>";
+
+
+
+            DB::transaction(function () use ($processo,$log,$id) {
                 $processo->save();
+                $log->save();
+
+                ProcessoTramitacao::where('fk_processo',$id)->where('status','Criado')->update(['status' => 'Bloqueado']);
             });
 
-            return response()->json(array('status' => "OK"));
+            return response()->json(array('status' => "Ok"));
         } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "ERRO"));
+            return response()->json(array('errors' => $erro));
         }
     }
 

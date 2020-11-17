@@ -3,6 +3,9 @@
  @section('htmlheader_title', 'Encaminhamento')
  @section('contentheader_title', 'Encaminhamento')
  @section('conteudo')
+  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -47,12 +50,14 @@
                         <br><br>
                         <div class="row">
                             <div class="form-group col-md-6">
-                            <input type="hidden" id="processo" value='{{$processo->id}}'>
-                            <input type="hidden" id="processo" value='{{$tramite}}'>
+
+                              <input type="hidden" name="processo" id="processo" value='{{$processo->numero}}'>
+                              <input type="hidden" name="tramitacao" value="{{ $tramite->id ?? '' }}">
+
                                 <strong>Setor <span style="color: red;">*</span></strong>
                                 @inject('secretaria', 'App\Secretaria')
                                 <select id="select_secretaria"
-                                    class="form-control select2 form-control @error('fk_setor', 'setor') is-invalid @enderror"
+                                    class="form-control select2 @error('fk_setor', 'setor') is-invalid @enderror"
                                     name="fk_setor">
                                     @foreach ($setores as $setor)
                                         @foreach ($secretaria->where('id', $setor->id)->get() as $secSigla)
@@ -77,7 +82,7 @@
                             <div class="form-group col-md-6" @foreach(Auth::user()->getRoleNames() as $nome)   @if($nome=="cidadao") hidden @endif  @endforeach>
                                 <strong>Usuario <span style="color: red;">*</span></strong>
                                 <select id="select_user"
-                                    class="form-control select2 form-control @error('fk_user', 'setor') is-invalid @enderror"
+                                    class="form-control select2 @error('fk_user', 'setor') is-invalid @enderror"
                                     name="fk_user">
                                     @foreach ($users as $user)
                                         @if (old('fk_user') == $user->id)
@@ -116,8 +121,9 @@
 
 @endsection
 @section('scripts-adicionais')
-<script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/processo_tramitacao.js') }}"></script>
+  <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
+  <script src="{{ asset('js/base.js') }}"></script>
+  <script src="{{ asset('js/processo_tramitacao.js') }}"></script>
 @endsection
 
 

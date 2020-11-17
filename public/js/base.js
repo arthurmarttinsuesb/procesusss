@@ -306,18 +306,10 @@ function encerrarDialog({ rota, element }) {
                     },
                     data: {},
                     success: function(data) {
-                        if (data.error_banco) {
-                            Swal.fire(
-                                "Atenção",
-                                "Encerramento do processo cancelado, tente novamente mais tarde.",
-                                "error"
-                            );
-                        } else {
-                            swalWithBootstrapButtons.fire(
-                                "Sucesso",
-                                "Processo Encerrado",
-                                "success"
-                            ).then(function(result) {
+                        if (data.errors) {
+                            Swal.fire("Atenção", "Encerramento do processo cancelado, tente novamente mais tarde.", "error");
+                        } else if (data.status == "Ok") {
+                            swalWithBootstrapButtons.fire("Sucesso", "Processo Encerrado", "success").then(function(result) {
                                 if (result.value) {
                                     window.location.href = base_url + "/processo";
                                 }
@@ -367,23 +359,14 @@ function devolverDialog({ rota, element }) {
                     },
                     data: {},
                     success: function(data) {
-                        if (data.error_banco) {
-                            Swal.fire(
-                                "Atenção",
-                                "Devolução cancelada, tente novamente mais tarde.",
-                                "error"
-                            );
-                        } else {
-                            swalWithBootstrapButtons.fire(
-                                "Sucesso",
-                                "Processo Devolvido.",
-                                "success"
-                            ).then(function(result) {
+                        if (data.errors) {
+                            Swal.fire("Atenção", "Devolução cancelada, tente novamente mais tarde.", "error");
+                        } else if (data.status == "Ok") {
+                            swalWithBootstrapButtons.fire("Sucesso", "Processo Devolvido", "success").then(function(result) {
                                 if (result.value) {
                                     window.location.href = base_url + "/processo";
                                 }
                             });
-
                         }
                     },
                     error: function() {

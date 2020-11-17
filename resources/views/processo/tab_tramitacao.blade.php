@@ -2,6 +2,7 @@
     <div class="table-responsive">
         <table>
             <tr>
+               <input type="hidden" name="tramitacao" id="tramitacao" value="{{ $tramite ?? '' }}">
                 @if($tramite!=="")
                     <td>
                         <a href="#" class="btn btn-block btn-outline-warning btnDevolver"><i class="fa fa-undo-alt"></i> Devolver o Processo</a>

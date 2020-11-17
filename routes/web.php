@@ -64,7 +64,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'processo-tramitacao', 'where' => ['prefix' => 'processo-tramitacao']], function () {
             Route::get('/create/{processo}/{tramitacao?}', ['uses' => 'ProcessoTramitacaoController@create']);
-            Route::post('/store/{processo}/{tramitacao?}', ['uses' => 'ProcessoTramitacaoController@store']);
             Route::get('/list/{processo}', ['uses' => 'ProcessoTramitacaoController@list']);
             
         });
@@ -72,7 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'processo', 'where' => ['prefix' => 'processo']], function () {
             Route::get('/list', ['uses' => 'ProcessoController@list']);
             Route::post('/{id}/encerrar', ['uses' => 'ProcessoController@encerrar']);
-            Route::post('/{id}/devolver', ['uses' => 'ProcessoController@devolver']);
+            Route::post('/{id}/devolver/{tramitacao?}', ['uses' => 'ProcessoController@devolver']);
         });
 
         // rotas para o metodo 'list'

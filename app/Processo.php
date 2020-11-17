@@ -8,8 +8,13 @@ class Processo extends Model
 {
     protected $fillable =
     [
-        'fk_user', 'numero', 'status'
+        'fk_user_remetente','fk_user', 'numero', 'status'
     ];
+
+    public function user_remetente()
+    {
+        return $this->belongsTo(User::class, 'fk_user_remetente');
+    }
 
     public function user()
     {
