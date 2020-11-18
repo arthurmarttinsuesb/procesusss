@@ -81,11 +81,7 @@
                 <!-- /.card-body -->
             </div>
             <div class="card-footer">
-<<<<<<< HEAD
                 <button type="submit" form="form" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
-=======
-                    <button type="submit" form="form" class="btn btn-info float-right salvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
->>>>>>> 13c1e9664d73d73ca6a430f7f15637ad85c1260f
                     &nbsp Aguarde...">Salvar</button>
                     <!-- /.card-footer -->
                 </div>

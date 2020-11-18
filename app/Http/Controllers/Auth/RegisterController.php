@@ -72,8 +72,9 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'terms' => ['required'],
             'filenames' => ['required'],
-            'filenames.*' => ['mimes:doc,pdf,docx']
         );
+
+        //'filenames.*' => ['mimes:doc,pdf,docx']
 
         $attributeNames = array(
             'nome' => 'Nome',
@@ -89,6 +90,7 @@ class RegisterController extends Controller
             'email' => 'E-mail',
             'password' => 'Senha',
             'terms' => 'Termos de Uso',
+            'filenames' => 'Arquivo/Foto',
         );
 
         if ($data['tipo'] == "PF") {
@@ -115,57 +117,65 @@ class RegisterController extends Controller
     {
 
         try {
-            $user =  new User();
-            $user->nome = $data['nome'];
-            $user->tipo = $data['tipo'];
-            $user->sexo = $data['sexo'];
-            $user->nascimento = $data['nascimento'];
-            $user->telefone = $data['telefone'];
-            $user->cpf_cnpj = $data['cpf_cnpj'];
-            $user->logradouro = $data['logradouro'];
-            $user->numero = $data['numero'];
-            $user->bairro = $data['bairro'];
-            $user->cep = $data['cep'];
-            $user->complemento = $data['complemento'];
-            $user->fk_estado = $data['estado'];
-            $user->fk_cidade = $data['cidade'];
 
-            $user->email = $data['email'];
-            $user->password = bcrypt($data['password']);
+            if ($data['sexo'] == "Outro"){
+                $sexo = $data['genero'];
+            }else {
+                $sexo = $data['sexo'];
+            }
 
-            DB::transaction(function () use ($user) {
-                $user->save();
-                $user->assignRole('cidadao');
-            });
+                $user =  new User();
+                $user->nome = $data['nome'];
+                $user->tipo = $data['tipo'];
+                $user->sexo = $sexo;
+                $user->nascimento = $data['nascimento'];
+                $user->telefone = $data['telefone'];
+                $user->cpf_cnpj = $data['cpf_cnpj'];
+                $user->logradouro = $data['logradouro'];
+                $user->numero = $data['numero'];
+                $user->bairro = $data['bairro'];
+                $user->cep = $data['cep'];
+                $user->complemento = $data['complemento'];
+                $user->fk_estado = $data['estado'];
+                $user->fk_cidade = $data['cidade'];
 
-            try{
+                $user->email = $data['email'];
+                $user->password = bcrypt($data['password']);
 
-
-                foreach($data['filenames'] as $file)
-                {
-                    $name = time().'.'.$file->extension();
-                    $file->move(public_path().'/files/', $name);
-                    $files_upload[] = $name;
-                }
-
-
-                $file= new File();
-                $file->filenames=json_encode($files_upload);
-                $file->fk_user = $user->id;
-                $file->save();
-
+                DB::transaction(function () use ($user) {
+                    $user->save();
+                    $user->assignRole('cidadao');
+                });
 
                 try{
-                    Mail::to($user->email)->send(new SendMailUser($user));
-                }catch(\Exception $erro){
-                    return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
-                }
-         } catch (\Exception  $erro) {
-             return response()->json(array('as' => $erro));
-         }
 
-            return $user;
-            app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+
+                    foreach($data['filenames'] as $file)
+                    {
+                        $name = time().'.'.$file->extension();
+                        $file->move(public_path().'/files/', $name);
+                        $files_upload[] = $name;
+                    }
+    
+    
+                    $file= new File();
+                    $file->filenames=json_encode($files_upload);
+                    $file->fk_user = $user->id;
+                    $file->save();
+    
+    
+                    try{
+                        Mail::to($user->email)->send(new SendMailUser($user));
+                    }catch(\Exception $erro){
+                        return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
+                    }
+
+             } catch (\Exception  $erro) {
+                 return response()->json(array('as' => $erro));
+             }
+
+             return $user;
+             app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
 
         } catch (Exception  $erro) {
             return response()->json(array('erros' => $erro));

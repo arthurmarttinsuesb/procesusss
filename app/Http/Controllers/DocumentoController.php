@@ -19,6 +19,7 @@ use Session;
 use Redirect;
 #class
 
+use App\UserSetor;
 use App\Processo;
 use App\ProcessoDocumento;
 use App\ProcessoLog;
@@ -125,6 +126,17 @@ class DocumentoController extends Controller
                     ->make(true);
     }
 
+    public function listar_documentos()
+    {
+        $user = Auth::user(); 
+        if ($user->hasRole('administrador') || $user->hasRole('funcionario')) {
+
+            $setor  = UserSetor::where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
+            $documento  = DocumentoTramite::whereRaw("(fk_user='".Auth::user()->id."' OR fk_setor='".$setor->fk_setor."')")->where('status','Pendente')->orderBy('created_at','desc')->get();
+            return view('documento.documento_lista', compact('documento'));
+        }
+    }
+  
     public function store(RequestDocumento $request)
     {
         try {
@@ -154,7 +166,7 @@ class DocumentoController extends Controller
 
             Session::flash('message_sucesso', 'Documento criado!');
             Session::flash('tab', 'tab_documento');
-            return Redirect::to('processo/'.$request->processo.'/edit');
+            return Redirect::to('processo/'.$request->processo_numero.'/edit');
         } catch (\Exception  $errors) {
             Session::flash('message_erro', 'Não foi possível cadastrar documento, tente novamente mais tarde.!');
             return back()->withInput();
@@ -188,7 +200,7 @@ class DocumentoController extends Controller
 
             Session::flash('tab', 'tab_documento');
             Session::flash('message_sucesso', 'Documento Alterado!');
-            return Redirect::to('processo/'.$modelo->fk_processo.'/edit');
+            return Redirect::to('processo/'.$modelo->processo->numero.'/edit');
         } catch (\Exception  $errors) {
             Session::flash('message_erro','Não foi possível alterar documento, tente novamente mais tarde.!');
             return back()->withInput();

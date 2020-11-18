@@ -32,7 +32,7 @@
            <div class="card">
               <div class="card-header">
                     <div class="float-right">
-                        <a href="/processo/{{$modelo->fk_processo}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
+                        <a href="/processo/{{$modelo->processo->numero}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
                     </div>
               </div>
               @if (Session::has('message'))
@@ -50,7 +50,7 @@
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
                        <div class="row">
-                            <div class="form-group col-4">
+                            <div class="form-group col-md-6">
                                 <strong>Titulo <span style="color: red;">*</span></strong>
                                 <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control @error('titulo') is-invalid @enderror" value="{{$modelo->titulo}}">
                                 @error('titulo')
@@ -59,7 +59,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-7">
+                            <div class="form-group col-md-4">
                                 <strong>Modelo de Documento <span style="color: red;">*</span></strong>
                                 <select id="tipo" name='tipo' class="form-control @error('tipo') is-invalid @enderror">
                                     <option value=' '>Selecione</option>
@@ -74,18 +74,14 @@
                                 @enderror
                             </div>
                             @role('administrador|funcionario')
-                            <div class="form-group col-1">
+                            <div class="form-group col-md-2">
                                 <strong>Conteúdo <span style="color: red;">*</span></strong>
                                 <select id="categoria" name='categoria' class="form-control @error('tipo') is-invalid @enderror">
-                                    @if($modelo->tipo == 'Privado')
-                                    <option value=''>Selecione</option>
-                                    <option value='publico'>Público</option>
-                                    <option value='privado' selected>Privado</option>
-                                    @else
-                                    <option value=''>Selecione</option>
-                                    <option value='publico' selected>Público</option>
-                                    <option value='privado'>Privado</option>
-                                    @endif
+                                   
+                                    <option value='' {{ $modelo->tipo == "" ? "selected":"") }}>Selecione</option>
+                                    <option value='publico' {{ $modelo->tipo == "publico" ? "selected":"") }}>Público</option>
+                                    <option value='privado' {{ $modelo->tipo == "privado" ? "selected":"") }}>Privado</option>
+                                   
                                 </select>
                             </div>
                             @endrole

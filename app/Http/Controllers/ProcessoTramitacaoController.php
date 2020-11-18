@@ -23,22 +23,32 @@ use App\Http\Utility\BotoesDatatable;
 class ProcessoTramitacaoController extends Controller
 {
 
-
-    public function create($id) {
+    public function create($processo,ProcessoTramitacao $tramitacao) {
         $setores = Setor::where('status', 'Ativo')->get();
-        $users = User::where('status', 'Ativo')->get();
-        $processo = Processo::where('id', $id)->first();
-        return view('processo.tramite.create',compact('processo','setores','users'));
+        $users = User::where('status', 'Ativo')->role(['administrador','funcionario'])->get();
+        $processo = Processo::firstWhere('numero', $processo);
+        
+        if(empty($tramitacao->id)){
+            $tramite="";
+        }else{
+            $tramite=$tramitacao;
+        }
+
+        return view('processo.tramite.create',compact('processo','setores','users','tramite'));
     }
 
 
     public function list(Request $request, $processo)
     {
         try {
-            $tramites = ProcessoTramitacao::where('fk_processo', $processo)->where('status','Criado')->with('user')->with('setor')->with('processo')->get();
+            $tramites = ProcessoTramitacao::where('fk_processo', $processo)->with('user')->with('setor')->with('processo')->get();
             return Datatables::of($tramites)
                 ->editColumn('tramite', function ($tramites) {
                     return isset($tramites->fk_user) ? 'Enviado para: <b>'.$tramites->user->nome.'</b> - '.date('d/m/Y H:s',strtotime($tramites->created_at)) : 'Enviado para: <b>'.$tramites->setor->titulo.'</b> - '.date('d/m/Y H:s',strtotime($tramites->created_at));
+                })
+                ->editColumn('criado', function ($tramites) {
+                    return  $tramites->created_at;
+                   
                 })
                 ->escapeColumns([0])
                 ->make(true);
@@ -71,7 +81,7 @@ class ProcessoTramitacaoController extends Controller
     //     }
     // }
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         try {
             $fk_setor = $request->fk_setor;
@@ -85,18 +95,24 @@ class ProcessoTramitacaoController extends Controller
                 $fk_setor = null;
             }
 
-            $processo_documento = ProcessoDocumento::where('fk_processo',$id)->get();
+            $processo = Processo::firstWhere('numero',$request->processo);
+            $processo_documento = ProcessoDocumento::where('fk_processo',$processo->id)->get();
+
+            /** verico se o processo já possui algum documento, caso não tenha eu não deixo o processo
+             * ser encaminhado;
+             */
+
         if($processo_documento->count()>0){
 
+            /** crio um novo tramite  */
             $tramite = new ProcessoTramitacao();
+            $tramite->fk_user_remetente = Auth::user()->id;
             $tramite->fk_setor = $fk_setor;
             $tramite->fk_user = $fk_user;
-            $tramite->fk_processo = $id;
+            $tramite->fk_processo = $processo->id;
 
-            $processo = Processo::find($id);
-            $processo->tramite = "Bloqueado";
-
-            //verifico pra onde foi enviado o processo, e mostro no log especificando se foi setor ou usuário;
+            /** verifico pra onde foi enviado o processo, e mostro no log especificando se foi setor ou usuário;*/ 
+             
             if($fk_setor==null){
                 $user = User::find($fk_user);
                 $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$user->nome."</b>";
@@ -109,7 +125,6 @@ class ProcessoTramitacaoController extends Controller
                 $setor = Setor::find($fk_setor);
                 $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>";
 
-
                 try{
                     Mail::to($setor->email)->send(new ProcessoRecebidoSetor($setor));
                 }catch(\Exception $erro){
@@ -119,19 +134,30 @@ class ProcessoTramitacaoController extends Controller
 
             $log =  new ProcessoLog();
             $log->fk_user = Auth::user()->id;
-            $log->fk_processo = $id;
+            $log->fk_processo = $processo->id;
             $log->status = $status_log;
+           
 
-            $tramite->save();
-
-            DB::transaction(function () use ($tramite,$processo,$log,$id) {
-                $processo->save();
+            DB::transaction(function () use ($tramite,$processo,$log,$request) {
+                $tramite->save();
                 $log->save();
 
-                ProcessoAnexo::where('fk_processo',$id)->where('fk_user',Auth::user()->id)->update(['tramite' => 'Bloqueado']);
-                ProcessoDocumento::where('fk_processo',$id)->where('fk_user',Auth::user()->id)->update(['tramite' => 'Bloqueado']);
+                ProcessoAnexo::where('fk_processo',$processo->id)->where('fk_user',Auth::user()->id)->update(['tramite' => 'Bloqueado']);
+                ProcessoDocumento::where('fk_processo',$processo->id)->where('fk_user',Auth::user()->id)->update(['tramite' => 'Bloqueado']);
+
+                if($request->tramitacao!==null){
+                    $tramite_atual = ProcessoTramitacao::find($request->tramitacao);
+                    $tramite_atual->status = "Bloqueado";
+                    $tramite_atual->save(); 
+                }else{
+                    $processo->tramite = "Bloqueado";
+                    $processo->save();
+                }
+    
             });
+
                 return Response::json(array('status' => 'Ok'));
+
             }else{
                 return Response::json(array('status' => 'Assinatura'));
             }

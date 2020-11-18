@@ -63,15 +63,15 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::group(['prefix' => 'processo-tramitacao', 'where' => ['prefix' => 'processo-tramitacao']], function () {
-            Route::get('/create/{id}', ['uses' => 'ProcessoTramitacaoController@create']);
-            Route::post('/store/{id}', ['uses' => 'ProcessoTramitacaoController@store']);
-            Route::get('/list/{id}', ['uses' => 'ProcessoTramitacaoController@list']);
+            Route::get('/create/{processo}/{tramitacao?}', ['uses' => 'ProcessoTramitacaoController@create']);
+            Route::get('/list/{processo}', ['uses' => 'ProcessoTramitacaoController@list']);
+            
         });
 
         Route::group(['prefix' => 'processo', 'where' => ['prefix' => 'processo']], function () {
             Route::get('/list', ['uses' => 'ProcessoController@list']);
             Route::post('/{id}/encerrar', ['uses' => 'ProcessoController@encerrar']);
-            Route::post('/{id}/devolver', ['uses' => 'ProcessoController@devolver']);
+            Route::post('/{id}/devolver/{tramitacao?}', ['uses' => 'ProcessoController@devolver']);
         });
 
         // rotas para o metodo 'list'
@@ -79,6 +79,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/unidade/list', 'SecretariaController@list');
         Route::get('/processo/list', 'ProcessoController@list');
         Route::get('/setor/list', 'SetorController@list');
+        Route::get('/processo/listar_processos', 'ProcessoController@listar_processos');
+        Route::get('/documento/listar_documentos', 'DocumentoController@listar_documentos');
         Route::get('/ativar-usuarios/list', 'AtivarUsuariosController@list');
         Route::post('/ativar-usuarios/ativar/{id}', 'AtivarUsuariosController@ativar_usuario');
         Route::get('/consultar-processo/list/{busca}', 'ConsultarProcessoController@list');

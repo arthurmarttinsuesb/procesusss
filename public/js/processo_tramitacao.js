@@ -1,4 +1,12 @@
-var id_processo = $("#processo").val();
+const select = $(".select2");
+if (Object.keys(select).length !== 0) {
+    select.select2({
+        theme: "bootstrap4",
+    });
+}
+
+var numero_processo = $("#processo").val();
+
 $(document).ready(function($) {
     const selectSetor = document.getElementById("select_secretaria");
     const selectUser = document.getElementById("select_user");
@@ -54,7 +62,7 @@ $(document).ready(function($) {
                         type: "post",
                         processData: false,
                         contentType: false,
-                        url: base_url + "/processo-tramitacao/store/" + id_processo,
+                        url: base_url + "/processo-tramitacao",
                         headers: {
                             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                         },
@@ -67,7 +75,7 @@ $(document).ready(function($) {
                             } else if (data.status == "Ok") {
                                 swalWithBootstrapButtons.fire("Sucesso", "Processo Encaminhado", "success").then(function(result) {
                                     if (result.value) {
-                                        window.location.href = base_url + "/processo/" + id_processo + "/edit";
+                                        window.location.href = base_url + "/processo/" + numero_processo + "/edit";
                                     }
                                 });
                             }
