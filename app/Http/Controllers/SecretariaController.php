@@ -153,7 +153,7 @@ class SecretariaController extends Controller
             $secretaria->status = 'Inativo';
             $secretaria->save();
 
-            return response()->json(array('status' => "OK"));
+            return response()->json(array('erro' => "ERRO"));
         } catch (\Exception  $erro) {
             return response()->json(array('erro' => "ERRO"));
         }

@@ -78,8 +78,13 @@
                                     <select
                                         class="form-control select2 form-control @error('fk_setor', 'usuario-setor') is-invalid @enderror"
                                         name="fk_setor">
+                                        @foreach ($secretarias as $secretaria)
+
                                         @foreach ($setores as $setor)
-                                             <option value="{{$setor->id}}" {{ ($usuarioSetor->fk_setor == $setor->id ? "selected":"") }} >{{$setor->titulo}}</option>
+                                        @if($secretaria->id == $setor->fk_secretaria)
+                                             <option value="{{$setor->id}}" {{ ($usuarioSetor->fk_setor == $setor->id ? "selected":"") }} > {{$secretaria->sigla}} - {{$setor->titulo}}</option>
+                                      @endif
+                                        @endforeach
                                         @endforeach
                                     </select>
                                     @error('fk_setor','usuario-setor')

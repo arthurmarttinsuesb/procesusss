@@ -8,6 +8,8 @@ use DataTables;
 
 use App\UserSetor;
 use App\User;
+use App\Secretaria;
+
 use Auth;
 use DB;
 use App\Setor;
@@ -55,8 +57,9 @@ class UserSetorsController extends Controller
     public function create()
     {
         $users = User::where('status', 'Ativo')->get();
+        $secretarias = Secretaria::where('status', 'Ativo')->get();
         $setores = Setor::where('status', 'Ativo')->get();
-        return View::make('usuarioSetor.create', ['users' => $users, 'setores' => $setores]);
+        return View::make('usuarioSetor.create', ['users' => $users, 'setores' => $setores,'secretarias' =>$secretarias]);
     }
 
     /**
@@ -123,8 +126,8 @@ class UserSetorsController extends Controller
             $userSetor = UserSetor::find($id);
             $users = User::where('status', 'Ativo')->get();
             $setores = Setor::where('status', 'Ativo')->get();
-
-            return View::make('usuarioSetor.edit', ['usuarioSetor' => $userSetor, 'users' => $users, 'setores' => $setores]);
+            $secretarias = Secretaria::where('status', 'Ativo')->get();
+            return View::make('usuarioSetor.edit', ['usuarioSetor' => $userSetor, 'users' => $users, 'setores' => $setores, 'secretarias' =>$secretarias]);
         } catch (Exception  $erro) {
             Session::flash('message', 'Não foi possível encontrar o registro!');
             return back();

@@ -4,7 +4,9 @@ $(document).on("click", ".btnExcluir", function() {
         rota: "setor",
         idTable: "table_setors",
         element: $(this),
+        
     });
+   
 });
 
 const table = $("#table_setors");

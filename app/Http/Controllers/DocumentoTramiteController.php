@@ -228,4 +228,5 @@ class DocumentoTramiteController extends Controller
             })->escapeColumns([0])
             ->make(true);
     }
+   
 }

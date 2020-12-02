@@ -71,6 +71,9 @@
                                             <a href="/pdf/documento/{{$documentos->processo_documento->id}}" target='_blank' class="btn bg-info color-palette" title="Visualizar Documento Completo"
                                                 data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
                                             </a>
+                                            <button type='button' class="btn bg-warning  color-palette btnDevolutiva"
+                                            data-id="{{$documentos->id}}" title="Devolver Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Informar erro
+                                            </button>
                                         </div>
                                         @else
                                         <div class="btn-group btn-group-sm">
@@ -80,6 +83,9 @@
                                             <a href="/pdf/documento/" target='_blank' class="btn bg-info color-palette" title="Visualizar Documento Completo"
                                                 data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
                                             </a>
+                                            <button type='button' class="btn bg-warning  color-palette btnDevolutiva"
+                                            data-id="{{$documentos->id}}" title="Devolver Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Informar erro
+                                            </button>
                                         </div>
 
                                     @endif</td>
