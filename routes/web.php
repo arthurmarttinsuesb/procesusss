@@ -52,12 +52,14 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/encaminhar', ['uses' => 'DocumentoController@encaminhar']);
             Route::post('/assinar/{id}', ['uses' => 'DocumentoController@assinatura_documento']);
             Route::post('/assinar-autor/{id}', ['uses' => 'DocumentoController@assinatura_documento_autor']);
+            
         });
 
         Route::group(['prefix' => 'documento-tramite', 'where' => ['prefix' => 'documento-tramite']], function () {
             Route::get('/list/{id}', ['uses' => 'DocumentoTramiteController@list']);
             Route::get('/create/{id}', ['uses' => 'DocumentoTramiteController@create']);
             Route::post('/store/{slug}', ['uses' => 'DocumentoTramiteController@store']);
+            Route::post('/documento_devolutiva', ['uses' => 'DocumentoTramiteController@documento_devolutiva']);
         });
 
         Route::group(['prefix' => 'anexos', 'where' => ['prefix' => 'anexos']], function () {
@@ -76,6 +78,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/list', ['uses' => 'ProcessoController@list']);
             Route::post('/{id}/encerrar', ['uses' => 'ProcessoController@encerrar']);
             Route::post('/{id}/devolver/{tramitacao?}', ['uses' => 'ProcessoController@devolver']);
+        });
+
+        Route::group(['prefix' => 'devolutiva', 'where' => ['prefix' => 'devolutiva']], function () {
+           // Route::get('/store/{id}', ['uses' => 'DevolutivaDocumentoController@store']);
+           
         });
 
         // rotas para o metodo 'list'
@@ -103,7 +110,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('consultar-processo', 'ConsultarProcessoController');
         Route::resource('documento-tramite', 'DocumentoTramiteController');
         Route::resource('processo.tramite', 'ProcessoTramitacaoController')->only(['store', 'index', 'destroy']);
-
+        Route::resource('devolutiva', 'DevolutivaDocumentoController');
 
         Route::get('file','FileController@create');
         Route::post('file','FileController@store');

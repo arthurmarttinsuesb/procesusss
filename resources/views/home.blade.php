@@ -155,6 +155,9 @@
                                             <a href="/pdf/documento/{{$documentos->processo_documento->id}}" target='_blank' class="btn bg-info color-palette" title="Visualizar Documento Completo"
                                                 data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
                                             </a>
+                                            <a href="/devolutiva" class="btn bg-warning  color-palette btnDevolutiva"
+                                            data-id="{{$documentos->id}}" title="Informar erro no Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Informar erro
+                                            </a>
                                         </div>
                                         @else
                                         <div class="btn-group btn-group-sm">
@@ -163,6 +166,9 @@
                                             </button>
                                             <a href="/pdf/documento/" target='_blank' class="btn bg-info color-palette" title="Visualizar Documento Completo"
                                                 data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
+                                            </a>
+                                            <a href="/devolutiva" class="btn bg-warning  color-palette btnDevolutiva"
+                                            data-id="{{$documentos->id}}" title="Informar erro no Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Informar erro
                                             </a>
                                         </div>
 
