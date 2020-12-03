@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/sobre', function () {
+    return view('sobre.sobre');
+});
+
 Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
 
 Auth::routes();
@@ -65,7 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'processo-tramitacao', 'where' => ['prefix' => 'processo-tramitacao']], function () {
             Route::get('/create/{processo}/{tramitacao?}', ['uses' => 'ProcessoTramitacaoController@create']);
             Route::get('/list/{processo}', ['uses' => 'ProcessoTramitacaoController@list']);
-            
+
         });
 
         Route::group(['prefix' => 'processo', 'where' => ['prefix' => 'processo']], function () {

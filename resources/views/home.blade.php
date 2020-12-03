@@ -54,9 +54,9 @@
                     <div class="timeline">
                         <!-- timeline time label -->
                         @if($processo->count()>0)
-                        <?php   $i = 0; ?>  
+                        <?php   $i = 0; ?>
                             @foreach($processo as $processo_visualizar)
-                            <?php $i = $i + 1; ?> 
+                            <?php $i = $i + 1; ?>
                             <div class="time-label">
                                 <span class="bg-teal">
                                     {{date('d/m/Y', strtotime($processo_visualizar->created_at))}} </span>
@@ -74,7 +74,7 @@
                                         <b> Criado Por: </b> {{$processo_visualizar->processo->user->nome}} <br>
                                         <b> Título: </b> {{$processo_visualizar->processo->titulo}} <br>
                                         <b> Descricao: </b> {{$processo_visualizar->processo->descricao ?? "Não possui"}} <br>
-                                        
+
                                     </div>
                                     <div class="timeline-footer">
                                         <div class="btn-group btn-group-sm">
@@ -83,7 +83,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
 
@@ -93,7 +93,7 @@
                            ?>
                             @endforeach
                             @if($processo->count()> 5)
-                           
+
                         <div class="row">
                             <div class="col-xl-10 col-sm-9">
                             </div>
@@ -105,8 +105,8 @@
                                         </div>
                             </div>
                         </div>
-                   
-                                   
+
+
                             @endif
                         @else
                             <div class="alert alert-info alert-dismissible">
@@ -126,9 +126,9 @@
                     <div class="timeline">
                         <!-- timeline time label -->
                     @if($documento->count()>0)
-                    <?php   $i = 0; ?>  
+                    <?php   $i = 0; ?>
                         @foreach($documento as $documentos)
-                        <?php $i = $i + 1; ?> 
+                        <?php $i = $i + 1; ?>
                         <!-- repete inicio -->
                         <div class="time-label">
                             <span class="bg-teal">{{date('d/m/Y H:i', strtotime($documentos->created_at))}} </span>
@@ -176,7 +176,7 @@
                            ?>
                         @endforeach
                         @if($documento->count()> 5)
-                           
+
                            <div class="row">
                                <div class="col-xl-10 col-sm-9">
                                </div>
@@ -188,8 +188,8 @@
                                            </div>
                                </div>
                            </div>
-                      
-                                      
+
+
                                @endif
                     @else
                     <div class="alert alert-info alert-dismissible">
@@ -211,6 +211,7 @@
         </div>
 
     </section>
+</div>
     @include('sweetalert::alert')
     <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
