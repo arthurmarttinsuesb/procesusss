@@ -29,15 +29,27 @@ class AtivarUsuariosController extends Controller
         return view('ativarUsuarios.edit', compact('modelo'));
     }
 
-    public function list()
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $usuario = User::where('status', 'Inativo')->with('cidade')->with('estado')->with('file')->get();
+        $usuario = User::where('status', 'Ativo')->where('id','!=','1')->get();
 
         return DataTables::of($usuario)
         ->editColumn('nascimento', function ($usuario) {
             return date("d/m/Y", strtotime($usuario->nascimento));
         })
-        ->editColumn('file.filenames', function ($usuario) {
+        ->editColumn('cidade', function ($usuario) {
+            return $usuario->cidade->nome;
+        })
+        ->editColumn('estado', function ($usuario) {
+            return $usuario->estado->nome;
+        })
+        ->editColumn('file', function ($usuario) {
             $docsHtml = '';
 
             $docs = json_decode($usuario->file->filenames, true);
@@ -51,7 +63,6 @@ class AtivarUsuariosController extends Controller
             })->escapeColumns([0])
             ->make(true);
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -81,24 +92,24 @@ class AtivarUsuariosController extends Controller
         }
     }
 
-    public function ativar_usuario($id)
-    {
-        try {
-            $user = User::find($id);
-            $user->status = 'Ativo';
-            $user->save();
+    // public function ativar_usuario($id)
+    // {
+    //     try {
+    //         $user = User::find($id);
+    //         $user->status = 'Ativo';
+    //         $user->save();
 
-            try{
-                Mail::to($user->email)->send(new UsuarioAtivado($user));
-            }catch(\Exception $erro){
-                return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
-            }
+    //         try{
+    //             Mail::to($user->email)->send(new UsuarioAtivado($user));
+    //         }catch(\Exception $erro){
+    //             return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
+    //         }
 
-            return response()->json(array('status' => "OK"));
-        } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "ERRO"));
-        }
-    }
+    //         return response()->json(array('status' => "OK"));
+    //     } catch (\Exception  $erro) {
+    //         return response()->json(array('erro' => "ERRO"));
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.

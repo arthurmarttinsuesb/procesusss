@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/encaminhar', ['uses' => 'DocumentoController@encaminhar']);
             Route::post('/assinar/{id}', ['uses' => 'DocumentoController@assinatura_documento']);
             Route::post('/assinar-autor/{id}', ['uses' => 'DocumentoController@assinatura_documento_autor']);
-            
+
         });
 
         Route::group(['prefix' => 'documento-tramite', 'where' => ['prefix' => 'documento-tramite']], function () {
@@ -78,11 +78,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/list', ['uses' => 'ProcessoController@list']);
             Route::post('/{id}/encerrar', ['uses' => 'ProcessoController@encerrar']);
             Route::post('/{id}/devolver/{tramitacao?}', ['uses' => 'ProcessoController@devolver']);
+            Route::get('/{id}/replicar', ['uses' => 'ProcessoController@replicar']);
+            Route::post('/{id}/salvarReplicar', ['uses' => 'ProcessoController@salvarReplicar']);
         });
 
         Route::group(['prefix' => 'devolutiva', 'where' => ['prefix' => 'devolutiva']], function () {
            // Route::get('/store/{id}', ['uses' => 'DevolutivaDocumentoController@store']);
-           
+
         });
 
         // rotas para o metodo 'list'

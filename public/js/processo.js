@@ -1,13 +1,12 @@
-$(document).ready(function($) {
+$(document).ready(function ($) {
     $(".todo-list").sortable({
         placeholder: "sort-highlight",
         handle: ".handle",
         forcePlaceholderSize: true,
         zIndex: 999999,
-
     });
 
-    $(document).on("click", ".btnAssinarAutor", function(dados) {
+    $(document).on("click", ".btnAssinarAutor", function (dados) {
         assinarDialog({
             nomeModulo: "Documento",
             rota: "documento/assinar-autor",
@@ -18,7 +17,7 @@ $(document).ready(function($) {
 
     //retorno das tabs
     var tab = $("#tab").val();
-    $('#custom-tabs-four-tab a[href="#' + tab + '"]').tab('show');
+    $('#custom-tabs-four-tab a[href="#' + tab + '"]').tab("show");
 
     var id_processo = $("#processo").val();
     var table = $("#table_documento").DataTable({
@@ -66,10 +65,10 @@ $(document).ready(function($) {
         serverSide: true,
         deferRender: true,
         searching: true,
-        "order": [1, "ASC"],
+        order: [1, "ASC"],
         columns: [
             { width: "100%", data: "tramite", name: "tramite" },
-            { data: "criado", name: "criado", visible: false }
+            { data: "criado", name: "criado", visible: false },
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
@@ -102,7 +101,7 @@ $(document).ready(function($) {
             });
         });*/
 
-    $(document).on("click", ".btnExcluir", function() {
+    $(document).on("click", ".btnExcluir", function () {
         deleteDialog({
             nomeModulo: "Documento",
             rota: "documento",
@@ -113,7 +112,7 @@ $(document).ready(function($) {
     var id_processo = $("#processo").val();
     var tramitacao = $("#tramitacao").val();
 
-    $(document).on("click", ".btnExcluirAnexo", function() {
+    $(document).on("click", ".btnExcluirAnexo", function () {
         deleteDialog({
             nomeModulo: "Anexo",
             rota: "anexos",
@@ -123,7 +122,7 @@ $(document).ready(function($) {
         });
     });
 
-    $(document).on("click", ".btnExcluirTramite", function() {
+    $(document).on("click", ".btnExcluirTramite", function () {
         deleteDialog({
             nomeModulo: "Tramite",
             rota: `processo/${id_processo}/tramite`,
@@ -132,7 +131,7 @@ $(document).ready(function($) {
         });
     });
 
-    $(document).on("click", ".btnAutenticar", function() {
+    $(document).on("click", ".btnAutenticar", function () {
         autenticarDialog({
             nomeModulo: "Anexo",
             rota: "anexos/autentica",
@@ -142,14 +141,14 @@ $(document).ready(function($) {
         });
     });
 
-    $(document).on("click", ".btnEncerrar", function() {
+    $(document).on("click", ".btnEncerrar", function () {
         encerrarDialog({
             rota: `processo/${id_processo}/encerrar`,
             element: $(this),
         });
     });
 
-    $(document).on("click", ".btnDevolver", function() {
+    $(document).on("click", ".btnDevolver", function () {
         devolverDialog({
             rota: `processo/${id_processo}/devolver/${tramitacao}`,
             element: $(this),

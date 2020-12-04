@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RequestProcessus;
 use App\Http\Requests;
 
 
@@ -64,32 +65,45 @@ class ProcessoController extends Controller
                 return  date('d/m/Y', strtotime($processo->created_at));
             })
             ->editColumn('acao', function ($processo) {
+                $btnVisualizar = '';
+                $btnAlterar = '';
+                $btnReplicar = '';
 
                 if($processo->status=='Finalizado' || $processo->status=='Encerrado'){
-                    return '<div class="btn-group btn-group-sm">
-                                <a href="/processo/' . $processo->numero . '"
-                                    class="btn bg-teal color-palette"
-                                    title="Visualizar" data-toggle="tooltip">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                            </div>';
-                }else{
-
-                    return '<div class="btn-group btn-group-sm">
-                                <a href="/processo/' . $processo->numero . '/edit"
-                                    class="btn btn-info"
-                                    title="Alterar" data-toggle="tooltip">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </a>
-                                <a href="/processo/' . $processo->numero . '"
-                                    class="btn bg-teal color-palette"
-                                    title="Visualizar" data-toggle="tooltip">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                            </div>';
-
+                    $btnVisualizar = '<div class="btn-group btn-group-sm">
+                                        <a href="/processo/' . $processo->numero . '"
+                                            class="btn bg-teal color-palette"
+                                            title="Visualizar" data-toggle="tooltip">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </div>';
                 }
-              
+                else{
+                    $btnAlterar = '<div class="btn-group btn-group-sm">
+                                        <a href="/processo/' . $processo->numero . '/edit"
+                                            class="btn btn-info"
+                                            title="Alterar" data-toggle="tooltip">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                    </div>';
+                    $btnVisualizar ='<div class="btn-group btn-group-sm">
+                                        <a href="/processo/' . $processo->numero . '"
+                                            class="btn bg-teal color-palette"
+                                            title="Visualizar" data-toggle="tooltip">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    </div>';
+                }
+                if(Auth::user()->id == $processo->fk_user){
+                    $btnReplicar ='<div class="btn-group btn-group-sm">
+                                        <a href="/processo/' . $processo->id . '/replicar"
+                                            class="btn btn-primary"
+                                            title="Replicar" data-toggle="tooltip">
+                                            <i class="fas fa-copy"></i>
+                                        </a>
+                                    </div>';
+                }
+                return $btnVisualizar." ".$btnAlterar." ".$btnReplicar;
             })
             ->editColumn('criado', function ($processo) {
                 return  $processo->created_at;
@@ -99,7 +113,7 @@ class ProcessoController extends Controller
     }
     public function listar_processos()
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
         if ($user->hasRole('administrador') || $user->hasRole('funcionario')) {
 
             $setor  = UserSetor::where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
@@ -168,7 +182,7 @@ class ProcessoController extends Controller
                 $processo_tramitacao = ProcessoTramitacao::where('fk_processo', $processo->id)->where('status','Criado')->with('user')->with('setor')->with('processo')->get();
                 $log = ProcessoLog::where('fk_processo', $processo->id)->paginate(10);
 
-                /*criei uma função para verificar se o usuário logado está participando do processo, 
+                /*criei uma função para verificar se o usuário logado está participando do processo,
                 seja como autor ou na tramitação*/
                 $verifica_usuario = ParticipacaoProcesso::participacao_processo_user(Auth::user()->id,$processo->id);
 
@@ -177,10 +191,10 @@ class ProcessoController extends Controller
                     return view('processo.show',compact('processo','log','processo_documento','processo_anexo','processo_tramitacao'));
 
                 /*O Processo sendo privado é realizada algumas verificações
-                1º se o usuário for do tipo cidadão + faz parte do processo (autor ou na tramitação), então é liberado o seu acesso caso 
+                1º se o usuário for do tipo cidadão + faz parte do processo (autor ou na tramitação), então é liberado o seu acesso caso
                 não seja o usuário é redirecionado para uma página com o erro 401 de acesso negado;
                 2º caso o usuário seja colaborador, então é feita a verificação se ele faz parte do processo via seu ID ou por está
-                vinculado a um setor que tenha participação no processo, caso o retorno seja true é liberado o seu acesso, se for false 
+                vinculado a um setor que tenha participação no processo, caso o retorno seja true é liberado o seu acesso, se for false
                 então ele é redirecionado para a página do erro 401*/
                 }else if($processo->tipo=="Privado"){
                     if(Auth::user()->hasRole('cidadao')){
@@ -200,10 +214,10 @@ class ProcessoController extends Controller
                             abort(401);
                         }
                     }
-                
+
                 }
             }
-       
+
     }
 
     /**
@@ -228,7 +242,7 @@ class ProcessoController extends Controller
                     return Redirect::to('processo/'.$processo->numero);
                 }else {
 
-                /*Confiro qual o tipo de usuário logado, se for do tipo cidadão faço as seguintes 
+                /*Confiro qual o tipo de usuário logado, se for do tipo cidadão faço as seguintes
                 verificações para determinar o tipo de acesso:
                     1º - não é autor do processo+teor= Público (Pode acessar a tela de consulta)
                     2º - não é autor do processo+teor= Privado (Redirecionado para a página de erro 401 que é de permissão negada) */
@@ -246,9 +260,9 @@ class ProcessoController extends Controller
                     /* para liberar o acesso ao usuário do tipo colaborador preciso realizar as devidas verificações na tabela de tramitação
                     - Preciso saber se o usuário faz parte do processo, seja como usuário direto ou como parte do setor com o status dessa tramitação bloqueada ou não*/
                     $processo_tramitacao_user_livre = ProcessoTramitacao::where('fk_processo', $processo->id)->where('fk_user',Auth::user()->id)->where('status','Criado')->first();
-                    
+
                     $processo_tramitacao_user_bloqueado = ProcessoTramitacao::where('fk_processo', $processo->id)->where('fk_user',Auth::user()->id)->where('status','Bloqueado')->first();
-                    
+
                     $processo_tramitacao_setor_livre = ProcessoTramitacao::where('fk_setor', $usuario_setor->fk_setor)->where('fk_processo', $processo->id)->where('status','Criado')->first();
 
                     $processo_tramitacao_setor_bloqueado = ProcessoTramitacao::where('fk_setor', $usuario_setor->fk_setor)->where('fk_processo', $processo->id)->where('status','Bloqueado')->first();
@@ -304,7 +318,7 @@ class ProcessoController extends Controller
             DB::transaction(function () use ($processo,$log) {
                 $processo->save();
                 $log->save();
-                
+
             });
 
             Session::flash('message_sucesso', 'Dados alterados.');
@@ -378,5 +392,67 @@ class ProcessoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function replicar($id)
+    {
+        $processo = Processo::firstWhere('id',$id);
+        $processo_documento = ProcessoDocumento::where('fk_processo', $processo->id)->where('status','Ativo')->get();
+        return view('processo.replicar', compact('processo', 'processo_documento'));
+    }
+
+    public function salvarReplicar(RequestProcessus $request)
+    {
+        try {
+            $id = Auth::id();
+            $numero_processo = 'pmj.' . time() . '.' . date('Y');
+            $processo = new Processo();
+            $processo->titulo = $request->titulo;
+            $processo->descricao = $request->descricao;
+            $processo->numero = $numero_processo;
+            $processo->tipo = $request->tipo;
+            $processo->fk_user = $id;
+            $processo->status = 'Ativo';
+
+            $log =  new ProcessoLog();
+
+            DB::transaction(function() use ($request, $processo, $log) {
+                $processo->save();
+
+                $log->fk_user = Auth::user()->id;
+                $log->fk_processo = $processo->id;
+                $log->status = 'Processo nº "'.$processo->numero.'" criado por: <b>'.Auth::user()->nome.'</b>';
+                $log->save();
+
+                foreach ($request->doc as $sele => $value) {
+                    // Busca o documento selecionado
+                    $selecionado = ProcessoDocumento::firstWhere('id',$value);
+
+                    //Salvar documento selecionado
+                    $modelo =  new ProcessoDocumento();
+                    $modelo->fk_processo = $processo->id;
+                    $modelo->fk_user = Auth::user()->id;
+                    $modelo->fk_modelo_documento = $selecionado->fk_modelo_documento;
+                    $modelo->titulo = $selecionado->titulo;
+                    $modelo->descricao = $selecionado->descricao;
+                    $modelo->conteudo = $selecionado->conteudo;
+                    $modelo->tipo =  $selecionado->tipo;
+
+                    //Add Log do documento selecionado
+                    $log1 =  new ProcessoLog();
+
+                    $log1->fk_user = Auth::user()->id;
+                    $log1->fk_processo = $processo->id;
+                    $log1->status = 'Documento "'.$selecionado->titulo.'" replicado por: <b>'.Auth::user()->nome.'</b> do processo nº '.$request->n_processo_antigo;
+
+                    $modelo->save();
+                    $log1->save();
+                }
+            });
+            return Redirect::to('processo/' . $processo->numero . '/edit');
+        } catch (\Exception  $erro) {
+            Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!' . $erro);
+            return back()->withInput();
+        }
     }
 }
