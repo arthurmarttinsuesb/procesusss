@@ -36,9 +36,10 @@ class DevolutivaDocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return view ('devolutiva.create');
+       // $modelo = ProcessoDocumento::where('id', $id)->where('status', 'Ativo')->first();
+       // return view ('devolutiva.create');
     }
 
     /**
@@ -48,6 +49,8 @@ class DevolutivaDocumentoController extends Controller
      */
     public function create($id)
     {
+      //  $modelo = ProcessoDocumento::where('id', $id)->where('status', 'Ativo')->first();
+      //  return view ('devolutiva.create', compact('modelo'));
         /*$modelo = ProcessoDocumento::where('id', $id)->where('status', 'Ativo')->first();
         $usuario = User::where('status','Ativo')-> role(['funcionario','administrador'])->get();
         $secretaria = Secretaria::where('status','Ativo')->get();
@@ -63,8 +66,62 @@ class DevolutivaDocumentoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestDevolutivaDocumento $request,ProcessoDocumento $slug)
+    public function store(RequestDevolutivaDocumento $request, $id)
     {
+       
+        try {
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+
+            $log->fk_processo = $slug->fk_processo;
+            $log->status = 'Documento "'.$slug->titulo.'" encaminhado por: <b>'.Auth::user()->nome.'</b>';
+           
+            $modelo = DocumentoTramite::where('fk_processo_documento', $id)->first();
+    
+            $devolutiva = new DevolutivaDocumento ();
+            $devolutiva->observacao = $request->observacao;
+            $devolutiva->fk_tramite_documento =  $modelo->id;
+            $devolutiva->fk_user = $modelo->fk_user ;
+            $devolutiva->fk_setor = $modelo->fk_setor;
+
+            DB::transaction(function () use ($modelo,$request,$log) {
+                $modelo = DocumentoTramite::find($id);
+                $modelo->status = "Devolvido";
+      
+                
+                if( $modelo->fk_user == null){
+                 
+                    $setor = Setor::where('id', $modelo->fk_setor)->first();
+                   
+                    try{
+                        Mail::to($setor->email)->send(new DocumentoRecebidoSetor($setor));
+                    }catch(\Exception $erro){
+                        return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                    }
+                }else {
+                    
+                   
+           
+                    $user = User::where('id', $modelo->fk_user)->first();
+                   
+                    try{
+                        Mail::to($user->email)->send(new DocumentoRecebidoUser($user));
+                    }catch(\Exception $erro){
+                        return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                    }
+                }
+                $modelo->save();
+                $log->save();
+                $devolutiva->save();
+            });
+
+            Session::flash('message_success', 'Documento devolvido!');
+            return back()->withInput();
+        } catch (\Exception  $errors) {
+            Session::flash('message', $errors.'Não foi possível devolver documento, tente novamente mais tarde.!');
+            return back()->withInput();
+        }
        
     }
 
@@ -104,6 +161,15 @@ class DevolutivaDocumentoController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+    public function devolutiva( $id)
+    {
+        //
+
+        $modelo = DocumentoTramite::find($id);
+      //  $modelo->status = 'Inativo';
+     // $modelo->save();
+         return view ('devolutiva.create',compact('modelo'));
     }
 
     /**

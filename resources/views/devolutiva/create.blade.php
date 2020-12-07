@@ -34,7 +34,7 @@
                 </div>
               @endif
 
-              <form  method="POST" action="/devolutiva" >
+              <form  method="POST" action="/devolutiva/store" id="documento_devolutiva" >
                  @csrf
                 
                 <div class="card-body">
@@ -45,8 +45,8 @@
                             <div class="form-group col-12">
                                 <strong>Observação <span style="color: red;">*</span></strong>
                                 <input type="hidden"  name="documento" value="">
-                                <textarea class="textarea form-control @error('Observação') is-invalid @enderror" name='Observação'>{{ old('Observação') }}</textarea>
-                                @error('Observação')
+                                <textarea class="textarea form-control @error('Observacao') is-invalid @enderror" name='Observacao'>{{ old('Observacao') }}</textarea>
+                                @error('Observacao')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -57,7 +57,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="submit"  class="btn btn-info float-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                    <button type="submit" form="documento_devolutiva" class="btn btn-info float-right" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                     &nbsp Aguarde...">Salvar</button>
                 </div>
                 <!-- /.card-footer -->
@@ -80,6 +80,7 @@
     <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('js/base.js') }}"></script>
     <script src="{{ asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/documento_devolutiva.js') }}"></script>
 @endsection
 
 
