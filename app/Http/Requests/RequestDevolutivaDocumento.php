@@ -19,15 +19,15 @@ class RequestDevolutivaDocumento extends FormRequest
     public function rules()
     {
         return [
-            'obsevacao' =>'required',
-            
+            'Obsevacao' =>'required',
+            'documento' =>'required',
         ];
     }
 
     public function attributes(){
         return [
-            'obsevacao' =>'Observação',
-            
+            'Obsevacao' =>'Observação',
+            'documento' =>'Documento',
             ];
 
     }

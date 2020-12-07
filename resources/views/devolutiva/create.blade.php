@@ -14,7 +14,7 @@
           <div class="col-sm-8">
             <h1>Adicionar observação ao documento:  </h1>
           </div>
-         
+
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -25,7 +25,7 @@
         <div class="col-12">
 
            <div class="card">
-            
+
               @if (Session::has('message'))
               <div class="alert alert-danger alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -36,15 +36,15 @@
 
               <form  method="POST" action="/devolutiva" >
                  @csrf
-                
+
                 <div class="card-body">
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
-                       
+
                         <div class="row">
                             <div class="form-group col-12">
                                 <strong>Observação <span style="color: red;">*</span></strong>
-                                <input type="hidden"  name="documento" value="">
+                                <input type="hidden"  name="documento" value='{{$id}}'>
                                 <textarea class="textarea form-control @error('Observação') is-invalid @enderror" name='Observação'>{{ old('Observação') }}</textarea>
                                 @error('Observação')
                                     <span class="invalid-feedback" role="alert">
@@ -53,7 +53,7 @@
                                 @enderror
                             </div>
                         </div>
-                       
+
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
