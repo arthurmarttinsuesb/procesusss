@@ -83,13 +83,8 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::group(['prefix' => 'devolutiva', 'where' => ['prefix' => 'devolutiva']], function () {
-<<<<<<< HEAD
             Route::get('/devolutiva/{id}', ['uses' => 'DevolutivaDocumentoController@devolutiva']);
             Route::get('/store/{id}', ['uses' => 'DevolutivaDocumentoController@store']);
-=======
-           // Route::get('/store/{id}', ['uses' => 'DevolutivaDocumentoController@store']);
-
->>>>>>> 655f1f33720858a704405ef039d6bdaf9e3ea8c4
         });
 
         // rotas para o metodo 'list'
