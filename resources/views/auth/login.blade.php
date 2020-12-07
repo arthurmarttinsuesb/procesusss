@@ -4,7 +4,7 @@
 @section('conteudo')
 <div class="login-box">
         <div class="login-logo">
-                <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}" 
+                <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}"
                    alt="Processus" style="width: 50%; height: auto;"></a>
         </div>
         <!-- /.login-logo -->
@@ -26,7 +26,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-                
+
                 </div>
                 <div class="input-group mb-3">
                 <input placeholder="Senha" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
@@ -65,16 +65,19 @@
             <p class="mb-0">
                 <a href="{{route('register')}}" class="text-center">Ainda não possui uma conta, cadastre-se.</a>
             </p>
+            <p class="mb-0">
+                <a href="/sobre" class="text-center">Sobre</a>
+            </p>
             <br>
             <hr>
             <div class="login-logo">
-                    <a href="{{ url('/home') }}"><img src="{{url('/img/footer_logo.jpeg')}}" 
+                    <a href="{{ url('/home') }}"><img src="{{url('/img/footer_logo.jpeg')}}"
                     alt="Processus" style="width: 100%; height: auto;"></a>
             </div>
-              
+
             </div>
             <!-- /.login-card-body -->
         </div>
-</div>    
-        
+</div>
+
 @endsection

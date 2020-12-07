@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('tipo'); //Pessoa Física ou Pessoa Jurídica 
+            $table->string('tipo'); //Pessoa Física ou Pessoa Jurídica
             $table->string('sexo');
             $table->date('nascimento');
             $table->string('telefone');
@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->foreign('fk_estado')->references('id')-> on('estados');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('status', 10)->default('Inativo');
+            $table->string('status', 10);
             $table->rememberToken();
             $table->timestamps();
         });

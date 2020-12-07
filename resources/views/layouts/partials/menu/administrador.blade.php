@@ -31,13 +31,19 @@
 <li class="nav-item">
     <a href="/ativar-usuarios" class="nav-link">
         <i class="nav-icon fa fa-user-plus"></i>
-        <p>Ativar Usuarios</p>
+        <p>Usuarios do Sistema</p>
     </a>
 </li>
 <li class="nav-item">
     <a href="/usuario-setor" class="nav-link">
         <i class="nav-icon fa fa-user"></i>
         <p>Colaboradores</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="/sobre" class="nav-link">
+        <i class="nav-icon fa fa-users"></i>
+        <p>Sobre</p>
     </a>
 </li>
 <!-- <li class="nav-item">

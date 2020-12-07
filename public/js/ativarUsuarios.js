@@ -2,7 +2,7 @@ const table = $("#table_users");
 
 if (Object.keys(table).length !== 0) {
     table.DataTable({
-        ajax: base_url + "/ativar-usuarios/list",
+        ajax: base_url + "/ativar-usuarios/show",
         scrollCollapse: true,
         responsive: true,
         paging: true,
@@ -16,10 +16,10 @@ if (Object.keys(table).length !== 0) {
             { data: "sexo", name: "sexo" },
             { data: "nascimento", name: "nascimento" },
             { data: "telefone", name: "telefone" },
-            { data: "cidade.nome", name: "cidade" },
-            { data: "estado.nome", name: "estado" },
+            { data: "cidade", name: "cidade" },
+            { data: "estado", name: "estado" },
             { data: "email", name: "email" },
-            { data: "file.filenames", name: "documentos" },
+            { data: "file", name: "documentos" },
             { data: "acao", name: "acao" },
         ],
         language: { url: "/plugins/datatables/traducao.json" },

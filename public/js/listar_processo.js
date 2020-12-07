@@ -1,4 +1,4 @@
-$(document).ready(function($) {
+$(document).ready(function ($) {
     var table = $("#table_administrador").DataTable({
         ajax: base_url + "/processo/list",
         scrollCollapse: true,
@@ -43,9 +43,7 @@ $(document).ready(function($) {
         language: { url: "/plugins/datatables/traducao.json" },
     });
 
-
-
-    $(document).on("click", ".btnExcluir", function() {
+    $(document).on("click", ".btnExcluir", function () {
         deleteDialog({
             nomeModulo: "Processo",
             rota: "processo",
@@ -54,7 +52,7 @@ $(document).ready(function($) {
         });
     });
 
-    $(document).on("click", ".btnAutenticar", function() {
+    $(document).on("click", ".btnAutenticar", function () {
         Swal.fire({
             title: "Você tem certeza que deseja autenticar o documento?",
             text: "Você não poderá reverter isso!",
@@ -75,8 +73,5 @@ $(document).ready(function($) {
         });
     });
 
-
     //
-
-
 });

@@ -128,7 +128,7 @@ class DocumentoController extends Controller
 
     public function listar_documentos()
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
         if ($user->hasRole('administrador') || $user->hasRole('funcionario')) {
 
             $setor  = UserSetor::where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
@@ -136,7 +136,7 @@ class DocumentoController extends Controller
             return view('documento.documento_lista', compact('documento'));
         }
     }
-  
+
     public function store(RequestDocumento $request)
     {
         try {
@@ -285,5 +285,5 @@ class DocumentoController extends Controller
         }
     }
 
-   
+
 }

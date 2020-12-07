@@ -138,6 +138,7 @@ class RegisterController extends Controller
                 $user->complemento = $data['complemento'];
                 $user->fk_estado = $data['estado'];
                 $user->fk_cidade = $data['cidade'];
+                $user->status = 'Ativo';
 
                 $user->email = $data['email'];
                 $user->password = bcrypt($data['password']);
@@ -156,19 +157,19 @@ class RegisterController extends Controller
                         $file->move(public_path().'/files/', $name);
                         $files_upload[] = $name;
                     }
-    
-    
+
+
                     $file= new File();
                     $file->filenames=json_encode($files_upload);
                     $file->fk_user = $user->id;
                     $file->save();
-    
-    
-                    try{
-                        Mail::to($user->email)->send(new SendMailUser($user));
-                    }catch(\Exception $erro){
-                        return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
-                    }
+
+
+                    // try{
+                    //     Mail::to($user->email)->send(new SendMailUser($user));
+                    // }catch(\Exception $erro){
+                    //     return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
+                    // }
 
              } catch (\Exception  $erro) {
                  return response()->json(array('as' => $erro));

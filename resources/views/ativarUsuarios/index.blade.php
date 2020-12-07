@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Ativar Usuarios')
-@section('contentheader_title', 'Ativar Usuarios')
+@section('htmlheader_title', 'Usuarios do Sistema')
+@section('contentheader_title', 'Usuarios do Sistema')
 
 @section('conteudo')
 <!-- DataTables -->
@@ -20,7 +20,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Ativar Usuarios</li>
+                        <li class="breadcrumb-item active">Usuarios do Sistema</li>
                     </ol>
                 </div>
             </div>
