@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Rotas que precisam do usuario ativo
     Route::group(['middleware' => 'userAtived'], function () {
 
-        Route::group(['prefix' => 'modelo-documento', 'where' => ['prefix' => 'modelo-documento'],'middleware' => ['role:administrador']], function () {
+        Route::group(['prefix' => 'modelo-documento', 'where' => ['prefix' => 'modelo-documento'],'middleware' => ['role:administrador|funcionario']], function () {
             Route::post('/inserir-imagem', ['uses' => 'ModeloDocumentoController@inserir_imagem']);
             Route::post('/remover-imagem', ['uses' => 'ModeloDocumentoController@remover_imagem']);
             Route::get('/list', ['uses' => 'ModeloDocumentoController@list']);
@@ -83,8 +83,13 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         Route::group(['prefix' => 'devolutiva', 'where' => ['prefix' => 'devolutiva']], function () {
+<<<<<<< HEAD
+            Route::get('/devolutiva/{id}', ['uses' => 'DevolutivaDocumentoController@devolutiva']);
+            Route::get('/store/{id}', ['uses' => 'DevolutivaDocumentoController@store']);
+=======
            // Route::get('/store/{id}', ['uses' => 'DevolutivaDocumentoController@store']);
 
+>>>>>>> 655f1f33720858a704405ef039d6bdaf9e3ea8c4
         });
 
         // rotas para o metodo 'list'

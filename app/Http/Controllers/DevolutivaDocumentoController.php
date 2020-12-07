@@ -38,9 +38,8 @@ class DevolutivaDocumentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-
     }
 
     /**
@@ -50,6 +49,8 @@ class DevolutivaDocumentoController extends Controller
      */
     public function create($id)
     {
+      //  $modelo = ProcessoDocumento::where('id', $id)->where('status', 'Ativo')->first();
+      //  return view ('devolutiva.create', compact('modelo'));
         /*$modelo = ProcessoDocumento::where('id', $id)->where('status', 'Ativo')->first();
         $usuario = User::where('status','Ativo')-> role(['funcionario','administrador'])->get();
         $secretaria = Secretaria::where('status','Ativo')->get();
@@ -126,6 +127,15 @@ class DevolutivaDocumentoController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+    public function devolutiva( $id)
+    {
+        //
+
+        $modelo = DocumentoTramite::find($id);
+      //  $modelo->status = 'Inativo';
+     // $modelo->save();
+         return view ('devolutiva.create',compact('modelo'));
     }
 
     /**
