@@ -34,7 +34,7 @@
                 </div>
               @endif
 
-              <form  method="POST" action="/devolutiva/store" id="documento_devolutiva" >
+              <form  method="POST" action="/devolutiva" id="documento_devolutiva" >
                  @csrf
 
                 <div class="card-body">
