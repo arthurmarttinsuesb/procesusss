@@ -82,6 +82,15 @@ class DevolutivaDocumentoController extends Controller
             DB::transaction(function () use ($devolutiva,$documento_tramite) {
                 $devolutiva->save();
                 $documento_tramite->save();
+
+                $processo_doc = ProcessoDocumento::find($documento_tramite->fk_processo_documento);
+                $processo = Processo::find($processo_doc->fk_processo);
+
+                $log =  new ProcessoLog();
+                $log->fk_user = Auth::user()->id;
+                $log->fk_processo = $processo->id;
+                $log->status = 'Processo nº "'.$processo->numero.'" Devolvido por: <b>'.Auth::user()->nome.'</b>. Pelo seguinte motivo '.$devolutiva->observacao;
+                $log->save();
             });
 
             return Redirect::to('/home');

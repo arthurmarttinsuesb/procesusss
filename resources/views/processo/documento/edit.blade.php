@@ -77,11 +77,9 @@
                             <div class="form-group col-md-2">
                                 <strong>Conteúdo <span style="color: red;">*</span></strong>
                                 <select id="categoria" name='categoria' class="form-control @error('tipo') is-invalid @enderror">
-                                   
-                                    <option value='' {{ $modelo->tipo == "" ? "selected":"") }}>Selecione</option>
-                                    <option value='publico' {{ $modelo->tipo == "publico" ? "selected":"") }}>Público</option>
-                                    <option value='privado' {{ $modelo->tipo == "privado" ? "selected":"") }}>Privado</option>
-                                   
+                                    <option value='' {{ $modelo->tipo == "" ? "selected":"" }}>Selecione</option>
+                                    <option value='Público' {{ $modelo->tipo == "Público" ? "selected":"" }}>Público</option>
+                                    <option value='Privado' {{ $modelo->tipo == "Privado" ? "selected":"" }}>Privado</option>
                                 </select>
                             </div>
                             @endrole

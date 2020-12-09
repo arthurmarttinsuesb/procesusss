@@ -62,12 +62,18 @@ class DocumentoController extends Controller
             })
             ->editColumn('status', function ($modelo) {
                 $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','!=','Inativo')->get();
-                if($documento_tramite->count()==0){
+                $documento_alt = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Alterado')->get();
+                $documento_devolvido = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Devolvido')->get();
+
+                if(($documento_tramite->count()==0 || $documento_alt->count()>0) && $documento_devolvido->count()==0){
                     return  '<span class="right badge badge-success">em andamento</span>';
                 }else{
                     $documento_tramite_pendente = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Pendente')->get();
-                    if($documento_tramite_pendente->count()==0){
+
+                    if($documento_tramite_pendente->count()==0 &&  $documento_devolvido->count()==0){
                         return  '<span class="right badge badge-secondary">concluído</span>';
+                    }else if($documento_devolvido->count()>0){
+                        return  '<span class="right badge badge-warning">Devolvido</span>';
                     }else{
                         return  '<span class="right badge badge-info">enviado</span>';
                     }
@@ -106,17 +112,23 @@ class DocumentoController extends Controller
                     //caso seja bloqueado só pode ser visualizado
                     if($modelo->tramite=="Liberado"){
                         $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','!=','Inativo')->get();
+                        $documento_devolvido = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Devolvido')->get();
+                        $documento_alt = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Alterado')->get();
                         //se o documento estiver traminando o usuário não pode excluir ou editar.
-                        if($documento_tramite->count()==0){
+                        if(($documento_tramite->count()==0 &&  $documento_devolvido->count()==0) || $documento_alt->count()>0){
                             return '<div class="btn-group btn-group-sm">
                                         '.$visualizar.$editar.$encaminhar.$assinatura.$excluir.'
                                     </div>';
-                            }else{
-                            return '<div class="btn-group btn-group-sm">
-                                        '.$visualizar.$encaminhar.'
+                        } else if($documento_devolvido->count()>0){
+                                return '<div class="btn-group btn-group-sm">
+                                        '.$visualizar.$editar.$excluir.'
                                     </div>';
-                            }
-                    }else if($modelo->tramite=="Bloqueado"){
+                        } else{
+                            return '<div class="btn-group btn-group-sm">
+                                    '.$visualizar.$encaminhar.'
+                                </div>';
+                        }
+                    } else if($modelo->tramite=="Bloqueado"){
 
                         return '<div class="btn-group btn-group-sm">
                                     '.$visualizar.$encaminhar.'
@@ -181,6 +193,12 @@ class DocumentoController extends Controller
             $modelo->titulo = $request->titulo;
             $modelo->descricao = $request->descricao;
             $modelo->conteudo = $request->conteudo;
+
+            $documento_tramite = DocumentoTramite::where('fk_processo_documento',$modelo->id)->where('status','Devolvido')->get();
+            foreach($documento_tramite as $documento){
+                $documento->status = 'Alterado';
+                $documento->save();
+            }
 
             if($request->categoria == "privado"){
                 $modelo->tipo = "Privado";
