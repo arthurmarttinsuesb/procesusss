@@ -234,18 +234,25 @@ class DocumentoController extends Controller
     {
         try {
             $modelo = ProcessoDocumento::find($id);
-            $modelo->status = 'Inativo';
-            $modelo->save();
+            //Teste se foi ou tentou assinar
+            $teste_assinatura = DocumentoTramite::where('fk_processo_documento',$id)->get();
+            if($teste_assinatura->count()==0){
+                $modelo->status = 'Inativo';
+                $modelo->save();
 
-            $log =  new ProcessoLog();
-            $log->fk_user = Auth::user()->id;
-            $log->fk_processo = $modelo->fk_processo;
-            $log->status = 'Documento "'.$modelo->titulo.'" excluído por: <b>'.Auth::user()->nome.'</b>';
-            $log->save();
+                $log =  new ProcessoLog();
+                $log->fk_user = Auth::user()->id;
+                $log->fk_processo = $modelo->fk_processo;
+                $log->status = 'Documento "'.$modelo->titulo.'" excluído por: <b>'.Auth::user()->nome.'</b>';
+                $log->save();
 
-            return response()->json(array('status' => "OK"));
+                return response()->json(array('status' => "OK"));
+            } else{
+                // return Redirect::to('documento/'.$modelo->id.'/arquivar');
+                return response()->json(array('status' => "ERRO", 'id' => $modelo->id));
+            }
         } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "ERRO"));
+            return response()->json(array('erro' => $erro));
         }
     }
 
@@ -303,5 +310,41 @@ class DocumentoController extends Controller
         }
     }
 
+    public function arquivamentoTela($id)
+    {
+        try {
+            $documento = ProcessoDocumento::find($id);
 
+            $modelo = Processo::where('id', $documento->fk_processo)->first();
+
+            return view('processo.arquivar',compact('id','documento','modelo'));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
+        }
+    }
+
+    public function arquivamento($id, Request $request)
+    {
+        try {
+            $modelo = ProcessoDocumento::find($id);
+
+            $modelo->status = 'Arquivado';
+            $modelo->save();
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $modelo->fk_processo;
+            $log->justificativa = $request->justificativa;
+
+            $log->status = 'Documento "'.$modelo->titulo.'" Arquivado por: <b>'.Auth::user()->nome.'</b>';
+            $log->save();
+
+            Session::flash('message_sucesso', 'Documento Arquivado!');
+            Session::flash('tab', 'tab_documento');
+            return Redirect::to('processo/'.$modelo->processo->numero.'/edit');
+        } catch (\Exception  $erro) {
+            Session::flash('message_erro','Não foi possível arquivar o documento, tente novamente mais tarde.!');
+            return back()->withInput();
+        }
+    }
 }

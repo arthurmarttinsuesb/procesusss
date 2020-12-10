@@ -52,7 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/encaminhar', ['uses' => 'DocumentoController@encaminhar']);
             Route::post('/assinar/{id}', ['uses' => 'DocumentoController@assinatura_documento']);
             Route::post('/assinar-autor/{id}', ['uses' => 'DocumentoController@assinatura_documento_autor']);
-
+            Route::get('/{id}/arquivar', ['uses' => 'DocumentoController@arquivamentoTela']);
+            Route::post('/{id}/arquivarJustificativa', ['uses' => 'DocumentoController@arquivamento']);
         });
 
         Route::group(['prefix' => 'documento-tramite', 'where' => ['prefix' => 'documento-tramite']], function () {
