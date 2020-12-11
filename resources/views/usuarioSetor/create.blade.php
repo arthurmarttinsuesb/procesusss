@@ -84,20 +84,19 @@
                                     <select
                                         class="form-control select2 form-control @error('fk_setor', 'usuario-setor') is-invalid @enderror"
                                         name="fk_setor">
-                                        
-                                        @foreach ($secretarias as $secretaria)
 
-                                        @foreach ($setores as $setor)
-                                        @if($secretaria->id == $setor->fk_secretaria)
-                                        @if (old('fk_setor') == $setor->id)
-                                       
-                                        <option value="{{$setor->id}}" selected>{{$secretaria->sigla}} - {{$setor->titulo}}</option>
-                                        
-                                        @else
-                                        <option value="{{$setor->id}}">{{$secretaria->sigla}} - {{$setor->titulo}}</option>
-                                        @endif
-                                        @endif
-                                        @endforeach
+                                        @foreach ($secretarias as $secretaria)
+                                            @foreach ($setores as $setor)
+                                                @if($secretaria->id == $setor->fk_secretaria)
+                                                    @if (old('fk_setor') == $setor->id)
+
+                                                    <option value="{{$setor->id}}" selected>{{$secretaria->sigla}} - {{$setor->titulo}}</option>
+
+                                                    @else
+                                                    <option value="{{$setor->id}}">{{$secretaria->sigla}} - {{$setor->titulo}}</option>
+                                                    @endif
+                                                @endif
+                                            @endforeach
                                         @endforeach
                                     </select>
                                     @error('fk_setor','usuario-setor')

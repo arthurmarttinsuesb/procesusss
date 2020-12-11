@@ -17,6 +17,7 @@ use App\ProcessoTramitacao;
 use App\ProcessoLog;
 use App\ProcessoAnexo;
 use App\Processo;
+use App\Secretaria;
 
 use App\Http\Utility\BotoesDatatable;
 
@@ -25,16 +26,17 @@ class ProcessoTramitacaoController extends Controller
 
     public function create($processo,ProcessoTramitacao $tramitacao) {
         $setores = Setor::where('status', 'Ativo')->get();
+        $secretarias = Secretaria::where('status', 'Ativo')->get();
         $users = User::where('status', 'Ativo')->role(['administrador','funcionario'])->get();
         $processo = Processo::firstWhere('numero', $processo);
-        
+
         if(empty($tramitacao->id)){
             $tramite="";
         }else{
             $tramite=$tramitacao;
         }
 
-        return view('processo.tramite.create',compact('processo','setores','users','tramite'));
+        return view('processo.tramite.create',compact('processo','setores','users','tramite','secretarias'));
     }
 
 
@@ -48,7 +50,7 @@ class ProcessoTramitacaoController extends Controller
                 })
                 ->editColumn('criado', function ($tramites) {
                     return  $tramites->created_at;
-                   
+
                 })
                 ->escapeColumns([0])
                 ->make(true);
@@ -111,11 +113,11 @@ class ProcessoTramitacaoController extends Controller
             $tramite->fk_user = $fk_user;
             $tramite->fk_processo = $processo->id;
 
-            /** verifico pra onde foi enviado o processo, e mostro no log especificando se foi setor ou usuário;*/ 
-             
+            /** verifico pra onde foi enviado o processo, e mostro no log especificando se foi setor ou usuário;*/
+
             if($fk_setor==null){
                 $user = User::find($fk_user);
-                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$user->nome."</b>";
+                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$user->nome."</b>, para verificar ".$request->instrucao;
                 try{
                     Mail::to($user->email)->send(new ProcessoRecebidoUser($user));
                 }catch(\Exception $erro){
@@ -123,20 +125,20 @@ class ProcessoTramitacaoController extends Controller
                 }
             }else{
                 $setor = Setor::find($fk_setor);
-                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>";
+                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>, para verificar ".$request->instrucao;
 
-                try{
-                    Mail::to($setor->email)->send(new ProcessoRecebidoSetor($setor));
-                }catch(\Exception $erro){
-                    return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
-                }
+                // try{
+                //     Mail::to($setor->email)->send(new ProcessoRecebidoSetor($setor));
+                // }catch(\Exception $erro){
+                //     return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                // }
             }
 
             $log =  new ProcessoLog();
             $log->fk_user = Auth::user()->id;
             $log->fk_processo = $processo->id;
             $log->status = $status_log;
-           
+
 
             DB::transaction(function () use ($tramite,$processo,$log,$request) {
                 $tramite->save();
@@ -148,12 +150,12 @@ class ProcessoTramitacaoController extends Controller
                 if($request->tramitacao!==null){
                     $tramite_atual = ProcessoTramitacao::find($request->tramitacao);
                     $tramite_atual->status = "Bloqueado";
-                    $tramite_atual->save(); 
+                    $tramite_atual->save();
                 }else{
                     $processo->tramite = "Bloqueado";
                     $processo->save();
                 }
-    
+
             });
 
                 return Response::json(array('status' => 'Ok'));
@@ -162,9 +164,9 @@ class ProcessoTramitacaoController extends Controller
                 return Response::json(array('status' => 'Assinatura'));
             }
 
-            } catch (\Exception  $erro) {
-                return Response::json(array('errors' => $erro));
-            }
+        } catch (\Exception  $erro) {
+            return Response::json(array('errors' => $erro));
+        }
     }
 
 
