@@ -29,9 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
         $setor  = UserSetor::where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
-        
+
         if ($user->hasRole('cidadao')) {
             return view('home_cidadao');
         }else{
@@ -40,7 +40,7 @@ class HomeController extends Controller
             return view('home', compact('documento','processo'));
         }
 
-        
+
     }
 
 }

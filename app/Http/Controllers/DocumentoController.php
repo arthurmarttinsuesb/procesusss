@@ -62,12 +62,18 @@ class DocumentoController extends Controller
             })
             ->editColumn('status', function ($modelo) {
                 $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','!=','Inativo')->get();
-                if($documento_tramite->count()==0){
+                $documento_alt = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Alterado')->get();
+                $documento_devolvido = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Devolvido')->get();
+
+                if(($documento_tramite->count()==0 || $documento_alt->count()>0) && $documento_devolvido->count()==0){
                     return  '<span class="right badge badge-success">em andamento</span>';
                 }else{
                     $documento_tramite_pendente = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Pendente')->get();
-                    if($documento_tramite_pendente->count()==0){
+
+                    if($documento_tramite_pendente->count()==0 &&  $documento_devolvido->count()==0){
                         return  '<span class="right badge badge-secondary">concluído</span>';
+                    }else if($documento_devolvido->count()>0){
+                        return  '<span class="right badge badge-warning">Devolvido</span>';
                     }else{
                         return  '<span class="right badge badge-info">enviado</span>';
                     }
@@ -106,17 +112,23 @@ class DocumentoController extends Controller
                     //caso seja bloqueado só pode ser visualizado
                     if($modelo->tramite=="Liberado"){
                         $documento_tramite = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','!=','Inativo')->get();
+                        $documento_devolvido = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Devolvido')->get();
+                        $documento_alt = DocumentoTramite::where('fk_processo_documento', $modelo->id)->where('status','Alterado')->get();
                         //se o documento estiver traminando o usuário não pode excluir ou editar.
-                        if($documento_tramite->count()==0){
+                        if(($documento_tramite->count()==0 &&  $documento_devolvido->count()==0) || $documento_alt->count()>0){
                             return '<div class="btn-group btn-group-sm">
                                         '.$visualizar.$editar.$encaminhar.$assinatura.$excluir.'
                                     </div>';
-                            }else{
-                            return '<div class="btn-group btn-group-sm">
-                                        '.$visualizar.$encaminhar.'
+                        } else if($documento_devolvido->count()>0){
+                                return '<div class="btn-group btn-group-sm">
+                                        '.$visualizar.$editar.$excluir.'
                                     </div>';
-                            }
-                    }else if($modelo->tramite=="Bloqueado"){
+                        } else{
+                            return '<div class="btn-group btn-group-sm">
+                                    '.$visualizar.$encaminhar.'
+                                </div>';
+                        }
+                    } else if($modelo->tramite=="Bloqueado"){
 
                         return '<div class="btn-group btn-group-sm">
                                     '.$visualizar.$encaminhar.'
@@ -182,6 +194,12 @@ class DocumentoController extends Controller
             $modelo->descricao = $request->descricao;
             $modelo->conteudo = $request->conteudo;
 
+            $documento_tramite = DocumentoTramite::where('fk_processo_documento',$modelo->id)->where('status','Devolvido')->get();
+            foreach($documento_tramite as $documento){
+                $documento->status = 'Alterado';
+                $documento->save();
+            }
+
             if($request->categoria == "privado"){
                 $modelo->tipo = "Privado";
             }else {
@@ -216,18 +234,25 @@ class DocumentoController extends Controller
     {
         try {
             $modelo = ProcessoDocumento::find($id);
-            $modelo->status = 'Inativo';
-            $modelo->save();
+            //Teste se foi ou tentou assinar
+            $teste_assinatura = DocumentoTramite::where('fk_processo_documento',$id)->get();
+            if($teste_assinatura->count()==0){
+                $modelo->status = 'Inativo';
+                $modelo->save();
 
-            $log =  new ProcessoLog();
-            $log->fk_user = Auth::user()->id;
-            $log->fk_processo = $modelo->fk_processo;
-            $log->status = 'Documento "'.$modelo->titulo.'" excluído por: <b>'.Auth::user()->nome.'</b>';
-            $log->save();
+                $log =  new ProcessoLog();
+                $log->fk_user = Auth::user()->id;
+                $log->fk_processo = $modelo->fk_processo;
+                $log->status = 'Documento "'.$modelo->titulo.'" excluído por: <b>'.Auth::user()->nome.'</b>';
+                $log->save();
 
-            return response()->json(array('status' => "OK"));
+                return response()->json(array('status' => "OK"));
+            } else{
+                // return Redirect::to('documento/'.$modelo->id.'/arquivar');
+                return response()->json(array('status' => "ERRO", 'id' => $modelo->id));
+            }
         } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "ERRO"));
+            return response()->json(array('erro' => $erro));
         }
     }
 
@@ -285,5 +310,41 @@ class DocumentoController extends Controller
         }
     }
 
+    public function arquivamentoTela($id)
+    {
+        try {
+            $documento = ProcessoDocumento::find($id);
 
+            $modelo = Processo::where('id', $documento->fk_processo)->first();
+
+            return view('processo.arquivar',compact('id','documento','modelo'));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "ERRO"));
+        }
+    }
+
+    public function arquivamento($id, Request $request)
+    {
+        try {
+            $modelo = ProcessoDocumento::find($id);
+
+            $modelo->status = 'Arquivado';
+            $modelo->save();
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $modelo->fk_processo;
+            $log->justificativa = $request->justificativa;
+
+            $log->status = 'Documento "'.$modelo->titulo.'" Arquivado por: <b>'.Auth::user()->nome.'</b>';
+            $log->save();
+
+            Session::flash('message_sucesso', 'Documento Arquivado!');
+            Session::flash('tab', 'tab_documento');
+            return Redirect::to('processo/'.$modelo->processo->numero.'/edit');
+        } catch (\Exception  $erro) {
+            Session::flash('message_erro','Não foi possível arquivar o documento, tente novamente mais tarde.!');
+            return back()->withInput();
+        }
+    }
 }

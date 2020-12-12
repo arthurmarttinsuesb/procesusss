@@ -37,7 +37,7 @@
                             <div class="col-xl-9 col-sm-1">
                             </div>
                             <div class="col-xl-3 col-sm-11">
-                                
+
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                     @endif
                     <div class="card-body table-responsive-sm">
                     @if(Auth::user()->hasRole('administrador') || Auth::user()->hasRole('funcionario') )
-                        
+
                         <table id="table_documento_lista" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -90,7 +90,7 @@
 
                                     @endif</td>
                                     </tr>
-                                @endforeach    
+                                @endforeach
                             </tbody>
                         </table>
 

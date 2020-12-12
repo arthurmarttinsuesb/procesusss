@@ -411,3 +411,74 @@ function devolverDialog({ rota, element }) {
             }
         });
 }
+
+function arquivarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
+    const id = element.data(dataId);
+    swalWithBootstrapButtons
+        .fire({
+            title: `Deseja excluir essa(e) ${nomeModulo}?`,
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, quero excluir!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true,
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "delete",
+                    url: base_url + `/${rota}/${id}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    data: {},
+                    success: function (data) {
+                        if (data.status == "ERRO") {
+                            Swal.fire(
+                                "Atenção",
+                                "Não é possivel excluir, documento será arquivado.",
+                                "info"
+                            );
+                            setTimeout(function () {
+                                window.location.href =
+                                    base_url +
+                                    "/documento/" +
+                                    data.id +
+                                    "/arquivar";
+                            }, 2000);
+                        } else {
+                            swalWithBootstrapButtons
+                                .fire(
+                                    "Sucesso",
+                                    "Exclusão Realizada",
+                                    "success"
+                                )
+                                .then(function (result) {
+                                    if (result.value) {
+                                        $("#" + idTable)
+                                            .DataTable()
+                                            .draw(false);
+                                    }
+                                });
+                        }
+                    },
+                    error: function () {
+                        swalWithBootstrapButtons.fire(
+                            "Atenção",
+                            "Exclusão cancelada, tente novamente mais tarde.",
+                            "error"
+                        );
+                    },
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    "Atenção",
+                    "Exclusão cancelada.",
+                    "error"
+                );
+            }
+        });
+}

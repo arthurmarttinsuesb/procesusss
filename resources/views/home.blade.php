@@ -155,11 +155,11 @@
                                             <a href="/pdf/documento/{{$documentos->processo_documento->id}}" target='_blank' class="btn bg-info color-palette" title="Visualizar Documento Completo"
                                                 data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
                                             </a>
-                                            <a href="/devolutiva" class="btn bg-warning  color-palette btnDevolutiva"
-                                            data-id="{{$documentos->id}}" title="Informar erro no Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Informar erro
+                                            <a href="/devolutiva/{{$documentos->id}}/edit" class="btn bg-warning  color-palette btnDevolutiva"
+                                            title="Informar erro no Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Informar erro
                                             </a>
                                         </div>
-                                        @else
+                                    @else
                                         <div class="btn-group btn-group-sm">
                                             <button type='button' class="btn bg-success color-palette btnAssinar"
                                             data-id="{{$documentos->id}}" title="Marcar documento como lido" data-toggle="tooltip"><i class="fa fa-envelope-open-text"></i></i> Marcar como lido
@@ -167,8 +167,8 @@
                                             <a href="/pdf/documento/" target='_blank' class="btn bg-info color-palette" title="Visualizar Documento Completo"
                                                 data-toggle="tooltip"><i class="fa fa-eye"></i> Visualizar
                                             </a>
-                                            <a href="/devolutiva" class="btn bg-warning  color-palette btnDevolutiva"
-                                            data-id="{{$documentos->id}}" title="Informar erro no Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Informar erro
+                                            <a href="/devolutiva/{{$documentos->id}}/edit" class="btn bg-warning  color-palette btnDevolutiva"
+                                            title="Informar erro no Documento" data-toggle="tooltip"><i class="fa fa-pencil-alt"></i></i> Informar erro
                                             </a>
                                         </div>
 
