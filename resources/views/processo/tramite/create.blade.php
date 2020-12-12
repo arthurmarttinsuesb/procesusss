@@ -104,7 +104,8 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group col-4">
+                            <!-- verifico se o tipo de usuário é cidadão, se for o campo do tipo usuário não vai ser mostrado-->
+                            <div class="form-group col-md-4" @foreach(Auth::user()->getRoleNames() as $nome)   @if($nome=="cidadao") hidden @endif  @endforeach>
                                     <strong>Instrução <span style="color: red;">*</span></strong>
                                     <input type="text" autocomplete="off" id="instrucao" name="instrucao"
                                         class="form-control @error('instrucao') is-invalid @enderror"

@@ -89,7 +89,7 @@ class DevolutivaDocumentoController extends Controller
                 $log =  new ProcessoLog();
                 $log->fk_user = Auth::user()->id;
                 $log->fk_processo = $processo->id;
-                $log->status = 'Processo nº "'.$processo->numero.'" Devolvido por: <b>'.Auth::user()->nome.'</b>. Pelo seguinte motivo '.$devolutiva->observacao;
+                $log->status = 'Documento "'.$documento_tramite->processo_documento->titulo.'" Devolvido por: <b>'.Auth::user()->nome.'</b>. Pelo seguinte motivo '.$devolutiva->observacao;
                 $log->save();
             });
 
