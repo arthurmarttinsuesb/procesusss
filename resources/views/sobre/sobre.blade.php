@@ -152,7 +152,8 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-success">
                         <div class="widget-user-image">
-                            <img class="img-circle elevation-2" src="" alt="User Avatar">
+                            <img class="img-circle elevation-2" src="https://imageshack.com/i/pmaLLFhnp"
+                                alt="User Avatar">
                         </div>
                         <!-- /.widget-user-image -->
                         <h3 class="widget-user-username">ANDERSON PEREIRA</h3>
@@ -175,7 +176,8 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-success">
                         <div class="widget-user-image">
-                            <img class="img-circle elevation-2" src="" alt="User Avatar">
+                            <img class="img-circle elevation-2" src="https://imageshack.com/i/podRNMmWp"
+                                alt="User Avatar">
                         </div>
                         <!-- /.widget-user-image -->
                         <h3 class="widget-user-username">TÚLIO CALIL</h3>
