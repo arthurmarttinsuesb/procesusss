@@ -55,7 +55,10 @@
                  @csrf
                 <div class="card-body">
 
-                @if($modelo->tramite=="Liberado" && Auth::user()->id==$modelo->fk_user)
+                 <!-- @if($modelo->tramite=="Liberado" && Auth::user()->id==$modelo->fk_user)-->
+                 <!-- @else -->
+                 <!-- @endif-->
+                 
                       (<span style="color: red;">*</span>) Campos Obrigatórios
                       <br><br>
                         <div class="form-row">
@@ -131,10 +134,10 @@
                                  </div> 
                             </div>   
                             <hr>
-                @else
+                
                      <input type="hidden"  name="processo" value="{{$modelo->fk_processo}}">
                      <input type="hidden"  id="processo_documento" value="{{$modelo->id}}">            
-                @endif            
+               
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                         <table id="table_tramite_documento" class="table table-bordered table-hover" width="100%">
