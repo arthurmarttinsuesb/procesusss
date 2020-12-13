@@ -113,17 +113,17 @@ $(document).ready(function ($) {
         });
     });
 
-    $(document).on("click", ".btnEncerrar", function () {
-        encerrarDialog({
-            rota: `processo/${id_processo}/encerrar`,
-            element: $(this),
-        });
-    });
+    // $(document).on("click", ".btnEncerrar", function () {
+    //     encerrarDialog({
+    //         rota: `processo/${id_processo}/encerrar`,
+    //         element: $(this),
+    //     });
+    // });
 
-    $(document).on("click", ".btnDevolver", function () {
-        devolverDialog({
-            rota: `processo/${id_processo}/devolver/${tramitacao}`,
-            element: $(this),
-        });
-    });
+    // $(document).on("click", ".btnDevolver", function () {
+    //     devolverDialog({
+    //         rota: `processo/${id_processo}/devolver/${tramitacao}`,
+    //         element: $(this),
+    //     });
+    // });
 });

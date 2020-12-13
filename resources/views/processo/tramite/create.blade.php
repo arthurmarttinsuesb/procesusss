@@ -59,6 +59,7 @@
                                 <select id="select_secretaria"
                                     class="form-control select2 @error('fk_setor', 'setor') is-invalid @enderror"
                                     name="fk_setor">
+                                    <option value="selecione" selected>Selecione</option>
                                     @foreach ($secretarias as $secretaria)
                                         @foreach ($setores as $setor)
                                             @if($secretaria->id == $setor->fk_secretaria)
@@ -72,7 +73,6 @@
                                             @endif
                                         @endforeach
                                     @endforeach
-                                    <option value="selecione" selected>Selecione</option>
                                 </select>
                                 @error('fk_setor','setor')
                                 <span class="invalid-feedback" role="alert">

@@ -317,7 +317,7 @@ class DocumentoController extends Controller
 
             $modelo = Processo::where('id', $documento->fk_processo)->first();
 
-            return view('processo.arquivar',compact('id','documento','modelo'));
+            return view('justificativa.arquivar',compact('id','documento','modelo'));
         } catch (\Exception  $erro) {
             return response()->json(array('erro' => "ERRO"));
         }

@@ -77,8 +77,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'processo', 'where' => ['prefix' => 'processo']], function () {
             Route::get('/list', ['uses' => 'ProcessoController@list']);
+            Route::get('/{id}/encerrar', ['uses' => 'ProcessoController@encerrarTela']);
             Route::post('/{id}/encerrar', ['uses' => 'ProcessoController@encerrar']);
-            Route::post('/{id}/devolver/{tramitacao?}', ['uses' => 'ProcessoController@devolver']);
+            Route::get('/{processo}/devolver/{tramite}', ['uses' => 'ProcessoController@devolverTela']);
+            Route::post('/{processo}/devolverObservacao/{tramite}', ['uses' => 'ProcessoController@devolver']);
             Route::get('/{id}/replicar', ['uses' => 'ProcessoController@replicar']);
             Route::post('/{id}/salvarReplicar', ['uses' => 'ProcessoController@salvarReplicar']);
         });

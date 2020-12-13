@@ -127,11 +127,13 @@ class ProcessoTramitacaoController extends Controller
                 $setor = Setor::find($fk_setor);
                 $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>, para verificar ".$request->instrucao;
 
-                // try{
-                //     Mail::to($setor->email)->send(new ProcessoRecebidoSetor($setor));
-                // }catch(\Exception $erro){
-                //     return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
-                // }
+                if($setor->email != NULL){
+                    try{
+                        Mail::to($setor->email)->send(new ProcessoRecebidoSetor($setor));
+                    }catch(\Exception $erro){
+                        return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                    }
+                }
             }
 
             $log =  new ProcessoLog();

@@ -329,34 +329,18 @@ class ProcessoController extends Controller
         }
     }
 
-
-    public function devolver($id, ProcessoTramitacao $tramitacao)
+    public function encerrarTela($id)
     {
         try {
-            $processo = Processo::find($id);
-            $processo->tramite = "Liberado";
-            $processo->status = "Ativo";
+            $processo_busca = Processo::find($id);
 
-            $log =  new ProcessoLog();
-            $log->fk_user = Auth::user()->id;
-            $log->fk_processo = $id;
-            $log->status = "Processo devolvido por: <b>".Auth::user()->nome."</b> para o autor(a) : <b>".$processo->user->nome."</b>";
-
-            $tramitacao->status = "Bloqueado";
-
-            DB::transaction(function () use ($processo,$tramitacao,$log) {
-                $processo->save();
-                $tramitacao->save();
-                $log->save();
-            });
-
-            return response()->json(array('status' => "Ok"));
+            return view('justificativa.encerrar',compact('processo_busca'));
         } catch (\Exception  $erro) {
-            return response()->json(array('errors' => $erro));
+            return response()->json(array('erro' => 'ERRO'));
         }
     }
 
-    public function encerrar($id)
+    public function encerrar($id, Request $request)
     {
         try {
             $processo = Processo::find($id);
@@ -366,7 +350,7 @@ class ProcessoController extends Controller
             $log =  new ProcessoLog();
             $log->fk_user = Auth::user()->id;
             $log->fk_processo = $id;
-            $log->status = "Processo encerrado por: <b>".Auth::user()->nome."</b>";
+            $log->status = "Processo encerrado por: <b>".Auth::user()->nome."</b>, por causa de ".$request->justificativa;
 
 
 
@@ -374,10 +358,10 @@ class ProcessoController extends Controller
                 $processo->save();
                 $log->save();
 
-                ProcessoTramitacao::where('fk_processo',$id)->where('status','Criado')->update(['status' => 'Bloqueado']);
+                ProcessoTramitacao::where('fk_processo',$id)->where('status','Criado')->orWhere('status','Liberado')->update(['status' => 'Bloqueado']);
             });
 
-            return response()->json(array('status' => "Ok"));
+            return Redirect::to('processo/');
         } catch (\Exception  $erro) {
             return response()->json(array('errors' => $erro));
         }
@@ -455,4 +439,71 @@ class ProcessoController extends Controller
             return back()->withInput();
         }
     }
+
+    public function devolverTela($processo,$tramite)
+    {
+        try {
+            $processo_busca = Processo::find($processo);
+            $tramite_busca = ProcessoTramitacao::find($tramite);
+
+            return view('justificativa.observacao',compact('processo_busca','tramite_busca'));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => 'ERRO'));
+        }
+    }
+
+    public function devolver($processo,$tramite, Request $request)
+    {
+        try {
+            $processo_busca = Processo::find($processo);
+            $tramite_busca = ProcessoTramitacao::find($tramite);
+
+            $processo_busca->tramite = "Liberado";
+            $processo_busca->status = "Ativo";
+
+            $tramite_busca->status = "Bloqueado";
+
+            $log =  new ProcessoLog();
+            $log->fk_user = Auth::user()->id;
+            $log->fk_processo = $processo_busca->id;
+            $log->status = "Processo devolvido por: <b>".Auth::user()->nome."</b> para o autor(a) : <b>".$processo_busca->user->nome."</b>, por causa de ".$request->justificativa;
+
+
+            DB::transaction(function () use ($processo_busca,$tramite_busca,$log) {
+                $processo_busca->save();
+                $tramite_busca->save();
+                $log->save();
+            });
+
+            return Redirect::to('processo/');
+        } catch (\Exception  $erro) {
+            return response()->json(array('errors' => 'ERRO'));
+        }
+    }
+
+    // public function devolver($id, ProcessoTramitacao $tramitacao)
+    // {
+    //     try {
+    //         $processo = Processo::find($id);
+    //         $processo->tramite = "Liberado";
+    //         $processo->status = "Ativo";
+
+    //         $log =  new ProcessoLog();
+    //         $log->fk_user = Auth::user()->id;
+    //         $log->fk_processo = $id;
+    //         $log->status = "Processo devolvido por: <b>".Auth::user()->nome."</b> para o autor(a) : <b>".$processo->user->nome."</b>";
+
+    //         $tramitacao->status = "Bloqueado";
+
+    //         DB::transaction(function () use ($processo,$tramitacao,$log) {
+    //             $processo->save();
+    //             $tramitacao->save();
+    //             $log->save();
+    //         });
+
+    //         return response()->json(array('status' => "Ok"));
+    //     } catch (\Exception  $erro) {
+    //         return response()->json(array('errors' => $erro));
+    //     }
+    // }
 }

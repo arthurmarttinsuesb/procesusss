@@ -4,13 +4,16 @@
             <tr>
                <input type="hidden" name="tramitacao" id="tramitacao" value="{{ $tramite ?? '' }}">
                 @if($tramite!=="")
+                    <!-- <td>
+                        <a href="processo/{{$processo->id}}/devolver/{{$tramite}}" class="btn btn-block btn-outline-warning"><i class="fa fa-undo-alt"></i> Devolver o Processo ao Autor(a)</a>
+                    </td> -->
                     <td>
-                        <a href="#" class="btn btn-block btn-outline-warning btnDevolver"><i class="fa fa-undo-alt"></i> Devolver o Processo</a>
+                        <a href="/processo/{{$processo->id}}/devolver/{{$tramite}}" class="btn btn-block btn-outline-warning"><i class="fa fa-undo-alt"></i> Devolver o Processo ao Autor(a)</a>
                     </td>
                 @endif
                 @if(($processo->user->hasRole('cidadao') & $tramite!=="") || (!Auth::user()->hasRole('cidadao') & $tramite=="" & $processo->tramite=="Liberado"))
                     <td>
-                        <a href="#" class="btn btn-block btn-outline-danger btnEncerrar"><i class="fa fa-times"></i> Encerrar o Processo</a>
+                        <a href="/processo/{{$processo->id}}/encerrar" class="btn btn-block btn-outline-danger"><i class="fa fa-times"></i> Encerrar o Processo</a>
                     </td>
                 @endif
 
@@ -22,7 +25,7 @@
     </div>
 </div>
 
-   
+
 
 <br>
 <br>
