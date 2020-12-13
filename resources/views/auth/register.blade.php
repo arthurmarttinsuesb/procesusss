@@ -120,22 +120,23 @@
                         <option value="">Selecione</option>
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-5">
                     <label>Logradouro (Rua/Avenida) <span style="color: red;">*</span></label>
                     <div class="form-group">
                         <input type="text" class="form-control @error('logradouro') is-invalid @enderror"
                             name="logradouro" id="logradouro" placeholder="Rua/Avenida" value="{{old('logradouro')}}" />
                     </div>
                 </div>
-
-            </div>
-
-            <div class="row">
                 <div class="form-group col-md-2">
                     <label>Número <span style="color: red;">*</span></label>
                     <input type="text" class="form-control @error('numero') is-invalid @enderror" name="numero"
                         id="numero" placeholder="Número" value="{{old('numero')}}" />
                 </div>
+
+            </div>
+
+            <div class="row">
+              
                 <div class="form-group col-md-4">
                     <label>Bairro <span style="color: red;">*</span></label>
                     <input type="text" class="form-control @error('bairro') is-invalid @enderror" name="bairro"
@@ -146,7 +147,7 @@
                     <input type="text" class="form-control @error('cep') is-invalid @enderror" name="cep" id="cep"
                         placeholder="CEP" value="{{old('cep')}}" data-inputmask='"mask": "99999-999"' data-mask />
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <label>Complemento</label>
                     <input type="text" class="form-control" name="complemento" id="complemento"
                         placeholder="Complemento" value="{{old('complemento')}}" />
@@ -196,8 +197,6 @@
                     </div>
                 </div>
                 <br>
-
-
 
             </div>
             <div class="row">
