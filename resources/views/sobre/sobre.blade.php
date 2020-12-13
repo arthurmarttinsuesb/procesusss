@@ -27,6 +27,19 @@
         <!-- Main content -->
 
         <div class="row">
+            <div class="col-md-12">
+                <div class="card card-widget widget-user-2 shadow-sm">
+                    <div class="widget-user-header bg-warning">
+                        <!-- /.widget-user-image -->
+                        <h3 class="widget-user-username">PROCESSUS</h3>
+                        <h5 class="widget-user-desc">Sistema de gestão e controle de processus desenvolvido através do
+                            Convênio 001/2019 PMJ/UESB</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-md-4">
                 <div class="card card-widget widget-user-2 shadow-sm">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
