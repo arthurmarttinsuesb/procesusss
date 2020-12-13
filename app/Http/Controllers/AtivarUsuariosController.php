@@ -53,7 +53,7 @@ class AtivarUsuariosController extends Controller
             $docsHtml = '';
 
             $docs = json_decode($usuario->file->filenames, true);
-            if($docs){
+            if($docs!=""){
                 foreach($docs as $doc){
                     $docsHtml = $docsHtml. "<a href='/files/".$doc."' target='_blank'>".$doc."</a> <br>";
                 }
