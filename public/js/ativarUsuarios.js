@@ -26,9 +26,9 @@ if (Object.keys(table).length !== 0) {
     });
 }
 
-$(document).ready(function() {
-    $(document).on("click", ".btnExcluir", function() {
-        deleteDialog({
+$(document).ready(function () {
+    $(document).on("click", ".btnExcluir", function () {
+        deleteUserDialog({
             nomeModulo: "Usuarios",
             rota: "ativar-usuarios",
             idTable: "table_users",
@@ -36,7 +36,7 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("change", "#sexo", function() {
+    $(document).on("change", "#sexo", function () {
         var sexo = $("#sexo option:selected").val();
         if (sexo == "Outro") {
             $(".genero").show();
@@ -47,7 +47,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on("click", ".btnAtivar", function() {
+    $(document).on("click", ".btnAtivar", function () {
         ativarDialog({
             nomeModulo: "Usuario(a)",
             rota: "ativar-usuarios/ativar",
@@ -56,7 +56,7 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on("change", "#tipo", function() {
+    $(document).on("change", "#tipo", function () {
         formatarCnpjCpf($);
     });
 
@@ -83,14 +83,14 @@ $(document).ready(function() {
         });
     }
 
-    $(document).on("change", "#estado", function() {
+    $(document).on("change", "#estado", function () {
         var id = $("#estado option:selected").val();
         //variavel que adiciona as opções
         var option = "";
-        $.getJSON(base_url + "/selecionar-cidade/" + id, function(dados) {
+        $.getJSON(base_url + "/selecionar-cidade/" + id, function (dados) {
             //Atibuindo valores à variavel com os dados da consulta
             option += '<option value="">Selecione</option>';
-            $.each(dados.cidades, function(i, cidade) {
+            $.each(dados.cidades, function (i, cidade) {
                 option +=
                     '<option value="' +
                     cidade.id +

@@ -86,6 +86,78 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
         });
 }
 
+function deleteUserDialog({
+    nomeModulo,
+    rota,
+    idTable,
+    dataId = "id",
+    element,
+}) {
+    const id = element.data(dataId);
+    swalWithBootstrapButtons
+        .fire({
+            title: `Deseja excluir essa(e) ${nomeModulo}?`,
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, quero excluir!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true,
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "delete",
+                    url: base_url + `/${rota}/${id}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    data: {},
+                    success: function (data) {
+                        if (data.status == "ERRO") {
+                            Swal.fire(
+                                "Atenção",
+                                "Exclusão cancelada, tente novamente mais tarde.",
+                                "error"
+                            );
+                        } else {
+                            swalWithBootstrapButtons
+                                .fire(
+                                    "Sucesso",
+                                    "Exclusão Realizada",
+                                    "success"
+                                )
+                                .then(function (result) {
+                                    if (result.value) {
+                                        $("#" + idTable)
+                                            .DataTable()
+                                            .draw(false);
+                                    }
+                                });
+                            setTimeout(function () {
+                                document.location.reload(true);
+                            }, 2000);
+                        }
+                    },
+                    error: function () {
+                        swalWithBootstrapButtons.fire(
+                            "Atenção",
+                            "Exclusão cancelada, tente novamente mais tarde.",
+                            "error"
+                        );
+                    },
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    "Atenção",
+                    "Exclusão cancelada.",
+                    "error"
+                );
+            }
+        });
+}
 // nomeModulo é o nome do modulo, que será exibido pro usuario,
 // exemplo "Deseja ativar o usuario (Fulano da Silva) ?"
 // rota é a rota para ativar que será feita o post, sem barras

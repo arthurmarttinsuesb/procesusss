@@ -5,6 +5,7 @@ use Mail;
 use DataTables;
 
 use App\User;
+use App\UserSetor;
 use App\Mail\UsuarioAtivado;
 use App\Http\Utility\BotoesDatatable;
 
@@ -53,13 +54,13 @@ class AtivarUsuariosController extends Controller
             $docsHtml = '';
 
             $docs = json_decode($usuario->file->filenames, true);
-            
+
                 foreach($docs as $doc){
                     $docsHtml = $docsHtml. "<a href='/files/".$doc."' target='_blank'>".$doc."</a> <br>";
                 }
 
             return $docsHtml;
-            
+
         })
         ->editColumn('acao', function ($usuario) {
                 return BotoesDatatable::criarBotoesAtivar($usuario->id, 'ativar-usuarios');
@@ -122,6 +123,11 @@ class AtivarUsuariosController extends Controller
     public function destroy($id)
     {
         try {
+            $checkUsuario = UserSetor::where('fk_user', $request->fk_user)->where('status', 'Ativo')->get();
+            if (!$checkUsuario->isEmpty()) {
+                return response()->json(array('status' => "ERRO"));
+            }
+
             $user = User::find($id);
             $user->status = 'Inativo';
             $user->save();
