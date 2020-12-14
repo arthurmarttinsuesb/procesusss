@@ -123,7 +123,7 @@ class AtivarUsuariosController extends Controller
     public function destroy($id)
     {
         try {
-            $checkUsuario = UserSetor::where('fk_user', $request->fk_user)->where('status', 'Ativo')->get();
+            $checkUsuario = UserSetor::where('fk_user', $id)->where('status', 'Ativo')->get();
             if (!$checkUsuario->isEmpty()) {
                 return response()->json(array('status' => "ERRO"));
             }

@@ -28,7 +28,7 @@ if (Object.keys(table).length !== 0) {
 
 $(document).ready(function () {
     $(document).on("click", ".btnExcluir", function () {
-        deleteUserDialog({
+        removerUserDialog({
             nomeModulo: "Usuarios",
             rota: "ativar-usuarios",
             idTable: "table_users",

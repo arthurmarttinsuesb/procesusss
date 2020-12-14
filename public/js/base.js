@@ -86,7 +86,7 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
         });
 }
 
-function deleteUserDialog({
+function removerUserDialog({
     nomeModulo,
     rota,
     idTable,
@@ -116,6 +116,7 @@ function deleteUserDialog({
                     },
                     data: {},
                     success: function (data) {
+                        console.log(data);
                         if (data.status == "ERRO") {
                             Swal.fire(
                                 "Atenção",
@@ -126,7 +127,7 @@ function deleteUserDialog({
                             swalWithBootstrapButtons
                                 .fire(
                                     "Sucesso",
-                                    "Exclusão Realizada",
+                                    "Exclusão Realizada!!!",
                                     "success"
                                 )
                                 .then(function (result) {
