@@ -43,7 +43,7 @@
                 <div class="form-group col-md-2 sexo ">
                     <label>Gênero <span style="color: red;">*</span></label>
                     <select id="sexo" name="sexo" class="form-control select2 @error('sexo') is-invalid @enderror">
-                        <option value=' ' selected>Selecione ...</option>
+                        <option value='' selected>Selecione ...</option>
                         @if (old('sexo') == "Masculino")
                         <option value="Masculino" selected>Masculino</option>
                         @else
@@ -73,8 +73,16 @@
                     <label>Tipo <span style="color: red;">*</span></label>
                     <select id="tipo" name="tipo" class="form-control select2 @error('tipo') is-invalid @enderror">
                         <option value="">Selecione</option>
+                        @if (old('tipo') == "PF")
+                        <option value="PF" selected>Pessoa Física</option>
+                        @else
                         <option value="PF">Pessoa Física</option>
+                        @endif
+                        @if (old('tipo') == "PJ")
+                        <option value="PJ" selected>Pessoa Jurídica</option>
+                        @else
                         <option value="PJ">Pessoa Jurídica</option>
+                        @endif
                     </select>
                 </div>
                 <div class="form-group col-md-3">

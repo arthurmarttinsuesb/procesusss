@@ -92,7 +92,7 @@ class RegisterController extends Controller
             'terms' => 'Termos de Uso',
             'filenames' => 'Arquivo/Foto',
         );
-
+        $validacao_cpf_cnpj="";
         if ($data['tipo'] == "PF") {
             $validacao_cpf_cnpj = array('cpf_cnpj' => ['required', 'cpf_cnpj', 'formato_cpf', 'unique:users']);
             $name = array('cpf_cnpj' => 'CPF');
