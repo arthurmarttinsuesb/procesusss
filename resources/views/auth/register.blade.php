@@ -72,7 +72,7 @@
                 <div class=" form-group col-md-2">
                     <label>Tipo <span style="color: red;">*</span></label>
                     <select id="tipo" name="tipo" class="form-control select2 @error('tipo') is-invalid @enderror">
-                        <option value=" " selected>Selecione</option>
+                        <option value=" ">Selecione</option>
                         @if (old('tipo') == "PF")
                         <option value="PF" selected>Pessoa Física</option>
                         @else
