@@ -104,7 +104,7 @@ class UserSetorsController extends Controller
             $user->assignRole($request->tipo);
 
 
-            Session::flash('message', 'Usuario vinculado com sucesso!');
+            Session::flash('message', 'Usuário vinculado com sucesso!');
             return Redirect::to('usuario-setor');
         } catch (\Exception  $erro) {
             Session::flash('message', 'Não foi possível vincular, tente novamente mais tarde.!');
@@ -166,7 +166,7 @@ class UserSetorsController extends Controller
             $user->removeRole($user->getRoleNames()->implode(', '));
             $user->assignRole($request->tipo);
 
-            Session::flash('message', 'Usuario atualizado!');
+            Session::flash('message', 'Usuário atualizado!');
             return Redirect::to('usuario-setor');
         } catch (\Exception  $erro) {
             Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!');

@@ -136,7 +136,7 @@
             </div>
 
             <div class="row">
-              
+
                 <div class="form-group col-md-4">
                     <label>Bairro <span style="color: red;">*</span></label>
                     <input type="text" class="form-control @error('bairro') is-invalid @enderror" name="bairro"

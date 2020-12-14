@@ -60,6 +60,7 @@ class RegisterController extends Controller
         $validacao_geral = array(
             'nome' => ['required', 'string', 'max:255'],
             'tipo' => ['required', 'string', 'max:2'],
+            'sexo' => ['required'],
             'nascimento' => ['required'],
             'telefone' => ['required', 'string', 'max:14'],
             'logradouro' => ['required', 'string', 'max:150'],
@@ -79,6 +80,7 @@ class RegisterController extends Controller
         $attributeNames = array(
             'nome' => 'Nome',
             'tipo' => 'Tipo',
+            'sexo' => 'Gênero',
             'telefone' => 'Telefone',
             'nascimento' => 'Data de Nascimento',
             'logradouro' => 'Logradouro',
