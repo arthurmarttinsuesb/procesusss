@@ -31,7 +31,7 @@
 <li class="nav-item">
     <a href="/ativar-usuarios" class="nav-link">
         <i class="nav-icon fa fa-user-plus"></i>
-        <p>Usuarios do Sistema</p>
+        <p>Usuários do Sistema</p>
     </a>
 </li>
 <li class="nav-item">
