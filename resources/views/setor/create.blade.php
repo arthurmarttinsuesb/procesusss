@@ -83,8 +83,6 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <strong>Secretaria <span style="color: red;">*</span></strong>
-
-
                                     <select
                                         class="form-control select2 form-control @error('fk_secretaria', 'setor') is-invalid @enderror"
                                         name="fk_secretaria">
@@ -105,11 +103,11 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-6">
                                     <strong>Email <span style="color: red;">*</span></strong>
-                                   
-                                        <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="email@exemplo.com" value="{{old('email')}}" />
-                                   
+                                    <input type="text" autocomplete="off" id="email" name="email"
+                                        class="form-control @error('email', 'setor') is-invalid @enderror"
+                                        value="{{ old('email') }}">
                                     @error('email','setor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
