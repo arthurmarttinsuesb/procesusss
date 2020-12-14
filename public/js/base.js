@@ -119,7 +119,7 @@ function removerUserDialog({
                         if (data.status == "ERRO") {
                             Swal.fire(
                                 "Atenção",
-                                "Exclusão cancelada, tente novamente mais tarde.",
+                                "Exclusão cancelada, Usuário Vinculado a um setor.",
                                 "error"
                             );
                         } else {
