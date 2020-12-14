@@ -53,7 +53,7 @@ class SecretariaController extends Controller
             ]);
 
             if ($validator->fails()) {
-                return redirect('secretaria/create')
+                return redirect('unidade/create')
                     ->withErrors($validator, 'secretaria')
                     ->withInput();
             }

@@ -16,6 +16,7 @@ use App\Setor;
 use App\Http\Utility\BotoesDatatable;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RequestUserSetors;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 
@@ -68,22 +69,9 @@ class UserSetorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestUserSetors $request)
     {
         try {
-
-            $validator = Validator::make($request->all(), [
-                'fk_user' => 'required',
-                'fk_setor' => 'required',
-                'tipo' => 'required',
-                'data_entrada' => 'required',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect('usuario-setor/create')
-                    ->withErrors($validator, 'usuario-setor')
-                    ->withInput();
-            }
 
             $checkUsuario = UserSetor::where('fk_user', $request->fk_user)->where('status', 'Ativo')->get();
             if (!$checkUsuario->isEmpty()) {
@@ -107,7 +95,7 @@ class UserSetorsController extends Controller
             Session::flash('message', 'Usuário vinculado com sucesso!');
             return Redirect::to('usuario-setor');
         } catch (\Exception  $erro) {
-            Session::flash('message', 'Não foi possível vincular, tente novamente mais tarde.!');
+            Session::flash('message', 'Não foi possível vincular, tente novamente mais tarde.!'.$erro);
             return back()->withInput();
         }
     }
@@ -140,27 +128,20 @@ class UserSetorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RequestUserSetors $request, $id)
     {
         try {
             $userSetor = UserSetor::find($id);
 
-            $validator = Validator::make($request->all(), [
-                'fk_user' => 'required',
-                'fk_setor' => 'required',
-                'data_entrada' => 'required',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect('usuario-setor/' . $id . '/edit')
-                    ->withErrors($validator, 'usuario-setor')
-                    ->withInput();
-            }
-
-            $userSetor->fk_user = isset($request->fk_user) ? $request->fk_user : $userSetor->fk_user;
-            $userSetor->fk_setor = isset($request->fk_setor) ? $request->fk_setor : $userSetor->fk_setor;
-            $userSetor->data_entrada = isset($request->data_entrada) ? $request->data_entrada : $userSetor->data_entrada;
+            $userSetor->fk_user = $request->fk_user;
+            $userSetor->fk_setor = $request->fk_setor;
+            $userSetor->data_entrada = date('Y-m-d', strtotime(str_replace("/", "-", $request->data_entrada)));
+            $userSetor->status = 'Ativo';
             $userSetor->save();
+
+            $user = User::where('id',$request->fk_user)->first();
+            $user->removeRole($user->getRoleNames()->implode(', '));
+            $user->assignRole($request->tipo);
 
             $user = User::where('id',$request->fk_user)->first();
             $user->removeRole($user->getRoleNames()->implode(', '));
@@ -169,7 +150,7 @@ class UserSetorsController extends Controller
             Session::flash('message', 'Usuário atualizado!');
             return Redirect::to('usuario-setor');
         } catch (\Exception  $erro) {
-            Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!');
+            Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!'.$erro);
             return back()->withInput();
         }
     }

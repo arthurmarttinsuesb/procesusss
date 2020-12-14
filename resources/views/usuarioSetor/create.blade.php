@@ -107,9 +107,7 @@
                                 </div>
                                 <div class="form-group col-xl-2 col-sm-2">
                                     <strong>Tipo de Usuário <span style="color: red;">*</span></strong>
-                                    <select
-                                        class="form-control select2 form-control @error('tipo') is-invalid @enderror"
-                                        name="tipo">
+                                    <select name="tipo" class="form-control select2 form-control @error('tipo') is-invalid @enderror">
                                         <option value="">Selecione</option>
                                         <option value="administrador">Administrador</option>
                                         <option value="funcionario">Funcionário</option>

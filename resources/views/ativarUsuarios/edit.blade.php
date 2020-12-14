@@ -126,8 +126,11 @@
                                 <select id="cidade" name='cidade' class="form-control select2 @error('cidade') is-invalid @enderror">
                                     <option value="">Selecione</option>
                                     @foreach($cidades->where('fk_estado',$modelo->fk_estado)->get() as $cidade)
-                                        <option value="{{$cidade->id}}" @if ($modelo->fk_cidade == $cidade->id) selected @endif >
-                                            {{$cidade->nome}}</option>
+                                    @if($modelo->fk_cidade == $cidade->id)
+                                        <option value="{{$cidade->id}}" selected > {{$cidade->nome}}</option>
+                                    @else
+                                        <option value="{{$cidade->id}}"  > {{$cidade->nome}}</option>
+                                    @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -167,7 +170,7 @@
 
                     <!-- /.card-body -->
                 </div>
-               
+
 
                 <!-- /.card -->
             </div>
