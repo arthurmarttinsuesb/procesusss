@@ -116,7 +116,6 @@ function removerUserDialog({
                     },
                     data: {},
                     success: function (data) {
-                        console.log(data);
                         if (data.status == "ERRO") {
                             Swal.fire(
                                 "Atenção",
