@@ -1,22 +1,16 @@
-@extends('layouts.sobrel')
-
-@section('htmlheader_title', 'Home')
-@section('contentheader_title', 'Home')
+@extends('auth.app')
+@section('htmlheader_title', 'Login')
+ @section('contentheader_title', 'Login')
 @section('conteudo')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+<div class="col-10">
+            <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sobre</h1>
                 </div>
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/login">Home</a></li>
-                        <li class="breadcrumb-item active">Sobre</li>
-                    </ol>
+                   
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -236,12 +230,7 @@
         </div>
 
     </section>
+        
 </div>
-<script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/home.js') }}"></script>
+
 @endsection
