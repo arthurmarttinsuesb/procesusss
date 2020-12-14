@@ -63,9 +63,9 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                             .draw(false);
                                     }
                                 });
-                            setTimeout(function () {
-                                document.location.reload(true);
-                            }, 5000);
+                            // setTimeout(function () {
+                            document.location.reload(true);
+                            // }, 5000);
                         }
                     },
                     error: function () {
@@ -135,9 +135,8 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                             .draw(false);
                                     }
                                 });
-                            setTimeout(function () {
-                                document.location.reload(true);
-                            }, 5000);
+
+                            document.location.reload(true);
                         }
                     },
                     error: function () {
@@ -265,9 +264,7 @@ function assinarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                 "Assinatura Realizada",
                                 "success"
                             );
-                            setTimeout(function () {
-                                document.location.reload(true);
-                            }, 5000);
+                            document.location.reload(true);
                         }
                     },
                     error: function () {

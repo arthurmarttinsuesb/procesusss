@@ -65,7 +65,7 @@ class SecretariaController extends Controller
 
             $secretaria->save();
 
-            Session::flash('message', 'Secretaria criada!');
+            Session::flash('message', 'Unidade criada!');
             return Redirect::to('unidade');
         } catch (\Exception  $erro) {
             Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!');
@@ -133,7 +133,7 @@ class SecretariaController extends Controller
             $secretaria->save();
 
 
-            Session::flash('message', 'Secretaria atualizada!');
+            Session::flash('message', 'Unidade atualizada!');
             return Redirect::to('unidade');
         } catch (\Exception  $erro) {
             Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!');
