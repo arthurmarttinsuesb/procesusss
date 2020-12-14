@@ -182,7 +182,7 @@ class AnexoController extends Controller
                             </a>';
 
                  //verifico se o anexo está liberado para visualizar, autenticar e excluir, caso não esteja ele só pode visualizar
-                if($modelo->tramite=="Liberado"){
+                // if($modelo->tramite=="Liberado"){
                     foreach(Auth::user()->getRoleNames() as $nome){
                         //se for do tipo cidadão retirar a autenticação
                         if($nome=="cidadao"){
@@ -202,11 +202,11 @@ class AnexoController extends Controller
                             }
                         }
                     }
-                }else{
-                    return '<div class="btn-group btn-group-sm">
-                                '.$visualizar.'
-                            </div>';
-                }
+                // }else{
+                //     return '<div class="btn-group btn-group-sm">
+                //                 '.$visualizar.'
+                //             </div>';
+                // }
 
 
             })->escapeColumns([0])

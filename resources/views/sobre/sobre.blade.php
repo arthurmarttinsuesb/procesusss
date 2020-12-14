@@ -1,22 +1,16 @@
-@extends('layouts.sobrel')
-
-@section('htmlheader_title', 'Home')
-@section('contentheader_title', 'Home')
+@extends('auth.app')
+@section('htmlheader_title', 'Login')
+ @section('contentheader_title', 'Login')
 @section('conteudo')
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+<div class="col-10">
+            <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sobre</h1>
                 </div>
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/login">Home</a></li>
-                        <li class="breadcrumb-item active">Sobre</li>
-                    </ol>
+                   
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -45,8 +39,8 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-info">
                         <div class="widget-user-image">
-                            <img class="img-circle elevation-2"
-                                src="http://www2.uesb.br/cpds/wp-content/uploads/2014/05/claudi3.png" alt="User Avatar">
+                            <img class="img-circle elevation-2" src="https://imageshack.com/i/pmq12hJtp"
+                                alt="User Avatar">
                         </div>
                         <!-- /.widget-user-image -->
                         <h3 class="widget-user-username">Claudia Ribeiro Santos Lopes</h3>
@@ -85,8 +79,7 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-info">
                         <div class="widget-user-image">
-                            <img class="img-circle elevation-2"
-                                src="http://www2.uesb.br/cpds/wp-content/uploads/2017/11/foto-jessica.jpg"
+                            <img class="img-circle elevation-2" src="https://imageshack.com/i/pnFau4PXp"
                                 alt="User Avatar">
                         </div>
                         <!-- /.widget-user-image -->
@@ -115,8 +108,8 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-info">
                         <div class="widget-user-image">
-                            <img class="img-circle elevation-2"
-                                src="http://www2.uesb.br/cpds/wp-content/uploads/2018/07/tailane.jpg" alt="User Avatar">
+                            <img class="img-circle elevation-2" src="https://imageshack.com/i/poMJg84Np"
+                                alt="User Avatar">
                         </div>
                         <!-- /.widget-user-image -->
                         <h3 class="widget-user-username">TAILANE MAIA</h3>
@@ -141,7 +134,7 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-success">
                         <div class="widget-user-image">
-                            <img class="img-circle elevation-2" src="https://imageshack.com/i/poDE39P4p"
+                            <img class="img-circle elevation-2" src="https://imageshack.com/i/pnKt8owFp"
                                 alt="User Avatar">
                         </div>
                         <!-- /.widget-user-image -->
@@ -165,7 +158,7 @@
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-success">
                         <div class="widget-user-image">
-                            <img class="img-circle elevation-2" src="https://imageshack.com/i/pmaLLFhnp"
+                            <img class="img-circle elevation-2" src="https://imageshack.com/i/pos3c2chp"
                                 alt="User Avatar">
                         </div>
                         <!-- /.widget-user-image -->
@@ -207,15 +200,37 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-widget widget-user-2 shadow-sm">
+                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                    <div class="widget-user-header bg-success">
+                        <div class="widget-user-image">
+                            <img class="img-circle elevation-2" src="https://imageshack.com/i/pn5XXDgrp"
+                                alt="User Avatar">
+                        </div>
+                        <!-- /.widget-user-image -->
+                        <h3 class="widget-user-username">WILLER ALMEIDA</h3>
+                        <h5 class="widget-user-desc">Discente do Curso Sistemas de Informação (UESB)</h5>
+                    </div>
+                    <div class="card-footer p-0">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    Bolsista, atua em projetos desenvolvidos na Fábrica de Software
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </section>
+        
 </div>
-<script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/home.js') }}"></script>
+
 @endsection

@@ -60,18 +60,18 @@
             <!-- /.social-auth-links -->
 
             <p class="mb-1">
-                <a href="/password/reset">Esqueceu a senha?</a>
+                <a href="/password/reset">>> Esqueceu a senha?</a>
             </p>
             <p class="mb-0">
-                <a href="{{route('register')}}" class="text-center">Ainda não possui uma conta, cadastre-se.</a>
+                <a href="{{route('register')}}" class="text-center">>> Ainda não possui uma conta, cadastre-se.</a>
             </p>
             <p class="mb-0">
-                <a href="/sobre" class="text-center">Sobre</a>
+                <a href="/sobre" class="text-center">>> Sobre o Sistema</a>
             </p>
             <br>
             <hr>
             <div class="login-logo">
-                    <a href="{{ url('/home') }}"><img src="{{url('/img/footer_logo.jpeg')}}"
+                    <a href="/sobre"><img src="{{url('/img/footer_logo.jpeg')}}"
                     alt="Processus" style="width: 100%; height: auto;"></a>
             </div>
 
