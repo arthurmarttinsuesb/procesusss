@@ -51,7 +51,7 @@ class DocumentoTramiteController extends Controller
         $modelo = ProcessoDocumento::where('id', $id)->where('status', 'Ativo')->first();
         $usuario = User::where('status','Ativo')-> role(['funcionario','administrador'])->get();
         $secretaria = Secretaria::where('status','Ativo')->get();
-       
+
         return view('processo.documento.tramite', compact('modelo','usuario','secretaria'));
     }
 
@@ -80,10 +80,10 @@ class DocumentoTramiteController extends Controller
                         "fk_user"=>null,
                         "status"=>"Pendente"));
                     }
-                   
+
                    // $setor = Setor::find($request->setor);
                     $setor = Setor::where('id', $request->setor)->first();
-                   
+
                     try{
                         Mail::to($setor->email)->send(new DocumentoRecebidoSetor($setor));
                     }catch(\Exception $erro){
@@ -98,7 +98,7 @@ class DocumentoTramiteController extends Controller
                         "fk_user"=>$colaboradores,
                         "status"=>"Pendente"));
                     }
-                   
+
                   //  $user = User::find($request->usuario);
                     $user = User::where('id', $request->usuario)->first();
                    // dd($user->email);
@@ -207,7 +207,7 @@ class DocumentoTramiteController extends Controller
                 }
             })
             ->editColumn('acao', function ($modelo) {
-                //se o processo documento desse tramite estiver bloqueado, então não poderar adicionar 
+                //se o processo documento desse tramite estiver bloqueado, então não poderar adicionar
                 //outros envios do documento ou até mesmo excluir;
 
              if($modelo->processo_documento->tramite=="Liberado"){
@@ -228,5 +228,5 @@ class DocumentoTramiteController extends Controller
             })->escapeColumns([0])
             ->make(true);
     }
-   
+
 }

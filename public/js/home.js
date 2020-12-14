@@ -7,4 +7,13 @@ $(document).ready(function ($) {
             element: $(this),
         });
     });
+
+    $(document).on("click", ".btnMarcar", function (dados) {
+        marcarDialog({
+            nomeModulo: "Documento",
+            rota: "documento/marcar",
+            idTable: "table",
+            element: $(this),
+        });
+    });
 });

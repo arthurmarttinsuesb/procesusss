@@ -188,6 +188,8 @@ class UserSetorsController extends Controller
             $userSetor->data_saida = date('Y-m-d H:i:s');
             $userSetor->save();
 
+            $user->removeRole($user->getRoleNames()->implode(', '));
+            $user->assignRole(2);
 
             return response()->json(array('status' => "OK"));
         } catch (\Exception $error) {
