@@ -63,9 +63,9 @@ function deleteDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                             .draw(false);
                                     }
                                 });
-                            // setTimeout(function () {
-                            document.location.reload(true);
-                            // }, 5000);
+                            setTimeout(function () {
+                                document.location.reload(true);
+                            }, 2000);
                         }
                     },
                     error: function () {
@@ -135,8 +135,9 @@ function ativarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                             .draw(false);
                                     }
                                 });
-
-                            document.location.reload(true);
+                            setTimeout(function () {
+                                document.location.reload(true);
+                            }, 2000);
                         }
                     },
                     error: function () {
@@ -264,13 +265,75 @@ function assinarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
                                 "Assinatura Realizada",
                                 "success"
                             );
-                            document.location.reload(true);
+                            setTimeout(function () {
+                                document.location.reload(true);
+                            }, 2000);
                         }
                     },
                     error: function () {
                         swalWithBootstrapButtons.fire(
                             "Atenção",
                             "Assinatura cancelada, tente novamente mais tarde.",
+                            "error"
+                        );
+                    },
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                    "Atenção",
+                    "Assinatura cancelada.",
+                    "error"
+                );
+            }
+        });
+}
+
+function marcarDialog({ nomeModulo, rota, idTable, dataId = "id", element }) {
+    const id = element.data(dataId);
+
+    swalWithBootstrapButtons
+        .fire({
+            title: `Deseja Marcar como lido esse ${nomeModulo}?`,
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sim, quero marcar!",
+            cancelButtonText: "Não, cancelar!",
+            reverseButtons: true,
+        })
+        .then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "post",
+                    url: base_url + `/${rota}/${id}`,
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        ),
+                    },
+                    data: {},
+                    success: function (data) {
+                        if (data.error_banco) {
+                            Swal.fire(
+                                "Atenção",
+                                "Marcação cancelada, tente novamente mais tarde.",
+                                "error"
+                            );
+                        } else {
+                            swalWithBootstrapButtons.fire(
+                                "Sucesso",
+                                "Marcação Realizada",
+                                "success"
+                            );
+                            setTimeout(function () {
+                                document.location.reload(true);
+                            }, 2000);
+                        }
+                    },
+                    error: function () {
+                        swalWithBootstrapButtons.fire(
+                            "Atenção",
+                            "Marcação cancelada, tente novamente mais tarde.",
                             "error"
                         );
                     },

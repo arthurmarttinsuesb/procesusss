@@ -273,6 +273,34 @@ class DocumentoController extends Controller
             DB::transaction(function () use ($documento_assinatura,$documento_tramite) {
                 $documento_assinatura->save();
                 $documento_tramite->save();
+
+                $log =  new ProcessoLog();
+                $log->fk_user = Auth::user()->id;
+                $log->fk_processo = $documento_tramite->processo_documento->fk_processo;
+                $log->status = 'Documento "'.$documento_tramite->processo_documento->titulo.'" assinado por: <b>'.Auth::user()->nome.'</b>';
+                $log->save();
+            });
+
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('errors' => $erro));
+        }
+    }
+
+    public function marcar_lido($id)
+    {
+        try {
+            $documento_tramite = DocumentoTramite::find($id);
+            $documento_tramite->status = "Finalizado";
+
+            DB::transaction(function () use ($documento_tramite) {
+                $documento_tramite->save();
+
+                $log =  new ProcessoLog();
+                $log->fk_user = Auth::user()->id;
+                $log->fk_processo = $documento_tramite->processo_documento->fk_processo;
+                $log->status = 'Documento "'.$documento_tramite->processo_documento->titulo.'" visto por: <b>'.Auth::user()->nome.'</b>';
+                $log->save();
             });
 
             return response()->json(array('status' => "OK"));

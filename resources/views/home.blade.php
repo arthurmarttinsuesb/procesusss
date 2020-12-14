@@ -161,7 +161,7 @@
                                         </div>
                                     @else
                                         <div class="btn-group btn-group-sm">
-                                            <button type='button' class="btn bg-success color-palette btnAssinar"
+                                            <button type='button' class="btn bg-success color-palette btnMarcar"
                                             data-id="{{$documentos->id}}" title="Marcar documento como lido" data-toggle="tooltip"><i class="fa fa-envelope-open-text"></i></i> Marcar como lido
                                             </button>
                                             <a href="/pdf/documento/" target='_blank' class="btn bg-info color-palette" title="Visualizar Documento Completo"
