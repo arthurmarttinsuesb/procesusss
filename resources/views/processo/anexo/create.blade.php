@@ -47,7 +47,7 @@
                         (<span style="color: red;">*</span>) Campos Obrigatórios
                         <br><br>
                         <div class="row">
-                            <div class="form-group col-md-7">
+                            <div class="form-group col-md-5">
                                 <strong>Tipo <span style="color: red;">*</span></strong>
                                 <input type="text" autocomplete="off" id="tipo" name="tipo" class="form-control">
                                 <input type="hidden"  name="processo_numero" value="{{$processo->numero}}">
@@ -57,7 +57,7 @@
                                 <input type="file" autocomplete="off" id="arquivo" name="arquivo" class="form-control">
                             </div>
                             @role('administrador|funcionario')
-                            <div class="form-group col-md-1">
+                            <div class="form-group col-md-3">
                                 <strong>Conteúdo <span style="color: red;">*</span></strong>
                                 <select id="categoria" name='categoria' class="form-control @error('tipo') is-invalid @enderror">
                                     <option value=''>Selecione</option>
