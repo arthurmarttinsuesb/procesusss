@@ -180,7 +180,8 @@ return [
         //datatables
         Yajra\DataTables\DataTablesServiceProvider::class,
         Elibyy\TCPDF\ServiceProvider::class,
-        Acaronlex\LaravelCalendar\ServiceProvider::class,
+        LaravelLegends\PtBrValidator\ValidatorProvider::class,
+
     ],
 
     /*

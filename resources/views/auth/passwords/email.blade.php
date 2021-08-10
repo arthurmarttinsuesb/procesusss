@@ -2,6 +2,7 @@
 @section('htmlheader_title', 'Alterar Senha')
  @section('contentheader_title', 'Alterar Senha')
 @section('conteudo')
+<!--{{url('/img/logo-processus.png')}} -->
 <div class="login-box">
         <div class="login-logo">
                 <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}" 
