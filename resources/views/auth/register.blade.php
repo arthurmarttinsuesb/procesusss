@@ -162,15 +162,15 @@
 
                 <h5 class="well">- Comprovante de Residência</h5>
                 <div class="input-group hdtuto control-group lst increment">
-                    <input type="file" name="filenames[]" class="myfrm form-control">
+                    <input type="file" name="filenames[]" class="myfrm form-control" id = "file_Residencia">
                 </div>
                 <h5 class="well">- Uma Selfie</h5>
                 <div class="input-group hdtuto control-group lst increment">
-                    <input type="file" name="filenames[]" class="myfrm form-control">
+                    <input type="file" name="filenames[]" class="myfrm form-control" id = "file_Selfie"> 
                 </div>
                 <h5 class="well">- Documento de Identificação</h5>
                 <div class="input-group hdtuto control-group lst increment">
-                    <input type="file" name="filenames[]" class="myfrm form-control">
+                    <input type="file" name="filenames[]" class="myfrm form-control" id = "file_ID">
                 </div>
                 <br>
 
@@ -236,6 +236,7 @@
             $(".nascimento").hide();
             $(".sexo").hide();
             $(".outro_genero").hide();
+            $(".file_Selfie").hide();
         }
     });
 </script>
