@@ -21,6 +21,10 @@ Route::get('/sobre', function () {
     return view('sobre.sobre');
 });
 
+Route::get('/manual/cidadao', function () {
+    return view('manual.cidadao');
+});
+
 Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
 
 Auth::routes();
