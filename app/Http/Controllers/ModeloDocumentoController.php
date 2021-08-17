@@ -58,7 +58,7 @@ class ModeloDocumentoController extends Controller
                                 class="btn btn-info"
                                 title="Alterar" data-toggle="tooltip">
                                 <i class="fas fa-pencil-alt"></i>
-                            </a>
+                            </a> 
                             <a href="#"
                                 class="btn bg-danger color-palette btnExcluir"
                                 data-id="' . $modelo->id . '"
