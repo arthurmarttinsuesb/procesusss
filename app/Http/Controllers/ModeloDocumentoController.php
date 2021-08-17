@@ -44,11 +44,12 @@ class ModeloDocumentoController extends Controller
     public function list(Request $request)
     {
         $modelo = ModeloDocumento::where('status', "Ativo")->get();
-
-        return Datatables::of($modelo)
-            ->editColumn('acao', function ($modelo) {
-                return '<div class="btn-group btn-group-sm">
-                                <a href="/pdf/modelo-documento/'.$modelo->id.'"
+        $user = Auth::user();
+        if ($user->hasRole('administrador')) {
+            return Datatables::of($modelo)
+                ->editColumn('acao', function ($modelo) {
+                    return '<div class="btn-group btn-group-sm">
+                                <a href="/pdf/modelo-documento/' . $modelo->id . '"
                                 class="btn bg-teal color-palette"
                                 title="Visualizar" data-toggle="tooltip" target="_blank">
                                 <i class="fas fa-eye"></i>
@@ -66,9 +67,24 @@ class ModeloDocumentoController extends Controller
                             </a>
 
                         </div>';
+                    return BotoesDatatable::criarBotoes($modelo->id, 'modelo-documento');
+                })->escapeColumns([0])
+                ->make(true);
+        }
+        else{
+            return Datatables::of($modelo)
+            ->editColumn('acao', function ($modelo) {
+                return '<div class="btn-group btn-group-sm">
+                            <a href="/pdf/modelo-documento/' . $modelo->id . '"
+                            class="btn bg-teal color-palette"
+                            title="Visualizar" data-toggle="tooltip" target="_blank">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>';
                 return BotoesDatatable::criarBotoes($modelo->id, 'modelo-documento');
             })->escapeColumns([0])
             ->make(true);
+        }
     }
 
     public function store(RequestModelo $request)
@@ -90,7 +106,7 @@ class ModeloDocumentoController extends Controller
         }
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         try {
             $modelo = ModeloDocumento::find($id);
@@ -136,6 +152,5 @@ class ModeloDocumentoController extends Controller
         } catch (\Exception  $erro) {
             return Response::json(array('errors' => 'true'));
         }
-
     }
 }
