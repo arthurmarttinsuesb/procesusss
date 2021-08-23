@@ -4,7 +4,6 @@
 @section('contentheader_title', 'Home')
 
 @section('conteudo')
-    <!-- Content Wrapper. Contains page content -->
     <div class="wrapper">
         @include('manual.manual_sidebar')
     </div>
@@ -25,38 +24,33 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-    
         <!-- Main content -->
         <section class="content">
-            <!-- Main content -->
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                            <div class="alert alert-info alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                <h5><i class="icon fas fa-info"></i> Olá!</h5>Este é o seu manual que irá lhe auxiliar a utilizar nossa plataforma.
-                            </div>
+                <!-- Main content -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                                <div class="alert alert-info alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h5><i class="icon fas fa-info"></i> Criar Processo</h5>
+                                </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-body">
-                <h5>Na home você tem disponíveis os menus do usuário</h5>
-                <br>
-                <div class="filter-container p-0 row">
-                    <div class="filtr-item col-sm-8" data-category="1" data-sort="white sample">
+                <div class="card-body">
+                    <h5>Assim que cumprir o passo anterior você será direcionado à página onde terá acesso às informações mais avançadas do processo que acabou de criar</h5>
+                    <br>
+                    <div class="filtr-item col-sm-12" data-category="1" data-sort="white sample">
                         <div class="row mb-12">
                             <div class="col-sm-12">
-                                <img class="img-fluid" src="{{asset('dist/img/sidebar.png') }}" alt="Photo">
+                                <img class="img-fluid" src="{{asset('dist/img/criar-redirecionamento.png') }}" alt="Photo">
                             </div>
                             <!-- /.col -->
                         </div>
                     </div>
                 </div>
-                <br>
-                <h5>Também é possível ver as atualizações que aconteceram em seus processos ou documentos</h5>
-            </div>
         </section>
     </div>
-                   
+
 @endsection

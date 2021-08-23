@@ -25,6 +25,38 @@ Route::get('/manual/cidadao', function () {
     return view('manual.cidadao');
 });
 
+Route::get('/manual/consultar', function () {
+    return view('manual.consultar_menu');
+});
+
+Route::get('/manual/processo', function () {
+    return view('manual.processo');
+});
+
+Route::get('/manual/criar_processo', function () {
+    return view('manual.criar_processo');
+});
+
+Route::get('/manual/add', function () {
+    return view('manual.add_documentos');
+});
+
+Route::get('/manual/acoes', function () {
+    return view('manual.acoes_documento');
+});
+
+Route::get('/manual/anexar', function () {
+    return view('manual.anexar_documento');
+});
+
+Route::get('/manual/encaminhar', function () {
+    return view('manual.encaminhar');
+});
+
+Route::get('/manual/status', function () {
+    return view('manual.status');
+});
+
 Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
 
 Auth::routes();

@@ -11,7 +11,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="/manual/cidadao" class="nav-link">
+    <a href="/manual/cidadao" target="_blank" class="nav-link">
         <i class="nav-icon fas fa-address-book"></i>
         <p>Manual do Cidadão</p>
     </a>
