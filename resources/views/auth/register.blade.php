@@ -46,9 +46,9 @@
                     <label>Nome <span style="color: red;">*</span></label>
                     <input type="text" class="form-control @error('nome') is-invalid @enderror" placeholder="Nome Completo" name="nome" value="{{ old('nome') }}" />
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-3 nascimento">
                     <label>Data de Nascimento <span style="color: red;">*</span></label>
-                    <input type="date" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento" id="nascimento" maxlength="10" value="{{ old('nascimento') }}" placeholder="Data de Nascimento" />
+                    <input type="date" class="form-control @error('nascimento') is-invalid @enderror" name="nascimento" id="nascimento" maxlength="10" value="{{ old('nascimento')}}" placeholder="Data de Nascimento" />
                 </div>
             </div>
             <div class="form-row">
@@ -160,17 +160,25 @@
 
                 <h4 class="well">Anexar Documentos:</h4>
 
-                <h5 class="well">- Comprovante de Residência</h5>
+                <h5 class="well residencia">- Comprovante de Residência</h5>
                 <div class="input-group hdtuto control-group lst increment">
-                    <input type="file" name="filenames[]" class="myfrm form-control" id = "file_Residencia">
+                    <input type="file" name="filenames[]" class="myfrm form-control residencia" id = "file_Residencia">
                 </div>
-                <h5 class="well">- Uma Selfie</h5>
+                <h5 class="well selfie">- Uma Selfie</h5>
                 <div class="input-group hdtuto control-group lst increment">
-                    <input type="file" name="filenames[]" class="myfrm form-control" id = "file_Selfie"> 
+                    <input type="file" name="filenames[]" class="myfrm form-control selfie" id = "file_Selfie"> 
                 </div>
-                <h5 class="well">- Documento de Identificação</h5>
+                <h5 class="well id doc_indentificacao">- Documento de Identificação</h5>
                 <div class="input-group hdtuto control-group lst increment">
-                    <input type="file" name="filenames[]" class="myfrm form-control" id = "file_ID">
+                    <input type="file" name="filenames[]" class="myfrm form-control doc_indentificacao" id = "file_ID">
+                </div>
+                <h5 class="well logo_empresa" hidden>- Logo da Empresa</h5>
+                <div class="input-group hdtuto control-group lst increment">
+                    <input type="file" name="filenames[]" class="myfrm form-control logo_empresa" id = "logo_empresa" hidden>
+                </div>
+                <h5 class="well comprovante_localizacao" hidden>- Comprovante de Localização</h5>
+                <div class="input-group hdtuto control-group lst increment">
+                    <input type="file" name="filenames[]" class="myfrm form-control comprovante_localizacao" id = "comprovante_localizacao" hidden>
                 </div>
                 <br>
 
@@ -216,7 +224,6 @@
     });
     $(document).on('change', '#sexo', function() {
         var sexo = $("#sexo option:selected").val();
-        
         if (sexo == "Outro") {
             $("#genero").prop("readonly", false);
         } else if (sexo == "Masculino") {
@@ -225,6 +232,7 @@
             $("#genero").prop("readonly", true);
         }
     });
+    
     $(document).on('change', '#tipo', function() {
         var tipo = $("#tipo option:selected").val();
 
@@ -232,11 +240,29 @@
             $(".nascimento").show();
             $(".sexo").show();
             $(".outro_genero").show();
+
+            $(".comprovante_localizacao").hide()
+            $(".logo_empresa").hide()
+
+            $(".doc_indentificacao").show()
+            $(".selfie").show();
+            $(".residencia").show();
+
         } else if (tipo == "PJ") {
             $(".nascimento").hide();
             $(".sexo").hide();
             $(".outro_genero").hide();
-            $(".file_Selfie").hide();
+            $(".selfie").hide();
+
+            $(".comprovante_localizacao").prop("hidden", false)
+            $(".logo_empresa").prop("hidden", false)
+
+            $(".comprovante_localizacao").show()
+            $(".logo_empresa").show()
+
+            $(".doc_indentificacao").hide()
+            $(".selfie").hide();
+            $(".residencia").hide();
         }
     });
 </script>
