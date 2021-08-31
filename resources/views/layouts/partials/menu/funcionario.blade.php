@@ -11,12 +11,6 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="/modelo-documento" class="nav-link">
-        <i class="nav-icon fa fa-file"></i>
-        <p>Modelo Documento</p>
-    </a>
-</li>
-<li class="nav-item">
     <a href="#" class="nav-link">
         <i class="nav-icon fas fa-address-book"></i>
         <p>
