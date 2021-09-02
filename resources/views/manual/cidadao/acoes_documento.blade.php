@@ -5,7 +5,7 @@
 
 @section('conteudo')
     <div class="wrapper">
-        @include('manual.manual_sidebar')
+        @include('manual.cidadao.manual_sidebar')
     </div>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -13,7 +13,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Manual do cidadão</h1>
+                        <h1>Manual do Cidadão</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -32,31 +32,32 @@
                         <div class="col-md-12">
                                 <div class="alert alert-info alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    <h5><i class="icon fas fa-info"></i> Consultar Processo</h5>
+                                    <h5><i class="icon fas fa-info"></i> Ações no Documento</h5>
                                 </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <h5>Em Consultar Processo você tem acesso a outros processos que estão em tramitação no sistema. Você pode pesquisar pelo número do processo ou por seu autor. Assim será visível: </h5>
+                    <h5>Na página de “Documentos” você terá acesso a algumas ações como:</h5>
                     <ul>
-                        <li>nome do autor do processo;</li>
-                        <li>número do processo;</li>
-                        <li>título;</li>
-                        <li>a descrição do tipo de solicitação ou informação;</li>
-                        <li>a quem foi encaminhada a solicitação ou informação;</li>
-                        <li>o status informa o estado atual do processo, se ele ainda está em tramites ou se já foi encerrado.</li>
+                        <li><i class="fa fa-eye"></i> Visualizar o documento</li>
+                        <li><i class="fa fa-pencil-alt"></i> Fazer edição</li>
+                        <li><i class="fa fa-paper-plane"></i> Encaminhar a algum setor</li>
+                        <li><i class="fa fa-user-edit"></i> Fazer a assinatura virtual</li>
+                        <li><i class="fa fa-trash"></i> Excluir o documento</li>
                     </ul>
                     <br>
                     <div class="filtr-item col-sm-12" data-category="1" data-sort="white sample">
                         <div class="row mb-12">
                             <div class="col-sm-12">
-                                <img class="img-fluid" src="{{asset('dist/img/consultar.png') }}" alt="Photo">
+                                <img class="img-fluid" src="{{asset('dist/img/ações.png') }}" alt="Photo">
                             </div>
                             <!-- /.col -->
                         </div>
                     </div>
+                    <br>
+                    <h5>Clique no símbolo da caneta, para fazer a assinatura virtual e confirme a operação.</h5>
                 </div>
         </section>
     </div>
