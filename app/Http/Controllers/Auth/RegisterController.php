@@ -56,12 +56,27 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-
         $validacao_geral = array(
             'nome' => ['required', 'string', 'max:255'],
             'tipo' => ['required', 'string', 'max:2'],
             'sexo' => ['required'],
             'nascimento' => ['required'],
+            'telefone' => ['required', 'string', 'max:14'],
+            'logradouro' => ['required', 'string', 'max:150'],
+            'numero' => ['required', 'string', 'max:10'],
+            'bairro' => ['required', 'string', 'max:100'],
+            'cep' => ['required', 'string', 'max:10'],
+            'estado' => ['required'],
+            'cidade' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'terms' => ['required'],
+            'filenames' => ['required'],
+        );
+
+        $validacao_pj = array(
+            'nome' => ['required', 'string', 'max:255'],
+            'tipo' => ['required', 'string', 'max:2'],
             'telefone' => ['required', 'string', 'max:14'],
             'logradouro' => ['required', 'string', 'max:150'],
             'numero' => ['required', 'string', 'max:10'],
@@ -94,7 +109,7 @@ class RegisterController extends Controller
             'terms' => 'Termos de Uso',
             'filenames' => 'Arquivo/Foto',
         );
-        $validacao_cpf_cnpj=array('cpf_cnpj' => ['required', 'cpf_cnpj', 'formato_cpf', 'unique:users']);
+        $validacao_cpf_cnpj = array('cpf_cnpj' => ['required', 'cpf_cnpj', 'formato_cpf', 'unique:users']);
         $name = array('cpf_cnpj' => 'CPF');
         if ($data['tipo'] == "PF") {
             $validacao_cpf_cnpj = array('cpf_cnpj' => ['required', 'cpf_cnpj', 'formato_cpf', 'unique:users']);
@@ -103,8 +118,12 @@ class RegisterController extends Controller
             $validacao_cpf_cnpj = array('cpf_cnpj' => ['required', 'cpf_cnpj', 'formato_cnpj', 'unique:users']);
             $name = array('cpf_cnpj' => 'CNPJ');
         }
-
-        $validator = Validator::make($data, array_merge($validacao_geral, $validacao_cpf_cnpj));
+        if ($data['tipo'] == "PF") {
+            $validator = Validator::make($data, array_merge($validacao_geral, $validacao_cpf_cnpj));
+        }
+        else if($data["tipo"] == "PJ"){
+            $validator = Validator::make($data, array_merge($validacao_pj, $validacao_cpf_cnpj));
+        }
         $validator->setAttributeNames(array_merge($attributeNames, $name));
 
         return $validator;
@@ -121,66 +140,60 @@ class RegisterController extends Controller
 
         try {
 
-            if ($data['sexo'] == "Outro"){
+            if ($data['sexo'] == "Outro") {
                 $sexo = $data['genero'];
-            }else {
+            } else {
                 $sexo = $data['sexo'];
             }
 
-                $user =  new User();
-                $user->nome = $data['nome'];
-                $user->tipo = $data['tipo'];
-                $user->sexo = $sexo;
-                $user->nascimento = $data['nascimento'];
-                $user->telefone = $data['telefone'];
-                $user->cpf_cnpj = $data['cpf_cnpj'];
-                $user->logradouro = $data['logradouro'];
-                $user->numero = $data['numero'];
-                $user->bairro = $data['bairro'];
-                $user->cep = $data['cep'];
-                $user->complemento = $data['complemento'];
-                $user->fk_estado = $data['estado'];
-                $user->fk_cidade = $data['cidade'];
-                $user->status = 'Ativo';
+            $user =  new User();
+            $user->nome = $data['nome'];
+            $user->tipo = $data['tipo'];
+            $user->sexo = $sexo;
+            $user->nascimento = $data['nascimento'];
+            $user->telefone = $data['telefone'];
+            $user->cpf_cnpj = $data['cpf_cnpj'];
+            $user->logradouro = $data['logradouro'];
+            $user->numero = $data['numero'];
+            $user->bairro = $data['bairro'];
+            $user->cep = $data['cep'];
+            $user->complemento = $data['complemento'];
+            $user->fk_estado = $data['estado'];
+            $user->fk_cidade = $data['cidade'];
+            $user->status = 'Ativo';
 
-                $user->email = $data['email'];
-                $user->password = bcrypt($data['password']);
+            $user->email = $data['email'];
+            $user->password = bcrypt($data['password']);
 
-                DB::transaction(function () use ($user) {
-                    $user->save();
-                    $user->assignRole('cidadao');
-                });
+            DB::transaction(function () use ($user) {
+                $user->save();
+                $user->assignRole('cidadao');
+            });
 
-                try{
+            try {
+                foreach ($data['filenames'] as $file) {
+                    $name = time() . '.' . $file->extension();
+                    $file->move(public_path() . '/files/', $name);
+                    $files_upload[] = $name;
+                }
 
+                $file = new File();
+                $file->filenames = json_encode($files_upload);
+                $file->fk_user = $user->id;
+                $file->save();
 
-                    foreach($data['filenames'] as $file)
-                    {
-                        $name = time().'.'.$file->extension();
-                        $file->move(public_path().'/files/', $name);
-                        $files_upload[] = $name;
-                    }
+                // try{
+                //     Mail::to($user->email)->send(new SendMailUser($user));
+                // }catch(\Exception $erro){
+                //     return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
+                // }
 
-
-                    $file= new File();
-                    $file->filenames=json_encode($files_upload);
-                    $file->fk_user = $user->id;
-                    $file->save();
-
-
-                    // try{
-                    //     Mail::to($user->email)->send(new SendMailUser($user));
-                    // }catch(\Exception $erro){
-                    //     return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
-                    // }
-
-             } catch (\Exception  $erro) {
-                 return response()->json(array('as' => $erro));
-             }
-
-             return $user;
-             app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
-
+            } catch (\Exception  $erro) {
+                return response()->json(array('as' => $erro));
+            }
+            
+            return $user;
+            app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
         } catch (Exception  $erro) {
             return response()->json(array('erros' => $erro));
         }

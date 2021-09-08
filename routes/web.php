@@ -58,6 +58,9 @@ Route::get('/manual/status', function () {
 });
 
 Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
+Route::get('/selecionar-setor/{id}', 'SecretariaSetorController@select_setores')->name('selecionar-setor');
+// Route::post('/selecionar-setor/{id}', 'SecretariaSetorController@select_setores')->name('selecionar-setor');
+
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {

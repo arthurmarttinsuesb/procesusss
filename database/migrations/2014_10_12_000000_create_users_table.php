@@ -17,8 +17,8 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('tipo'); //Pessoa Física ou Pessoa Jurídica
-            $table->string('sexo');
-            $table->date('nascimento');
+            $table->string('sexo')->nullable();
+            $table->date('nascimento')->nullable();
             $table->string('telefone');
             $table->string('cpf_cnpj')->unique();
             $table->string('logradouro');

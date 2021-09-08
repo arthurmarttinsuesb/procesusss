@@ -12,13 +12,31 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+
             <div class="image" style="color:white;font-family:verdana;">
+                <p></p>
                 <i class="nav-icon fa fa-user"></i>
             </div>
+
             <div class="info">
-                <p class="d-block" style="color:white;font-family:verdana;">{{ Auth::user()->nome }}</p>
+                <p class="d-block" style="color:white;font-family:verdana;text-transform: capitalize">{{ Auth::user()->nome }}
+                    <br>
+                    @foreach(Auth::user()->getRoleNames() as $nome)
+                    @endforeach
+                    <font face='arial' style="text-transform: cauppitalize"">{{ $nome }} </font>
+                </p>
             </div>
         </div>
+        <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image" style="color:white;font-family:verdana;">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="info">
+                @foreach(Auth::user()->getRoleNames() as $nome)
+                @endforeach
+                <p class="d-block" style="color:white;font-family:verdana;"> Usuário: {{ $nome }}</p>
+            </div>
+        </div> -->
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

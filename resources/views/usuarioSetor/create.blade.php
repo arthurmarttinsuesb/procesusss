@@ -60,9 +60,7 @@
                             <div class="row">
                                 <div class="form-group col-xl-4 col-sm-4">
                                     <strong>Usuario <span style="color: red;">*</span></strong>
-                                    <select
-                                        class="form-control select2 form-control @error('fk_user', 'usuario-setor') is-invalid @enderror"
-                                        name="fk_user">
+                                    <select class="form-control select2 form-control @error('fk_user', 'usuario-setor') is-invalid @enderror" name="fk_user">
 
                                         @foreach ($users as $user)
                                         @if (old('fk_user') == $user->id)
@@ -80,24 +78,25 @@
                                     @enderror
                                 </div>
                                 <div class="form-group col-xl-4 col-sm-4">
-                                    <strong>Setor <span style="color: red;">*</span></strong>
-                                    <select
-                                        class="form-control select2 form-control @error('fk_setor', 'usuario-setor') is-invalid @enderror"
-                                        name="fk_setor">
+                                    <strong> Secretaria <span style="color: red;">*</span></strong>
+                                    <select class="form-control select2 form-control @error('fk_sect', 'usuario-setor') is-invalid @enderror" name="fk_sect" id="fk_sect">
 
                                         @foreach ($secretarias as $secretaria)
-                                            @foreach ($setores as $setor)
-                                                @if($secretaria->id == $setor->fk_secretaria)
-                                                    @if (old('fk_setor') == $setor->id)
 
-                                                    <option value="{{$setor->id}}" selected>{{$secretaria->sigla}} - {{$setor->titulo}}</option>
+                                        <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
 
-                                                    @else
-                                                    <option value="{{$setor->id}}">{{$secretaria->sigla}} - {{$setor->titulo}}</option>
-                                                    @endif
-                                                @endif
-                                            @endforeach
                                         @endforeach
+                                    </select>
+                                    @error('fk_setor','usuario-setor')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-xl-4 col-sm-4">
+                                    <strong>Setor <span style="color: red;">*</span></strong>
+                                    <select class="form-control select2 form-control @error('fk_setor', 'usuario-setor') is-invalid @enderror" name="fk_setor" id = "fk_setor">
+
                                     </select>
                                     @error('fk_setor','usuario-setor')
                                     <span class="invalid-feedback" role="alert">
@@ -120,10 +119,7 @@
                                 </div>
                                 <div class="form-group col-xl-2 col-sm-2">
                                     <strong>Data Entrada <span style="color: red;">*</span></strong>
-                                    <input type="text" autocomplete="off" id="data_entrada" name="data_entrada"
-                                        class="form-control @error('data_entrada', 'usuario-setor') is-invalid @enderror"
-                                        value="{{ old('data_entrada', date('d/m/Y')) }}" data-inputmask-alias="datetime"
-                                        data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false">
+                                    <input type="text" autocomplete="off" id="data_entrada" name="data_entrada" class="form-control @error('data_entrada', 'usuario-setor') is-invalid @enderror" value="{{ old('data_entrada', date('d/m/Y')) }}" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false">
                                     @error('data_entrada','usuario-setor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -150,6 +146,29 @@
 
 @endsection
 @section('scripts-adicionais')
+<script type="text/javascript">
+    $(document).on('change', '#fk_sect', function() {
+        var secretaria = $("#fk_sect option:selected").val();
+        // console.log(secretaria);
+        var option = "";
+        $.getJSON("/selecionar-setor/" + secretaria, function(dados) {
+            //Atibuindo valores à variavel com os dados da consulta
+            option += '<option value="">Selecione</option>';
+            $.each(dados.setores, function(i, setor) {
+                option +=
+                    '<option value="' +
+                    setor.id +
+                    '" >' +
+                    setor.titulo +
+                    "</option>";
+            });
+            //passando para o select de cidades
+            console.log(option);
+            $("#fk_setor").html(option).show();
+
+        });
+    });
+</script>
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
 <script src="{{ asset('js/usuario-setor.js') }}"></script>
