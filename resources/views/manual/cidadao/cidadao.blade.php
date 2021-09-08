@@ -6,7 +6,7 @@
 @section('conteudo')
     <!-- Content Wrapper. Contains page content -->
     <div class="wrapper">
-        @include('manual.manual_sidebar')
+        @include('manual.cidadao.manual_sidebar')
     </div>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -14,7 +14,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Manual do cidadão</h1>
+                        <h1>Manual do Cidadão</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -41,13 +41,13 @@
             </div>
 
             <div class="card-body">
-                <h5>Na home você tem disponíveis os menus do usuário</h5>
+                <h5>Na Tela Inicial você tem disponíveis os menus do cidadão e do colaborador.</h5>
                 <br>
                 <div class="filter-container p-0 row">
-                    <div class="filtr-item col-sm-8" data-category="1" data-sort="white sample">
+                    <div class="filtr-item col-sm-12" data-category="1" data-sort="white sample">
                         <div class="row mb-12">
                             <div class="col-sm-12">
-                                <img class="img-fluid" src="{{asset('dist/img/sidebar.png') }}" alt="Photo">
+                                <img class="img-fluid" src="{{asset('dist/img/home-colaborador.png') }}" alt="Photo">
                             </div>
                             <!-- /.col -->
                         </div>

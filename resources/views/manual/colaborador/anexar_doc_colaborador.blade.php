@@ -5,7 +5,7 @@
 
 @section('conteudo')
     <div class="wrapper">
-        @include('manual.manual_sidebar')
+        @include('manual.colaborador.colaborador_sidebar')
     </div>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -13,7 +13,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Manual do cidadão</h1>
+                        <h1>Manual do Colaborador</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -32,26 +32,35 @@
                         <div class="col-md-12">
                                 <div class="alert alert-info alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    <h5><i class="icon fas fa-info"></i> Processo</h5>
+                                    <h5><i class="icon fas fa-info"></i> Anexar Documento</h5>
                                 </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <h5>Ao clicar em Processo, você terá acesso a todos os seus processos já criados.</h5>
-                    <h5>Se deseja criar um novo processo, basta clicar em Adicionar processo, localizado na parte superior direta da página.</h5>
-                    <br>
-                    <h5>Então aparecerá uma tela de criação, basta preencher as informações iniciais do processo que deseja criar e clicar em “Criar”.</h5>
+                    <h5>Em anexos é possível adicionar todos documentos que sejam necessários para o seu processo, como RG ou comprovantes. Clique em “Adicionar Anexos”</h5>
                     <br>
                     <div class="filtr-item col-sm-12" data-category="1" data-sort="white sample">
                         <div class="row mb-12">
                             <div class="col-sm-12">
-                                <img class="img-fluid" src="{{asset('dist/img/criar-inicio.png') }}" alt="Photo">
+                                <img class="img-fluid" src="{{asset('dist/img/anexos.png') }}" alt="Photo">
                             </div>
                             <!-- /.col -->
                         </div>
                     </div>
+                    <br>
+                    <h5>Clique em “Escolher Arquivo”, selecione o arquivo que deseja enviar, sua privacidade e clique em “Salvar”.</h5>
+                    <br>
+                    <div class="filtr-item col-sm-12" data-category="1" data-sort="white sample">
+                        <div class="row mb-12">
+                            <div class="col-sm-12">
+                                <img class="img-fluid" src="{{asset('dist/img/anexar-colaborador.png') }}" alt="Photo">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </div>
+
                 </div>
         </section>
     </div>

@@ -21,41 +21,81 @@ Route::get('/sobre', function () {
     return view('sobre.sobre');
 });
 
+// MANUAL CIDADÃO
 Route::get('/manual/cidadao', function () {
-    return view('manual.cidadao');
+    return view('manual.cidadao.cidadao');
 });
 
 Route::get('/manual/consultar', function () {
-    return view('manual.consultar_menu');
+    return view('manual.cidadao.consultar_menu');
 });
 
 Route::get('/manual/processo', function () {
-    return view('manual.processo');
+    return view('manual.cidadao.processo');
 });
 
 Route::get('/manual/criar_processo', function () {
-    return view('manual.criar_processo');
+    return view('manual.cidadao.criar_processo');
 });
 
 Route::get('/manual/add', function () {
-    return view('manual.add_documentos');
+    return view('manual.cidadao.add_documentos');
 });
 
 Route::get('/manual/acoes', function () {
-    return view('manual.acoes_documento');
+    return view('manual.cidadao.acoes_documento');
 });
 
 Route::get('/manual/anexar', function () {
-    return view('manual.anexar_documento');
+    return view('manual.cidadao.anexar_documento');
 });
 
 Route::get('/manual/encaminhar', function () {
-    return view('manual.encaminhar');
+    return view('manual.cidadao.encaminhar');
 });
 
 Route::get('/manual/status', function () {
-    return view('manual.status');
+    return view('manual.cidadao.status');
 });
+// FIM MANUAL CIDADÃO
+
+// MANUAL COLABORADOR
+Route::get('/manual/colaborador', function () {
+    return view('manual.colaborador.colaborador');
+});
+
+Route::get('/manual/consultar', function () {
+    return view('manual.colaborador.consultar_colaborador');
+});
+
+Route::get('/manual/add-doc', function () {
+    return view('manual.colaborador.add_doc_colaborador');
+});
+
+Route::get('/manual/modelo', function () {
+    return view('manual.colaborador.modelo_doc');
+});
+
+Route::get('/manual/acoes', function () {
+    return view('manual.colaborador.acoes_doc_colaborador');
+});
+
+Route::get('/manual/criar_processo', function () {
+    return view('manual.colaborador.criar_processo_colaborador');
+});
+
+Route::get('/manual/anexar', function () {
+    return view('manual.colaborador.anexar_doc_colaborador');
+});
+
+Route::get('/manual/encaminhar', function () {
+    return view('manual.colaborador.encaminhar_colaborador');
+});
+
+Route::get('/manual/status', function () {
+    return view('manual.colaborador.status_colaborador');
+});
+// FIM MANUAL COLABORADOR
 
 Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
 Route::get('/selecionar-setor/{id}', 'SecretariaSetorController@select_setores')->name('selecionar-setor');
