@@ -60,42 +60,104 @@ Route::get('/manual/status', function () {
 // FIM MANUAL CIDADÃO
 
 // MANUAL COLABORADOR
-Route::get('/manual/colaborador', function () {
+Route::get('/manual/colaborador/colaborador', function () {
     return view('manual.colaborador.colaborador');
 });
 
-Route::get('/manual/consultar', function () {
+Route::get('/manual/colaborador/processo', function () {
+    return view('manual.colaborador.processo');
+});
+
+Route::get('/manual/colaborador/consultar', function () {
     return view('manual.colaborador.consultar_colaborador');
 });
 
-Route::get('/manual/add-doc', function () {
+Route::get('/manual/colaborador/add-doc', function () {
     return view('manual.colaborador.add_doc_colaborador');
 });
 
-Route::get('/manual/modelo', function () {
+Route::get('/manual/colaborador/modelo', function () {
     return view('manual.colaborador.modelo_doc');
 });
 
-Route::get('/manual/acoes', function () {
+Route::get('/manual/colaborador/acoes', function () {
     return view('manual.colaborador.acoes_doc_colaborador');
 });
 
-Route::get('/manual/criar_processo', function () {
+Route::get('/manual/colaborador/criar_processo', function () {
     return view('manual.colaborador.criar_processo_colaborador');
 });
 
-Route::get('/manual/anexar', function () {
+Route::get('/manual/colaborador/anexar', function () {
     return view('manual.colaborador.anexar_doc_colaborador');
 });
 
-Route::get('/manual/encaminhar', function () {
+Route::get('/manual/colaborador/encaminhar', function () {
     return view('manual.colaborador.encaminhar_colaborador');
 });
 
-Route::get('/manual/status', function () {
+Route::get('/manual/colaborador/status', function () {
     return view('manual.colaborador.status_colaborador');
 });
 // FIM MANUAL COLABORADOR
+
+// MANUAL ADMINISTRADOR
+Route::get('/manual/administrador', function () {
+    return view('manual.administrador.administrador');
+});
+
+Route::get('/manual/administrador/consultar', function () {
+    return view('manual.administrador.consultar_adm');
+});
+
+Route::get('/manual/administrador/processo', function () {
+    return view('manual.administrador.processo');
+});
+
+Route::get('/manual/administrador/add-doc', function () {
+    return view('manual.administrador.add_doc_adm');
+});
+
+Route::get('/manual/administrador/acoes', function () {
+    return view('manual.administrador.acoes_doc_adm');
+});
+
+Route::get('/manual/administrador/criar_processo', function () {
+    return view('manual.administrador.criar_processo_adm');
+});
+
+Route::get('/manual/administrador/anexar', function () {
+    return view('manual.administrador.anexar_doc_adm');
+});
+
+Route::get('/manual/administrador/encaminhar', function () {
+    return view('manual.administrador.encaminhar_adm');
+});
+
+Route::get('/manual/administrador/status', function () {
+    return view('manual.administrador.status_adm');
+});
+
+Route::get('/manual/administrador/modelo', function () {
+    return view('manual.administrador.modelo_adm');
+});
+
+Route::get('/manual/administrador/unidade', function () {
+    return view('manual.administrador.unidade');
+});
+
+Route::get('/manual/administrador/setor', function () {
+    return view('manual.administrador.setor');
+});
+
+Route::get('/manual/administrador/usuarios', function () {
+    return view('manual.administrador.usuarios');
+});
+
+Route::get('/manual/administrador/colaboradores', function () {
+    return view('manual.administrador.colaboradores');
+});
+// FIM MANUAL ADMINISTRADOR
 
 Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
 Route::get('/selecionar-setor/{id}', 'SecretariaSetorController@select_setores')->name('selecionar-setor');

@@ -62,7 +62,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/manual/administrador" target="_blank" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Manual do Administrador</p>
             </a>

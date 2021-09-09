@@ -55,6 +55,22 @@
                         </div>
                     </div>
                 </div>
+                <br>
+                <h5>Se você tiver notificações pendentes elas serão mostradas da seguinte maneira:</h5>
+                <br>
+                <div class="filter-container p-0 row">
+                    <div class="filtr-item col-sm-12" data-category="1" data-sort="white sample">
+                        <div class="row mb-12">
+                            <div class="col-sm-12">
+                                <img class="img-fluid" src="{{asset('dist/img/home-notificacao.png') }}" alt="Photo">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <h5>Sendo possível clicar para fazer a assinatura do documento, visualizar os detalhes do processo e também, se necessário, informar erros ao cidadão que criou o processo.</h5>
+                <br>
             </div>
         </section>
     </div>

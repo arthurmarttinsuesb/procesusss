@@ -21,7 +21,7 @@
             
 
                 <li class="nav-item">
-                    <a href="/manual/consultar" class="nav-link">
+                    <a href="/manual/colaborador/consultar" class="nav-link">
                         <i class="nav-icon fas fa-search"></i>
                         <p>
                             Consultar Processo
@@ -31,7 +31,7 @@
             
 
                 <li class="nav-item">
-                    <a href="/manual/processo" class="nav-link">
+                    <a href="/manual/colaborador/processo" class="nav-link">
                         <i class="nav-icon fas fa-archive"></i>
                         <p>
                             Processo
@@ -41,7 +41,7 @@
             
 
                 <li class="nav-item">
-                    <a href="/manual/criar_processo" class="nav-link">
+                    <a href="/manual/colaborador/criar_processo" class="nav-link">
                         <i class="nav-icon fas fa-archive"></i>
                         <p>
                             Criar Processo
@@ -51,7 +51,7 @@
             
 
                 <li class="nav-item">
-                    <a href="/manual/add-doc" class="nav-link">
+                    <a href="/manual/colaborador/add-doc" class="nav-link">
                         <i class="nav-icon fas fa-folder-plus"></i>
                         <p>
                             Adicionar Documento
@@ -60,7 +60,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/manual/modelo" class="nav-link">
+                    <a href="/manual/colaborador/modelo" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
                             Modelo de Documento
@@ -69,7 +69,7 @@
                 </li>            
 
                 <li class="nav-item">
-                    <a href="/manual/acoes" class="nav-link">
+                    <a href="/manual/colaborador/acoes" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
                             Ações no Documento
@@ -79,7 +79,7 @@
             
 
                 <li class="nav-item">
-                    <a href="/manual/anexar" class="nav-link">
+                    <a href="/manual/colaborador/anexar" class="nav-link">
                         <i class="nav-icon fas fa-paperclip"></i>
                         <p>
                             Anexar Documentos
@@ -89,7 +89,7 @@
             
 
                 <li class="nav-item">
-                    <a href="/manual/encaminhar" class="nav-link">
+                    <a href="/manual/colaborador/encaminhar" class="nav-link">
                         <i class="nav-icon far fa-paper-plane"></i>
                         <p>
                             Encaminhar processo
@@ -99,7 +99,7 @@
             
 
                 <li class="nav-item">
-                    <a href="/manual/status" class="nav-link">
+                    <a href="/manual/colaborador/status" class="nav-link">
                     <i class="nav-icon fas fa-calendar-check"></i>
                     <p>
                         Estado do Processo

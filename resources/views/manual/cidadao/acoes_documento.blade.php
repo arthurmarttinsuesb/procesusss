@@ -51,13 +51,13 @@
                     <div class="filtr-item col-sm-12" data-category="1" data-sort="white sample">
                         <div class="row mb-12">
                             <div class="col-sm-12">
-                                <img class="img-fluid" src="{{asset('dist/img/ações.png') }}" alt="Photo">
+                                <img class="img-fluid" src="{{asset('dist/img/acoes.png') }}" alt="Photo">
                             </div>
                             <!-- /.col -->
                         </div>
                     </div>
                     <br>
-                    <h5>Clique no símbolo da caneta, para fazer a assinatura virtual e confirme a operação.</h5>
+                    <h5>Clique no símbolo <i class="fas fa-user-edit"></i>, para fazer a assinatura virtual e confirme a operação.</h5>
                 </div>
         </section>
     </div>
