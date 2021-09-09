@@ -62,7 +62,7 @@
                     </div>
                     <br>
                     <h5>Informe o nome da Unidade em <strong>“Título”</strong> e sua sigla.</h5>
-                    <h5>Se a unidade já não é mais atuante, você pode removê-la clicando em excluir e em seguida confirmando exta exclusão em <strong>“Sim, quer excluir!”</strong> que irá aparecer para você.</h5>
+                    <h5>Se a unidade já não é mais atuante, você pode removê-la clicando em excluir e em seguida confirmando esta exclusão em <strong>“Sim, quer excluir!”</strong> que irá aparecer para você.</h5>
                     <br>
                     <div class="filtr-item col-sm-6" data-category="1" data-sort="white sample">
                         <div class="row mb-8">

@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <br>
-                    <h5><strong>OBS.:</strong> É necessário que você tenha pelo menos um documento criado ou que tenho sido enviado a você para que o encaminhamento possa acontecer. </h5>
+                    <h5><strong>OBS.:</strong> É necessário que você tenha pelo menos um documento criado ou que tenha sido enviado a você para que o encaminhamento possa acontecer. </h5>
                 </div>
         </section>
     </div>
