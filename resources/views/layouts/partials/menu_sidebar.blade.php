@@ -19,11 +19,12 @@
             </div>
 
             <div class="info">
+                
                 <p class="d-block" style="color:white;font-family:verdana;text-transform: capitalize">{{ Auth::user()->nome }}
                     <br>
                     @foreach(Auth::user()->getRoleNames() as $nome)
                     @endforeach
-                    <font face='arial' style="text-transform: cauppitalize"">{{ $nome }} </font>
+                    <b><font face='arial' style="text-transform: cauppitalize"" class="bg-teal">{{ $nome }} </font></b>
                 </p>
             </div>
         </div>
