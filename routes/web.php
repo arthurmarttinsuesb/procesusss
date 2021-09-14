@@ -22,7 +22,7 @@ Route::get('/sobre/geral', function () {
 });
 
 Route::get('/sobre/usuario', function () {
-    return view('sobre.sobre-logado');
+    return view('sobre.sobre_logado');
 });
 
 // MANUAL CIDADÃO
@@ -64,7 +64,7 @@ Route::get('/manual/status', function () {
 // FIM MANUAL CIDADÃO
 
 // MANUAL COLABORADOR
-Route::get('/manual/colaborador/colaborador', function () {
+Route::get('/manual/colaborador', function () {
     return view('manual.colaborador.colaborador');
 });
 
