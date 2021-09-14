@@ -1,21 +1,32 @@
-@extends('auth.app')
-@section('htmlheader_title', 'Login')
- @section('contentheader_title', 'Login')
+@extends('layouts.app')
+
+@section('htmlheader_title', 'Home')
+@section('contentheader_title', 'Home')
+
 @section('conteudo')
-<div class="col-10">
-            <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="wrapper">
+    </div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>Sobre o Sistema</h1>
                     </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/home">Tela Inicial</a></li>
+                            <li class="breadcrumb-item active">Sobre</li>
+                        </ol>
+                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
-    <!-- Main content -->
-    <section class="content">
+    
+        <!-- Main content -->
+        <section class="content">
             <!-- Main content -->
             <div class="container-fluid">
                 <div class="row">
@@ -271,7 +282,6 @@
                 </div>
             </div>
         </section>
-        
-</div>
-
+    </div>
+                   
 @endsection

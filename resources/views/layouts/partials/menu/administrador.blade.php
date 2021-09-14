@@ -70,7 +70,7 @@
     </ul>
 </li>
 <li class="nav-item">
-    <a href="/sobre" class="nav-link">
+    <a href="/sobre/usuario" class="nav-link">
         <i class="nav-icon fa fa-users"></i>
         <p>Sobre o Sistema</p>
     </a>

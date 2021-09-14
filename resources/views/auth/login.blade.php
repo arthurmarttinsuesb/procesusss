@@ -66,7 +66,7 @@
                 <a href="{{route('register')}}" class="text-center">>> Ainda não possui uma conta, cadastre-se.</a>
             </p>
             <p class="mb-0">
-                <a href="/sobre" class="text-center">>> Sobre o Sistema</a>
+                <a href="/sobre/geral" target="blank" class="text-center">>> Sobre o Sistema</a>
             </p>
             <br>
             <hr>

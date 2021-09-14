@@ -17,8 +17,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/sobre', function () {
+Route::get('/sobre/geral', function () {
     return view('sobre.sobre');
+});
+
+Route::get('/sobre/usuario', function () {
+    return view('sobre.sobre-logado');
 });
 
 // MANUAL CIDADÃO
