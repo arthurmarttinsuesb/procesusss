@@ -17,8 +17,12 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/sobre', function () {
+Route::get('/sobre/geral', function () {
     return view('sobre.sobre');
+});
+
+Route::get('/sobre/usuario', function () {
+    return view('sobre.sobre_logado');
 });
 
 // MANUAL CIDADÃO
@@ -60,7 +64,7 @@ Route::get('/manual/status', function () {
 // FIM MANUAL CIDADÃO
 
 // MANUAL COLABORADOR
-Route::get('/manual/colaborador/colaborador', function () {
+Route::get('/manual/colaborador', function () {
     return view('manual.colaborador.colaborador');
 });
 
