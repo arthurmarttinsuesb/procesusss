@@ -162,7 +162,7 @@ Route::get('/manual/administrador/colaboradores', function () {
 Route::get('/selecionar-cidade/{id}', 'EstadoCidadeController@select_cidade')->name('selecionar-cidade');
 Route::get('/selecionar-setor/{id}', 'SecretariaSetorController@select_setores')->name('selecionar-setor');
 // Route::post('/selecionar-setor/{id}', 'SecretariaSetorController@select_setores')->name('selecionar-setor');
-
+Route::post('/replicarModal', 'ProcessoController@replicarModal');
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
@@ -225,6 +225,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/{processo}/devolverObservacao/{tramite}', ['uses' => 'ProcessoController@devolver']);
             Route::get('/{id}/replicar', ['uses' => 'ProcessoController@replicar']);
             Route::post('/{id}/salvarReplicar', ['uses' => 'ProcessoController@salvarReplicar']);
+            
         });
 
         Route::group(['prefix' => 'devolutiva', 'where' => ['prefix' => 'devolutiva']], function () {
