@@ -24,10 +24,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-12">
-                            <strong>Descrição</strong>
-                            <textarea class="textarea form-control" name='descricao'></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>

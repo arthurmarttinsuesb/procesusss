@@ -96,15 +96,15 @@ class ProcessoController extends Controller
                                         </a>
                                     </div>';
                 }
-                // if (Auth::user()->id == $processo->fk_user) {
-                //     $btnReplicar = '<div class="btn-group btn-group-sm">
-                //                         <a href="/processo/' . $processo->id . '/replicar"
-                //                             class="btn btn-primary"
-                //                             title="Replicar" data-toggle="tooltip">
-                //                             <i class="fas fa-copy"></i>
-                //                         </a>
-                //                     </div>';
-                // }
+                if (Auth::user()->id == $processo->fk_user) {
+                    // $btnReplicar = '<div class="btn-group btn-group-sm">
+                    //                     <a href="/processo/' . $processo->id . '/replicar"
+                    //                         class="btn btn-primary"
+                    //                         title="Replicar" data-toggle="tooltip">
+                    //                         <i class="fas fa-copy"></i>
+                    //                     </a>
+                    //                 </div>';
+                }
                 return $btnVisualizar . " " . $btnAlterar . " " . $btnReplicar;
             })
             ->editColumn('criado', function ($processo) {
@@ -383,9 +383,12 @@ class ProcessoController extends Controller
     }
 
     public function replicarModal(Request $request){
-        $processo = Processo::firstWhere('id', $request->processo);
-        $processo_documento = ProcessoDocumento::where('fk_processo', $processo->id)->where('status', 'Ativo')->get();
+        $id = $request->processo;
+        $processo = Processo::find($id);
+        // dd($processo);
+        $processo_documento = ProcessoDocumento::where('fk_processo', $id)->where('status', 'Ativo')->get();
         return view('processo.replicar', compact('processo', 'processo_documento'));
+
     }
 
     public function salvarReplicar(RequestProcessus $request)
