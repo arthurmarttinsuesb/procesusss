@@ -1,4 +1,4 @@
-@if (auth()->user()->status == 'Ativo')
+@if (auth()->user())
     <meta http-equiv="refresh" content="0;url=home">
 
 @else
@@ -12,9 +12,6 @@
                     <a href="{{ url('/home') }}"><img src="{{url('/img/logo-processus.png')}}"
                     alt="Processus" style="width: 50%; height: auto;"></a>
             </div>
-            <!-- @if (auth()->user()->status == 'Ativo')
-                <meta http-equiv="refresh" content="0;url=home">
-            @endif -->
             <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
