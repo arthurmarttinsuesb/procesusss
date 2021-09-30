@@ -45,15 +45,15 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-header">MENU</li>
                 @if (auth()->user()->status == 'Ativo')
-                @foreach(Auth::user()->getRoleNames() as $nome)
-                @if($nome=="administrador")
-                @include('layouts.partials.menu.administrador')
-                @elseif($nome=="funcionario")
-                @include('layouts.partials.menu.funcionario')
-                @elseif($nome=="cidadao")
-                @include('layouts.partials.menu.cidadao')
-                @endif
-                @endforeach
+                    @foreach(Auth::user()->getRoleNames() as $nome)
+                        @if($nome=="administrador")
+                            @include('layouts.partials.menu.administrador')
+                                @elseif($nome=="funcionario")
+                                    @include('layouts.partials.menu.funcionario')
+                                @elseif($nome=="cidadao")
+                            @include('layouts.partials.menu.cidadao')
+                        @endif
+                    @endforeach
                 @else
                 <div class="alert alert-warning m-2">Por favor, ative o usuario.</div>
                 @endif
