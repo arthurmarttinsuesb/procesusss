@@ -75,7 +75,7 @@
                 </div>
                 <!-- <div class="row outro_genero " style="display: none;"> -->                
                 <div class="col-md-3 outro_genero">
-                    <label>Outro Gênero <span style="color: red;">*</span></label>
+                    <label>Outro Gênero</label>
                     <input type="text" class="form-control " placeholder="Informe o seu gênero" name="genero" id="genero" value="{{ old('genero') }}" readonly />
                 </div>
                 <!-- </div> -->

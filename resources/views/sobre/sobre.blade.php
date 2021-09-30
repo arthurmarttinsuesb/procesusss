@@ -69,6 +69,11 @@
                                                     Coordenadora do Curso de Sistemas de Informação da UESB
                                                 </a>
                                             </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Coordenadora Institucional do convênio 001/2019-PMJ/UESB
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -92,9 +97,14 @@
                                     <h3 class="profile-username text-center">Jéssica Cerqueira</h3>
 
                                     <p class="text-muted text-center">Scrum Master da Fábrica de Software</p>
-
+                                    
                                     <div class="card-footer p-0">
                                         <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Bolsa Pesquisador 1, convênio 001/2019-PMJ/UESB
+                                                </a>
+                                            </li>
                                             <li class="nav-item">
                                                 <a href="#" class="nav-link">
                                                     Analista de Sistemas
@@ -103,6 +113,11 @@
                                             <li class="nav-item">
                                                 <a href="#" class="nav-link">
                                                     Desenvolvedora Web
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Atua em projetos desenvolvidos na Fábrica de Software.
                                                 </a>
                                             </li>
                                         </ul>
@@ -129,15 +144,20 @@
 
                                     <h3 class="profile-username text-center">Tailane Maia</h3>
 
-                                    <p class="text-muted text-center">Discente do Curso Sistemas de Informação (UESB)</p>
+                                    <p class="text-muted text-center">Graduanda do Curso Sistemas de Informação (UESB)</p>
 
                                     <div class="card-footer p-0">
                                         <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                Bolsista, atua em projetos desenvolvidos na Fábrica de Software
-                                            </a>
-                                        </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Estagiária pela disciplina de Estágio Profissional no curso de Sistemas de Informação
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Atua em projetos desenvolvidos na Fábrica de Software.
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -160,15 +180,20 @@
 
                                     <h3 class="profile-username text-center">Ronald Matos</h3>
 
-                                    <p class="text-muted text-center">Discente do Curso Sistemas de Informação (UESB)</p>
+                                    <p class="text-muted text-center">Graduando do Curso Sistemas de Informação (UESB)</p>
 
                                     <div class="card-footer p-0">
                                         <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                Bolsista, atua em projetos desenvolvidos na Fábrica de Software
-                                            </a>
-                                        </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Bolsa de Iniciação à Pesquisa, convênio 001/2019-PMJ/UESB.
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Atua em projetos desenvolvidos na Fábrica de Software.
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -191,15 +216,20 @@
 
                                     <h3 class="profile-username text-center">Anderson Pereira</h3>
 
-                                    <p class="text-muted text-center">Discente do Curso Sistemas de Informação (UESB)</p>
+                                    <p class="text-muted text-center">Graduando do Curso Sistemas de Informação (UESB)</p>
 
                                     <div class="card-footer p-0">
                                         <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                Bolsista, atua em projetos desenvolvidos na Fábrica de Software
-                                            </a>
-                                        </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Estagiário pela disciplina de Estágio Profissional no curso de Sistemas de Informação
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Atua em projetos desenvolvidos na Fábrica de Software.
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -222,15 +252,20 @@
 
                                     <h3 class="profile-username text-center">Túlio Calil</h3>
 
-                                    <p class="text-muted text-center">Discente do Curso Sistemas de Informação (UESB)</p>
+                                    <p class="text-muted text-center">Graduando do Curso Sistemas de Informação (UESB)</p>
 
                                     <div class="card-footer p-0">
                                         <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                Bolsista, atua em projetos desenvolvidos na Fábrica de Software
-                                            </a>
-                                        </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Bolsa Pesquisador 1, convênio 001/2019-PMJ/UESB
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Atua em projetos desenvolvidos na Fábrica de Software.
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -253,15 +288,92 @@
 
                                     <h3 class="profile-username text-center">Willer Almeida</h3>
 
-                                    <p class="text-muted text-center">Discente do Curso Sistemas de Informação (UESB)</p>
+                                    <p class="text-muted text-center">Graduando do Curso Sistemas de Informação (UESB)</p>
 
                                     <div class="card-footer p-0">
                                         <ul class="nav flex-column">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                Bolsista, atua em projetos desenvolvidos na Fábrica de Software
-                                            </a>
-                                        </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Estagiário pela disciplina de Estágio Profissional no curso de Sistemas de Informação
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Atua em projetos desenvolvidos na Fábrica de Software.
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="hidden">
+                    <div class="card card-primary card-outline card-outline-tabs">
+                        <div class="card-header p-0 border-bottom-0">
+
+                        </div>
+                        <div class="card-body ">
+                            <div class="card card-info card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                    <img class="profile-user-img img-fluid img-circle" src="https://imageshack.com/i/pmMsn61Aj" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">Francisca Figueiredo</h3>
+
+                                    <p class="text-muted text-center">Graduanda do Curso Sistemas de Informação (UESB)</p>
+
+                                    <div class="card-footer p-0">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Estagiária pela disciplina de Estágio Profissional no curso de Sistemas de Informação
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Atua em projetos desenvolvidos na Fábrica de Software.
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <input type="hidden">
+                    <div class="card card-primary card-outline card-outline-tabs">
+                        <div class="card-header p-0 border-bottom-0">
+
+                        </div>
+                        <div class="card-body ">
+                            <div class="card card-info card-outline">
+                                <div class="card-body box-profile">
+                                    <div class="text-center">
+                                    <img class="profile-user-img img-fluid img-circle" src="https://imageshack.com/i/po5gIAOvj" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">Guilherme Waldshmidt</h3>
+
+                                    <p class="text-muted text-center">Graduanda do Curso Sistemas de Informação (UESB)</p>
+
+                                    <div class="card-footer p-0">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Estagiário pela disciplina de Estágio Profissional no curso de Sistemas de Informação
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    Atua em projetos desenvolvidos na Fábrica de Software.
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

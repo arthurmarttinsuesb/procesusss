@@ -7,7 +7,18 @@ $(document).on("click", ".btnExcluir", function () {
     });
 });
 
-$(document).on("click", ".busca_processo", function () {
+$(document).on("keyup", ".busca_processo_form", function (event) {
+    console.log(event)
+    event.preventDefault()
+    
+    var busca = $("#campo_busca").val();
+
+    if (busca != "") buscarProcesso(busca);
+    else alert("Campo de busca em branco, Preencha com os dados da busca!!!");
+})
+
+$(document).on("click", ".busca_processo", function (event) {
+    event.preventDefault()
     var busca = $("#campo_busca").val();
 
     if (busca != "") buscarProcesso(busca);
