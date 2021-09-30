@@ -52,7 +52,7 @@
                                                 @elseif($processo->status=='Encaminhado') 
                                                     <span class="right badge badge-success">em andamento</span>
                                                 @elseif($processo->status=='Finalizado' || $processo->status=='Encerrado')   
-                                                     <span class="right badge badge-danger">encerrado</span>
+                                                     <span class="right badge badge-danger">concluido</span>
                                             @endif   
                                         </h5>
                             </div>

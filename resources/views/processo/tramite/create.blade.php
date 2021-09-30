@@ -70,15 +70,7 @@
                     <strong>{{ $message }}</strong>
                   </span>
                   @enderror
-                  <strong>Setor <span style="color: red;">*</span></strong>
-                  <select class="form-control select2 form-control @error('fk_setor', 'setor') is-invalid @enderror" name="fk_setor" id="select_secretaria">
 
-                  </select>
-                  @error('fk_setor','setor')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror
                   <!-- <select id="select_secretaria" class="form-control select2 @error('fk_setor', 'setor') is-invalid @enderror" name="fk_setor">
                     <option value="selecione" selected>Selecione</option>
                     @foreach ($secretarias as $secretaria)
@@ -102,8 +94,20 @@
                   @enderror -->
                 </div>
 
+                <div class="form-group col-md-4">
+                  <strong>Setor <span style="color: red;">*</span></strong>
+                  <select class="form-control select2 form-control @error('fk_setor', 'setor') is-invalid @enderror" name="fk_setor" id="select_secretaria">
+
+                  </select>
+                  @error('fk_setor','setor')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+
                 <!-- verifico se o tipo de usuário é cidadão, se for o campo do tipo usuário não vai ser mostrado-->
-                <div class="form-group col-md-4" @foreach(Auth::user()->getRoleNames() as $nome) @if($nome=="cidadao") hidden @endif @endforeach>
+                <div hidden class="form-group col-md-4" @foreach(Auth::user()->getRoleNames() as $nome) @if($nome=="cidadao") hidden @endif @endforeach>
                   <strong>Usuario <span style="color: red;">*</span></strong>
                   <select id="select_user" class="form-control select2 @error('fk_user', 'setor') is-invalid @enderror" name="fk_user">
                     @foreach ($users as $user)
@@ -155,27 +159,27 @@
 @endsection
 @section('scripts-adicionais')
 <script type="text/javascript">
-    $(document).on('change', '#fk_sect', function() {
-        var secretaria = $("#fk_sect option:selected").val();
-        // console.log(secretaria);
-        var option = "";
-        $.getJSON("/selecionar-setor/" + secretaria, function(dados) {
-            //Atibuindo valores à variavel com os dados da consulta
-            option += '<option value="">Selecione</option>';
-            $.each(dados.setores, function(i, setor) {
-                option +=
-                    '<option value="' +
-                    setor.id +
-                    '" >' +
-                    setor.titulo +
-                    "</option>";
-            });
-            //passando para o select de cidades
-            // console.log(option);
-            $("#select_secretaria").html(option).show();
+  $(document).on('change', '#fk_sect', function() {
+    var secretaria = $("#fk_sect option:selected").val();
+    // console.log(secretaria);
+    var option = "";
+    $.getJSON("/selecionar-setor/" + secretaria, function(dados) {
+      //Atibuindo valores à variavel com os dados da consulta
+      option += '<option value="">Selecione</option>';
+      $.each(dados.setores, function(i, setor) {
+        option +=
+          '<option value="' +
+          setor.id +
+          '" >' +
+          setor.titulo +
+          "</option>";
+      });
+      //passando para o select de cidades
+      // console.log(option);
+      $("#select_secretaria").html(option).show();
 
-        });
     });
+  });
 </script>
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>

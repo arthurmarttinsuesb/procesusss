@@ -19,7 +19,7 @@
 
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Tela Inicial</a></li>
+                        <li class="breadcrumb-item"><a href="/home">Tela Inicial</a></li>
                         <li class="breadcrumb-item active">Processos</li>
                     </ol>
                 </div>
@@ -38,55 +38,60 @@
                             </div>
                             <div class="col-xl-3 col-sm-11">
                                 <div class="float-right">
-                                    <button data-toggle="modal" data-target="#modal-processo"
-                                        class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar
+                                    <button data-toggle="modal" data-target="#modal-processo" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar
+                                        Processo</button>
+                                    <button data-toggle="modal" data-target="#modal_replicar_processo" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Replicar
                                         Processo</button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                    <!-- /.card-header -->
-                    @if (Session::has('message'))
-                    <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
-                    @endif
-                    <div class="card-body table-responsive-sm">
+
+                </div>
+                <!-- /.card-header -->
+                @if (Session::has('message'))
+                <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
+                @endif
+                <div class="card-body table-responsive-sm">
                     @if(Auth::user()->hasRole('administrador'))
-                        <table id="table_administrador" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Criado Por</th>
-                                    <th>Número Processo</th>
-                                    <th>Data de Abertura</th>
-                                    <th>Tipo</th>
-                                    <th>Status</th>
-                                    <th>Ação</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        </table>
+                    <table id="table_administrador" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Criado Por</th>
+                                <th>Número Processo</th>
+                                <th>Data de Abertura</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    </table>
                     @else
-                        <table id="table_usuario" class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Número Processo</th>
-                                    <th>Data de Abertura</th>
-                                    <th>Tipo</th>
-                                    <th>Status</th>
-                                    <th>Ação</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                        </table>
+                    <table id="table_usuario" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Número Processo</th>
+                                <th>Data de Abertura</th>
+                                <th>Tipo</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    </table>
 
                     @endif
-                    </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
-                <!-- /.row -->
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <!-- /.row -->
     </section>
 </div>
 @include('processo.modal_processo')
+@include('processo.modal_replicar_processo')
 <!-- /.content -->
 <!-- jQuery -->
 <script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>

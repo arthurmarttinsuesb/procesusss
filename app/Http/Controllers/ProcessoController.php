@@ -39,6 +39,7 @@ class ProcessoController extends Controller
         return view('processo.index');
     }
 
+    
     public function list(Request $request)
     {
         $user = Auth::user(); //
@@ -96,13 +97,13 @@ class ProcessoController extends Controller
                                     </div>';
                 }
                 if (Auth::user()->id == $processo->fk_user) {
-                    $btnReplicar = '<div class="btn-group btn-group-sm">
-                                        <a href="/processo/' . $processo->id . '/replicar"
-                                            class="btn btn-primary"
-                                            title="Replicar" data-toggle="tooltip">
-                                            <i class="fas fa-copy"></i>
-                                        </a>
-                                    </div>';
+                    // $btnReplicar = '<div class="btn-group btn-group-sm">
+                    //                     <a href="/processo/' . $processo->id . '/replicar"
+                    //                         class="btn btn-primary"
+                    //                         title="Replicar" data-toggle="tooltip">
+                    //                         <i class="fas fa-copy"></i>
+                    //                     </a>
+                    //                 </div>';
                 }
                 return $btnVisualizar . " " . $btnAlterar . " " . $btnReplicar;
             })
@@ -379,6 +380,15 @@ class ProcessoController extends Controller
         $processo = Processo::firstWhere('id', $id);
         $processo_documento = ProcessoDocumento::where('fk_processo', $processo->id)->where('status', 'Ativo')->get();
         return view('processo.replicar', compact('processo', 'processo_documento'));
+    }
+
+    public function replicarModal(Request $request){
+        $id = $request->processo;
+        $processo = Processo::find($id);
+        // dd($processo);
+        $processo_documento = ProcessoDocumento::where('fk_processo', $id)->where('status', 'Ativo')->get();
+        return view('processo.replicar', compact('processo', 'processo_documento'));
+
     }
 
     public function salvarReplicar(RequestProcessus $request)
