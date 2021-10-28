@@ -1,6 +1,16 @@
 const table = $("#table_users");
 
 if (Object.keys(table).length !== 0) {
+    $(document).on("change", "#tipo", function () {
+        var sexo = $("#sexo option:selected").val();
+        if (sexo == "Outro") {
+            $(".genero").show();
+        } else if (sexo == "Masculino") {
+            $(".genero").hide();
+        } else if (sexo == "Feminino") {
+            $(".genero").hide();
+        }
+    });
     table.DataTable({
         ajax: base_url + "/ativar-usuarios/show",
         scrollCollapse: true,

@@ -1,5 +1,5 @@
 @if (auth()->user())
-    <meta http-equiv="refresh" content="0;url=home">
+    <meta http-equiv="refresh" content="0;url=http://processus.local/home">
 
 @else
     @extends('auth.app')
