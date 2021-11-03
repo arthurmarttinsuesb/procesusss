@@ -14,7 +14,7 @@
           <div class="info">
             <?php $primeiroNome = explode(' ', Auth::user()->nome); ?>
             <a href="#" class="d-block"> Olá, {{$primeiro_nome[0]}}</a>
-            <span class="right badge badge-info">{{$permissao}}</span>
+            <!-- <span class="right badge badge-info">{{$permissao}}</span> -->
           </div>
           <br>
       </div>
@@ -34,7 +34,7 @@
                     @include('layouts.partials.menu.cidadao')
                 @endif
             @else
-                <div class="alert alert-warning m-2">Atenção, a sua conta estará passando por uma avaliação e em breve estará sendo liberada.</div>
+                <div class="alert alert-warning m-2">Aguardando Liberação.</div>
             @endif
           <li class="nav-item">
            <a href="{{ url('logout') }}"  class="nav-link" onclick="event.preventDefault();
