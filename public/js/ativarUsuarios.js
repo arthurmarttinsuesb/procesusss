@@ -1,7 +1,7 @@
 const table = $("#table_users");
 
 if (Object.keys(table).length !== 0) {
-    $(document).on("change", "#tipo", function () {
+    $(document).on("change", "#tipo", function() {
         var sexo = $("#sexo option:selected").val();
         if (sexo == "Outro") {
             $(".genero").show();
@@ -11,6 +11,7 @@ if (Object.keys(table).length !== 0) {
             $(".genero").hide();
         }
     });
+
     table.DataTable({
         ajax: base_url + "/ativar-usuarios/show",
         scrollCollapse: true,
@@ -23,21 +24,16 @@ if (Object.keys(table).length !== 0) {
         pageLength: 10,
         columns: [
             { data: "nome", name: "nome" },
-            { data: "sexo", name: "sexo" },
-            { data: "nascimento", name: "nascimento" },
             { data: "telefone", name: "telefone" },
-            { data: "cidade", name: "cidade" },
-            { data: "estado", name: "estado" },
             { data: "email", name: "email" },
-            { data: "file", name: "documentos" },
             { data: "acao", name: "acao" },
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
 }
 
-$(document).ready(function () {
-    $(document).on("click", ".btnExcluir", function () {
+$(document).ready(function() {
+    $(document).on("click", ".btnExcluir", function() {
         removerUserDialog({
             nomeModulo: "Usuarios",
             rota: "ativar-usuarios",
@@ -46,7 +42,7 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on("change", "#sexo", function () {
+    $(document).on("change", "#sexo", function() {
         var sexo = $("#sexo option:selected").val();
         if (sexo == "Outro") {
             $(".genero").show();
@@ -57,7 +53,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("click", ".btnAtivar", function () {
+    $(document).on("click", ".btnAtivar", function() {
         ativarDialog({
             nomeModulo: "Usuario(a)",
             rota: "ativar-usuarios/ativar",
@@ -66,7 +62,7 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on("change", "#tipo", function () {
+    $(document).on("change", "#tipo", function() {
         formatarCnpjCpf($);
     });
 
@@ -93,14 +89,14 @@ $(document).ready(function () {
         });
     }
 
-    $(document).on("change", "#estado", function () {
+    $(document).on("change", "#estado", function() {
         var id = $("#estado option:selected").val();
         //variavel que adiciona as opções
         var option = "";
-        $.getJSON(base_url + "/selecionar-cidade/" + id, function (dados) {
+        $.getJSON(base_url + "/selecionar-cidade/" + id, function(dados) {
             //Atibuindo valores à variavel com os dados da consulta
             option += '<option value="">Selecione</option>';
-            $.each(dados.cidades, function (i, cidade) {
+            $.each(dados.cidades, function(i, cidade) {
                 option +=
                     '<option value="' +
                     cidade.id +

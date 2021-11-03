@@ -4,7 +4,7 @@
 @include('layouts.partials.htmlheader')
 @show
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="sidebar-mini layout-fixed">
     <!-- Site wrapper -->
     <div class="wrapper">
         @include('layouts.partials.menu_navbar')
@@ -16,7 +16,6 @@
     @include('layouts.partials.footer')
     @section('scripts')
     @include('layouts.partials.scripts')
-    @show
     @yield('scripts-adicionais')
 </body>
 

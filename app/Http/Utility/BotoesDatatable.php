@@ -72,21 +72,15 @@ class BotoesDatatable
                 </div>';
     }
 
-    public static function criarBotoesAtivar($id, $route)
+    public static function criarBotoesAtivar($id, $route, $slug)
     {
         return '<div class="btn-group btn-group-sm">
-                <a href="/' . $route . '/' . $id . '/edit"
-                    class="btn btn-info"
-                    title="Alterar" data-toggle="tooltip">
-                    <i class="fas fa-pencil-alt"></i>
-                </a>
-                <a href="#"
-                    class="btn bg-danger color-palette btnExcluir"
-                    data-id="' . $id . '"
-                    title="Excluir" data-toggle="tooltip">
-                    <i class="fas fa-trash"></i>
-                </a>
-        </div>';
+                        <a href="/'.$route.'/visualizar-dados/'.$slug.'"
+                            class="btn bg-olive"
+                            title="Visualizar Informações do Cidadão" data-toggle="tooltip">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                </div>';
     }
 
     public static function criarBotoesProcesso($id, $route, $assinatura)

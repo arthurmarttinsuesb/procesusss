@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'nome' => 'Administrador',
+            'slug' => 'administrador',
             'tipo' => 'PF',
             'sexo' => 'Masculino',
             'nascimento' => '2020-12-05',
@@ -27,6 +28,15 @@ class UserSeeder extends Seeder
             'fk_estado' => '5',
             'email' => 'admin@processus.com.br',
             'password' => Hash::make('processus@234'),
+            'status' => 'Ativo',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('user_setors')->insert([
+            'fk_user' => '1',
+            'fk_setor' => '1',
+            'data_entrada' => now(),
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()

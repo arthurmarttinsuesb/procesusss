@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('htmlheader_title', 'Usuarios do Sistema')
-@section('contentheader_title', 'Usuarios do Sistema')
+@section('htmlheader_title', 'Liberar Acesso')
+@section('contentheader_title', 'Liberar Acesso')
 
 @section('conteudo')
 <!-- DataTables -->
@@ -15,12 +15,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Usuários do Sistema</h1>
+                    <h1>Liberar Acesso</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Tela Inicial</a></li>
-                        <li class="breadcrumb-item active">Usuários do Sistema</li>
+                        <li class="breadcrumb-item active">Liberar Acesso</li>
                     </ol>
                 </div>
             </div>
@@ -37,19 +37,13 @@
                     <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                     @endif
                     <!-- /.card-header -->
-
                     <div class="card-body table-responsive-sm">
                         <table id="table_users" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Nome</th>
-                                    <th>Sexo</th>
-                                    <th>Nascimento</th>
                                     <th>Telefone</th>
-                                    <th>Cidade</th>
-                                    <th>Estado</th>
                                     <th>Email</th>
-                                    <th>Documentos</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
@@ -65,7 +59,9 @@
 </div>
 <!-- /.content -->
 <!-- jQuery -->
-<script src="{{asset('plugins/jquery/jquery.min.js') }}"></script>
+
+@endsection
+@section('scripts-adicionais')
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
