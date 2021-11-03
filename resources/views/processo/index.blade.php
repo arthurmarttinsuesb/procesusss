@@ -8,14 +8,14 @@
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 
-<style>
+<!-- <style>
     .float-right button {
         background-color: #fff;
     }
     .float-right button:hover {
         background-color: #17a2b8;
     }
-</style>
+</style> -->
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -40,25 +40,37 @@
     <section class="content">
         <div class="row">
             <div class="col-12">
-                <div class="card" style="background-color:#f4f6f9; border: 1px solid #f4f6f9; box-shadow: unset;">
+                <!-- <div class="card" style="background-color:#f4f6f9; border: 1px solid #f4f6f9; box-shadow: unset;"> -->
                     <!-- <div class="card-header"> -->
                         <!-- <div class="row"> -->
                             <!-- <div class="col-xl-3 col-sm-11"> -->
-                                <div class="float-right">
+                                <!-- <div class="float-right">
                                     <button data-toggle="modal" data-target="#modal-processo" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Processo</button>
                                     <button data-toggle="modal" data-target="#modal_replicar_processo" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Replicar Processo</button>
-                                </div>
+                                </div> -->
                             <!-- </div> -->
 
                         <!-- </div> -->
                     <!-- </div> -->
+                    
 
-                </div>
-                <!-- /.card-header -->
+                <!-- </div> -->
+                
                 @if (Session::has('message'))
                 <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                 @endif
                 <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-xl-6 col-sm-9">
+                            </div>
+                            <div class="col-xl-6 col-sm-6" style="display: flex;">
+                                    <button data-toggle="modal" data-target="#modal-processo" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Processo</button>
+                                    <button data-toggle="modal" data-target="#modal_replicar_processo" class="btn btn-block btn-outline-info" style="margin: 0 auto 0 10px;"><i class="fa fa-plus"></i> Replicar Processo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
                     <div class="card-body table-responsive-sm">
                         @if(Auth::user()->hasRole('administrador'))
                         <table id="table_administrador" class="table table-bordered table-hover">
