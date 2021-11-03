@@ -34,7 +34,10 @@
                 <div class="card">
 
                     @if (Session::has('message'))
-                    <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            {{ Session::get('message') }}
+                        </div>
                     @endif
                     <!-- /.card-header -->
                     <div class="card-body table-responsive-sm">

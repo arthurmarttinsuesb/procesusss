@@ -30,8 +30,9 @@ class ProcessoRecebidoSetor extends Mailable
      */
     public function build()
     {
-        return $this->from('prefeitura@email.com')
-            ->subject('Processo recebido!')
+        $email = env('EMAIL_SISTEMA');
+        return $this->from($email)
+            ->subject('Processus')
             ->with([
                 'user' => $this->setor,
             ])

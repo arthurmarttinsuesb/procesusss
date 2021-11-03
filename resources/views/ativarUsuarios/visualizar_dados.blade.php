@@ -37,6 +37,13 @@
                             <a href="{{ URL::to('/ativar-usuarios') }}" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar para listagem</a>
                         </div>
                     </div>
+                        @if (Session::has('message'))
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
                     <form action="/ativar-usuarios/ativar/{{ $modelo->slug}}" method="post" id="liberar">
                         @csrf
                         <div class="card-body">
@@ -116,7 +123,7 @@
                         </div>
                         <div class="card-footer">
                             @if($modelo->status=="Inativo")
-                                <button type="submit" form="liberar" class="btn btn-success float-right">Liberar Acesso</button>                          
+                                <button type="submit" form="liberar" class="btn btn-success float-right"><i class="fas fa-unlock-alt"></i> Liberar Acesso</button>                          
                             @endif
                             <!-- /.card-footer -->
                         </div>

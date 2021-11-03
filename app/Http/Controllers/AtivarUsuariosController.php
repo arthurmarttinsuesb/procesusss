@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 use Mail;
 use DataTables;
+use Response;
+use DB;
+use Auth;
+use Session;
+use Redirect;
 
 use App\User;
 use App\UserSetor;
 use App\Mail\UsuarioAtivado;
 use App\Http\Utility\BotoesDatatable;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -94,40 +98,24 @@ class AtivarUsuariosController extends Controller
 
     public function ativar_usuario($slug)
     {
-
         try {
-            $modelo = User::find($id);
-            $modelo->fk_modelo_documento = $request->tipo;
-            $modelo->titulo = $request->titulo;
-            $modelo->descricao = $request->descricao;
-            $modelo->conteudo = $request->conteudo;
-
-            DB::transaction(function () use ($modelo) {
-                $modelo->save();
-            });
-
-            Session::flash('message', 'Usuário Alterado!');
-            return Redirect::to('processo/'.$modelo->fk_processo.'/edit');
-        } catch (\Exception  $errors) {
-            Session::flash('message', 'Não foi possível alterar usuário, tente novamente mais tarde.!');
-            return back()->withInput();
-        }
-
-        try {
-            $user = User::find($id);
+            $user = User::where('slug',$slug)->first();
             $user->status = 'Ativo';
             $user->save();
 
-            try{
+            DB::transaction(function () use ($user) {
+                $user->save();
                 Mail::to($user->email)->send(new UsuarioAtivado($user));
-            }catch(\Exception $erro){
-                return response()->json(array('erro'.$erro => "ERRO_EMAIL"));
-            }
+            });
 
-            return response()->json(array('status' => "OK"));
-        } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "ERRO"));
+            Session::flash('message', 'Acesso Liberado.');
+            return Redirect::to('/ativar-usuarios');
+        } catch (\Exception  $errors) {
+            Session::flash('message', 'Não foi possível fazer a liberação do usuário, tente novamente mais tarde.!');
+            return back()->withInput();
         }
+
+        
     }
 
     /**

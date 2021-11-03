@@ -30,11 +30,12 @@ class SendMailUser extends Mailable
      */
     public function build()
     {
-        return $this->from('prefeitura@email.com')
-            ->subject('Cadastro realizado com sucesso!')
-            ->with([
-                'user' => $this->user,
-            ])
-            ->view('emails.user');
+        $email = env('EMAIL_SISTEMA');
+        return $this->from($email)
+                ->subject('Processus')
+                ->with([
+                    'user' => $this->user,
+                ])
+                ->view('emails.user');
     }
 }
