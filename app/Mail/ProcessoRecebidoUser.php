@@ -30,8 +30,8 @@ class ProcessoRecebidoUser extends Mailable
      */
     public function build()
     {
-        return $this->from('prefeitura@email.com')
-            ->subject('Processo recebido!')
+        return $this->from('cpds.fabrica@gmail.com')
+            ->subject('Processus')
             ->with([
                 'user' => $this->user,
             ])

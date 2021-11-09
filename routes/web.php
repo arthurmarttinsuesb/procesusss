@@ -245,7 +245,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/processo/listar_processos', 'ProcessoController@listar_processos');
         Route::get('/documento/listar_documentos', 'DocumentoController@listar_documentos');
         Route::get('/ativar-usuarios/list', 'AtivarUsuariosController@list');
-        Route::post('/ativar-usuarios/ativar/{id}', 'AtivarUsuariosController@ativar_usuario');
+        Route::get('/ativar-usuarios/visualizar-dados/{slug}', 'AtivarUsuariosController@visualizar_dados');
+        Route::post('/ativar-usuarios/ativar/{slug}', 'AtivarUsuariosController@ativar_usuario');
         Route::get('/consultar-processo/list/{busca}', 'ConsultarProcessoController@list');
 
         // lembrar de por as rotas pro metodo 'list' mais acima,

@@ -30,8 +30,9 @@ class UsuarioAtivado extends Mailable
      */
     public function build()
     {
-        return $this->from('prefeitura@email.com')
-        ->subject('Conta Processus Ativada!')
+        $email = env('EMAIL_SISTEMA');
+        return $this->from($email)
+        ->subject('Processus')
         ->with([
             'user' => $this->user,
         ])

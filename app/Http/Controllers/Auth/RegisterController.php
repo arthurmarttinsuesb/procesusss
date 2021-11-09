@@ -160,7 +160,7 @@ class RegisterController extends Controller
             $user->complemento = $data['complemento'];
             $user->fk_estado = $data['estado'];
             $user->fk_cidade = $data['cidade'];
-            $user->status = 'Ativo';
+            $user->status = 'Inativo';
 
             $user->email = $data['email'];
             $user->password = bcrypt($data['password']);

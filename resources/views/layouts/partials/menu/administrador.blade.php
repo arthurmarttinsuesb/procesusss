@@ -10,35 +10,50 @@
         <p>Processo</p>
     </a>
 </li>
-<li class="nav-item">
-    <a href="/modelo-documento" class="nav-link">
-        <i class="nav-icon fa fa-file"></i>
-        <p>Modelo Documento</p>
-    </a>
-</li>
-<li class="nav-item">
-    <a href="/unidade" class="nav-link">
-        <i class="nav-icon fa fa-university"></i>
-        <p>Unidade</p>
-    </a>
-</li>
-<li class="nav-item">
-    <a href="/setor" class="nav-link">
-        <i class="nav-icon 	fas fa-landmark"></i>
-        <p>Setor</p>
-    </a>
-</li>
+
 <li class="nav-item">
     <a href="/ativar-usuarios" class="nav-link">
         <i class="nav-icon fa fa-user-plus"></i>
-        <p>Usuários do Sistema</p>
+        <p>Liberar Acesso </p>
     </a>
 </li>
+
 <li class="nav-item">
-    <a href="/usuario-setor" class="nav-link">
-        <i class="nav-icon fa fa-user"></i>
-        <p>Colaboradores</p>
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-cogs"></i>
+        <p>
+            Configurações
+            <i class="right fas fa-angle-left"></i>
+        </p>
     </a>
+    <ul class="nav nav-treeview">
+        
+    <li class="nav-item">
+        <a href="/modelo-documento" class="nav-link">
+            <i class="nav-icon far fa-circle"></i>
+            <p>Modelo Documento</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/unidade" class="nav-link">
+            <i class="nav-icon far fa-circle"></i>
+            <p>Unidade</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/setor" class="nav-link">
+            <i class="nav-icon 	far fa-circle"></i>
+            <p>Setor</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/usuario-setor" class="nav-link">
+            <i class="nav-icon far fa-circle"></i>
+            <p>Colaboradores</p>
+        </a>
+    </li>
+
+    </ul>
 </li>
 <li class="nav-item">
     <a href="#" class="nav-link">

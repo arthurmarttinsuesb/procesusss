@@ -7,11 +7,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasRoles;
+    use HasSlug;
 
     protected $guard_name = 'web';
 
@@ -20,6 +23,20 @@ class User extends Authenticatable
         'nome', 'tipo','sexo','nascimento','telefone','cpf_cnpj','logradouro','numero','bairro',
         'cep','complemento','fk_cidade','fk_estado' ,'email','status'
     ]; 
+
+     //toda vez que eu criar um nome ele irá gerar um slug automáticamente.
+     public function getSlugOptions() : SlugOptions
+     {
+         return SlugOptions::create()
+             ->generateSlugsFrom('nome')
+             ->saveSlugsTo('slug');
+     }
+
+       //estou substituindo o id como identificação padrão para o slug
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function cidade()
     {
