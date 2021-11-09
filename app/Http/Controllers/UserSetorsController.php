@@ -41,7 +41,8 @@ class UserSetorsController extends Controller
                 return  $usuarioSetor->user->nome;
         })
         ->editColumn('tipo', function ($usuarioSetor) {
-            return  $usuarioSetor->user->getRoleNames();
+            $tipo = $usuarioSetor->user->getRoleNames();
+            return $tipo[0];
         })
         ->editColumn('setor', function ($usuarioSetor) {
                 return  $usuarioSetor->setor->titulo;

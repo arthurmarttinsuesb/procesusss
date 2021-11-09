@@ -371,7 +371,7 @@
 
                                     <h3 class="profile-username text-center">Guilherme Waldshmidt</h3>
 
-                                    <p class="text-muted text-center">Graduanda do Curso Sistemas de Informação (UESB)</p>
+                                    <p class="text-muted text-center">Graduando do Curso Sistemas de Informação (UESB)</p>
 
                                     <div class="card-footer p-0">
                                         <ul class="nav flex-column">
