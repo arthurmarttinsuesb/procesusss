@@ -16,8 +16,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -25,8 +27,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'CAE',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -34,8 +38,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'CME',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -43,8 +49,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'NACEM',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -52,8 +60,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Depto Pedagogico',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -61,8 +71,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'DAE',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -70,8 +82,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Depto de Projetos',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -79,8 +93,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'RH',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -88,8 +104,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'REDA',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -97,8 +115,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Anos Finais',
             'fk_secretaria' => 1,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -106,8 +126,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 2,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -115,8 +137,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Depto. Compras e Licitações',
             'fk_secretaria' => 2,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -124,8 +148,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Depto. De Recursos Humanos',
             'fk_secretaria' => 2,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -133,8 +159,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'DEMAP',
             'fk_secretaria' => 2,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -142,8 +170,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'DENIT',
             'fk_secretaria' => 2,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -151,8 +181,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Depto. De Informática',
             'fk_secretaria' => 2,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -160,8 +192,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -169,8 +203,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'SUAS',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -178,8 +214,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'SUAS',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -187,8 +225,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Restaurante Popular',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -196,8 +236,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Programa Bolsa Família',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -205,8 +247,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Cadastro Unico para Programas Sociais',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -214,8 +258,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Proteção Social Básica',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -223,8 +269,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'CRAS',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -232,8 +280,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'SCFV',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -241,8 +291,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Benefícios Eventuais',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -250,8 +302,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Proteção Social Especial de Média Complexidade',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -259,8 +313,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'CREAS',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -268,8 +324,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Serviço Especializado em Abordagem Social',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -277,8 +335,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Centro POP',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -286,8 +346,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'NAM',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -295,8 +357,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Proteção Social Especial de Alta Complexidade',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -304,8 +368,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Casa de Passagem pra Adultos e Famílias',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -313,8 +379,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gestão de Políticas Públicas',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -322,8 +390,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Central de Cursos',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -331,8 +401,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Diretoria de Juventude',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -340,8 +412,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gestão Financeira e Orçamentária',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -349,8 +423,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Conselho Municipal de Assistência Social',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -358,8 +434,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Conselho Tutelar',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -367,8 +445,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'CMDCA',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -376,8 +456,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Vigilância Socioassistencial',
             'fk_secretaria' => 3,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -385,8 +467,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 4,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -394,8 +478,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Recepção',
             'fk_secretaria' => 4,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -403,8 +489,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Procuradores',
             'fk_secretaria' => 4,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -412,8 +500,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Assessoria',
             'fk_secretaria' => 4,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -421,8 +511,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 5,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -430,8 +522,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Secretaria',
             'fk_secretaria' => 5,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -439,8 +533,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Setor de Tributos',
             'fk_secretaria' => 5,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -448,8 +544,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Setor de Contabilidade',
             'fk_secretaria' => 5,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -457,8 +555,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Tesouraria',
             'fk_secretaria' => 5,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -466,8 +566,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Cadastro',
             'fk_secretaria' => 5,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -475,8 +577,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 6,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -484,8 +588,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Setor de Eventos e Projetos',
             'fk_secretaria' => 6,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -493,8 +599,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Assessoria Tecnica Especial',
             'fk_secretaria' => 6,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -502,8 +610,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Guarda Municipal',
             'fk_secretaria' => 6,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -511,8 +621,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Setor de Distritos',
             'fk_secretaria' => 6,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -520,8 +632,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Ouvidoria',
             'fk_secretaria' => 6,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -529,8 +643,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 7,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -538,8 +654,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Setor de Fiscalizacao',
             'fk_secretaria' => 7,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -547,8 +665,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Setor de Engenharia',
             'fk_secretaria' => 7,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -556,8 +676,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Setor de Convenios',
             'fk_secretaria' => 7,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -565,8 +687,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'RH',
             'fk_secretaria' => 7,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -574,8 +698,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 8,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -583,8 +709,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Divisao Administrativa Financeira',
             'fk_secretaria' => 8,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -592,8 +720,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Divisao de Estudos e Projetos',
             'fk_secretaria' => 8,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -601,8 +731,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Expansao Social',
             'fk_secretaria' => 8,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -610,8 +742,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Meio Ambiente',
             'fk_secretaria' => 8,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -619,8 +753,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 9,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -628,8 +764,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Coordenacao Administrativa Financeira',
             'fk_secretaria' => 9,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -637,8 +775,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Divisao de Programas e Projetos',
             'fk_secretaria' => 9,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -646,8 +786,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Diretoria de Turismo',
             'fk_secretaria' => 9,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -655,8 +797,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Supervisao de Cumprimento de Diretrizes da Política Publica de Incentivo a Cultura',
             'fk_secretaria' => 9,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -664,8 +808,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Casa de Cultura',
             'fk_secretaria' => 9,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -673,8 +819,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Museu',
             'fk_secretaria' => 9,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -682,8 +830,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Proarte',
             'fk_secretaria' => 9,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -691,8 +841,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 10,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -700,8 +852,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Diretoria de Esportes',
             'fk_secretaria' => 10,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -709,8 +863,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Divisao de Esporte Educacional',
             'fk_secretaria' => 10,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -718,8 +874,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Esporte Comunitario e lazer',
             'fk_secretaria' => 10,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -727,8 +885,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Suprimento e Manutencao',
             'fk_secretaria' => 10,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -736,8 +896,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Divisao de Programas e Eventos Esportivos',
             'fk_secretaria' => 10,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -745,8 +907,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 11,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -754,8 +918,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Assessoria',
             'fk_secretaria' => 11,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -763,8 +929,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Sala do Empreendedor',
             'fk_secretaria' => 11,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -772,8 +940,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 12,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -781,8 +951,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Divisao de Normas Procedimentos e Orientacao',
             'fk_secretaria' => 12,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -790,8 +962,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Divisao de Inspeção e Analise',
             'fk_secretaria' => 12,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -799,8 +973,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Controle Interno Setorial',
             'fk_secretaria' => 12,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -808,8 +984,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 13,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -817,8 +995,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Departamento Administrativo Financeira',
             'fk_secretaria' => 13,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -826,8 +1006,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Departamento de Servicos Publicos',
             'fk_secretaria' => 13,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -835,8 +1017,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'RH',
             'fk_secretaria' => 13,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -844,8 +1028,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Divisao de Limpeza Urbana',
             'fk_secretaria' => 13,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -853,8 +1039,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Divisao de Pracas Parques e Jardins',
             'fk_secretaria' => 13,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -862,8 +1050,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Iluminação Publica',
             'fk_secretaria' => 13,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -871,8 +1061,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'SUMTRAM',
             'fk_secretaria' => 13,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -880,8 +1072,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Gabinete',
             'fk_secretaria' => 14,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -889,8 +1083,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Assessoria',
             'fk_secretaria' => 14,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -898,8 +1094,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Coordenacao',
             'fk_secretaria' => 15,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
 
         DB::table('setors')->insert([
@@ -907,8 +1105,10 @@ class SetorSeeder extends Seeder
             'sigla' => 'Protocolo',
             'fk_secretaria' => 16,
             'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
             'created_at' => now(),
             'updated_at' => now()
+            
         ]);
     }
 }
