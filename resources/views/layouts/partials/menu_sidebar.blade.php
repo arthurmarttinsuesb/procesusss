@@ -15,11 +15,11 @@
                 <i class="nav-icon fa fa-user"></i>
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::user()->nome }}
+                <a href="#" class="d-block" style="overflow: hidden;">{{ Auth::user()->nome }}
                         <br>
                         @foreach(Auth::user()->getRoleNames() as $nome)
                         @endforeach</a>
-                        <a class="d-block" style="color:#c4c8cf; font-size:12px; overflow: hidden;"> {{ $nome }}</a>
+                        <a class="d-block" style="color:#c4c8cf; font-size:12px;"> {{ $nome }}</a>
                 </a>
             </div>
         </div>

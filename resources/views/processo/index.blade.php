@@ -40,22 +40,6 @@
     <section class="content">
         <div class="row">
             <div class="col-12">
-                <!-- <div class="card" style="background-color:#f4f6f9; border: 1px solid #f4f6f9; box-shadow: unset;"> -->
-                    <!-- <div class="card-header"> -->
-                        <!-- <div class="row"> -->
-                            <!-- <div class="col-xl-3 col-sm-11"> -->
-                                <!-- <div class="float-right">
-                                    <button data-toggle="modal" data-target="#modal-processo" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Processo</button>
-                                    <button data-toggle="modal" data-target="#modal_replicar_processo" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Replicar Processo</button>
-                                </div> -->
-                            <!-- </div> -->
-
-                        <!-- </div> -->
-                    <!-- </div> -->
-                    
-
-                <!-- </div> -->
-                
                 @if (Session::has('message'))
                 <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                 @endif
