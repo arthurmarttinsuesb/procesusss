@@ -111,7 +111,7 @@ class AtivarUsuariosController extends Controller
             Session::flash('message', 'Acesso Liberado.');
             return Redirect::to('/ativar-usuarios');
         } catch (\Exception  $errors) {
-            Session::flash('message', 'Não foi possível fazer a liberação do usuário, tente novamente mais tarde.!');
+            Session::flash('message', $errors.'Não foi possível fazer a liberação do usuário, tente novamente mais tarde.!');
             return back()->withInput();
         }
 
