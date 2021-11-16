@@ -80,12 +80,11 @@
                                 <div class="form-group col-xl-4 col-sm-4">
                                     <strong> Secretaria <span style="color: red;">*</span></strong>
                                     <select class="form-control select2 form-control @error('fk_sect', 'usuario-setor') is-invalid @enderror" name="fk_sect" id="fk_sect">
-
+                                        <option value="">Selecione</option>
                                         @foreach ($secretarias as $secretaria)
-
-                                        <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
-
+                                        <option value="{{$secretaria->id}}">{{$secretaria->sigla}}</option>
                                         @endforeach
+                                        
                                     </select>
                                     @error('fk_setor','usuario-setor')
                                     <span class="invalid-feedback" role="alert">

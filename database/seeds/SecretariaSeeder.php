@@ -13,7 +13,7 @@ class SecretariaSeeder extends Seeder
     {
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de Educacao',
-            'sigla' => 'Sec Educacao',
+            'sigla' => 'PMJ/SME',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -21,7 +21,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de Administracao',
-            'sigla' => 'Sec Administracao',
+            'sigla' => 'PMJ/SMA',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -29,7 +29,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de Desenvolvimento Social',
-            'sigla' => 'Sec Desenvolvimento Social',
+            'sigla' => 'PMJ/SMDS',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -37,7 +37,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Procuradoria Geral do Município',
-            'sigla' => 'Procuradoria Geral',
+            'sigla' => 'PMJ/PGM',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -45,7 +45,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal da Fazenda',
-            'sigla' => 'Sec Fazenda',
+            'sigla' => 'PMJ/SMF',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -53,7 +53,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de Governo',
-            'sigla' => 'Sec Governo',
+            'sigla' => 'PJM/SMG',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -61,7 +61,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de Infraestrutura',
-            'sigla' => 'Sec Infraestrutura',
+            'sigla' => 'PJM/SMI',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -69,7 +69,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de de Agricultura, Irrigacao e Meio Ambiente',
-            'sigla' => 'Sec Agricultura e Meio ambiente',
+            'sigla' => 'PJM/SMAIMA',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -77,7 +77,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de Cultura e Turismo',
-            'sigla' => 'Sec Cultura e Turismo',
+            'sigla' => 'PJM/SMCT',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -85,7 +85,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de Esporte e Lazer',
-            'sigla' => 'Sec Esporte e Lazer',
+            'sigla' => 'PJM/SMEL',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -93,7 +93,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de Desenvolvimento Economico',
-            'sigla' => 'Sec Desenvolvimento Economico',
+            'sigla' => 'PJM/SMDE',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -101,7 +101,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Controladoria Geral do Município',
-            'sigla' => 'Controladoria',
+            'sigla' => 'PJM/CGM',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -109,7 +109,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria Municipal de Servicos Publicos',
-            'sigla' => 'Sec Servicos Publicos',
+            'sigla' => 'PJM/SMSP',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -117,7 +117,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Secretaria de Relacoes Institucionais e Comunicacao Social',
-            'sigla' => 'Sec Servicos Publicos',
+            'sigla' => 'PJM/SRICS',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -125,7 +125,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Servico de Informacao ao Cidadao',
-            'sigla' => 'SIC',
+            'sigla' => 'PJM/SIC',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
@@ -133,7 +133,7 @@ class SecretariaSeeder extends Seeder
 
         DB::table('secretarias')->insert([
             'titulo' => 'Protocolo',
-            'sigla' => 'Protocolo',
+            'sigla' => 'PJM/Protocolo',
             'status' => 'Ativo',
             'created_at' => now(),
             'updated_at' => now()
