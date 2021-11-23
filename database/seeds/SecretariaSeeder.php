@@ -138,5 +138,13 @@ class SecretariaSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('secretarias')->insert([
+            'titulo' => 'Secretaria Municipal de Saude',
+            'sigla' => 'PJM/SMS',
+            'status' => 'Ativo',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

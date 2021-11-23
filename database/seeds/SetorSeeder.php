@@ -1110,5 +1110,104 @@ class SetorSeeder extends Seeder
             'updated_at' => now()
             
         ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Gabinete do Secretario',
+            'sigla' => 'PJM/SMS/Gabinete - Gabinete do Secretario',
+            'fk_secretaria' => 17,
+            'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
+            'created_at' => now(),
+            'updated_at' => now()
+            
+        ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Assessoria de Controle, Avaliacao e Auditoria',
+            'sigla' => 'PJM/SMS/ACAA - Assessoria de Controle, Avaliacao e Auditoria',
+            'fk_secretaria' => 17,
+            'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
+            'created_at' => now(),
+            'updated_at' => now()
+            
+        ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Central de Regulacao de Assistência de Saude',
+            'sigla' => 'PJM/SMS/CRAS - Central de Regulacao de Assistência de Saude',
+            'fk_secretaria' => 17,
+            'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
+            'created_at' => now(),
+            'updated_at' => now()
+            
+        ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Departamento de Planejamento e Acompanhamento da Gestao Descentralizada',
+            'sigla' => 'PJM/SMS/DPAGD - Departamento de Planejamento e Acompanhamento da Gestao Descentralizada',
+            'fk_secretaria' => 17,
+            'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
+            'created_at' => now(),
+            'updated_at' => now()
+            
+        ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Nucleo de Informacao em Saude',
+            'sigla' => 'PJM/SMS/NIS - Nucleo de Informacao em Saude',
+            'fk_secretaria' => 17,
+            'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
+            'created_at' => now(),
+            'updated_at' => now()
+            
+        ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Departamento de Administrativo e Financeiro',
+            'sigla' => 'PJM/SMS/DAF - Departamento de Administrativo e Financeiro',
+            'fk_secretaria' => 17,
+            'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
+            'created_at' => now(),
+            'updated_at' => now()
+            
+        ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Departamento de Assistencia a Saude',
+            'sigla' => 'PJM/SMS/DAS - Departamento de Assistencia a Saude',
+            'fk_secretaria' => 17,
+            'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
+            'created_at' => now(),
+            'updated_at' => now()
+            
+        ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Departamento de Vigilancia Epidemiologica e Saude do Trabalhador',
+            'sigla' => 'PJM/SMS/DVEST - Departamento de Vigilancia Epidemiologica e Saude do Trabalhador',
+            'fk_secretaria' => 17,
+            'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
+            'created_at' => now(),
+            'updated_at' => now()
+            
+        ]);
+
+        DB::table('setors')->insert([
+            'titulo' => 'Departamento de Vigilancia Sanitaria e Ambiental',
+            'sigla' => 'PJM/SMS/DVSA - Departamento de Vigilancia Sanitaria e Ambiental',
+            'fk_secretaria' => 17,
+            'status' => 'Ativo',
+            'email' => 'cpds.fabrica@gmail.com',
+            'created_at' => now(),
+            'updated_at' => now()
+            
+        ]);
     }
 }
