@@ -184,8 +184,15 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/list', ['uses' => 'ModeloDocumentoController@list']);
         });
 
+
+        Route::group(['prefix' => 'meu-modelo', 'where' => ['prefix' => 'meu-modelo'],'middleware' => ['role:administrador|funcionario']], function () {
+            Route::get('/list', ['uses' => 'MeuModeloController@list']);
+            Route::get('/{slug}/edit', ['uses' => 'MeuModeloController@edit']);
+        });
+
         Route::group(['prefix' => 'pdf', 'where' => ['prefix' => 'pdf']], function () {
-            Route::get('/modelo-documento/{id}', ['uses' => 'PDFController@modelo_documento']);
+            Route::get('/modelo-documento/{slug}', ['uses' => 'PDFController@modelo_documento']);
+            Route::get('/meu-modelo/{slug}', ['uses' => 'PDFController@meu_modelo']);
             Route::get('/documento/{id}', ['uses' => 'PDFController@documento']);
         });
 
@@ -252,6 +259,7 @@ Route::group(['middleware' => 'auth'], function () {
         // lembrar de por as rotas pro metodo 'list' mais acima,
         // para que o laravel não sobrescreva(comportamento padrão do resources)
         Route::resource('modelo-documento', 'ModeloDocumentoController');
+        Route::resource('meu-modelo', 'MeuModeloController');
         Route::resource('usuario-setor', 'UserSetorsController');
         Route::resource('unidade', 'SecretariaController');
         Route::resource('processo', 'ProcessoController');

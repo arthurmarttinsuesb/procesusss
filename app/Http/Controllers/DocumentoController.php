@@ -34,7 +34,7 @@ class DocumentoController extends Controller
     public function show($id)
     {
 
-        $tipo = ModeloDocumento::where('status', "Ativo")->get();
+        $tipo = ModeloDocumento::where('fk_user', Auth::user()->id)->orWhere('fk_user', NULL)->get();
         $processo = Processo::where('id', $id)->first();
 
         return view('processo.documento.create',compact('id','tipo','processo'));
@@ -43,7 +43,7 @@ class DocumentoController extends Controller
     }
     public function edit($id)
     {
-        $tipo = ModeloDocumento::where('status', "Ativo")->get();
+        $tipo = ModeloDocumento::where('fk_user', Auth::user()->id)->orWhere('fk_user', NULL)->get();
         $modelo = ProcessoDocumento::where('id', $id)->where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
         if(empty($modelo)){
             abort(401);

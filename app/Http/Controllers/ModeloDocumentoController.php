@@ -34,27 +34,27 @@ class ModeloDocumentoController extends Controller
     {
         return view('modeloDocumento.create');
     }
-    public function edit($id)
+    public function edit($slug)
     {
-        $modelo = ModeloDocumento::where('id', $id)->where('status', 'Ativo')->first();
+        $modelo = ModeloDocumento::where('slug', $slug)->first();
         return view('modeloDocumento.edit', compact('modelo'));
     }
 
 
     public function list(Request $request)
     {
-        $modelo = ModeloDocumento::where('status', "Ativo")->get();
+        $modelo = ModeloDocumento::where('fk_user', NULL)->get();
         $user = Auth::user();
         if ($user->hasRole('administrador')) {
             return Datatables::of($modelo)
                 ->editColumn('acao', function ($modelo) {
                     return '<div class="btn-group btn-group-sm">
-                                <a href="/pdf/modelo-documento/' . $modelo->id . '"
+                                <a href="/pdf/modelo-documento/'.$modelo->slug.'"
                                 class="btn bg-teal color-palette"
                                 title="Visualizar" data-toggle="tooltip" target="_blank">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="/modelo-documento/' . $modelo->id . '/edit"
+                            <a href="/modelo-documento/'.$modelo->slug.'/edit"
                                 class="btn btn-info"
                                 title="Alterar" data-toggle="tooltip">
                                 <i class="fas fa-pencil-alt"></i>
@@ -75,13 +75,13 @@ class ModeloDocumentoController extends Controller
             return Datatables::of($modelo)
             ->editColumn('acao', function ($modelo) {
                 return '<div class="btn-group btn-group-sm">
-                            <a href="/pdf/modelo-documento/' . $modelo->id . '"
+                            <a href="/pdf/modelo-documento/'.$modelo->slug.'"
                             class="btn bg-teal color-palette"
                             title="Visualizar" data-toggle="tooltip" target="_blank">
                             <i class="fas fa-eye"></i>
                         </a>
                     </div>';
-                return BotoesDatatable::criarBotoes($modelo->id, 'modelo-documento');
+                // return BotoesDatatable::criarBotoes($modelo->id, 'modelo-documento');
             })->escapeColumns([0])
             ->make(true);
         }
@@ -127,10 +127,12 @@ class ModeloDocumentoController extends Controller
 
     public function destroy($id)
     {
-        $modelo = ModeloDocumento::find($id);
-        $modelo->status = "Inativo";
-        $modelo->save();
-        return response()->json(array('status' => "OK"));
+        try {
+            $modelo =  ModeloDocumento::destroy($id);
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "$erro"));
+        }
     }
 
     public function inserir_imagem(Request $request)

@@ -19,6 +19,7 @@ class CreateModeloDocumentosTable extends Migration
             $table->longText('conteudo');
             $table->string('status', 100)->default('Ativo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -29,6 +30,8 @@ class CreateModeloDocumentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('modelo_documentos');
+        Schema::table('modelo_documentos', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 }

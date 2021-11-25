@@ -12,10 +12,27 @@
 </li>
 
 <li class="nav-item">
-    <a href="/modelo-documento" class="nav-link">
+    <a href="#" class="nav-link">
         <i class="nav-icon fa fa-file"></i>
-        <p>Modelo Documento</p>
+        <p>
+            Modelos de Documento
+            <i class="right fas fa-angle-left"></i>
+        </p>
     </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="/meu-modelo" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Meus Modelos</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="/modelo-documento" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Modelos Gerais</p>
+            </a>
+        </li>
+    </ul>
 </li>
 
 <li class="nav-item">
