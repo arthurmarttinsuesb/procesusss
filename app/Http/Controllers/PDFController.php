@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ModeloDocumento;
-use App\MeuModelo;
 use App\ProcessoDocumento;
 use App\DocumentoAssinatura;
 use App\User;
@@ -42,30 +41,7 @@ class PDFController extends Controller
 
     }
 
-    public function meu_modelo($slug)
-    {
-        $modelo = MeuModelo::where('slug', $slug)->first();
-        $view = \View::make('pdf.modelo_documento',compact('modelo'));
-        $html = "<!DOCTYPE html>
-                <html>
-                <head>
-                <meta charset='utf-8'>
-                <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-                <!-- Tell the browser to be responsive to screen width -->
-                <meta name='viewport' content='width=device-width, initial-scale=1'>
-                </head>
-                <body>
-                    <p>$modelo->conteudo</p>
-                </body>
-                </html>";
-
-        $pdf = new PDF();
-        $pdf::SetTitle($modelo->titulo);
-        $pdf::AddPage();
-        $pdf::writeHTML($html, true, false, true, false, '');
-        return $pdf::Output('documento.pdf');
-
-    }
+    
     public function documento($id)
     {
         $modelo = ProcessoDocumento::where('id', $id)->first();

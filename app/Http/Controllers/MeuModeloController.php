@@ -36,27 +36,23 @@ class MeuModeloController extends Controller
     }
     public function edit($slug)
     {
-        $modelo = ModeloDocumento::where('slug', $slug)->first();
 
-        /** o modelo pode ser alterado sob 2 condições
-         * 1 - se o usuário for autor(a) do modelo;
-         * 2 - se o usuário for diferente do autor(a), mais o arquivo possui o compatilhamento com o setor
-         */ 
-        if(($modelo->fk_user != Auth::user()->id && $modelo->compartilhar_setor == 'compartilhado') || ($modelo->fk_user == Auth::user()->id)){
-            return view('MeuModelo.edit', compact('modelo'));
-        }else{
+        $modelo = ModeloDocumento::where('slug', $slug)->first();
+        if($modelo->fk_user !=  Auth::user()->id){
             abort(401);
+        }else{
+            return view('MeuModelo.edit', compact('modelo'));
         }
     }
 
 
     public function list(Request $request)
     {
-        $modelo = ModeloDocumento::where('fk_user', Auth::user()->id)->get();
+            $modelo = ModeloDocumento::where('fk_user', Auth::user()->id)->get();
             return Datatables::of($modelo)
                 ->editColumn('acao', function ($modelo) {
                     return '<div class="btn-group btn-group-sm">
-                                <a href="/pdf/meu-modelo/'.$modelo->slug.'"
+                                <a href="/pdf/modelo-documento/'.$modelo->slug.'"
                                 class="btn bg-teal color-palette"
                                 title="Visualizar" data-toggle="tooltip" target="_blank">
                                 <i class="fas fa-eye"></i>
@@ -68,7 +64,7 @@ class MeuModeloController extends Controller
                             </a> 
                             <a href="#"
                                 class="btn bg-danger color-palette btnExcluir"
-                                data-id="'.$modelo->id.'"
+                                data-id="' . $modelo->id . '"
                                 title="Excluir" data-toggle="tooltip">
                                 <i class="fas fa-trash"></i>
                             </a>
@@ -77,15 +73,15 @@ class MeuModeloController extends Controller
                     return BotoesDatatable::criarBotoes($modelo->id, 'meu-modelo');
                 })->escapeColumns([0])
                 ->make(true);
-      
+       
     }
 
     public function store(RequestModelo $request)
     {
         try {
             $modelo =  new ModeloDocumento();
-            $modelo->titulo = $request->titulo;
             $modelo->fk_user = Auth::user()->id;
+            $modelo->titulo = $request->titulo;
             $modelo->conteudo = $request->conteudo;
 
             DB::transaction(function () use ($modelo) {
@@ -119,14 +115,5 @@ class MeuModeloController extends Controller
         }
     }
 
-    public function destroy($id)
-    {
-        try {
-            $modelo =  ModeloDocumento::destroy($id);
-            return response()->json(array('status' => "OK"));
-        } catch (\Exception  $erro) {
-            return response()->json(array('erro' => "$erro"));
-        }
-    }
-
+   
 }

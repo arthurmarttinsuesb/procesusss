@@ -192,7 +192,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'pdf', 'where' => ['prefix' => 'pdf']], function () {
             Route::get('/modelo-documento/{slug}', ['uses' => 'PDFController@modelo_documento']);
-            Route::get('/meu-modelo/{slug}', ['uses' => 'PDFController@meu_modelo']);
             Route::get('/documento/{id}', ['uses' => 'PDFController@documento']);
         });
 
