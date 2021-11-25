@@ -32,12 +32,30 @@ class ModeloDocumentoController extends Controller
 
     public function create()
     {
-        return view('modeloDocumento.create');
+
+        /** se o usuário quiser criar um novo modelo o sistema irá redirecioná-lo para 
+         * criar um modelo próprio e não um geral
+         */
+        if(Auth::user()->hasRole('administrador')){
+            return view('modeloDocumento.create');
+        }else{
+            return view('MeuModelo.create');
+        }
+
+        
     }
     public function edit($slug)
     {
+
+        /** caso alguém que não seja o administrador tente alterar o modelo de documento
+         * o sistema apresentará uma mensagem de erro de permissão.
+         */
         $modelo = ModeloDocumento::where('slug', $slug)->first();
-        return view('modeloDocumento.edit', compact('modelo'));
+        if(Auth::user()->hasRole('administrador')){
+            return view('modeloDocumento.edit', compact('modelo'));
+        }else{
+            abort(401);
+        }
     }
 
 

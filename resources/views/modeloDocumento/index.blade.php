@@ -38,8 +38,8 @@
             </div>
             <!-- /.card-header -->
             @if (Session::has('message'))
-            <div class="alert alert-info alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                      {{ Session::get('message') }}
                 </div>
             @endif

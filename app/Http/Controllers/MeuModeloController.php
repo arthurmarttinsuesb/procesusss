@@ -37,6 +37,9 @@ class MeuModeloController extends Controller
     public function edit($slug)
     {
 
+        /** caso alguém que não seja o dono tente alterar o modelo de documento
+         * o sistema apresentará uma mensagem de erro de permissão.
+         */
         $modelo = ModeloDocumento::where('slug', $slug)->first();
         if($modelo->fk_user !=  Auth::user()->id){
             abort(401);
