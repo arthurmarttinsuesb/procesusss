@@ -14,7 +14,7 @@
           <div class="info">
             <?php $primeiroNome = explode(' ', Auth::user()->nome); ?>
             <a href="#" class="d-block"> Olá, {{$primeiro_nome[0]}}</a>
-            <!-- <span class="right badge badge-info">{{$permissao}}</span> -->
+            <span class="right badge badge-info">{{$permissao}}</span>
           </div>
           <br>
       </div>
@@ -26,13 +26,18 @@
                with font-awesome or any other icon font library -->
           <li class="nav-header">MENU</li>
             @if (auth()->user()->status == 'Ativo')
-                @if($permissao=="administrador")
-                    @include('layouts.partials.menu.administrador')
-                        @elseif($permissao=="funcionario")
-                            @include('layouts.partials.menu.funcionario')
-                        @elseif($permissao=="cidadao")
-                    @include('layouts.partials.menu.cidadao')
-                @endif
+                @role('administrador')
+                  @include('layouts.partials.menu.administrador')
+                @endrole
+                @role('cidadao')
+                  @include('layouts.partials.menu.cidadao')
+                @endrole
+                @role('colaborador-nivel-1')
+                  @include('layouts.partials.menu.colaborador_nivel_1')
+                @endrole
+                @role('colaborador-nivel-2')
+                  @include('layouts.partials.menu.colaborador_nivel_2')
+                @endrole
             @else
                 <div class="alert alert-warning m-2">Aguardando Liberação.</div>
             @endif

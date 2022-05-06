@@ -33,12 +33,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-xl-10 col-sm-9">
-                            </div>
-                            <div>
+                        <div class=" float-right">
                             <a href="{{ URL::to('unidade/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Unidade</a>
-                            </div>
+                            
                         </div>
                     </div>
                     @if (Session::has('message'))

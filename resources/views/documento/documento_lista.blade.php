@@ -33,20 +33,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-xl-9 col-sm-1">
-                            </div>
-                            <div class="col-xl-3 col-sm-11">
-
-                            </div>
-                        </div>
+                        
                     </div>
                     <!-- /.card-header -->
                     @if (Session::has('message'))
                     <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                     @endif
                     <div class="card-body table-responsive-sm">
-                    @if(Auth::user()->hasRole('administrador') || Auth::user()->hasRole('funcionario') )
+                    @if(Auth::user()->hasRole('administrador') || Auth::user()->hasRole('colaborador-nivel-2') )
 
                         <table id="table_documento_lista" class="table table-bordered table-hover">
                             <thead>

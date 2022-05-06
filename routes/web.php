@@ -178,14 +178,14 @@ Route::group(['middleware' => 'auth'], function () {
     // Rotas que precisam do usuario ativo
     Route::group(['middleware' => 'userAtived'], function () {
 
-        Route::group(['prefix' => 'modelo-documento', 'where' => ['prefix' => 'modelo-documento'],'middleware' => ['role:administrador|funcionario']], function () {
+        Route::group(['prefix' => 'modelo-documento', 'where' => ['prefix' => 'modelo-documento'],'middleware' => ['role:administrador|colaborador-nivel-1|colaborador-nivel-2']], function () {
             Route::post('/inserir-imagem', ['uses' => 'ModeloDocumentoController@inserir_imagem']);
             Route::post('/remover-imagem', ['uses' => 'ModeloDocumentoController@remover_imagem']);
             Route::get('/list', ['uses' => 'ModeloDocumentoController@list']);
         });
 
 
-        Route::group(['prefix' => 'meu-modelo', 'where' => ['prefix' => 'meu-modelo'],'middleware' => ['role:administrador|funcionario']], function () {
+        Route::group(['prefix' => 'meu-modelo', 'where' => ['prefix' => 'meu-modelo']], function () {
             Route::get('/list', ['uses' => 'MeuModeloController@list']);
             Route::get('/{slug}/edit', ['uses' => 'MeuModeloController@edit']);
         });
@@ -233,8 +233,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/{id}/encerrar', ['uses' => 'ProcessoController@encerrar']);
             Route::get('/{processo}/devolver/{tramite}', ['uses' => 'ProcessoController@devolverTela']);
             Route::post('/{processo}/devolverObservacao/{tramite}', ['uses' => 'ProcessoController@devolver']);
-            Route::get('/{id}/replicar', ['uses' => 'ProcessoController@replicar']);
-            Route::post('/{id}/salvarReplicar', ['uses' => 'ProcessoController@salvarReplicar']);
+            Route::get('/{numero}/replicar', ['uses' => 'ProcessoController@replicar']);
+            Route::post('/salvarReplicar', ['uses' => 'ProcessoController@salvarReplicar']);
             
         });
 

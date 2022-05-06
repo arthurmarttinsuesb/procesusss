@@ -19,7 +19,7 @@
                                 <option value="">Selecione</option>
                                 @foreach($processos->get() as $processo)
                                 @if (Auth::user()->id == $processo->fk_user)
-                                <option value='{{$processo->id}}'>{{$processo->numero}}</option>
+                                <option value='{{$processo->numero}}'>{{$processo->numero}}</option>
                                 @endif
                                 @endforeach
                             </select>

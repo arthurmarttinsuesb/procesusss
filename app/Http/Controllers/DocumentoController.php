@@ -141,7 +141,7 @@ class DocumentoController extends Controller
     public function listar_documentos()
     {
         $user = Auth::user();
-        if ($user->hasRole('administrador') || $user->hasRole('funcionario')) {
+        if ($user->hasRole('administrador') || $user->hasRole('colaborador-nivel-2')) {
 
             $setor  = UserSetor::where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
             $documento  = DocumentoTramite::whereRaw("(fk_user='".Auth::user()->id."' OR fk_setor='".$setor->fk_setor."')")->where('status','Pendente')->orderBy('created_at','desc')->get();

@@ -27,7 +27,7 @@ class ProcessoTramitacaoController extends Controller
     public function create($processo,ProcessoTramitacao $tramitacao) {
         $setores = Setor::where('status', 'Ativo')->get();
         $secretarias = Secretaria::where('status', 'Ativo')->get();
-        $users = User::where('status', 'Ativo')->role(['administrador','funcionario'])->get();
+        $users = User::where('status', 'Ativo')->role(['administrador','colaborador-nivel-2','colaborador-nivel-1'])->get();
         $processo = Processo::firstWhere('numero', $processo);
 
         if(empty($tramitacao->id)){
@@ -125,7 +125,7 @@ class ProcessoTramitacaoController extends Controller
                 }
             }else{
                 $setor = Setor::find($fk_setor);
-                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>, para verificar ".$request->instrucao;
+                $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>, para verifica:".$request->instrucao;
 
                 if($setor->email != NULL){
                     try{

@@ -33,12 +33,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                            <div class="row">
-                            <div class="col-xl-9 col-sm-9">
-                            </div>
-                            <div class="col-xl-3 col-sm-3">
-                                <a href="{{ URL::to('usuario-setor/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Colaborador</a>
-                            </div>
+                        <div class=" float-right">
+                            <a href="{{ URL::to('usuario-setor/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Colaborador</a>
                         </div>
                     </div>
                     @if (Session::has('message'))

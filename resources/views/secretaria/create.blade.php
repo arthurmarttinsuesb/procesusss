@@ -30,14 +30,11 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-xl-10 col-sm-9">
-                            </div>
-                            <div class="col-xl-2 col-sm-3">
+                        <div class=" float-right">
                                 <a href="{{ URL::to('unidade') }}" class="btn btn-block btn-outline-info ">
                                     <i class="fa fa-list-alt"></i> Listar Unidades
                                 </a>
-                            </div>
+                            
                         </div>
                     </div>
 

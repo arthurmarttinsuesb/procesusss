@@ -115,7 +115,7 @@ class ProcessoController extends Controller
     public function listar_processos()
     {
         $user = Auth::user();
-        if ($user->hasRole('administrador') || $user->hasRole('funcionario')) {
+        if ($user->hasRole('administrador') || $user->hasRole('colaborador-nivel-2')) {
 
             $setor  = UserSetor::where('fk_user', Auth::user()->id)->where('status', 'Ativo')->first();
             $processo  = ProcessoTramitacao::where('status', 'Criado')->where('fk_user', Auth::user()->id)->orWhere('fk_setor', $setor->fk_setor)->get();
@@ -375,33 +375,27 @@ class ProcessoController extends Controller
         //
     }
 
-    public function replicar($id)
+    public function replicar($numero)
     {
-        $processo = Processo::firstWhere('id', $id);
+        $processo = Processo::firstWhere('numero', $numero);
         $processo_documento = ProcessoDocumento::where('fk_processo', $processo->id)->where('status', 'Ativo')->get();
         return view('processo.replicar', compact('processo', 'processo_documento'));
     }
 
     public function replicarModal(Request $request){
-        $id = $request->processo;
-        $processo = Processo::find($id);
-        // dd($processo);
-        $processo_documento = ProcessoDocumento::where('fk_processo', $id)->where('status', 'Ativo')->get();
-        return view('processo.replicar', compact('processo', 'processo_documento'));
-
+        return Redirect::to('processo/' . $request->processo . '/replicar');
     }
 
     public function salvarReplicar(RequestProcessus $request)
     {
         try {
-            $id = Auth::id();
             $numero_processo = 'pmj.' . time() . '.' . date('Y');
             $processo = new Processo();
             $processo->titulo = $request->titulo;
             $processo->descricao = $request->descricao;
             $processo->numero = $numero_processo;
             $processo->tipo = $request->tipo;
-            $processo->fk_user = $id;
+            $processo->fk_user = Auth::user()->id;
             $processo->status = 'Ativo';
 
             $log =  new ProcessoLog();
@@ -413,33 +407,36 @@ class ProcessoController extends Controller
                 $log->fk_processo = $processo->id;
                 $log->status = 'Processo nº "' . $processo->numero . '" criado por: <b>' . Auth::user()->nome . '</b>';
                 $log->save();
-
-                foreach ($request->doc as $sele => $value) {
-                    // Busca o documento selecionado
-                    $selecionado = ProcessoDocumento::firstWhere('id', $value);
-
-                    //Salvar documento selecionado
-                    $modelo =  new ProcessoDocumento();
-                    $modelo->fk_processo = $processo->id;
-                    $modelo->fk_user = Auth::user()->id;
-                    $modelo->fk_modelo_documento = $selecionado->fk_modelo_documento;
-                    $modelo->titulo = $selecionado->titulo;
-                    $modelo->descricao = $selecionado->descricao;
-                    $modelo->conteudo = $selecionado->conteudo;
-                    $modelo->tipo =  $selecionado->tipo;
-
-                    //Add Log do documento selecionado
-                    $log1 =  new ProcessoLog();
-
-                    $log1->fk_user = Auth::user()->id;
-                    $log1->fk_processo = $processo->id;
-                    $log1->status = 'Documento "' . $selecionado->titulo . '" replicado por: <b>' . Auth::user()->nome . '</b> do processo nº ' . $request->n_processo_antigo;
-
-                    $modelo->save();
-                    $log1->save();
+                if($request->doc!=""){
+                    foreach ($request->doc as $sele => $value) {
+                        // Busca o documento selecionado
+                        $selecionado = ProcessoDocumento::firstWhere('id', $value);
+    
+                        //Salvar documento selecionado
+                        $modelo =  new ProcessoDocumento();
+                        $modelo->fk_processo = $processo->id;
+                        $modelo->fk_user = Auth::user()->id;
+                        $modelo->fk_modelo_documento = $selecionado->fk_modelo_documento;
+                        $modelo->titulo = $selecionado->titulo;
+                        $modelo->descricao = $selecionado->descricao;
+                        $modelo->conteudo = $selecionado->conteudo;
+                        $modelo->tipo =  $selecionado->tipo;
+    
+                        //Add Log do documento selecionado
+                        $log1 =  new ProcessoLog();
+    
+                        $log1->fk_user = Auth::user()->id;
+                        $log1->fk_processo = $processo->id;
+                        $log1->status = 'Documento "' . $selecionado->titulo . '" replicado por: <b>' . Auth::user()->nome . '</b> do processo nº ' . $request->n_processo_antigo;
+    
+                        $modelo->save();
+                        $log1->save();
+                    }
                 }
             });
+           
             return Redirect::to('processo/' . $processo->numero . '/edit');
+
         } catch (\Exception  $erro) {
             Session::flash('message', 'Não foi possível cadastrar, tente novamente mais tarde.!' . $erro);
             return back()->withInput();

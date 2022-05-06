@@ -49,22 +49,19 @@
               (<span style="color: red;">*</span>) Campos Obrigatórios
               <br><br>
               <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
 
                   <input type="hidden" name="processo" id="processo" value='{{$processo->numero}}'>
                   <input type="hidden" name="tramitacao" value="{{ $tramite->id ?? '' }}">
 
-
                   <!-- select_secretaria -->
                   <strong> Secretaria <span style="color: red;">*</span></strong>
-                  <select class="form-control select2 form-control @error('fk_sect', 'usuario-setor') is-invalid @enderror" name="fk_sect" id="fk_sect">
-
-                    @foreach ($secretarias as $secretaria)
-
-                    <option value="{{$secretaria->id}}" selected>{{$secretaria->sigla}}</option>
-
-                    @endforeach
-                  </select>
+                    <select class="form-control select2 form-control @error('fk_sect', 'usuario-setor') is-invalid @enderror" name="fk_sect" id="fk_sect">
+                        <option value=" ">Selecione</option>
+                      @foreach ($secretarias as $secretaria)
+                        <option value="{{$secretaria->id}}">{{$secretaria->titulo}} - {{$secretaria->sigla}}</option>
+                      @endforeach
+                    </select>
                   @error('fk_setor','usuario-setor')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -94,10 +91,9 @@
                   @enderror -->
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                   <strong>Setor <span style="color: red;">*</span></strong>
                   <select class="form-control select2 form-control @error('fk_setor', 'setor') is-invalid @enderror" name="fk_setor" id="select_secretaria">
-
                   </select>
                   @error('fk_setor','setor')
                   <span class="invalid-feedback" role="alert">
@@ -107,41 +103,36 @@
                 </div>
 
                 <!-- verifico se o tipo de usuário é cidadão, se for o campo do tipo usuário não vai ser mostrado-->
-                <div hidden class="form-group col-md-4" @foreach(Auth::user()->getRoleNames() as $nome) @if($nome=="cidadao") hidden @endif @endforeach>
+                <div hidden class="form-group col-md-4" @role('cidadao')  hidden @endrole>
                   <strong>Usuario <span style="color: red;">*</span></strong>
                   <select id="select_user" class="form-control select2 @error('fk_user', 'setor') is-invalid @enderror" name="fk_user">
+                         <option value="selecione" selected>Selecione</option>
                     @foreach ($users as $user)
-                    @if (old('fk_user') == $user->id)
-                    <option value="{{$user->id}}" selected>{{$user->nome}}
-                    </option>
-                    @else
-                    <option value="{{$user->id}}">{{$user->nome}}</option>
-                    @endif
+                        <option value="{{$user->id}}"  @if (old('fk_user') == $user->id) selected @endif>{{$user->nome}} </option>
                     @endforeach
-                    <option value="selecione" selected>Selecione</option>
                   </select>
                   @error('fk_user','setor')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
                   @enderror
                 </div>
 
                 <!-- verifico se o tipo de usuário é cidadão, se for o campo do tipo usuário não vai ser mostrado-->
-                <div class="form-group col-md-4" @foreach(Auth::user()->getRoleNames() as $nome) @if($nome=="cidadao") hidden @endif @endforeach>
+                <div class="form-group col-md-12"  @role('cidadao')  hidden @endrole>
                   <strong>Instrução <span style="color: red;">*</span></strong>
-                  <input type="text" autocomplete="off" id="instrucao" name="instrucao" class="form-control @error('instrucao') is-invalid @enderror" value=" {{ old('instrucao') }}">
-                  @error('instrucao')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror
+                  <textarea type="text" rows='5' autocomplete="off" id="instrucao" name="instrucao" class="form-control @error('instrucao') is-invalid @enderror">{{ old('instrucao') }}</textarea>
+                    @error('instrucao')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
               </div>
             </div>
             <!-- se o processo estiber bloqueado não pode alterar mais nada -->
             <div class="card-footer">
-              <button type="button" form="tramite" class="btn btn-info float-right add_tramite" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
+                        <button type="button" form="tramite" class="btn btn-info float-right add_tramite" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i>
                         &nbsp Aguarde...">Salvar</button>
             </div>
 

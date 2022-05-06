@@ -75,7 +75,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            @role('administrador|funcionario')
+                            @role('administrador|colaborador-nivel-2')
                             <div class="form-group col-md-2">
                                 <strong>Conteúdo <span style="color: red;">*</span></strong>
                                 <select id="categoria" name='categoria' class="form-control @error('tipo') is-invalid @enderror">

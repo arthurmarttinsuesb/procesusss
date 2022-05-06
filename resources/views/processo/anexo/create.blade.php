@@ -56,7 +56,7 @@
                                 <strong>Arquivo <span style="color: red;">*</span></strong>
                                 <input type="file" autocomplete="off" id="arquivo" name="arquivo" class="form-control">
                             </div>
-                            @role('administrador|funcionario')
+                            @role('administrador|colaborador-nivel-2')
                             <div class="form-group col-md-3">
                                 <strong>Conteúdo <span style="color: red;">*</span></strong>
                                 <select id="categoria" name='categoria' class="form-control @error('tipo') is-invalid @enderror">

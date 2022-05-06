@@ -32,7 +32,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-2 float-right">
+                        <div class="float-right">
                             <a href="{{ route('setor.index') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Setor</a>
                         </div>
                     </div>

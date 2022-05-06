@@ -45,7 +45,7 @@
                     <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
                     @endif
                     <div class="card-body table-responsive-sm">
-                    @if(Auth::user()->hasRole('administrador') || Auth::user()->hasRole('funcionario') )
+                    @if(Auth::user()->hasRole('administrador') || Auth::user()->hasRole('colaborador-nivel-2') )
                         
                         <table id="table_processo_lista" class="table table-bordered table-hover">
                             <thead>

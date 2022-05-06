@@ -51,7 +51,7 @@
                     </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" action="/processo/{{$processo->id}}/salvarReplicar" id="processo">
+                        <form method="POST" action="/processo/salvarReplicar" id="processo">
                             @csrf
                             (<span style="color: red;">*</span>) Campos Obrigatórios
                             <br><br>
@@ -137,7 +137,6 @@
 @include('sweetalert::alert')
 @endsection
 @section('scripts-adicionais')
-
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>

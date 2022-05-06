@@ -42,7 +42,13 @@ class UserSetorsController extends Controller
         })
         ->editColumn('tipo', function ($usuarioSetor) {
             $tipo = $usuarioSetor->user->getRoleNames();
-            return $tipo[0];
+            if ($tipo[0] == "administrador"){
+                return "Administrador";
+            }elseif($tipo[0] == "colaborador-nivel-1"){
+                return "Colaborador Nível 1";
+            }elseif($tipo[0] == "colaborador-nivel-2"){
+                return "Colaborador Nível 2";
+            }
         })
         ->editColumn('setor', function ($usuarioSetor) {
                 return  $usuarioSetor->setor->titulo;
@@ -144,14 +150,11 @@ class UserSetorsController extends Controller
             $user->removeRole($user->getRoleNames()->implode(', '));
             $user->assignRole($request->tipo);
 
-            $user = User::where('id',$request->fk_user)->first();
-            $user->removeRole($user->getRoleNames()->implode(', '));
-            $user->assignRole($request->tipo);
 
             Session::flash('message', 'Usuário atualizado!');
             return Redirect::to('usuario-setor');
         } catch (\Exception  $erro) {
-            Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!'.$erro);
+            Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!');
             return back()->withInput();
         }
     }

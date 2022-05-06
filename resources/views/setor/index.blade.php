@@ -33,12 +33,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-xl-10 col-sm-9">
-                            </div>
-                            <div class="col-xl-2 col-sm-3">
+                            <div class=" float-right">
                                 <a href="{{ URL::to('setor/create') }}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Setor</a>
-                            </div>
+                            
                         </div>
                     </div>
                     @if (Session::has('message'))

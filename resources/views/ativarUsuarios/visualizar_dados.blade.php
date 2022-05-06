@@ -33,7 +33,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="col-3 float-right">
+                        <div class="float-right">
                             <a href="{{ URL::to('/ativar-usuarios') }}" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar para listagem</a>
                         </div>
                     </div>

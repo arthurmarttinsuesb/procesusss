@@ -33,12 +33,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-xl-10 col-sm-9">
-                            </div>
-                            <div>
-                                <a href="/processo/{{$processo_busca->numero}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
-                            </div>
+                        <div class=" float-right">
+                            <a href="/processo/{{$processo_busca->numero}}/edit" class="btn btn-block btn-outline-info "><i class="fa fa-undo-alt"></i> Retornar ao Processo</a>
                         </div>
                     </div>
 

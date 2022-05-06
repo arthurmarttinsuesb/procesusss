@@ -25,19 +25,14 @@ class RequestProcessus extends FormRequest
     {
         return [
             'titulo' => 'required',
-            'descricao' => 'required',
             'tipo' => 'required',
-            'doc' => 'required'
-
         ];
     }
 
     public function attributes(){
         return [
             'titulo' =>'Título',
-            'descricao' =>'Descrição',
             'tipo' => 'Tipo',
-            'doc' => 'Documento'
         ];
 
     }

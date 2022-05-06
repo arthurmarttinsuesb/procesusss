@@ -32,7 +32,7 @@
         <div class="col-12">
           <div class="card">
              <div class="card-header">
-                <div class="col-2 float-right">
+                <div class="float-right">
                   <a href="{{ route('listar_rifa') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Rifas</a>
                 </div>
               </div>

@@ -33,13 +33,10 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <div class="row">
-                            <div class="col-xl-10 col-sm-9">
-                            </div>
-                            <div class="col-xl-2 col-sm-3">
+                        <div class=" float-right">
                                 <a href="{{ URL::to('usuario-setor') }}" class="btn btn-block btn-outline-info "><i
                                     class="fa fa-list-alt"></i>Listar Colaboradores</a>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -73,6 +70,12 @@
                                     </span>
                                     @enderror
                                 </div>
+                                
+                                <!-- 
+                                    O setor a priore foi removido, pois caso o usuário mude de setor, ele vai ter que registrar a data de saída
+                                    do setor atual, e add a data de entrada do setor atual.
+
+
                                 <div class="form-group col-xl-4 col-sm-4">
                                     <strong>Setor <span style="color: red;">*</span></strong>
                                     <select
@@ -80,11 +83,11 @@
                                         name="fk_setor">
                                         @foreach ($secretarias as $secretaria)
 
-                                        @foreach ($setores as $setor)
-                                        @if($secretaria->id == $setor->fk_secretaria)
-                                             <option value="{{$setor->id}}" {{ ($usuarioSetor->fk_setor == $setor->id ? "selected":"") }} > {{$secretaria->sigla}} - {{$setor->titulo}}</option>
-                                      @endif
-                                        @endforeach
+                                            @foreach ($setores as $setor)
+                                                @if($secretaria->id == $setor->fk_secretaria)
+                                                    <option value="{{$setor->id}}" {{ ($usuarioSetor->fk_setor == $setor->id ? "selected":"") }} > {{$secretaria->sigla}} - {{$setor->titulo}}</option>
+                                                @endif
+                                            @endforeach
                                         @endforeach
                                     </select>
                                     @error('fk_setor','usuario-setor')
@@ -92,15 +95,18 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                </div>
-                                <div class="form-group col-xl-2 col-sm-2">
+                                </div> -->
+
+                                
+                                <div class="form-group col-xl-4 col-sm-4">
                                     <strong>Tipo de Usuário <span style="color: red;">*</span></strong>
                                     <select
                                         class="form-control select2 form-control @error('tipo') is-invalid @enderror"
                                         name="tipo">
                                         <option value="">Selecione</option>
                                         <option value="administrador" @if("administrador"==$usuarioSetor->user->getRoleNames()->implode(', ') ) Selected @endif>Administrador</option>
-                                        <option value="funcionario" @if("funcionario"==$usuarioSetor->user->getRoleNames()->implode(', ') ) Selected @endif>Funcionário</option>
+                                        <option value="colaborador-nivel-2" @if("colaborador-nivel-2"==$usuarioSetor->user->getRoleNames()->implode(', ') ) Selected @endif>Colaborador Nível 2</option>
+                                        <option value="colaborador-nivel-1" @if("colaborador-nivel-1"==$usuarioSetor->user->getRoleNames()->implode(', ') ) Selected @endif>Colaborador Nível 1</option>
                                     </select>
                                     @error('tipo')
                                     <span class="invalid-feedback" role="alert">
