@@ -118,21 +118,21 @@ class ProcessoTramitacaoController extends Controller
             if($fk_setor==null){
                 $user = User::find($fk_user);
                 $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$user->nome."</b>, para verificar ".$request->instrucao;
-                try{
-                    Mail::to($user->email)->send(new ProcessoRecebidoUser($user));
-                }catch(\Exception $erro){
-                    return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
-                }
+                // try{
+                //     Mail::to($user->email)->send(new ProcessoRecebidoUser($user));
+                // }catch(\Exception $erro){
+                //     return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                // }
             }else{
                 $setor = Setor::find($fk_setor);
                 $status_log = "Processo encaminhado de: <b>".Auth::user()->nome."</b>  para: <b>".$setor->titulo."</b>, para verifica:".$request->instrucao;
 
                 if($setor->email != NULL){
-                    try{
-                        Mail::to($setor->email)->send(new ProcessoRecebidoSetor($setor));
-                    }catch(\Exception $erro){
-                        return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
-                    }
+                    // try{
+                    //     Mail::to($setor->email)->send(new ProcessoRecebidoSetor($setor));
+                    // }catch(\Exception $erro){
+                    //     return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                    // }
                 }
             }
 

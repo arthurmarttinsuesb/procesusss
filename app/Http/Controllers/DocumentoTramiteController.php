@@ -84,11 +84,11 @@ class DocumentoTramiteController extends Controller
                    // $setor = Setor::find($request->setor);
                     $setor = Setor::where('id', $request->setor)->first();
 
-                    try{
-                        Mail::to($setor->email)->send(new DocumentoRecebidoSetor($setor));
-                    }catch(\Exception $erro){
-                        return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
-                    }
+                    // try{
+                    //     Mail::to($setor->email)->send(new DocumentoRecebidoSetor($setor));
+                    // }catch(\Exception $erro){
+                    //     return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                    // }
                 }else if($request->envio=='colaborador'){
                     foreach($request->usuario as $colaboradores){
                         DocumentoTramite::create(array("assinatura"=>$request->assinatura,
@@ -102,11 +102,11 @@ class DocumentoTramiteController extends Controller
                   //  $user = User::find($request->usuario);
                     $user = User::where('id', $request->usuario)->first();
                    // dd($user->email);
-                    try{
-                        Mail::to($user->email)->send(new DocumentoRecebidoUser($user));
-                    }catch(\Exception $erro){
-                        return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
-                    }
+                    // try{
+                    //     Mail::to($user->email)->send(new DocumentoRecebidoUser($user));
+                    // }catch(\Exception $erro){
+                    //     return response()->json(array($erro.'erro' => "ERRO_EMAIL"));
+                    // }
                 }
                 $log->save();
             });

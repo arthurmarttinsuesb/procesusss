@@ -105,7 +105,7 @@ class AtivarUsuariosController extends Controller
 
             DB::transaction(function () use ($user) {
                 $user->save();
-                Mail::to($user->email)->send(new UsuarioAtivado($user));
+                // Mail::to($user->email)->send(new UsuarioAtivado($user));
             });
 
             Session::flash('message', 'Acesso Liberado.');
