@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/sobre/geral', function () {
+Route::get('/sobre/geral' , function () {
     return view('sobre.sobre');
 });
 
@@ -248,6 +248,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/unidade/list', 'SecretariaController@list');
         Route::get('/processo/list', 'ProcessoController@list');
         Route::get('/setor/list', 'SetorController@list');
+        Route::get('/usuarios/list', 'userController@listUser'); // controller para lista usuarios no datatables
         Route::get('/processo/listar_processos', 'ProcessoController@listar_processos');
         Route::get('/documento/listar_documentos', 'DocumentoController@listar_documentos');
         Route::get('/ativar-usuarios/list', 'AtivarUsuariosController@list');
@@ -261,6 +262,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('meu-modelo', 'MeuModeloController');
         Route::resource('usuario-setor', 'UserSetorsController');
         Route::resource('unidade', 'SecretariaController');
+        Route::resource('usuarios', 'userController'); //rota de usuarios
         Route::resource('processo', 'ProcessoController');
         Route::resource('setor', 'SetorController');
         Route::resource('fullcalendar', 'FullCalendarController');

@@ -41,6 +41,12 @@
         </li>
     </ul>
 </li>
+<li class="nav-item">
+    <a href="/usuarios" class="nav-link">
+        <i class="nav-icon fa fa-user-plus"></i>
+        <p>Usuários do Sistema</p>
+    </a>
+</li>
 
 <li class="nav-item">
     <a href="#" class="nav-link">
@@ -101,12 +107,15 @@
         </li>
     </ul>
 </li>
+
 <li class="nav-item">
     <a href="/sobre/usuario" class="nav-link">
         <i class="nav-icon fa fa-users"></i>
-        <p>Sobre o Sistema</p>
+        <p>Sobre o sistema</p>
     </a>
 </li>
+
+<!-- ate aqui-->
 <!-- <li class="nav-item">
     <a href="/fullcalendar" class="nav-link">
         <i class="nav-icon fa fa-address-book"></i>

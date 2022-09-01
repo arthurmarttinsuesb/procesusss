@@ -182,3 +182,4 @@ class UserSetorsController extends Controller
         }
     }
 }
+

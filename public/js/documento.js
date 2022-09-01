@@ -1,6 +1,8 @@
 $(document).ready(function($) {
+    
     $('#conteudo').summernote({
         height: 900,
+        
         callbacks: {
             onImageUpload: function(files, editor, $editable) {
                 uploadImage(files[0], editor, $editable);
@@ -9,7 +11,10 @@ $(document).ready(function($) {
                 deleteFile(target[0].src);
             }
         }
+        
     });
+   
+
 
     function uploadImage(file, editor, welEditable) {
         var data = new FormData();

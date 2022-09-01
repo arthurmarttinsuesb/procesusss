@@ -1,15 +1,20 @@
 $(document).ready(function ($) {
+   
     $('.textarea').summernote({
-        height: 900,
+        height: 900, 
+       
         callbacks: {
             onImageUpload: function (files, editor, $editable) {
                 uploadImage(files[0], editor, $editable);
             },
             onMediaDelete: function (target) {
                 deleteFile(target[0].src);
-            }
-        }
-    });
+            },
+            
+        },
+    }, 
+   );
+   
 
     function uploadImage(file, editor, welEditable) {
         var data = new FormData();

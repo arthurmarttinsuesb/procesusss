@@ -63,7 +63,7 @@
                             <div class="form-group col-12">
                                 <strong>Conteúdo <span style="color: red;">*</span></strong>
                                 <textarea class="textarea form-control @error('conteudo') is-invalid @enderror" name='conteudo' id='conteudo' placeholder="Place some text here"
-                                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ old('conteudo') }}</textarea>
+                                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px; font-weight: 700;">{{ old('conteudo') }}</textarea>
                                     @error('conteudo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
