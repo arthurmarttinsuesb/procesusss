@@ -5,6 +5,12 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="/conta" class="nav-link">
+        <i class="nav-icon fa fa-user"></i>
+        <p>Minha conta</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="/processo" class="nav-link">
         <i class="nav-icon fas fa-archive"></i>
         <p>Processo</p>
