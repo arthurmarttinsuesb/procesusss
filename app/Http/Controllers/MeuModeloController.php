@@ -117,6 +117,14 @@ class MeuModeloController extends Controller
             return back()->withInput();
         }
     }
+    public function destroy($id){
+        try {
+            $modelo =  ModeloDocumento::destroy($id);
+            return response()->json(array('status' => "OK"));
+        } catch (\Exception  $erro) {
+            return response()->json(array('erro' => "$erro"));
+        }
+    }
 
    
 }
