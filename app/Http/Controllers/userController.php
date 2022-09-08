@@ -33,7 +33,9 @@ class userController extends Controller
             }
 
         })
-        ->editColumn('status', function ($usuarios) {
+       ->editColumn('nascimento', function($usuarios){
+            return date('d/m/Y', strtotime($usuarios->nascimento));
+        }) ->editColumn('status', function ($usuarios) {
             if($usuarios->status=='Ativo'){
                 return  '<span class="right badge badge-success">Ativo</span>';
             } else  if($usuarios->status=='Inativo'){
@@ -41,12 +43,6 @@ class userController extends Controller
             }
         })->editColumn('acao', function ($usuarios) {
             return BotoesDatatable::criarBotoesPrincipais($usuarios->id, 'usuarios');
-        })->editColumn('nascimento', function($usuarios){
-            return date('d/m/Y', strtotime($usuarios->nascimento));
-        })->editColumn('cidade', function($usuarios){
-            return $usuarios->cidade->nome;
-        })->editColumn('estado', function($usuarios){
-            return $usuarios->estado->nome;
         })
         ->escapeColumns([0])->make(true);
     }
@@ -96,7 +92,7 @@ class userController extends Controller
             $usuarios->numero = isset($request->numero) ? $request->numero : $usuarios->numero;
             $usuarios->complemento = isset($request->complemento) ? $request->complemento : $usuarios->complemento;
             //$usuarios->cidade = isset($request->cidade) ? $request->cidade : $usuarios->cidade; // pedente de alteração
-            //$usuarios->estado = isset($request->estado) ? $request->estado : $usuarios->estado;
+            $usuarios->estado = isset($request->estado->id) ? $request->estado->id : $usuarios->estado;
             $usuarios->removeRole($usuarios->getRoleNames()->implode(', '));
             $usuarios->assignRole($request->tipo);
             $usuarios->save();

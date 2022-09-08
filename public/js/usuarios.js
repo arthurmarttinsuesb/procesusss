@@ -22,14 +22,13 @@ if (Object.keys(table).length !== 0) {
         columns: [
             { data: "nome", name: "nome" },
             { data: "tipo", name: "tipo" },
-            { data: "status", name: "status" },
             { data: "telefone", name: "telefone" },
             { data: "email", name: "email" },
-            { data: "acao", name: "acao" },
             {data: "sexo", name:"sexo"},
             {data: "nascimento", name: "nascimento"},
-            {data: "cidade", name: "cidade"},
-            {data: "estado", name: "estado"},
+            { data: "status", name: "status" },
+            { data: "acao", name: "acao" },
+            
            
         ],
 

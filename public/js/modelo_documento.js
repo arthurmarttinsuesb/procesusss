@@ -1,7 +1,8 @@
 $(document).ready(function ($) {
    
     $('.textarea').summernote({
-        height: 900, 
+        height: 900,
+       
        
         callbacks: {
             onImageUpload: function (files, editor, $editable) {

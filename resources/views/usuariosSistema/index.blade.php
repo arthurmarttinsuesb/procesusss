@@ -42,14 +42,14 @@
                                 <tr>
                                     <th>Nome</th>
                                     <th>Tipo</th>
-                                    <th>Status</th>
                                     <th>Telefone</th>
                                     <th>Email</th>
-                                    <th>Ação</th>
                                     <th>Sexo</th>
                                     <th>Nascimento</th> 
-                                    <th>cidade</th>
-                                    <th>estado</th>                                 
+                                    
+                                    <th>Status</th> 
+                                    <th>Ação</th> 
+                                                                
                                 </tr> 
                             </thead>
                             <tbody>

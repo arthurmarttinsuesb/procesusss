@@ -53,6 +53,7 @@ class MeuModeloController extends Controller
     {
             $modelo = ModeloDocumento::where('fk_user', Auth::user()->id)->get();
             return Datatables::of($modelo)
+                
                 ->editColumn('acao', function ($modelo) {
                     return '<div class="btn-group btn-group-sm">
                                 <a href="/pdf/modelo-documento/'.$modelo->slug.'"

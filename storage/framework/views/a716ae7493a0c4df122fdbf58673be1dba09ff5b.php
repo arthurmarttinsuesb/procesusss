@@ -47,8 +47,10 @@
               <table id="table" class="table table-bordered table-hover">
                 <thead>
                   <tr>
+                    
                     <th>Tipo de Documento</th>
                     <th>Ação</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -63,15 +65,16 @@
 </div>
     <!-- /.content -->
  <!-- jQuery -->
-
+ <script src="<?php echo e(asset('plugins/jquery/jquery.min.js')); ?>"></script>
+ <script src="<?php echo e(asset('plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
+ <script src="<?php echo e(asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')); ?>"></script>
+ <script src="<?php echo e(asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')); ?>"></script>
+ <script src="<?php echo e(asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')); ?>"></script>
+ <script src="<?php echo e(asset('js/base.js')); ?>"></script>
+ <script src="<?php echo e(asset('js/listar_meu_modelo.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scripts-adicionais'); ?>
-   <script src="<?php echo e(asset('plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
-   <script src="<?php echo e(asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')); ?>"></script>
-   <script src="<?php echo e(asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')); ?>"></script>
-   <script src="<?php echo e(asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')); ?>"></script>
-   <script src="<?php echo e(asset('js/base.js')); ?>"></script>
-   <script src="<?php echo e(asset('js/listar_meu_modelo.js')); ?>"></script>
+
 <?php $__env->stopSection(); ?>
 
 

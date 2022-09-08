@@ -1,19 +1,26 @@
-$(document).ready(function($) {
-    var table = $("#table").DataTable({
-        ajax: base_url + "/meu-modelo/list/",
+if (Object.keys(table).length !== 0) {
+    const table = $("#table");
+        table.DataTable({
+        ajax: base_url + "/meu-modelo/list",
         scrollCollapse: true,
         responsive: true,
-        paging: false,
+        paging: true,
         processing: true,
         serverSide: true,
         deferRender: true,
-        searching: false,
+        searching: true,
+        pageLength: 10,
         columns: [
+            
             { data: "titulo", name: "titulo" },
             { data: "acao", name: "acao" },
+            
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
+}
+$(document).ready(function($) {
+  
 
     $(document).on("click", ".btnExcluir", function() {
         deleteDialog({
