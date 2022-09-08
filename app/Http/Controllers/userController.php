@@ -41,7 +41,14 @@ class userController extends Controller
             }
         })->editColumn('acao', function ($usuarios) {
             return BotoesDatatable::criarBotoesPrincipais($usuarios->id, 'usuarios');
-        })->escapeColumns([0])->make(true);
+        })->editColumn('nascimento', function($usuarios){
+            return date('d/m/Y', strtotime($usuarios->nascimento));
+        })->editColumn('cidade', function($usuarios){
+            return $usuarios->cidade->nome;
+        })->editColumn('estado', function($usuarios){
+            return $usuarios->estado->nome;
+        })
+        ->escapeColumns([0])->make(true);
     }
     public function edit($id)
     {
@@ -58,6 +65,15 @@ class userController extends Controller
                 'tipo' => 'required',
                 'email' => 'required',
                 'telefone' => 'required',
+                'sexo' => 'required',
+                'cpf_cnpj' =>'required',
+                'nascimento' => 'required',
+                'logradouro' => 'required',
+                'bairro' => 'required',
+                'cep' => 'required',
+                'numero' => 'required',
+                
+                
             ]);
 
             if ($validator->fails()) {
@@ -71,6 +87,16 @@ class userController extends Controller
             $usuarios->nome = isset($request->nome) ? $request->nome : $usuarios->nome;
             $usuarios->email = isset($request->email) ? $request->email : $usuarios->email;
             $usuarios->telefone = isset($request->telefone) ? $request->telefone : $usuarios->telefone;
+            $usuarios->sexo = isset($request->sexo) ? $request->sexo : $usuarios->sexo;
+            $usuarios->nascimento = isset($request->nascimento) ? $request->nascimento : $usuarios->nascimento;
+            $usuarios->logradouro = isset($request->logradouro) ? $request->logradouro : $usuarios->logradouro;
+            $usuarios->bairro = isset($request->bairro) ? $request->bairro : $usuarios->bairro;
+            $usuarios->cep = isset($request->cep) ? $request->cep : $usuarios->cep;
+            $usuarios->cpf_cnpj = isset($request->cpf_cnpj) ? $request->cpf_cnpj : $usuarios->cpf_cnpj;
+            $usuarios->numero = isset($request->numero) ? $request->numero : $usuarios->numero;
+            $usuarios->complemento = isset($request->complemento) ? $request->complemento : $usuarios->complemento;
+            //$usuarios->cidade = isset($request->cidade) ? $request->cidade : $usuarios->cidade; // pedente de alteração
+            //$usuarios->estado = isset($request->estado) ? $request->estado : $usuarios->estado;
             $usuarios->removeRole($usuarios->getRoleNames()->implode(', '));
             $usuarios->assignRole($request->tipo);
             $usuarios->save();

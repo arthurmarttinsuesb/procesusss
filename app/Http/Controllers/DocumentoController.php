@@ -134,7 +134,9 @@ class DocumentoController extends Controller
                                     '.$visualizar.$encaminhar.'
                                 </div>';
                     }
-                    })->escapeColumns([0])
+                    })->editColumn('selecionar', function ($modelo) {
+                        return '<span class="right badge badge-success">em andamento</span>';
+                                    })->escapeColumns([0])
                     ->make(true);
     }
 

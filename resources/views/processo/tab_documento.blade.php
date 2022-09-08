@@ -2,6 +2,7 @@
 
     <div class="float-right">
         <a href="/documento/{{$processo->id}}" class="btn btn-block btn-outline-info"><i class="fa fa-plus"></i> Adicionar Documento</a>
+        
     </div>
     <br>
     <br>
@@ -12,6 +13,7 @@
             <th>Conteúdo</th>
             <th>Status</th>
             <th>Ação</th>
+            
         </tr>
         </thead>
         <tbody>

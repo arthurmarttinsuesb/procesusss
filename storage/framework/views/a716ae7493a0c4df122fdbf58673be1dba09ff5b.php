@@ -43,7 +43,7 @@
 
                 </div>
             <?php endif; ?>
-            <div class="card-body">
+            <div class="card-body table-responsive-sm">
               <table id="table" class="table table-bordered table-hover">
                 <thead>
                   <tr>
@@ -52,6 +52,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                </tbody>
               </table>
             </div>
             <!-- /.card-body -->

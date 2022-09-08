@@ -48,14 +48,14 @@
                     </div>
                     @endif
                     <div class="card-body">
-                        <form method="POST" action="/usuarios/{{$usuarios->id}}" id="usuarios">
+                        <form method="POST" action="/usuarios/{{$usuarios->id}}" id="usuarios" >
                             @csrf
                             @method('PUT')
                             (<span style="color: red;">*</span>) Campos Obrigatórios
                             <br><br>
 
                             <div class="row">
-                                <div class="form-group col-12">
+                                <div class="form-group col-8">
                                     <strong>Usuário<span style="color: red;">*</span></strong>
                                     <input type="text" autocomplete="off" id="nome" name="nome" class="form-control @error('nome') is-invalid @enderror" value="{{$usuarios->nome}}">
                                     @error('nome')
@@ -64,10 +64,25 @@
                                         </span>
                                     @enderror
                                 </div>
-                               
+                                <div class="form-group col-xl-4 col-sm-4">
+                                    <strong>Sexo <span style="color: red;">*</span></strong>
+                                    <select
+                                        class="form-control select2 form-control @error('sexo') is-invalid @enderror"
+                                        name="sexo">
+                                        <option value="">Selecione</option>
+                                        <option value="Masculino" @if("Masculino"==$usuarios->sexo ) Selected @endif>Masculino</option>
+                                        <option value="Feminino" @if("Feminino"==$usuarios->sexo ) Selected @endif>Feminino</option>
+
+                                    </select>
+                                    @error('sexo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
                             
-                                
+                             <div class="row">   
                                 <div class="form-group col-xl-4 col-sm-4">
                                     <strong>Tipo de Usuário <span style="color: red;">*</span></strong>
                                     <select
@@ -85,10 +100,19 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                
+                                </div>
+                                <div class="form-group col-8">
+                                        <strong>Cpf/Cnpj<span style="color: red;">*</span></strong>
+                                        <input type="text" autocomplete="off" id="cpf_cnpj" name="cpf_cnpj" class="form-control @error('cpf') is-invalid @enderror" value="{{$usuarios->cpf_cnpj}}">
+                                        @error('cpf_cnpj')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-12">
+                                    <div class="form-group col-4">
                                         <strong>Email<span style="color: red;">*</span></strong>
                                         <input type="text" autocomplete="off" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{$usuarios->email}}">
                                         @error('email')
@@ -97,9 +121,18 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-12">
+                                    <div class="form-group col-4">
+                                        <strong>Data de nascimento<span style="color: red;">*</span></strong>
+                                        <input type="date" autocomplete="off" id="nascimento" name="nascimento" class="form-control @error('nacimento') is-invalid @enderror" value="{{$usuarios->nascimento}}">
+                                        @error('nascimento')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    
+                                   
+                                    <div class="form-group col-md-4">
                                         <strong>Telefone<span style="color: red;">*</span></strong>
                                         <input type="text" autocomplete="off" id="telefone" name="telefone" class="form-control @error('telefone') is-invalid @enderror" value="{{$usuarios->telefone}}">
                                         @error('telefone')
@@ -108,6 +141,93 @@
                                             </span>
                                         @enderror
                                     </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-4">
+                                        <label>Estado <span style="color: red;">*</span></label>
+                                        @inject('estados', 'App\Estado')
+                                        <select id="estado" name='estado' class="form-control select2 @error('estado') is-invalid @enderror">
+                                            <option value="">Selecione</option>
+                                            @foreach($estados->get() as $estado)
+                                            <option value='{{$estado->id}}'@if($estado->nome==$usuarios->estado->nome) Selected @endif>{{$estado->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('estado')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <!-- cidades não esta retornando por estado por isso foi comentado temporiamente e substituido por um input de texto
+                                    <div class="form-group col-md-4">
+                                        <label>Cidade <span style="color: red;">*</span></label>
+                                        <select id="cidade" name='cidade' class="form-control select2 @error('cidade') is-invalid @enderror">
+                                            <option value="">Selecione</option>
+                                        </select>
+                                    </div>
+                                    -->
+                                    <div class="form-group col-md-4">
+                                        <strong>Cidade<span style="color: red;">*</span></strong>
+                                        <input type="text" autocomplete="off" id="cidade" name="cidade" class="form-control @error('cidade') is-invalid @enderror" value="{{$usuarios->cidade->nome}}">
+                                        @error('cidade')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-md-4">
+                                        <strong>Rua/Avenida<span style="color: red;">*</span></strong>
+                                        <input type="text" autocomplete="off" id="logradouro" name="logradouro" class="form-control @error('logradouro') is-invalid @enderror" value="{{$usuarios->logradouro}}">
+                                        @error('logradouro')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <strong>Bairro<span style="color: red;">*</span></strong>
+                                        <input type="text" autocomplete="off" id="bairro" name="bairro" class="form-control @error('bairro') is-invalid @enderror" value="{{$usuarios->bairro}}">
+                                        @error('bairro')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <strong>CEP<span style="color: red;">*</span></strong>
+                                        <input type="text" autocomplete="off" id="cep" name="cep" class="form-control @error('cep') is-invalid @enderror" value="{{$usuarios->cep}}">
+                                        @error('cep')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <strong>Numero<span style="color: red;">*</span></strong>
+                                        <input type="text" autocomplete="off" id="numero" name="numero" class="form-control @error('numero') is-invalid @enderror" value="{{$usuarios->numero}}">
+                                        @error('numero')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <strong>Complemento<span style="color: red;">*</span></strong>
+                                        <input type="text" autocomplete="off" id="complemento" name="complemento" class="form-control @error('complemento') is-invalid @enderror" value="{{$usuarios->complemento}}">
+                                        @error('complemento')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    
+                                    
+                                   
                                 </div>
                             </div>
                             <!-- /.card-body -->

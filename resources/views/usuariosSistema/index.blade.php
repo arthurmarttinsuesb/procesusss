@@ -46,10 +46,14 @@
                                     <th>Telefone</th>
                                     <th>Email</th>
                                     <th>Ação</th>
-                                  
+                                    <th>Sexo</th>
+                                    <th>Nascimento</th> 
+                                    <th>cidade</th>
+                                    <th>estado</th>                                 
                                 </tr> 
                             </thead>
                             <tbody>
+                                
                             </tbody>
                         </table>
                     </div>

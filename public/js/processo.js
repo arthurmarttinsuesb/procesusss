@@ -34,6 +34,7 @@ $(document).ready(function ($) {
             { data: "tipo", name: "tipo" },
             { data: "status", name: "status" },
             { data: "acao", name: "acao" },
+           
         ],
         language: { url: "/plugins/datatables/traducao.json" },
     });
@@ -112,6 +113,7 @@ $(document).ready(function ($) {
             element: $(this),
         });
     });
+ 
 
     // $(document).on("click", ".btnEncerrar", function () {
     //     encerrarDialog({

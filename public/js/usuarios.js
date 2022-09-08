@@ -1,6 +1,6 @@
 $(document).on("click", ".btnExcluir", function() {
     deleteDialog({
-        nomeModulo: "usuariosSistema",
+        nomeModulo: "Usuários do sistema",
         rota: "usuarios",
         idTable: "table_usuario",
         element: $(this),
@@ -26,6 +26,11 @@ if (Object.keys(table).length !== 0) {
             { data: "telefone", name: "telefone" },
             { data: "email", name: "email" },
             { data: "acao", name: "acao" },
+            {data: "sexo", name:"sexo"},
+            {data: "nascimento", name: "nascimento"},
+            {data: "cidade", name: "cidade"},
+            {data: "estado", name: "estado"},
+           
         ],
 
         language: { url: "/plugins/datatables/traducao.json" },
