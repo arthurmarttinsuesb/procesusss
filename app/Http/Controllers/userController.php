@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 use Session;
 use Redirect;
-use Illuminate\Http\Request;
 use DataTables;
-use App\Http\Utility\BotoesDatatable;
+
 use App\User;
+
+use Illuminate\Http\Request;
+use App\Http\Utility\BotoesDatatable;
+
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,8 +21,11 @@ class userController extends Controller
         return View::make('usuariosSistema.index');
     }
     public function listUser(){
-        $usuarios = User::select();
+        $usuarios = User::get();
         return DataTables::of($usuarios)
+        ->editColumn('nome', function ($usuarios) {
+            return  $usuarios->nome;
+        })
         ->editColumn('tipo', function ($usuarios) {
             $tipo = $usuarios->getRoleNames();
             if ($tipo[0] == "administrador"){
@@ -33,15 +39,26 @@ class userController extends Controller
             }
 
         })
+        ->editColumn('telefone', function ($usuarios) {
+            return  $usuarios->telefone;
+        })
+        ->editColumn('email', function ($usuarios) {
+            return  $usuarios->email;
+        })
+        ->editColumn('sexo', function ($usuarios) {
+            return  $usuarios->sexo;
+        })
        ->editColumn('nascimento', function($usuarios){
             return date('d/m/Y', strtotime($usuarios->nascimento));
-        }) ->editColumn('status', function ($usuarios) {
+        }) 
+        ->editColumn('status', function ($usuarios) {
             if($usuarios->status=='Ativo'){
                 return  '<span class="right badge badge-success">Ativo</span>';
             } else  if($usuarios->status=='Inativo'){
                 return  '<span class="right badge badge-danger">Inativo</span>';
             }
-        })->editColumn('acao', function ($usuarios) {
+        })
+        ->editColumn('acao', function ($usuarios) {
             return BotoesDatatable::criarBotoesPrincipais($usuarios->id, 'usuarios');
         })
         ->escapeColumns([0])->make(true);
@@ -98,10 +115,10 @@ class userController extends Controller
             $usuarios->save();
 
 
-            Session::flash('message', 'Usuario atualizado!');
+            Session::flash('message', 'Usuário atualizado!');
             return Redirect::to('usuarios');
         } catch (\Exception  $erro) {
-            Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde.!');
+            Session::flash('message', 'Não foi possível alterar, tente novamente mais tarde!');
             return back()->withInput();
         }
     }
