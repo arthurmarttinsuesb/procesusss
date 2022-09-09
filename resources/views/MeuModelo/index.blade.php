@@ -44,13 +44,11 @@
                 </div>
             @endif
             <div class="card-body table-responsive-sm">
-              <table id="table" class="table table-bordered table-hover">
+              <table id="table_meu_modelo" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    
                     <th>Tipo de Documento</th>
-                    <th>Ação</th>
-                    
+                    <th>Ação</th>                 
                   </tr>
                 </thead>
                 <tbody>
@@ -71,7 +69,7 @@
  <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
  <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
  <script src="{{ asset('js/base.js') }}"></script>
- <script src="{{ asset('js/listar_meu_modelo.js') }}"></script>
+ <script src="{{ asset('js/listar_modelo_pessoal.js') }}"></script>
 @endsection
 @section('scripts-adicionais')
 

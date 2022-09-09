@@ -8,15 +8,6 @@
 <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 
-<!-- <style>
-    .float-right button {
-        background-color: #fff;
-    }
-    .float-right button:hover {
-        background-color: #17a2b8;
-    }
-</style> -->
-
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -106,5 +97,5 @@
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/listar_processo.js') }}"></script>
+<script src="{{ asset('js/listar_processos.js') }}"></script>
 @endsection

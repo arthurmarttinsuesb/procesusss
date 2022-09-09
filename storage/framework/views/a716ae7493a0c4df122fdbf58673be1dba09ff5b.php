@@ -1,3 +1,4 @@
+
  
  <?php $__env->startSection('htmlheader_title', 'Meus Modelos de Documento'); ?>
  <?php $__env->startSection('contentheader_title', 'Meus Modelos de Documento'); ?>
@@ -44,13 +45,11 @@
                 </div>
             <?php endif; ?>
             <div class="card-body table-responsive-sm">
-              <table id="table" class="table table-bordered table-hover">
+              <table id="table_meu_modelo" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    
                     <th>Tipo de Documento</th>
-                    <th>Ação</th>
-                    
+                    <th>Ação</th>                 
                   </tr>
                 </thead>
                 <tbody>
@@ -71,7 +70,7 @@
  <script src="<?php echo e(asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')); ?>"></script>
  <script src="<?php echo e(asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')); ?>"></script>
  <script src="<?php echo e(asset('js/base.js')); ?>"></script>
- <script src="<?php echo e(asset('js/listar_meu_modelo.js')); ?>"></script>
+ <script src="<?php echo e(asset('js/listar_modelo_pessoal.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scripts-adicionais'); ?>
 
