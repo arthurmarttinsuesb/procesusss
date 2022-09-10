@@ -243,7 +243,7 @@ unset($__errorArgs, $__bag); ?>
                                 <div class="row">
                                     <div class="form-group col-4">
                                         <label>Estado <span style="color: red;">*</span></label>
-                                        <?php $estados = app('App\Estado'); ?>
+                    
                                         <select id="estado" name='estado' class="form-control select2 <?php $__errorArgs = ['estado'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -253,8 +253,8 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>">
                                             <option value="">Selecione</option>
-                                            <?php $__currentLoopData = $estados->get(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $estado): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <option value='<?php echo e($estado->id); ?>'<?php if($estado->nome==$usuarios->estado->nome): ?> Selected <?php endif; ?>><?php echo e($estado->nome); ?></option>
+                                            <?php $__currentLoopData = $estados; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $estado): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value='<?php echo e($estado->id); ?>'<?php if($estado->id==$usuarios->fk_estado): ?> Selected <?php endif; ?>><?php echo e($estado->nome); ?></option>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                         <?php $__errorArgs = ['estado'];
@@ -270,9 +270,10 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                     </div>
-                                    <!-- cidades não esta retornando por estado por isso foi comentado temporiamente e substituido por um input de texto
+                                    
                                     <div class="form-group col-md-4">
                                         <label>Cidade <span style="color: red;">*</span></label>
+                            
                                         <select id="cidade" name='cidade' class="form-control select2 <?php $__errorArgs = ['cidade'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -282,32 +283,25 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>">
                                             <option value="">Selecione</option>
+                                            <?php $__currentLoopData = $cidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cidade): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <option value='<?php echo e($cidade->id); ?>' <?php if($cidade->id==$usuarios->fk_cidade): ?> Selected <?php endif; ?>><?php echo e($cidade->nome); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
-                                    </div>
-                                    -->
-                                    <div class="form-group col-md-4">
-                                        <strong>Cidade<span style="color: red;">*</span></strong>
-                                        <input type="text" autocomplete="off" id="cidade" name="cidade" class="form-control <?php $__errorArgs = ['cidade'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" value="<?php echo e($usuarios->cidade->nome); ?>">
                                         <?php $__errorArgs = ['cidade'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong><?php echo e($message); ?></strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong><?php echo e($message); ?></strong>
+                                        </span>
                                         <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                     </div>
+                                    
+                                    
 
                                     <div class="form-group col-md-4">
                                         <strong>Rua/Avenida<span style="color: red;">*</span></strong>

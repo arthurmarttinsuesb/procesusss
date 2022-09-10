@@ -2,7 +2,7 @@ $(document).on("click", ".btnExcluir", function() {
     deleteDialog({
         nomeModulo: "Usuários do sistema",
         rota: "usuarios",
-        idTable: "table_usuario",
+        idTable: "table_usuarios",
         element: $(this),
     });
 });
@@ -28,10 +28,11 @@ if (Object.keys(table).length !== 0) {
             {data: "nascimento", name: "nascimento"},
             { data: "status", name: "status" },
             { data: "acao", name: "acao" },
-            
-           
+
         ],
 
         language: { url: "/plugins/datatables/traducao.json" },
     });
 }
+
+

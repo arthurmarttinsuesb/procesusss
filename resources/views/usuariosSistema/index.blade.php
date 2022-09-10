@@ -45,10 +45,10 @@
                                     <th>Telefone</th>
                                     <th>Email</th>
                                     <th>Sexo</th>
-                                    <th>Nascimento</th> 
-                                    
+                                    <th>Nascimento</th>      
                                     <th>Status</th> 
-                                    <th>Ação</th> 
+                                    <th>Ação</th>
+
                                                                 
                                 </tr> 
                             </thead>

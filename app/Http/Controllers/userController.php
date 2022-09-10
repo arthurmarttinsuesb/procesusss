@@ -9,6 +9,8 @@ use App\Http\Utility\BotoesDatatable;
 use App\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use App\Estado;
+use App\Cidade;
 
 
 class userController extends Controller
@@ -45,12 +47,15 @@ class userController extends Controller
             return BotoesDatatable::criarBotoesPrincipais($usuarios->id, 'usuarios');
         })
         ->escapeColumns([0])->make(true);
+
     }
     public function edit($id)
     {
         $usuarios = User::find($id);
+        $estados =  Estado::select('id', 'nome', 'sigla')->get();
+        $cidades = Cidade::select('id', 'nome', 'fk_estado')->orderBy('nome')->get();
 
-        return View::make('usuariosSistema.edit', ['usuarios' => $usuarios]);
+        return View::make('usuariosSistema.edit', ['usuarios' => $usuarios, 'cidades' => $cidades, 'estados' => $estados]);
     }
     public function update(Request $request, $id)
     {
@@ -91,8 +96,11 @@ class userController extends Controller
             $usuarios->cpf_cnpj = isset($request->cpf_cnpj) ? $request->cpf_cnpj : $usuarios->cpf_cnpj;
             $usuarios->numero = isset($request->numero) ? $request->numero : $usuarios->numero;
             $usuarios->complemento = isset($request->complemento) ? $request->complemento : $usuarios->complemento;
+            $usuarios->fk_cidade = $request->cidade;
+            $usuarios->fk_estado = $request->estado;
+            
             //$usuarios->cidade = isset($request->cidade) ? $request->cidade : $usuarios->cidade; // pedente de alteração
-            $usuarios->estado = isset($request->estado->id) ? $request->estado->id : $usuarios->estado;
+            //$usuarios->estado = isset($request->estado->id) ? $request->estado->id : $usuarios->estado;
             $usuarios->removeRole($usuarios->getRoleNames()->implode(', '));
             $usuarios->assignRole($request->tipo);
             $usuarios->save();

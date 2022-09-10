@@ -146,11 +146,11 @@
                                 <div class="row">
                                     <div class="form-group col-4">
                                         <label>Estado <span style="color: red;">*</span></label>
-                                        @inject('estados', 'App\Estado')
+                    
                                         <select id="estado" name='estado' class="form-control select2 @error('estado') is-invalid @enderror">
                                             <option value="">Selecione</option>
-                                            @foreach($estados->get() as $estado)
-                                            <option value='{{$estado->id}}'@if($estado->nome==$usuarios->estado->nome) Selected @endif>{{$estado->nome}}</option>
+                                            @foreach($estados as $estado)
+                                            <option value='{{$estado->id}}'@if($estado->id==$usuarios->fk_estado) Selected @endif>{{$estado->nome}}</option>
                                             @endforeach
                                         </select>
                                         @error('estado')
@@ -159,23 +159,24 @@
                                         </span>
                                         @enderror
                                     </div>
-                                    <!-- cidades não esta retornando por estado por isso foi comentado temporiamente e substituido por um input de texto
+                                    
                                     <div class="form-group col-md-4">
                                         <label>Cidade <span style="color: red;">*</span></label>
+                            
                                         <select id="cidade" name='cidade' class="form-control select2 @error('cidade') is-invalid @enderror">
                                             <option value="">Selecione</option>
+                                            @foreach($cidades as $cidade)
+                                            <option value='{{$cidade->id}}' @if($cidade->id==$usuarios->fk_cidade) Selected @endif>{{$cidade->nome}}</option>
+                                            @endforeach
                                         </select>
-                                    </div>
-                                    -->
-                                    <div class="form-group col-md-4">
-                                        <strong>Cidade<span style="color: red;">*</span></strong>
-                                        <input type="text" autocomplete="off" id="cidade" name="cidade" class="form-control @error('cidade') is-invalid @enderror" value="{{$usuarios->cidade->nome}}">
                                         @error('cidade')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
+                                    
+                                    
 
                                     <div class="form-group col-md-4">
                                         <strong>Rua/Avenida<span style="color: red;">*</span></strong>
