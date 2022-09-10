@@ -1,3 +1,5 @@
+
+
  <?php $__env->startSection('htmlheader_title', 'Alterar Meu Modelo'); ?>
  <?php $__env->startSection('contentheader_title', 'Alterar Meu Modelo'); ?>
 
@@ -118,7 +120,7 @@ unset($__errorArgs, $__bag); ?>
 <?php $__env->startSection('scripts-adicionais'); ?>
 <script src="<?php echo e(asset('plugins/summernote/summernote-bs4.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/base.js')); ?>"></script>
-<script src="<?php echo e(asset('js/modelo_documento.js')); ?>"></script>
+<script src="<?php echo e(asset('js/meu_modelo_documento.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 

@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('htmlheader_title', 'Processo'); ?>
 <?php $__env->startSection('contentheader_title', 'Processo'); ?>
 
@@ -5,15 +7,6 @@
 <!-- DataTables -->
 <link rel="stylesheet" href="<?php echo e(asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')); ?>">
 <link rel="stylesheet" href="<?php echo e(asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')); ?>">
-
-<!-- <style>
-    .float-right button {
-        background-color: #fff;
-    }
-    .float-right button:hover {
-        background-color: #17a2b8;
-    }
-</style> -->
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -104,6 +97,6 @@
 <script src="<?php echo e(asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')); ?>"></script>
 <script src="<?php echo e(asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/base.js')); ?>"></script>
-<script src="<?php echo e(asset('js/listar_processo.js')); ?>"></script>
+<script src="<?php echo e(asset('js/listar_processos.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/processus/resources/views/processo/index.blade.php ENDPATH**/ ?>

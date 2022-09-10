@@ -1,3 +1,4 @@
+
  
  <?php $__env->startSection('htmlheader_title', 'Modelo de Documento'); ?>
  <?php $__env->startSection('contentheader_title', 'Modelo de Documento'); ?>
@@ -43,8 +44,8 @@
 
                 </div>
             <?php endif; ?>
-            <div class="card-body">
-              <table id="table" class="table table-bordered table-hover">
+            <div class="card-body table-responsive-sm">
+              <table id="table_modelo_geral" class="table table-bordered table-hover">
                 <thead>
                   <tr>
                     <th>Tipo de Documento</th>
@@ -70,10 +71,6 @@
    <script src="<?php echo e(asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')); ?>"></script>
    <script src="<?php echo e(asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')); ?>"></script>
    <script src="<?php echo e(asset('js/base.js')); ?>"></script>
-   <script src="<?php echo e(asset('js/listar_modelo_documento.js')); ?>"></script>
+   <script src="<?php echo e(asset('js/listar_modelo_geral.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
-
-
-
-
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/html/processus/resources/views/modeloDocumento/index.blade.php ENDPATH**/ ?>

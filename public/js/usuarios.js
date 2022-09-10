@@ -19,16 +19,16 @@ if (Object.keys(table).length !== 0) {
         deferRender: true,
         searching: true,
         pageLength: 10,
+        order: [0, "ASC"],
         columns: [
             { data: "nome", name: "nome" },
             { data: "tipo", name: "tipo" },
             { data: "telefone", name: "telefone" },
             { data: "email", name: "email" },
-            {data: "sexo", name:"sexo"},
-            {data: "nascimento", name: "nascimento"},
+            { data: "sexo", name:"sexo"},
+            { data: "nascimento", name: "nascimento"},
             { data: "status", name: "status" },
-            { data: "acao", name: "acao" },
-
+            { data: "acao", name: "acao" }, 
         ],
 
         language: { url: "/plugins/datatables/traducao.json" },

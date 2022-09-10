@@ -43,8 +43,8 @@
                      {{ Session::get('message') }}
                 </div>
             @endif
-            <div class="card-body">
-              <table id="table" class="table table-bordered table-hover">
+            <div class="card-body table-responsive-sm">
+              <table id="table_modelo_geral" class="table table-bordered table-hover">
                 <thead>
                   <tr>
                     <th>Tipo de Documento</th>
@@ -70,8 +70,5 @@
    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
    <script src="{{ asset('js/base.js') }}"></script>
-   <script src="{{ asset('js/listar_modelo_documento.js') }}"></script>
+   <script src="{{ asset('js/listar_modelo_geral.js') }}"></script>
 @endsection
-
-
-
