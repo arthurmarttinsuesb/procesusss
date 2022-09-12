@@ -39,7 +39,7 @@ class accountController extends Controller
                         DB::transaction(function () use ($usuario, $request) {
                             $usuario->save();
                         });
-                        Session::flash('message', 'Senha Alterada!');
+                        Session::flash('message', 'Senha alterada com sucesso!');
                         return Redirect::to('conta');
                     } else
                     Session::flash('message', 'Senha atual incorreta, tente novamente mais tarde.!');
@@ -49,7 +49,7 @@ class accountController extends Controller
                     else{ // requisição no trocar email
                         $usuario->email = isset($request->email) ? $request->email : $usuario->email;
                         $usuario->save();
-                        Session::flash('message', 'Email alterado!');
+                        Session::flash('message', 'Email alterado com sucesso!');
                         return Redirect::to('conta');
                     }
                    
