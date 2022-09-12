@@ -20,6 +20,7 @@ use App\Http\Requests\RequestUserSetors;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 
+
 class UserSetorsController extends Controller
 {
     /**

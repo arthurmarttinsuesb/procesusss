@@ -19,7 +19,7 @@
 
 <li class="nav-item">
     <a href="/ativar-usuarios" class="nav-link">
-        <i class="nav-icon fa fa-user-plus"></i>
+        <i class="nav-icon fas fa-unlock-alt"></i>
         <p>Liberar Acesso </p>
     </a>
 </li>

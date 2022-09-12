@@ -128,6 +128,10 @@
                             <label>Complemento: </label>
                             <input type="text" class="form-control"  value="{{$usuario->complemento}}" disabled/>
                         </div>
+                        <div class="float-right">
+                            <a href="{{ URL::to('conta/editEmail') }}"  class="btn btn-block btn-outline-info"><i class="fa fa-tools" ></i> Trocar Email</a>
+                            <a href="{{ URL::to('conta/editSenha') }}"  class="btn btn-block btn-outline-info"><i class="fa fa-tools" ></i> Trocar Senha</a>
+                        </div>
                     </div>
                     
                     </div>

@@ -126,6 +126,10 @@
                             <label>Complemento: </label>
                             <input type="text" class="form-control"  value="<?php echo e($usuario->complemento); ?>" disabled/>
                         </div>
+                        <div class="float-right">
+                            <a href="<?php echo e(URL::to('conta/editEmail')); ?>"  class="btn btn-block btn-outline-info"><i class="fa fa-tools" ></i> Trocar Email</a>
+                            <a href="<?php echo e(URL::to('conta/editSenha')); ?>"  class="btn btn-block btn-outline-info"><i class="fa fa-tools" ></i> Trocar Senha</a>
+                        </div>
                     </div>
                     
                     </div>

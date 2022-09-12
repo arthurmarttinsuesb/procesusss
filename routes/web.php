@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\accountController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +16,7 @@ use App\Http\Controllers\accountController;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/conta', [accountController::class, 'index']);
+
 
 Route::get('/sobre/geral' , function () {
     return view('sobre.sobre');
@@ -243,7 +243,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/devolutiva/{id}', ['uses' => 'DevolutivaDocumentoController@devolutiva']);
             Route::get('/store/{id}', ['uses' => 'DevolutivaDocumentoController@store']);
         });
-
+        //rota para usuario mudar o email
+        Route::get('/conta/editEmail', 'accountController@editEmail');
+        Route::get('/conta/editSenha', 'accountController@editSenha');
         // rotas para o metodo 'list'
         Route::get('/usuario-setor/list', 'UserSetorsController@list');
         Route::get('/unidade/list', 'SecretariaController@list');
@@ -268,6 +270,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('usuarios', 'userController'); //rota de usuarios
         Route::resource('processo', 'ProcessoController');
         Route::resource('setor', 'SetorController');
+        Route::resource('conta', 'accountController');
         Route::resource('fullcalendar', 'FullCalendarController');
         Route::resource('documento', 'DocumentoController');
         Route::resource('anexos', 'AnexoController');
