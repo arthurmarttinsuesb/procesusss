@@ -59,9 +59,6 @@ class UserSetorsController extends Controller
         ->editColumn('unidade_setor', function ($usuarioSetor) {
             return  $usuarioSetor->setor->secretaria->sigla." - ".$usuarioSetor->setor->titulo;
         })
-        ->editColumn('secretaria', function ($usuarioSetor) {
-
-        })
         ->editColumn('acao', function ($usuarioSetor) {
             return BotoesDatatable::criarBotoesPrincipais($usuarioSetor->user->slug, 'usuario-setor');
         })->escapeColumns([0])
