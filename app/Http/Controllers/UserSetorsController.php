@@ -7,6 +7,7 @@ use App\Http\Requests\RequestUserSetors;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Utility\BotoesDatatable;
+use Spatie\Permission\Models\Role;
 
 use App\UserSetor;
 use App\User;
@@ -32,6 +33,10 @@ class UserSetorsController extends Controller
      */
     public function index()
     {
+        $roles = Role::all()->pluck('name');
+
+        dd($roles);
+
         return View::make('usuarioSetor.index');
     }
 
