@@ -20,7 +20,7 @@ class User extends Authenticatable
 
     protected $fillable = 
     [
-        'nome', 'tipo','sexo','nascimento','telefone','cpf_cnpj','logradouro','numero','bairro',
+        'id','nome', 'tipo','sexo','nascimento','telefone','cpf_cnpj','logradouro','numero','bairro',
         'cep','complemento','fk_cidade','fk_estado' ,'email','status'
     ]; 
 

@@ -260,6 +260,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/consultar-processo/list/{busca}', 'ConsultarProcessoController@list');
         Route::get('/modelo-documento/list', 'ModeloDocumentoController@list');
         Route::get('/meu-modelo/list', 'MeuModeloController@list');
+       
+        //rota usuario setor
+        Route::post('/usuario-setor/busca', 'UserSetorsController@busca');
+        //rota edit com slug
+        Route::post('/usuario-setor/{slug}/edit', 'UserSetorsController@edit');
 
         // lembrar de por as rotas pro metodo 'list' mais acima,
         // para que o laravel não sobrescreva(comportamento padrão do resources)

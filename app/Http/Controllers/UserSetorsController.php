@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Session;
-use Redirect;
-use DataTables;
-
-use App\UserSetor;
-use App\User;
-use App\Secretaria;
-
-use Auth;
-use DB;
-use App\Setor;
-use App\Http\Utility\BotoesDatatable;
-
 use Illuminate\Http\Request;
 use App\Http\Requests\RequestUserSetors;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Utility\BotoesDatatable;
+
+use App\UserSetor;
+use App\User;
+use App\Secretaria;
+use App\Setor;
+
+use Auth;
+use DB;
+use Session;
+use Redirect;
+use DataTables;
+
+
+
 
 
 class UserSetorsController extends Controller
@@ -38,6 +40,9 @@ class UserSetorsController extends Controller
         $usuarioSetor = UserSetor::where('status', 'Ativo')->get();
 
         return DataTables::of($usuarioSetor)
+        ->editColumn('email', function ($usuarioSetor) {
+            return  $usuarioSetor->user->email;
+        })
         ->editColumn('nome', function ($usuarioSetor) {
                 return  $usuarioSetor->user->nome;
         })
@@ -51,16 +56,16 @@ class UserSetorsController extends Controller
                 return "Colaborador Nível 2";
             }
         })
-        ->editColumn('setor', function ($usuarioSetor) {
-                return  $usuarioSetor->setor->titulo;
+        ->editColumn('unidade_setor', function ($usuarioSetor) {
+            return  $usuarioSetor->setor->secretaria->sigla." - ".$usuarioSetor->setor->titulo;
         })
         ->editColumn('secretaria', function ($usuarioSetor) {
-            return  $usuarioSetor->setor->secretaria->titulo;
+            
         })
-            ->editColumn('acao', function ($usuarioSetor) {
-                return BotoesDatatable::criarBotoesPrincipais($usuarioSetor->id, 'usuario-setor');
-            })->escapeColumns([0])
-            ->make(true);
+        ->editColumn('acao', function ($usuarioSetor) {
+            return BotoesDatatable::criarBotoesPrincipais($usuarioSetor->user->slug, 'usuario-setor');
+        })->escapeColumns([0])
+        ->make(true);
     }
 
     public function create()
@@ -69,6 +74,18 @@ class UserSetorsController extends Controller
         $secretarias = Secretaria::where('status', 'Ativo')->get();
         $setores = Setor::where('status', 'Ativo')->get();
         return View::make('usuarioSetor.create', ['users' => $users, 'setores' => $setores,'secretarias' =>$secretarias]);
+    }
+
+    public function busca(Request $request)
+    {
+        try {
+            dd($request->busca);
+            $users = User::where('email', $request->busca)->select('id','nome')->where('status','Ativo')->first();
+            return "<option value='$users->id'>$users->nome</option>";
+
+        } catch (\Exception  $erro) {
+            return response($erro, 500);
+        }
     }
 
     /**
@@ -116,14 +133,12 @@ class UserSetorsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit($id)
+    public function edit($slug)
     {
         try {
-            $userSetor = UserSetor::find($id);
-            $users = User::where('status', 'Ativo')->get();
-            $setores = Setor::where('status', 'Ativo')->get();
-            $secretarias = Secretaria::where('status', 'Ativo')->get();
-            return View::make('usuarioSetor.edit', ['usuarioSetor' => $userSetor, 'users' => $users, 'setores' => $setores, 'secretarias' =>$secretarias]);
+            $users = User::where("slug",$slug)->first();
+            $userSetor = UserSetor::where("fk_user", $users->id)->where("status","Ativo")->first();
+            return View::make('usuarioSetor.edit', ['usuarioSetor' => $userSetor, 'users' => $users]);
         } catch (Exception  $erro) {
             Session::flash('message', 'Não foi possível encontrar o registro!');
             return back();
@@ -136,21 +151,16 @@ class UserSetorsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(RequestUserSetors $request, $id)
+    public function update(Request $request, $id)
     {
         try {
             $userSetor = UserSetor::find($id);
-
-            $userSetor->fk_user = $request->fk_user;
-            $userSetor->fk_setor = $request->fk_setor;
-            $userSetor->data_entrada = date('Y-m-d', strtotime(str_replace("/", "-", $request->data_entrada)));
-            $userSetor->status = 'Ativo';
+            $userSetor->data_entrada = $request->data_entrada;
             $userSetor->save();
 
-            $user = User::where('id',$request->fk_user)->first();
+            $user = User::where('id',$userSetor->fk_user)->first();
             $user->removeRole($user->getRoleNames()->implode(', '));
             $user->assignRole($request->tipo);
-
 
             Session::flash('message', 'Usuário atualizado!');
             return Redirect::to('usuario-setor');
@@ -183,4 +193,3 @@ class UserSetorsController extends Controller
         }
     }
 }
-

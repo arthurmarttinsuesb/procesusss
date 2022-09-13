@@ -38,7 +38,10 @@
                         </div>
                     </div>
                     @if (Session::has('message'))
-                    <div class="alert alert-info m-2">{{ Session::get('message') }}</div>
+                        <div class="alert alert-info alert-dismissible m-2">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            {{ Session::get('message') }}
+                        </div>
                     @endif
                     <!-- /.card-header -->
 
@@ -46,10 +49,10 @@
                         <table id="table_usuario-setor" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
+                                    <th>e-mail</th>
                                     <th>Nome</th>
                                     <th>Tipo</th>
-                                    <th>Setor</th>
-                                    <th>Secretaria</th>
+                                    <th>Unidade - Setor</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
@@ -71,5 +74,5 @@
 <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
 <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/base.js') }}"></script>
-<script src="{{ asset('js/usuario-setor.js') }}"></script>
+<script src="{{ asset('js/listarUsuarioSetor.js') }}"></script>
 @endsection

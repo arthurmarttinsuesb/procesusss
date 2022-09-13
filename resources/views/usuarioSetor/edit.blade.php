@@ -30,23 +30,21 @@
     <section class="content">
         <div class="row">
             <div class="col-12">
-
                 <div class="card">
                     <div class="card-header">
-                        <div class=" float-right">
-                                <a href="{{ URL::to('usuario-setor') }}" class="btn btn-block btn-outline-info "><i
-                                    class="fa fa-list-alt"></i>Listar Colaboradores</a>
-                            
+                        <div class="float-right">
+                            <a href="{{ URL::to('usuario-setor') }}" class="btn btn-block btn-outline-info "><i class="fa fa-list-alt"></i> Listar Colaboradores</a>
                         </div>
                     </div>
 
                     @if (Session::has('message'))
-                    <div class="alert alert-danger alert-dismissible m-2">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
-                        {{ Session::get('message') }}
-                    </div>
+                        <div class="alert alert-danger alert-dismissible m-2">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-ban"></i> Atenção!</h5>
+                            {{ Session::get('message') }}
+                        </div>
                     @endif
+                    
                     <div class="card-body">
                         <form method="POST" action="/usuario-setor/{{$usuarioSetor->id}}" id="usuario-setor">
                             @csrf
@@ -56,53 +54,17 @@
 
                             <div class="row">
                                 <div class="form-group col-xl-4 col-sm-4">
-                                    <strong>Usuario <span style="color: red;">*</span></strong>
-                                    <select
-                                        class="form-control select2 form-control @error('fk_user', 'usuario-setor') is-invalid @enderror"
-                                        name="fk_user">
-                                        @foreach ($users as $user)
-                                            <option value="{{$user->id}}" {{ ($usuarioSetor->fk_user == $user->id ? "selected":"") }}>{{$user->nome}}</option>
-                                        @endforeach
-                                    </select>
+                                    <strong>Nome do Usuário</strong>
+                                    <input type="text" value="{{ $usuarioSetor->user->nome }}" id="fk_user" name="fk_user" class="form-control @error('fk_user', 'usuario-setor') is-invalid @enderror" disabled>
                                     @error('fk_user','usuario-setor')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-                                
-                                <!-- 
-                                    O setor a priore foi removido, pois caso o usuário mude de setor, ele vai ter que registrar a data de saída
-                                    do setor atual, e add a data de entrada do setor atual.
-
-
                                 <div class="form-group col-xl-4 col-sm-4">
-                                    <strong>Setor <span style="color: red;">*</span></strong>
-                                    <select
-                                        class="form-control select2 form-control @error('fk_setor', 'usuario-setor') is-invalid @enderror"
-                                        name="fk_setor">
-                                        @foreach ($secretarias as $secretaria)
-
-                                            @foreach ($setores as $setor)
-                                                @if($secretaria->id == $setor->fk_secretaria)
-                                                    <option value="{{$setor->id}}" {{ ($usuarioSetor->fk_setor == $setor->id ? "selected":"") }} > {{$secretaria->sigla}} - {{$setor->titulo}}</option>
-                                                @endif
-                                            @endforeach
-                                        @endforeach
-                                    </select>
-                                    @error('fk_setor','usuario-setor')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div> -->
-
-                                
-                                <div class="form-group col-xl-4 col-sm-4">
-                                    <strong>Tipo de Usuário <span style="color: red;">*</span></strong>
-                                    <select
-                                        class="form-control select2 form-control @error('tipo') is-invalid @enderror"
-                                        name="tipo">
+                                    <strong>Permissão <span style="color: red;">*</span></strong>
+                                    <select class="form-control select2 form-control @error('tipo') is-invalid @enderror" name="tipo">
                                         <option value="">Selecione</option>
                                         <option value="administrador" @if("administrador"==$usuarioSetor->user->getRoleNames()->implode(', ') ) Selected @endif>Administrador</option>
                                         <option value="colaborador-nivel-2" @if("colaborador-nivel-2"==$usuarioSetor->user->getRoleNames()->implode(', ') ) Selected @endif>Colaborador Nível 2</option>
@@ -116,12 +78,7 @@
                                 </div>
                                 <div class="form-group col-xl-2 col-sm-2">
                                     <strong>Data Entrada <span style="color: red;">*</span></strong>
-                                    <input type="text"
-                                        value="{{ old('data_entrada', date('d-m-Y', strtotime($usuarioSetor->data_entrada))) }}"
-                                        autocomplete="off" id="data_entrada" name="data_entrada"
-                                        class="form-control @error('data_entrada', 'usuario-setor') is-invalid @enderror"
-                                        data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy"
-                                        data-mask="" im-insert="false">
+                                    <input type="date" value="{{ $usuarioSetor->data_entrada }}" autocomplete="off" id="data_entrada" name="data_entrada" class="form-control @error('data_entrada', 'usuario-setor') is-invalid @enderror">
                                     @error('data_entrada','usuario-setor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -137,7 +94,6 @@
                     &nbsp Aguarde...">Salvar</button>
                     </div>
                     <!-- /.card-footer -->
-
                     <!-- /.card -->
 
                 </div>
@@ -149,5 +105,5 @@
 @section('scripts-adicionais')
 <script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
-<script src="{{ asset('js/usuario-setor.js') }}"></script>
+<script src="{{ asset('js/usuarioSetor.js') }}"></script>
 @endsection
